@@ -17,6 +17,7 @@ repos:
           - eslint-plugin-react # react specific linting rules
           - eslint-plugin-react-hooks # enforces the rules of hooks
           - eslint-plugin-react-refresh
+          - eslint-plugin-storybook
         files: ^src/.*\.[t]sx?$ # *.ts and *.tsx
         types: [file]
         args: ['--config=.eslintrc.cjs', '--ignore-path=.eslintignore']
