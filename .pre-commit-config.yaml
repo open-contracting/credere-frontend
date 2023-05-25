@@ -1,0 +1,22 @@
+repos:
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: 'v8.40.0'
+    hooks:
+      - id: eslint
+        additional_dependencies:
+          - eslint
+          - eslint-config-airbnb
+          - eslint-config-airbnb-typescript
+          - typescript
+          - '@typescript-eslint/parser'
+          - '@typescript-eslint/eslint-plugin'
+          - eslint-plugin-import
+          - eslint-config-prettier # turns off all rules that might conflict with prettier
+          - eslint-plugin-jsx-a11y # checks accessibility rules on jsx elements
+          - eslint-plugin-prettier # runs prettier as an eslint rule
+          - eslint-plugin-react # react specific linting rules
+          - eslint-plugin-react-hooks # enforces the rules of hooks
+          - eslint-plugin-react-refresh
+        files: ^src/.*\.[t]sx?$ # *.ts and *.tsx
+        types: [file]
+        args: ['--config=web/.eslintrc.cjs', '--ignore-path=web/.eslintignore']

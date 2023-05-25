@@ -1,5 +1,5 @@
 {
-  "src/**/*.{ts,tsx}": ["eslint --fix src --ext ts,tsx --report-unused-disable-directives -c .eslintrc.cjs", "git add"],
+  "src/**/*.{ts,tsx}": ["eslint --fix src --ext ts,tsx --report-unused-disable-directives -c .eslintrc.cjs"],
   "*.html": ["prettier --write"],
   "*.scss": "prettier --write"
 }
