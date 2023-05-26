@@ -11,6 +11,7 @@ repos:
           - eslint-config-airbnb@^19.0.4
           - eslint-config-airbnb-typescript@^17.0.0
           - eslint-config-prettier@^8.8.0 # turns off all rules that might conflict with prettier
+          - eslint-import-resolver-typescript@^3.5.5
           - eslint-plugin-import@^2.27.5
           - eslint-plugin-jsx-a11y@^6.7.1 # checks accessibility rules on jsx elements
           - eslint-plugin-prettier@^4.2.1 # runs prettier as an eslint rule
