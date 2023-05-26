@@ -3,7 +3,6 @@
 /dist
 /config
 .DS_Store
-/src/stories/*
 /package.json
 /tsconfig.json
 **/*.md

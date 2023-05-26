@@ -14,4 +14,8 @@ export function Text({ children, className }: TextProps & PropsWithChildren) {
   );
 }
 
+Text.defaultProps = {
+  className: '',
+};
+
 export default Text;

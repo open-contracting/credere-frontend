@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { FormControl, FormHelperText, InputAdornment, InputProps, Typography, Input as _Input } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Controller, useFormContext } from 'react-hook-form';
@@ -19,7 +20,7 @@ const Input = styled(_Input)`
   }
 `;
 
-type IFormInputProps = {
+export type FormInputProps = {
   name: string;
   label: string;
 } & InputProps;
@@ -47,7 +48,7 @@ const getIcon = (type: string | undefined) => {
 
   return undefined;
 };
-export default function FormInput({ name, label, type, ...otherProps }: IFormInputProps) {
+export default function FormInput({ name, label, type, ...otherProps }: FormInputProps) {
   const {
     control,
     formState: { errors },
@@ -64,9 +65,6 @@ export default function FormInput({ name, label, type, ...otherProps }: IFormInp
             {label}
           </Typography>
           <Input
-            // inputProps={{
-            //   className: 'w-1/3 px-4 py-2 border border-gray-300 outline-none focus:border-gray-400',
-            // }}
             type={type}
             startAdornment={getIcon(type)}
             {...field}

@@ -1,9 +1,10 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { Meta, StoryObj } from '@storybook/react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { LoginInput, loginSchema } from '../../schemas/auth';
-import FormInput from './FormInput';
+import FormInput, { FormInputProps } from './FormInput';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -16,7 +17,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const ComponentWithHooks = (args: any) => {
+function ComponentWithHooks(args: FormInputProps) {
   const methods = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
   });
@@ -26,7 +27,7 @@ const ComponentWithHooks = (args: any) => {
       <FormInput {...args} />
     </FormProvider>
   );
-};
+}
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const TextEmail: Story = {

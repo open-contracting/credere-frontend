@@ -13,9 +13,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const ComponentWithChildren = () => {
+function ComponentWithChildren() {
   return <Text> Forgot Password? </Text>;
-};
+}
 
 export const Default: Story = {
   args: {},

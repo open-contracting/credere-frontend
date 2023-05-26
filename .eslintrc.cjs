@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   env: {
     node: true,
@@ -11,6 +13,7 @@ module.exports = {
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        paths: [path.resolve(__dirname, 'src')],
       },
       typescript: {
         directory: './tsconfig.json',
@@ -38,7 +41,6 @@ module.exports = {
     },
   },
   plugins: ['react-refresh', '@typescript-eslint', 'react', 'prettier'],
-  ignorePatterns: ['/src/stories/*'],
   rules: {
     'react-refresh/only-export-components': 'warn',
     'react/react-in-jsx-scope': 'off',

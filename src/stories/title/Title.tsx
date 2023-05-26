@@ -7,9 +7,9 @@ export type TitleProps = {
   className?: string;
 };
 
-type variant = 'h1' | 'h2';
+type VariantType = 'h1' | 'h2';
 export function Title({ label, type = 'section', className }: TitleProps) {
-  let variant: variant = 'h2';
+  let variant: VariantType = 'h2';
   let fontSizeClass = 'text-2xl font-medium';
   if (type === 'page') {
     variant = 'h1';
@@ -21,5 +21,10 @@ export function Title({ label, type = 'section', className }: TitleProps) {
     </Typography>
   );
 }
+
+Title.defaultProps = {
+  type: 'section',
+  className: '',
+};
 
 export default Title;
