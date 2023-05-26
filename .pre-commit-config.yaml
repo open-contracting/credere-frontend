@@ -23,4 +23,4 @@ repos:
           - typescript@^5.0.2
         files: ^src/.*\.[t]sx?$ # *.ts and *.tsx
         types: [file]
-        args: ['--config=.eslintrc.cjs', '--ignore-path=.eslintignore']
+        args: ['--config=.eslintrc.cjs', '--ignore-path=.eslintignore', '--rule', 'import/no-unresolved: 0']
