@@ -3,10 +3,11 @@ import { twMerge } from 'tailwind-merge';
 
 import ArrowInCircleIcon from '../../assets/icons/arrow-in-circle.svg';
 
+type SizeType = 'large' | 'small';
 export interface ButtonProps {
   primary?: boolean;
   label: string;
-  size?: 'large' | 'small';
+  size?: SizeType;
   noIcon?: boolean;
   icon?: string; // svg imported
   onClick?: () => void;
@@ -43,7 +44,7 @@ export function Button<C extends React.ElementType>({
 
 Button.defaultProps = {
   primary: true,
-  size: 'large',
+  size: 'large' as SizeType,
   noIcon: false,
   icon: ArrowInCircleIcon,
   onClick: undefined,

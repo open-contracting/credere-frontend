@@ -1,6 +1,8 @@
 import { Typography } from '@mui/material';
 import { twMerge } from 'tailwind-merge';
 
+type TileTypeType = 'page' | 'section';
+
 export type TitleProps = {
   label: string;
   type?: 'page' | 'section';
@@ -23,7 +25,7 @@ export function Title({ label, type = 'section', className }: TitleProps) {
 }
 
 Title.defaultProps = {
-  type: 'section',
+  type: 'section' as TileTypeType,
   className: '',
 };
 
