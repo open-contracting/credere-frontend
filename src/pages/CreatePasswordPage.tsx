@@ -1,8 +1,7 @@
- 
-
 /* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Container } from '@mui/material';
+import { useT } from '@transifex/react';
 import { useEffect } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -21,6 +20,7 @@ const params = z.object({
 });
 
 export function CreatePasswordPage() {
+  const t = useT();
   const updatePassword = useUpdatePassword();
   const { email: username, key: tempPassword } = useSearchParamsTypeSafe(params, 'This is an invalid link');
 
@@ -57,7 +57,7 @@ export function CreatePasswordPage() {
       <Title
         type="page"
         className="lg:pt-16 lg:pl-20 md:pt-10 md:pl-12 sm:pt-9 sm:pl-10 pt-8 pl-6 lg:mb-16 mb-10"
-        label="Create Password"
+        label={t('Create Password')}
       />
       <Container
         maxWidth={false}
@@ -88,13 +88,13 @@ export function CreatePasswordPage() {
                 width: { sm: '580px' },
                 borderRadius: 0,
               }}>
-              <Title type="section" className="self-center mb-8" label="Set account password" />
-              <FormInput name="password" label="Password" type="password" />
-              <FormInput name="passwordConfirm" label="Confirm password" type="password" />
+              <Title type="section" className="self-center mb-8" label={t('Set account password')} />
+              <FormInput name="password" label={t('Password')} type="password" />
+              <FormInput name="passwordConfirm" label={t('Confirm password')} type="password" />
 
-              <Button className="mb-10" label="Submit" type="submit" />
+              <Button className="mb-10" label={t('Submit')} type="submit" />
               <Box>
-                <Text className="inline-block">Need help? Email</Text>
+                <Text className="inline-block">{t('Need help? Email')}</Text>
                 <Text className="inline-block underline ml-1">
                   <a className="text-darkest" href="mailto:credere@open-contracting.org">
                     credere@open-contracting.org
