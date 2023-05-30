@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Container } from '@mui/material';
+import { LanguagePicker, useT } from '@transifex/react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
@@ -12,6 +13,8 @@ import Text from '../stories/text/Text';
 import Title from '../stories/title/Title';
 
 export function SignInPage() {
+  // ver con Nahu
+  const t = useT();
   const { signInMutation, isLoading } = useSignIn();
 
   const methods = useForm<LoginInput>({
@@ -61,8 +64,9 @@ export function SignInPage() {
                 width: { sm: '580px' },
                 borderRadius: 0,
               }}>
+              <LanguagePicker />
               <Title type="section" className="self-center mb-8" label="Log in" />
-              <FormInput name="username" label="Email Address" type="email" placeholder="example@email.com" />
+              <FormInput name="username" label={t('Email Address')} type="email" placeholder="example@email.com" />
               <FormInput name="password" label="Password" type="password" />
               <FormInput name="temp_password" label="One-Time Password Code (MFA)" />
 
