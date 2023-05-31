@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
+import { useT } from '@transifex/react';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,19 +15,20 @@ type IUseResetPassword = {
 export default function useResetPassword(): IUseResetPassword {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const t = useT();
 
   const { mutate: resetPasswordMutation, isLoading } = useMutation<IResponse, unknown, ResetPasswordInput, unknown>(
     (payload) => resetPasswordFn(payload),
     {
       onSuccess: () => {
-        enqueueSnackbar(`Check your email to continue`, {
+        enqueueSnackbar(t('Check your email to continue'), {
           variant: 'info',
         });
         navigate('/login');
       },
       onError: (error) => {
         console.log(error);
-        enqueueSnackbar(`Error trying to reset password. ${error}`, {
+        enqueueSnackbar(` ${t('Error trying to reset password.')} ${error}`, {
           variant: 'error',
         });
       },

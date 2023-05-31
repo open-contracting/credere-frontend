@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Container } from '@mui/material';
-import { LanguagePicker, useT } from '@transifex/react';
+import { useT } from '@transifex/react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
@@ -63,7 +63,6 @@ export function SignInPage() {
                 width: { sm: '580px' },
                 borderRadius: 0,
               }}>
-              <LanguagePicker />
               <Title type="section" className="self-center mb-8" label={t('Log in')} />
               <FormInput name="username" label={t('Email Address')} type="email" placeholder="example@email.com" />
               <FormInput name="password" label={t('Password')} type="password" />

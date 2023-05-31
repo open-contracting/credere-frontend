@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
+import { useT } from '@transifex/react';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +12,7 @@ type IUseUpdatePassword = UseMutateFunction<IUpdatePasswordResponse, unknown, Up
 export default function useUpdatePassword(): IUseUpdatePassword {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const t = useT();
 
   const { mutate: updatePasswordMutation } = useMutation<
     IUpdatePasswordResponse,
@@ -23,7 +25,7 @@ export default function useUpdatePassword(): IUseUpdatePassword {
     },
     onError: (error) => {
       console.log(error);
-      enqueueSnackbar(`Error on update password. ${error}`, {
+      enqueueSnackbar(`${t('Error on update password.')} ${error}`, {
         variant: 'error',
       });
     },
