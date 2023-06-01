@@ -10,8 +10,10 @@ import App from '../pages/App';
 import CreatePasswordPage from '../pages/CreatePasswordPage';
 import PasswordCreated from '../pages/PasswordCreated';
 import ResetPasswordPage from '../pages/ResetPasswordPage';
+import SelectLanguage from '../pages/SelectLanguage';
 import SetupMFAPage from '../pages/SetupMFAPage';
 import SignInPage from '../pages/SignInPage';
+import LangContextProvider from '../providers/LangContextProvider';
 import StateContextProvider from '../providers/StateContextProvider';
 import ErrorPage from './ErrorPage';
 import ProtectedRoute from './ProtectedRoute';
@@ -82,16 +84,27 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
   },
+  {
+    path: '/set-language',
+    element: (
+      <PublicPageLayout>
+        <SelectLanguage />
+      </PublicPageLayout>
+    ),
+    errorElement: <ErrorPage />,
+  },
 ]);
 
 export function AppRouter() {
   return (
     <MuiTheme>
       <StateContextProvider>
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
+        <LangContextProvider>
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </LangContextProvider>
       </StateContextProvider>
     </MuiTheme>
   );
