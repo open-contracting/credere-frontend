@@ -1,33 +1,35 @@
 import React from 'react';
 
+import { getUser, saveUser } from '../api/localstore';
 import { DISPATCH_ACTIONS } from '../constants';
 import { IUser } from '../schemas/auth';
 
-type State = {
-  authUser: IUser | null;
+type AuthState = {
+  user: IUser | null;
 };
 
-type Action = {
+type ActionSetAuth = {
   type: string;
   payload: IUser | null;
 };
 
-type Dispatch = (action: Action) => void;
+type Dispatch = (action: ActionSetAuth) => void;
 
-const initialState: State = {
-  authUser: null,
+const initialState: AuthState = {
+  user: getUser(),
 };
 
 type StateContextProviderProps = { children: React.ReactNode };
 
-export const StateContext = React.createContext<{ state: State; dispatch: Dispatch } | undefined>(undefined);
+export const StateContext = React.createContext<{ state: AuthState; dispatch: Dispatch } | undefined>(undefined);
 
-const stateReducer = (state: State, action: Action) => {
+const authReducer = (state: AuthState, action: ActionSetAuth) => {
   switch (action.type) {
     case DISPATCH_ACTIONS.SET_USER: {
+      saveUser(action.payload);
       return {
         ...state,
-        authUser: action.payload,
+        user: action.payload,
       };
     }
     default: {
@@ -37,7 +39,7 @@ const stateReducer = (state: State, action: Action) => {
 };
 
 export function StateContextProvider({ children }: StateContextProviderProps) {
-  const [state, dispatch] = React.useReducer(stateReducer, initialState);
+  const [state, dispatch] = React.useReducer(authReducer, initialState);
 
   const value = React.useMemo(
     () => ({

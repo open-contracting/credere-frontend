@@ -47,3 +47,33 @@ export const Password: Story = {
   },
   render: (args) => <ComponentWithHooks {...args} />,
 };
+
+export const InPageFields: Story = {
+  args: {
+    name: 'providerName',
+    label: 'Provider Name',
+    big: false,
+  },
+  render: (args) => <ComponentWithHooks {...args} />,
+};
+
+export const WithPlaceholder: Story = {
+  args: {
+    name: 'providerName',
+    label: 'Provider Name',
+    big: false,
+    placeholder: 'Provider Name Placeholder',
+  },
+  render: (args) => <ComponentWithHooks {...args} />,
+};
+
+export const TextArea: Story = {
+  args: {
+    name: 'providerName',
+    label: 'Provider Name',
+    rows: 4,
+    multiline: true,
+    big: false,
+  },
+  render: (args) => <ComponentWithHooks {...args} />,
+};

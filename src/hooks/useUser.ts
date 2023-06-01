@@ -22,7 +22,7 @@ export default function useUser(): IUser | null {
       }
     },
     {
-      enabled: stateContext.state.authUser !== null,
+      enabled: stateContext.state.user !== null,
       refetchOnMount: false,
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,

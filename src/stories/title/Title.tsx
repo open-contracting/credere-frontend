@@ -5,7 +5,7 @@ type TileTypeType = 'page' | 'section';
 
 export type TitleProps = {
   label: string;
-  type?: 'page' | 'section';
+  type?: 'page' | 'section' | 'subsection';
   className?: string;
 };
 

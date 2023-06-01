@@ -14,6 +14,7 @@ export const COLORS: { [key: string]: string } = {
 
 export const USER_LOCAL_STORAGE_KEY = 'CREDERE_USER';
 export const ACCESS_TOKEN_LOCAL_STORAGE_KEY = 'CREDERE_USER_ACCESS_TOKEN';
+export const LANG_STORAGE_KEY = 'CREDERE_LANG';
 
 export const QUERY_KEYS = {
   user: 'user',
@@ -21,6 +22,7 @@ export const QUERY_KEYS = {
 
 export const DISPATCH_ACTIONS = {
   SET_USER: 'SET_USER',
+  SET_LANG: 'SET_LANG',
 };
 
 export default {

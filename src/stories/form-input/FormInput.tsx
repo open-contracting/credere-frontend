@@ -1,13 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { FormControl, FormHelperText, InputAdornment, InputProps, Typography, Input as _Input } from '@mui/material';
+import { FormControl, FormHelperText, InputAdornment, InputProps, Input as _Input } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import EmailIcon from '../../assets/icons/email.svg';
 import KeyIcon from '../../assets/icons/key.svg';
 import { COLORS } from '../../constants';
+import { Text } from '../text/Text';
 
-const Input = styled(_Input)`
+export const Input = styled(_Input)`
   background-color: white;
   padding: 17px 18px;
   margin-bottom: 0.5rem;
@@ -23,6 +24,9 @@ const Input = styled(_Input)`
 export type FormInputProps = {
   name: string;
   label: string;
+  big?: boolean;
+  noIcon?: boolean;
+  placeholder?: string;
 } & InputProps;
 
 const getIcon = (type: string | undefined) => {
@@ -30,7 +34,7 @@ const getIcon = (type: string | undefined) => {
     return undefined;
   }
 
-  let icon = '';
+  let icon;
   if (type === 'email') {
     icon = EmailIcon;
   }
@@ -48,7 +52,17 @@ const getIcon = (type: string | undefined) => {
 
   return undefined;
 };
-export default function FormInput({ name, label, type, ...otherProps }: FormInputProps) {
+
+const AUTH_LABELS_CLASSNAMES = 'text-moodyBlue text-xl mb-3';
+export function FormInput({
+  name,
+  label,
+  placeholder,
+  big = true,
+  noIcon = false,
+  type,
+  ...otherProps
+}: FormInputProps) {
   const {
     control,
     formState: { errors },
@@ -61,14 +75,13 @@ export default function FormInput({ name, label, type, ...otherProps }: FormInpu
       name={name}
       render={({ field }) => (
         <FormControl fullWidth sx={{ mb: 2 }}>
-          <Typography variant="body1" className="text-moodyBlue text-xl mb-3">
-            {label}
-          </Typography>
+          <Text className={`${big ? AUTH_LABELS_CLASSNAMES : ''}`}>{label}</Text>
           <Input
             type={type}
-            startAdornment={getIcon(type)}
+            startAdornment={noIcon ? undefined : getIcon(type)}
             {...field}
             fullWidth
+            placeholder={placeholder}
             disableUnderline
             error={!!errors[name]}
             {...otherProps}
@@ -81,3 +94,11 @@ export default function FormInput({ name, label, type, ...otherProps }: FormInpu
     />
   );
 }
+
+FormInput.defaultProps = {
+  noIcon: false,
+  big: true,
+  placeholder: undefined,
+};
+
+export default FormInput;

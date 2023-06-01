@@ -61,8 +61,6 @@ authApi.interceptors.response.use(
 
     const delayRetryRequest = new Promise<void>((resolve) => {
       setTimeout(() => {
-        // eslint-disable-next-line no-console
-        console.log('retry the request', config.url);
         resolve();
       }, config.retryDelay || 1000);
     });

@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
+import { useT } from '@transifex/react';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +16,7 @@ type IUseSetupMFA = {
 export default function useSetupMFA(): IUseSetupMFA {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-
+  const t = useT();
   const { mutate: setupMFAMutation, isLoading } = useMutation<IResponse, unknown, SetupMFAInput, unknown>(
     (payload) => setupMFAFn(payload),
     {
@@ -26,11 +27,11 @@ export default function useSetupMFA(): IUseSetupMFA {
       onError: (error) => {
         console.log(error);
         if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
-          enqueueSnackbar(`MFA code setup failed`, {
+          enqueueSnackbar(t('MFA code setup failed'), {
             variant: 'error',
           });
         } else {
-          enqueueSnackbar(`Error in setup MFA ${error}`, {
+          enqueueSnackbar(`${t('Error in setup MFA ')} ${error}`, {
             variant: 'error',
           });
         }

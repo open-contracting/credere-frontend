@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Container } from '@mui/material';
+import { useT } from '@transifex/react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import QRCode from 'react-qr-code';
 import { z } from 'zod';
@@ -14,6 +15,7 @@ import Text from '../stories/text/Text';
 import Title from '../stories/title/Title';
 
 export function SetupMFAPage() {
+  const t = useT();
   const { setupMFAMutation, isLoading } = useSetupMFA();
 
   const { secret, session } = useParamsTypeSafe(
@@ -45,7 +47,7 @@ export function SetupMFAPage() {
       <Title
         type="page"
         className="lg:pt-16 lg:pl-20 md:pt-10 md:pl-12 sm:pt-9 sm:pl-10 pt-8 pl-6 lg:mb-16 mb-10"
-        label="MFA Setup"
+        label={t('MFA Setup')}
       />
       <Container
         maxWidth={false}
@@ -76,20 +78,20 @@ export function SetupMFAPage() {
                 width: { sm: '580px' },
                 borderRadius: 0,
               }}>
-              <Title type="section" className="self-center mb-8" label="Configure MFA" />
-              <Text>Install an Authenticator App or use the Google Chrome Authenticator extension.</Text>
-              <Text>Use this QR</Text>
+              <Title type="section" className="self-center mb-8" label={t('Configure MFA')} />
+              <Text>label={t('Install an Authenticator App or use the Google Chrome Authenticator extension.')}</Text>
+              <Text>{t('Use this QR')}</Text>
               <QRCode
                 className="self-center"
                 value={`otpauth://totp/${username}?secret=${secret}&issuer=Credere (OCP)`}
               />
 
-              <Text className="mt-10">Or enter the secret manually:</Text>
+              <Text className="mt-10">{t('Or enter the secret manually:')}</Text>
               <Text className="mb-10 text-xs">{secret}</Text>
-              <FormInput name="temp_password" label="One-Time Password Code (MFA)" />
-              <Button className="mb-10" label="Finish setup" type="submit" disabled={isLoading} />
+              <FormInput name="temp_password" label={t('One-Time Password Code (MFA)')} />
+              <Button className="mb-10" label={t('Finish setup')} type="submit" disabled={isLoading} />
               <Box>
-                <Text className="inline-block">Need help? Email </Text>
+                <Text className="inline-block">{t('Need help? Email')} </Text>
                 <Text className="inline-block underline ml-1">
                   <a className="text-darkest" href="mailto:credere@open-contracting.org">
                     credere@open-contracting.org
