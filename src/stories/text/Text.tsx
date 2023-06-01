@@ -8,7 +8,7 @@ export type TextProps = {
 
 export function Text({ children, className }: TextProps & PropsWithChildren) {
   return (
-    <Typography variant="body1" className={twMerge(`text-darkest text-base mb-4 ${className}`)}>
+    <Typography variant="body1" className={twMerge(`text-darkest text-lg mb-4 ${className}`)}>
       {children}
     </Typography>
   );
