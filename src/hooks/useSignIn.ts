@@ -33,13 +33,18 @@ export default function useSignIn(): IUseSignIn {
         navigate('/');
       },
       onError: (error) => {
-        console.log(error);
         if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
-          enqueueSnackbar(t('Invalid credentials'), {
-            variant: 'error',
-          });
+          if (error.response.data && error.response.data.message) {
+            enqueueSnackbar(t('Error: {error}', { error: error.response.data.message }), {
+              variant: 'error',
+            });
+          } else {
+            enqueueSnackbar(t('Invalid credentials'), {
+              variant: 'error',
+            });
+          }
         } else {
-          enqueueSnackbar(`${t('Error on sign in.')} ${error}`, {
+          enqueueSnackbar(t('Error on sign in. {error}', { error }), {
             variant: 'error',
           });
         }

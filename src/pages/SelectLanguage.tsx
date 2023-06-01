@@ -55,7 +55,7 @@ function SelectLanguage() {
   const onSubmitHandler: SubmitHandler<LangInput> = (values) => {
     tx.setCurrentLocale(values.lang);
     langContext.dispatch({ type: DISPATCH_ACTIONS.SET_LANG, payload: values.lang });
-    enqueueSnackbar(t('Language changed'), {
+    enqueueSnackbar(t('Language changed to: {language}', { language: values.lang }), {
       variant: 'success',
     });
   };
