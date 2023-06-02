@@ -8,6 +8,7 @@ import PublicPageLayout from '../layout/PublicPageLayout';
 import MuiTheme from '../mui-theme';
 import App from '../pages/App';
 import CreatePasswordPage from '../pages/CreatePasswordPage';
+import IntroMsme from '../pages/IntroMsme';
 import PasswordCreated from '../pages/PasswordCreated';
 import ResetPasswordPage from '../pages/ResetPasswordPage';
 import SelectLanguage from '../pages/SelectLanguage';
@@ -89,6 +90,15 @@ const router = createBrowserRouter([
     element: (
       <PublicPageLayout>
         <SelectLanguage />
+      </PublicPageLayout>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/intro-page',
+    element: (
+      <PublicPageLayout>
+        <IntroMsme />
       </PublicPageLayout>
     ),
     errorElement: <ErrorPage />,
