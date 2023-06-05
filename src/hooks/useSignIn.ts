@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+ 
 import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useT } from '@transifex/react';
 import axios from 'axios';

@@ -10,6 +10,8 @@ export const COLORS: { [key: string]: string } = {
   red: '#FB6045',
   darkGreen: '#17736B',
   fieldBorder: '#DADADA',
+  white: '#FFFFFF',
+  transparent: 'transparent',
 };
 
 export const USER_LOCAL_STORAGE_KEY = 'CREDERE_USER';

@@ -6,6 +6,7 @@ interface ImportMetaEnv {
   readonly VITE_HOST: string;
   readonly VITE_TRANSIFEX_TOKEN: string;
   readonly VITE_DEFAULT_LANG: string;
+  readonly VITE_CREDERE_PHONE_NUMBER: string;
   // more env variables...
 }
 
