@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { FormControl, FormControlLabel, FormHelperText, Checkbox as MUICheckbox } from '@mui/material';
+import { FormControl, FormControlLabel, FormHelperText, Checkbox as MUICheckbox, Typography } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 
@@ -24,23 +24,22 @@ export function Checkbox({ name, label, className }: CheckboxProps) {
       defaultValue=""
       name={name}
       render={({ field }) => (
-        <FormControl fullWidth sx={{ mb: 2 }}>
+        <FormControl fullWidth sx={{ mb: '8px' }}>
           <FormControlLabel
-            className={twMerge(`text-darkest text-lg mb-4 ${className}`)}
+            sx={{ alignItems: 'flex-start' }}
             control={
               <MUICheckbox
-                // sx={{
-                //   color: COLORS.darkest,
-                //   '&.Mui-checked': {
-                //     color: COLORS.darkest,
-                //   },
-                // }}
-                icon={<img src={NotChecked} alt="icon" />}
-                checkedIcon={<img src={Checked} alt="icon" />}
+                sx={{ px: '10px', py: '2px', ':hover': { backgroundColor: 'transparent' } }}
+                icon={<img className="mb-0.5" src={NotChecked} alt="check-icon-empty" />}
+                checkedIcon={<img className="mb-0.5" src={Checked} alt="check-icon-checked" />}
                 {...field}
               />
             }
-            label={label}
+            label={
+              <Typography variant="body1" className={twMerge(`text-darkest text-lg ${className}`)}>
+                {label}
+              </Typography>
+            }
           />
           <FormHelperText className="text-red text-base mx-0" error={!!errors[name]}>{`${
             errors[name] ? errors[name]?.message : ''

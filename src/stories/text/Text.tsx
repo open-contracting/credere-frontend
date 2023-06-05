@@ -4,11 +4,21 @@ import { twMerge } from 'tailwind-merge';
 
 export type TextProps = {
   className?: string;
+  fontVariant?: boolean;
 };
 
-export function Text({ children, className }: TextProps & PropsWithChildren) {
+export function Text({ children, fontVariant = false, className }: TextProps & PropsWithChildren) {
   return (
-    <Typography variant="body1" className={twMerge(`text-darkest text-lg mb-4 ${className}`)}>
+    <Typography
+      variant="body1"
+      sx={
+        fontVariant
+          ? {
+              fontFamily: 'GT Eesti Pro Text',
+            }
+          : {}
+      }
+      className={twMerge(`text-darkest text-lg mb-4 ${className}`)}>
       {children}
     </Typography>
   );
@@ -16,6 +26,7 @@ export function Text({ children, className }: TextProps & PropsWithChildren) {
 
 Text.defaultProps = {
   className: '',
+  fontVariant: false,
 };
 
 export default Text;
