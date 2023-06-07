@@ -10,9 +10,10 @@ export type CheckboxProps = {
   name: string;
   label: string;
   className?: string;
+  defaultValue?: boolean;
 };
 
-export function Checkbox({ name, label, className }: CheckboxProps) {
+export function Checkbox({ name, label, defaultValue = false, className }: CheckboxProps) {
   const {
     control,
     formState: { errors },
@@ -21,7 +22,7 @@ export function Checkbox({ name, label, className }: CheckboxProps) {
   return (
     <Controller
       control={control}
-      defaultValue=""
+      defaultValue={defaultValue}
       name={name}
       render={({ field }) => (
         <FormControl fullWidth sx={{ mb: '8px' }}>
@@ -52,6 +53,7 @@ export function Checkbox({ name, label, className }: CheckboxProps) {
 
 Checkbox.defaultProps = {
   className: undefined,
+  defaultValue: false,
 };
 
 export default Checkbox;

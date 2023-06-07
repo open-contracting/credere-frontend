@@ -4,33 +4,33 @@ import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 
-import { applicationAccessSchemeFn } from '../api/public';
+import { declineApplicationFn } from '../api/public';
 import { DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
-import { ApplicationBaseInput, IApplicationResponse } from '../schemas/application';
+import { DeclineApplicationInput, IApplicationResponse } from '../schemas/application';
 import useApplicationContext from './useApplicationContext';
 
-type IUseAccesScheme = {
-  accessSchemeMutation: UseMutateFunction<IApplicationResponse, unknown, ApplicationBaseInput, unknown>;
+type IUseDeclineApplication = {
+  declineApplicationMutation: UseMutateFunction<IApplicationResponse, unknown, DeclineApplicationInput, unknown>;
   isLoading: boolean;
 };
 
-export default function useAccesScheme(): IUseAccesScheme {
+export default function useDeclineApplication(): IUseDeclineApplication {
   const t = useT();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const applicationContext = useApplicationContext();
   const { enqueueSnackbar } = useSnackbar();
 
-  const { mutate: accessSchemeMutation, isLoading } = useMutation<
+  const { mutate: declineApplicationMutation, isLoading } = useMutation<
     IApplicationResponse,
     unknown,
-    ApplicationBaseInput,
+    DeclineApplicationInput,
     unknown
-  >((payload) => applicationAccessSchemeFn(payload), {
+  >((payload) => declineApplicationFn(payload), {
     onSuccess: (data) => {
       queryClient.setQueryData([QUERY_KEYS.application, data.application.uuid], data);
       applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });
-      navigate('../credit-options');
+      navigate('../decline-feedback');
     },
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
@@ -40,12 +40,12 @@ export default function useAccesScheme(): IUseAccesScheme {
           });
         }
       } else {
-        enqueueSnackbar(t('Error accessing the scheme. {error}', { error }), {
+        enqueueSnackbar(t('Error declining the application. {error}', { error }), {
           variant: 'error',
         });
       }
     },
   });
 
-  return { accessSchemeMutation, isLoading };
+  return { declineApplicationMutation, isLoading };
 }

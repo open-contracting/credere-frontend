@@ -4,52 +4,47 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box } from '@mui/material';
 import { useT } from '@transifex/react';
+import { useMemo } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { TypeOf, boolean, object } from 'zod';
+import { useNavigate } from 'react-router-dom';
 
 import FAQComponent from '../components/FAQComponent';
+import useAccessScheme from '../hooks/useAccessScheme';
+import useApplicationContext from '../hooks/useApplicationContext';
+import { IntroInput, introSchema } from '../schemas/application';
 import { Button } from '../stories/button/Button';
 import Checkbox from '../stories/checkbox/Checkbox';
 import Text from '../stories/text/Text';
 import Title from '../stories/title/Title';
 
-const IntroSchema = object({
-  agreeTopassInfoToBankingPartner: boolean(),
-  aceptTermsAndConditions: boolean(),
-});
-
-type IntroInput = TypeOf<typeof IntroSchema>;
-
 function IntroMsme() {
   const t = useT();
+  const navigate = useNavigate();
+  const applicationContext = useApplicationContext();
+  const { accessSchemeMutation, isLoading } = useAccessScheme();
 
-  // const { accesSchemeMutation, isLoading } = useAccessScheme();
-  // const { enqueueSnackbar } = useSnackbar();
-
+  console.log('applicationContext', applicationContext.state);
   const methods = useForm<IntroInput>({
-    resolver: zodResolver(IntroSchema),
+    resolver: zodResolver(introSchema),
   });
   const { handleSubmit } = methods;
 
-  // AM Should recibe the user UID as value to send in the mutation
-
-  const onSubmitAcceptHandler: SubmitHandler<IntroInput> = (values) => {
-    console.log('accept', values);
-    // Pendinto to modify the hook
-    // accesSchemeMutation(values);
-  };
-  // AM Should recibe the user UID as value to send in the mutation
-  const onSubmitDeclineHandler = () => {
-    console.log(`declined`);
-    // Pendint to add this hook
-    // DeclineSchemeMutation(values);
+  const onSubmitHandler: SubmitHandler<IntroInput> = () => {
+    accessSchemeMutation({ uuid: applicationContext.state.data?.application.uuid });
   };
 
-  const PARAMS_FOR_TEXT = {
-    award_title: 'PROVISION OF FOOD FOR SCHOOLS',
-    buyer_name: 'Santa Marta High School',
-    award_contract_value: 'USD 1000',
+  const navigateDeclineHandler = () => {
+    navigate('../decline');
   };
+
+  const paramsForText = useMemo(() => {
+    if (!applicationContext.state.data) return {};
+    return {
+      award_title: applicationContext.state.data.award.description,
+      buyer_name: applicationContext.state.data.award.buyer_name,
+      award_contract_value: applicationContext.state.data.award.award_amount,
+    };
+  }, [applicationContext.state.data]);
 
   return (
     <>
@@ -60,8 +55,8 @@ function IntroMsme() {
             {t(
               'Congratulations on winning the award for the public sector contract for {award_title} with {buyer_name}.',
               {
-                award_title: PARAMS_FOR_TEXT.buyer_name,
-                buyer_name: PARAMS_FOR_TEXT.buyer_name,
+                award_title: paramsForText.buyer_name,
+                buyer_name: paramsForText.buyer_name,
               },
             )}
           </Text>
@@ -73,12 +68,12 @@ function IntroMsme() {
           <Text className="mb-8">
             {t(
               'You can request up 90% of the value of the award in your credit application, which is currently {award_contract_value}.',
-              { award_contract_value: PARAMS_FOR_TEXT.award_contract_value },
+              { award_contract_value: paramsForText.award_contract_value },
             )}
           </Text>
           <Text className="mb-8">
             {t(
-              'If you would like to view the credit options available, then all you have to do is click ‘Access the scheme’ below. Once you have selected a credit option, the online application takes just a couple of minutes.  ',
+              "If you would like to view the credit options available, then all you have to do is click 'Access the scheme' below. Once you have selected a credit option, the online application takes just a couple of minutes.",
             )}
           </Text>
           <Text className="mb-8">
@@ -94,7 +89,7 @@ function IntroMsme() {
           <FormProvider {...methods}>
             <Box
               component="form"
-              onSubmit={handleSubmit(onSubmitAcceptHandler)}
+              onSubmit={handleSubmit(onSubmitHandler)}
               noValidate
               autoComplete="off"
               sx={{
@@ -102,20 +97,22 @@ function IntroMsme() {
                 flexDirection: 'column',
               }}>
               <Checkbox
-                name="agreeTopassInfoToBankingPartner"
+                name="agree_topass_info_to_banking_partner"
+                defaultValue={false}
                 label={t('A agree for my details to be passed onto the banking partner.')}
               />
               <Checkbox
-                name="aceptTermsAndConditions"
+                name="acept_terms_and_conditions"
+                defaultValue={false}
                 label={t('I have read the terms and conditions for the credit guarantee scheme.')}
               />
               <div className="mt-5 grid grid-cols-1 gap-4 md:flex md:gap-0">
                 <div>
-                  <Button className="md:mr-4" label={t('Acces the scheme')} type="submit" />
+                  <Button className="md:mr-4" label={t('Acces the scheme')} type="submit" disabled={isLoading} />
                 </div>
 
                 <div>
-                  <Button label={t('Decline')} onClick={onSubmitDeclineHandler} />
+                  <Button label={t('Decline')} onClick={navigateDeclineHandler} disabled={isLoading} />
                 </div>
               </div>
             </Box>

@@ -4,7 +4,7 @@ import PageLayout from '../layout/PageLayout';
 import Text from '../stories/text/Text';
 import Title from '../stories/title/Title';
 
-export default function ErrorPage() {
+export default function RouterErrorPage() {
   const error = useRouteError();
 
   return (

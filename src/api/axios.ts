@@ -82,3 +82,5 @@ authApi.interceptors.response.use(
     return delayRetryRequest.then(() => authApi(config));
   },
 );
+
+export const publicApi = axios.create(globalConfig);

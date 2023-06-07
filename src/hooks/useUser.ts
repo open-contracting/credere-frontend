@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { getMeFn } from '../api/auth';
 import { getUser, removeUser, saveUser } from '../api/localstore';
-import { QUERY_KEYS } from '../constants';
+import { DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
 import { IUser } from '../schemas/auth';
 import useStateContext from './useStateContext';
 
@@ -15,7 +15,7 @@ export default function useUser(): IUser | null {
     async (): Promise<IUser | null> => {
       try {
         const response = await getMeFn();
-        stateContext.dispatch({ type: 'SET_USER', payload: response.user });
+        stateContext.dispatch({ type: DISPATCH_ACTIONS.SET_USER, payload: response.user });
         return response.user;
       } catch {
         return Promise.resolve(null);

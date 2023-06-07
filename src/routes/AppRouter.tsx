@@ -4,20 +4,27 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import BaseLayout from '../layout/BaseLayout';
 import PageLayout from '../layout/PageLayout';
+import PublicApplicationLayout from '../layout/PublicApplicationLayout';
 import PublicPageLayout from '../layout/PublicPageLayout';
 import MuiTheme from '../mui-theme';
 import App from '../pages/App';
 import CreatePasswordPage from '../pages/CreatePasswordPage';
+import Decline from '../pages/Decline';
+import DeclineCompleted from '../pages/DeclineCompleted';
+import DeclineFeedback from '../pages/DeclineFeedback';
 import FrequentlyAskedQuestionsPage from '../pages/FrequentlyAskedQuestionsPage';
 import IntroMsme from '../pages/IntroMsme';
 import PasswordCreated from '../pages/PasswordCreated';
 import ResetPasswordPage from '../pages/ResetPasswordPage';
+import RouterErrorPage from '../pages/RouterErrorPage';
 import SelectLanguage from '../pages/SelectLanguage';
 import SetupMFAPage from '../pages/SetupMFAPage';
 import SignInPage from '../pages/SignInPage';
+import SubmitionCompleted from '../pages/SubmitionCompleted';
+import ViewCreditOptions from '../pages/ViewCreditOptions';
+import ApplicationContextProvider from '../providers/ApplicationContextProvider';
 import LangContextProvider from '../providers/LangContextProvider';
 import StateContextProvider from '../providers/StateContextProvider';
-import ErrorPage from './ErrorPage';
 import ProtectedRoute from './ProtectedRoute';
 
 // Create a React Query client
@@ -39,7 +46,7 @@ const router = createBrowserRouter([
         </PageLayout>
       </ProtectedRoute>
     ),
-    errorElement: <ErrorPage />,
+    errorElement: <RouterErrorPage />,
   },
   {
     path: '/login',
@@ -48,7 +55,7 @@ const router = createBrowserRouter([
         <SignInPage />
       </BaseLayout>
     ),
-    errorElement: <ErrorPage />,
+    errorElement: <RouterErrorPage />,
   },
   {
     path: '/create-password',
@@ -57,7 +64,7 @@ const router = createBrowserRouter([
         <CreatePasswordPage />
       </BaseLayout>
     ),
-    errorElement: <ErrorPage />,
+    errorElement: <RouterErrorPage />,
   },
   {
     path: '/setup-mfa/:secret/:session',
@@ -66,7 +73,7 @@ const router = createBrowserRouter([
         <SetupMFAPage />
       </BaseLayout>
     ),
-    errorElement: <ErrorPage />,
+    errorElement: <RouterErrorPage />,
   },
   {
     path: '/password-created/',
@@ -75,7 +82,7 @@ const router = createBrowserRouter([
         <PasswordCreated />
       </PublicPageLayout>
     ),
-    errorElement: <ErrorPage />,
+    errorElement: <RouterErrorPage />,
   },
   {
     path: '/reset-password',
@@ -84,7 +91,7 @@ const router = createBrowserRouter([
         <ResetPasswordPage />
       </BaseLayout>
     ),
-    errorElement: <ErrorPage />,
+    errorElement: <RouterErrorPage />,
   },
   {
     path: '/set-language',
@@ -93,7 +100,7 @@ const router = createBrowserRouter([
         <SelectLanguage />
       </PublicPageLayout>
     ),
-    errorElement: <ErrorPage />,
+    errorElement: <RouterErrorPage />,
   },
   {
     path: '/frequently-asked-questions',
@@ -102,16 +109,38 @@ const router = createBrowserRouter([
         <FrequentlyAskedQuestionsPage />
       </PublicPageLayout>
     ),
-    errorElement: <ErrorPage />,
+    errorElement: <RouterErrorPage />,
   },
   {
-    path: '/intro-page',
-    element: (
-      <PublicPageLayout>
-        <IntroMsme />
-      </PublicPageLayout>
-    ),
-    errorElement: <ErrorPage />,
+    path: '/application/:uuid',
+    element: <PublicApplicationLayout />,
+    children: [
+      {
+        path: 'intro',
+        element: <IntroMsme />,
+      },
+      {
+        path: 'credit-options',
+        element: <ViewCreditOptions />,
+      },
+      {
+        path: 'submition-completed',
+        element: <SubmitionCompleted />,
+      },
+      {
+        path: 'decline',
+        element: <Decline />,
+      },
+      {
+        path: 'decline-feedback',
+        element: <DeclineFeedback />,
+      },
+      {
+        path: 'decline-completed',
+        element: <DeclineCompleted />,
+      },
+    ],
+    errorElement: <RouterErrorPage />,
   },
 ]);
 
@@ -120,10 +149,12 @@ export function AppRouter() {
     <MuiTheme>
       <StateContextProvider>
         <LangContextProvider>
-          <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
+          <ApplicationContextProvider>
+            <QueryClientProvider client={queryClient}>
+              <RouterProvider router={router} />
+              <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+          </ApplicationContextProvider>
         </LangContextProvider>
       </StateContextProvider>
     </MuiTheme>

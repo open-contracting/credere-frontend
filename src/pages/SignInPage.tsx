@@ -76,7 +76,7 @@ export function SignInPage() {
 
               <Button className="mb-10" label={t('Login')} type="submit" disabled={isLoading} />
               <Box>
-                <Text className="inline-block">{t('Don’t have an account? Email')}</Text>
+                <Text className="inline-block">{t("Don't have an account? Email")}</Text>
                 <Text className="inline-block underline ml-1">
                   <a className="text-darkest" href="mailto:credere@open-contracting.org">
                     credere@open-contracting.org

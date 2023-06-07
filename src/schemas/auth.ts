@@ -1,8 +1,11 @@
+import { t } from '@transifex/native';
 import { TypeOf, object, string } from 'zod';
 
-const emailSchema = string().min(1, 'Email address is required').email('Email Address is invalid');
-const passwordSchema = string().min(1, 'Password is required').min(12, 'Password must be more than 12 characters');
-const otp = string().min(6, 'OTP length must be 6 digits').max(6, 'OTP length must be 6 digits');
+const emailSchema = string().min(1, t('Email address is required')).email(t('Email Address is invalid'));
+const passwordSchema = string()
+  .min(1, t('Password is required'))
+  .min(12, t('Password must be more than 12 characters'));
+const otp = string().min(6, t('OTP length must be 6 digits')).max(6, t('OTP length must be 6 digits'));
 
 export const loginSchema = object({
   username: emailSchema,
@@ -25,7 +28,7 @@ export interface SetupMFAInput {
 }
 
 const registerSchema = object({
-  name: string().min(1, 'Full name is required').max(100),
+  name: string().min(1, t('Full name is required')).max(100),
   email: emailSchema,
 });
 
@@ -33,10 +36,10 @@ export type RegisterInput = TypeOf<typeof registerSchema>;
 
 export const setPasswordSchema = object({
   password: passwordSchema,
-  passwordConfirm: string().min(1, 'Please confirm your password'),
+  passwordConfirm: string().min(1, t('Please confirm your password')),
 }).refine((data) => data.password === data.passwordConfirm, {
   path: ['passwordConfirm'],
-  message: 'Passwords do not match',
+  message: t('Passwords do not match'),
 });
 
 export type UpdatePasswordInput = TypeOf<typeof setPasswordSchema>;
