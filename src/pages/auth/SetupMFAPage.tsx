@@ -4,15 +4,14 @@ import { Box, Container } from '@mui/material';
 import { useT } from '@transifex/react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import QRCode from 'react-qr-code';
+import { useParamsTypeSafe, useSearchParamsTypeSafe } from 'src/hooks/useParamsTypeSafe';
+import useSetupMFA from 'src/hooks/useSetupMFA';
+import { SetupMFAInputForm, setupMFASchema } from 'src/schemas/auth';
+import { Button } from 'src/stories/button/Button';
+import FormInput from 'src/stories/form-input/FormInput';
+import Text from 'src/stories/text/Text';
+import Title from 'src/stories/title/Title';
 import { z } from 'zod';
-
-import { useParamsTypeSafe, useSearchParamsTypeSafe } from '../hooks/useParamsTypeSafe';
-import useSetupMFA from '../hooks/useSetupMFA';
-import { SetupMFAInputForm, setupMFASchema } from '../schemas/auth';
-import { Button } from '../stories/button/Button';
-import FormInput from '../stories/form-input/FormInput';
-import Text from '../stories/text/Text';
-import Title from '../stories/title/Title';
 
 export function SetupMFAPage() {
   const t = useT();

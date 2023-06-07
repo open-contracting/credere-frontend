@@ -1,31 +1,30 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-
-import BaseLayout from '../layout/BaseLayout';
-import PageLayout from '../layout/PageLayout';
-import PublicApplicationLayout from '../layout/PublicApplicationLayout';
-import PublicPageLayout from '../layout/PublicPageLayout';
-import MuiTheme from '../mui-theme';
-import App from '../pages/App';
-import CreatePasswordPage from '../pages/CreatePasswordPage';
-import Decline from '../pages/Decline';
-import DeclineCompleted from '../pages/DeclineCompleted';
-import DeclineFeedback from '../pages/DeclineFeedback';
-import FrequentlyAskedQuestionsPage from '../pages/FrequentlyAskedQuestionsPage';
-import IntroMsme from '../pages/IntroMsme';
-import PasswordCreated from '../pages/PasswordCreated';
-import ResetPasswordPage from '../pages/ResetPasswordPage';
-import RouterErrorPage from '../pages/RouterErrorPage';
-import SelectLanguage from '../pages/SelectLanguage';
-import SetupMFAPage from '../pages/SetupMFAPage';
-import SignInPage from '../pages/SignInPage';
-import SubmitionCompleted from '../pages/SubmitionCompleted';
-import ViewCreditOptions from '../pages/ViewCreditOptions';
-import ApplicationContextProvider from '../providers/ApplicationContextProvider';
-import LangContextProvider from '../providers/LangContextProvider';
-import StateContextProvider from '../providers/StateContextProvider';
-import ProtectedRoute from './ProtectedRoute';
+import BaseLayout from 'src/layout/BaseLayout';
+import PageLayout from 'src/layout/PageLayout';
+import PublicApplicationLayout from 'src/layout/PublicApplicationLayout';
+import PublicPageLayout from 'src/layout/PublicPageLayout';
+import MuiTheme from 'src/mui-theme';
+import App from 'src/pages/App';
+import RouterErrorPage from 'src/pages/RouterErrorPage';
+import SelectLanguage from 'src/pages/SelectLanguage';
+import CreatePasswordPage from 'src/pages/auth/CreatePasswordPage';
+import PasswordCreated from 'src/pages/auth/PasswordCreated';
+import ResetPasswordPage from 'src/pages/auth/ResetPasswordPage';
+import SetupMFAPage from 'src/pages/auth/SetupMFAPage';
+import SignInPage from 'src/pages/auth/SignInPage';
+import Decline from 'src/pages/msme/Decline';
+import DeclineCompleted from 'src/pages/msme/DeclineCompleted';
+import DeclineFeedback from 'src/pages/msme/DeclineFeedback';
+import FrequentlyAskedQuestionsPage from 'src/pages/msme/FrequentlyAskedQuestionsPage';
+import IntroMsme from 'src/pages/msme/IntroMsme';
+import SubmitionCompleted from 'src/pages/msme/SubmitionCompleted';
+import ViewCreditOptions from 'src/pages/msme/ViewCreditOptions';
+import ApplicationContextProvider from 'src/providers/ApplicationContextProvider';
+import LangContextProvider from 'src/providers/LangContextProvider';
+import StateContextProvider from 'src/providers/StateContextProvider';
+import ProtectedRoute from 'src/routes/ProtectedRoute';
 
 // Create a React Query client
 const queryClient = new QueryClient({

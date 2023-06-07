@@ -7,15 +7,14 @@ import { useT } from '@transifex/react';
 import { useMemo } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-
-import FAQComponent from '../components/FAQComponent';
-import useAccessScheme from '../hooks/useAccessScheme';
-import useApplicationContext from '../hooks/useApplicationContext';
-import { IntroInput, introSchema } from '../schemas/application';
-import { Button } from '../stories/button/Button';
-import Checkbox from '../stories/checkbox/Checkbox';
-import Text from '../stories/text/Text';
-import Title from '../stories/title/Title';
+import FAQComponent from 'src/components/FAQComponent';
+import useAccessScheme from 'src/hooks/useAccessScheme';
+import useApplicationContext from 'src/hooks/useApplicationContext';
+import { IntroInput, introSchema } from 'src/schemas/application';
+import { Button } from 'src/stories/button/Button';
+import Checkbox from 'src/stories/checkbox/Checkbox';
+import Text from 'src/stories/text/Text';
+import Title from 'src/stories/title/Title';
 
 function IntroMsme() {
   const t = useT();

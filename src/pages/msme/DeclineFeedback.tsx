@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+ 
 
 /* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -6,16 +6,15 @@ import { Box } from '@mui/material';
 import { useT } from '@transifex/react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-
-import FAQComponent from '../components/FAQComponent';
-import useApplicationContext from '../hooks/useApplicationContext';
-import useDeclineFeedbackApplication from '../hooks/useDeclineFeedbackApplication';
-import { DeclineFeedbackInput, declineFeedbackSchema } from '../schemas/application';
-import { Button } from '../stories/button/Button';
-import Checkbox from '../stories/checkbox/Checkbox';
-import FormInput from '../stories/form-input/FormInput';
-import Text from '../stories/text/Text';
-import Title from '../stories/title/Title';
+import FAQComponent from 'src/components/FAQComponent';
+import useApplicationContext from 'src/hooks/useApplicationContext';
+import useDeclineFeedbackApplication from 'src/hooks/useDeclineFeedbackApplication';
+import { DeclineFeedbackInput, declineFeedbackSchema } from 'src/schemas/application';
+import { Button } from 'src/stories/button/Button';
+import Checkbox from 'src/stories/checkbox/Checkbox';
+import FormInput from 'src/stories/form-input/FormInput';
+import Text from 'src/stories/text/Text';
+import Title from 'src/stories/title/Title';
 
 function DeclineFeedback() {
   const t = useT();

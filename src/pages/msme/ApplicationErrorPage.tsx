@@ -1,11 +1,7 @@
-/* eslint-disable no-console */
-
-/* eslint-disable react/jsx-props-no-spreading */
 import { useT } from '@transifex/react';
-
-import NeedHelpComponent from '../components/NeedHelpComponent';
-import Text from '../stories/text/Text';
-import Title from '../stories/title/Title';
+import NeedHelpComponent from 'src/components/NeedHelpComponent';
+import Text from 'src/stories/text/Text';
+import Title from 'src/stories/title/Title';
 
 export type ApplicationErrorPageProps = {
   message: string;

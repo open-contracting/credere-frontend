@@ -1,9 +1,8 @@
 import { useT } from '@transifex/react';
 import { Link } from 'react-router-dom';
-
-import { Button } from '../stories/button/Button';
-import Text from '../stories/text/Text';
-import Title from '../stories/title/Title';
+import { Button } from 'src/stories/button/Button';
+import Text from 'src/stories/text/Text';
+import Title from 'src/stories/title/Title';
 
 function PasswordCreated() {
   const t = useT();

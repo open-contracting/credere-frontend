@@ -1,13 +1,12 @@
-/* eslint-disable react/jsx-props-no-spreading */
+ 
 import { Box } from '@mui/material';
 import { useT } from '@transifex/react';
 import { useEffect, useState } from 'react';
-
-import NeedHelpComponent from '../components/NeedHelpComponent';
-import FAQ_QUESTIONS from '../constants/faq-questions';
-import FAQPageSection from '../stories/faq/FAQPageSection';
-import LinkButton from '../stories/link-button/LinkButton';
-import Title from '../stories/title/Title';
+import NeedHelpComponent from 'src/components/NeedHelpComponent';
+import FAQ_QUESTIONS from 'src/constants/faq-questions';
+import FAQPageSection from 'src/stories/faq/FAQPageSection';
+import LinkButton from 'src/stories/link-button/LinkButton';
+import Title from 'src/stories/title/Title';
 
 function FrequentlyAskedQuestionsPage() {
   const t = useT();

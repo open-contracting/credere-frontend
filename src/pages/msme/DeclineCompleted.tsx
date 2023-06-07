@@ -1,12 +1,11 @@
-/* eslint-disable no-console */
+ 
 
-/* eslint-disable react/jsx-props-no-spreading */
+ 
 import { useT } from '@transifex/react';
-
-import FAQComponent from '../components/FAQComponent';
-import { Button } from '../stories/button/Button';
-import Text from '../stories/text/Text';
-import Title from '../stories/title/Title';
+import FAQComponent from 'src/components/FAQComponent';
+import { Button } from 'src/stories/button/Button';
+import Text from 'src/stories/text/Text';
+import Title from 'src/stories/title/Title';
 
 function DeclineCompleted() {
   const t = useT();

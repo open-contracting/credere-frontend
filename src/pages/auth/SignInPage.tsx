@@ -4,13 +4,12 @@ import { Box, Container } from '@mui/material';
 import { useT } from '@transifex/react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-
-import useSignIn from '../hooks/useSignIn';
-import { LoginInput, loginSchema } from '../schemas/auth';
-import { Button } from '../stories/button/Button';
-import FormInput from '../stories/form-input/FormInput';
-import Text from '../stories/text/Text';
-import Title from '../stories/title/Title';
+import useSignIn from 'src/hooks/useSignIn';
+import { LoginInput, loginSchema } from 'src/schemas/auth';
+import { Button } from 'src/stories/button/Button';
+import FormInput from 'src/stories/form-input/FormInput';
+import Text from 'src/stories/text/Text';
+import Title from 'src/stories/title/Title';
 
 export function SignInPage() {
   const t = useT();

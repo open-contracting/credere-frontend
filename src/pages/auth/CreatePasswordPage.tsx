@@ -4,15 +4,14 @@ import { Box, Container } from '@mui/material';
 import { useT } from '@transifex/react';
 import { useEffect } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { useSearchParamsTypeSafe } from 'src/hooks/useParamsTypeSafe';
+import useUpdatePassword from 'src/hooks/useUpdatePassword';
+import { UpdatePasswordInput, UpdatePasswordPayload, setPasswordSchema } from 'src/schemas/auth';
+import { Button } from 'src/stories/button/Button';
+import FormInput from 'src/stories/form-input/FormInput';
+import Text from 'src/stories/text/Text';
+import Title from 'src/stories/title/Title';
 import { z } from 'zod';
-
-import { useSearchParamsTypeSafe } from '../hooks/useParamsTypeSafe';
-import useUpdatePassword from '../hooks/useUpdatePassword';
-import { UpdatePasswordInput, UpdatePasswordPayload, setPasswordSchema } from '../schemas/auth';
-import { Button } from '../stories/button/Button';
-import FormInput from '../stories/form-input/FormInput';
-import Text from '../stories/text/Text';
-import Title from '../stories/title/Title';
 
 const params = z.object({
   email: z.coerce.string().email(),

@@ -11,7 +11,7 @@ import { getApplicationFn } from '../api/public';
 import { DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
 import useApplicationContext from '../hooks/useApplicationContext';
 import { useParamsTypeSafe } from '../hooks/useParamsTypeSafe';
-import ApplicationErrorPage from '../pages/ApplicationErrorPage';
+import ApplicationErrorPage from '../pages/msme/ApplicationErrorPage';
 import { IApplication } from '../schemas/application';
 import Loader from '../stories/loader/Loader';
 import PublicPageLayout from './PublicPageLayout';

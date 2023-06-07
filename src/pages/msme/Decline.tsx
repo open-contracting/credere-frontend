@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+ 
 
 /* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -6,15 +6,14 @@ import { Box } from '@mui/material';
 import { useT } from '@transifex/react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-
-import FAQComponent from '../components/FAQComponent';
-import useApplicationContext from '../hooks/useApplicationContext';
-import useDeclineApplication from '../hooks/useDeclineApplication';
-import { DeclineApplicationInput, declineApplicationSchema } from '../schemas/application';
-import { Button } from '../stories/button/Button';
-import Checkbox from '../stories/checkbox/Checkbox';
-import Text from '../stories/text/Text';
-import Title from '../stories/title/Title';
+import FAQComponent from 'src/components/FAQComponent';
+import useApplicationContext from 'src/hooks/useApplicationContext';
+import useDeclineApplication from 'src/hooks/useDeclineApplication';
+import { DeclineApplicationInput, declineApplicationSchema } from 'src/schemas/application';
+import { Button } from 'src/stories/button/Button';
+import Checkbox from 'src/stories/checkbox/Checkbox';
+import Text from 'src/stories/text/Text';
+import Title from 'src/stories/title/Title';
 
 function Decline() {
   const t = useT();

@@ -4,13 +4,12 @@ import { Box, Container } from '@mui/material';
 import { useT } from '@transifex/react';
 import { useEffect } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-
-import useResetPassword from '../hooks/useResetPassword';
-import { ResetPasswordInput, resetPasswordSchema } from '../schemas/auth';
-import { Button } from '../stories/button/Button';
-import FormInput from '../stories/form-input/FormInput';
-import Text from '../stories/text/Text';
-import Title from '../stories/title/Title';
+import useResetPassword from 'src/hooks/useResetPassword';
+import { ResetPasswordInput, resetPasswordSchema } from 'src/schemas/auth';
+import { Button } from 'src/stories/button/Button';
+import FormInput from 'src/stories/form-input/FormInput';
+import Text from 'src/stories/text/Text';
+import Title from 'src/stories/title/Title';
 
 export function ResetPasswordPage() {
   const t = useT();

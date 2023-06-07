@@ -1,13 +1,9 @@
-/* eslint-disable no-console */
-
-/* eslint-disable react/jsx-props-no-spreading */
 import { useT } from '@transifex/react';
 import { useNavigate } from 'react-router-dom';
-
-import NeedHelpComponent from '../components/NeedHelpComponent';
-import { Button } from '../stories/button/Button';
-import Text from '../stories/text/Text';
-import Title from '../stories/title/Title';
+import NeedHelpComponent from 'src/components/NeedHelpComponent';
+import { Button } from 'src/stories/button/Button';
+import Text from 'src/stories/text/Text';
+import Title from 'src/stories/title/Title';
 
 function ViewCreditOptions() {
   const t = useT();
