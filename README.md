@@ -76,3 +76,31 @@ Must be one of the following:
 - **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 - **test**: Adding missing tests or correcting existing tests
 - **chore**: Changes to the build process or auxiliary tools and libraries such as documentation generation
+
+## Transifex
+
+For translations, the project is using the [Transifex](https://developers.transifex.com/docs/javascript-sdk-setup) service.
+
+### React Implementation
+
+The specific implementation being used is: **Transifex Native SDK**
+
+For specific instructions on how to use the available components, please refer to:
+
+[https://www.npmjs.com/package/@transifex/react](https://www.npmjs.com/package/@transifex/react)
+
+### Pushing Content to Transifex Service
+
+It's necessary to use the Transifex CLI in order to push content to the service server.
+
+For detailed instructions on installing the CLI, please refer to:
+
+[https://www.npmjs.com/package/@transifex/cli](https://www.npmjs.com/package/@transifex/cli)
+
+#### Push keys to Transifex
+
+To upload the current strings to the Transifex server for translation, execute the following command, we must be positioned within the **/src** directory of the project
+
+```bash
+npx txjs-cli push --token=[transifex-token] --secret=[transifex-secret]
+```
