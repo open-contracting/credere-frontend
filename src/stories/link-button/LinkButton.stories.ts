@@ -26,3 +26,10 @@ export const Primary: Story = {
     label: 'Link Button',
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    label: 'Link Button',
+  },
+};
