@@ -50,7 +50,7 @@ function DeclineFeedback() {
       <Title type="page" label={t('Confirm Removal')} className="mb-8" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 md:col-span-2 md:mr-10">
-          <Text className="mb-8">{t('Thanks for letting us know. You won’t receive any more emails from us.')}</Text>
+          <Text className="mb-8">{t("Thanks for letting us know. You won't receive any more emails from us.")}</Text>
           <Text className="mb-8">
             {t(
               'Please take a moment to provide us with feedback on the main reason why the offer was declined. This will help us to understand the needs of SMEs better.',
