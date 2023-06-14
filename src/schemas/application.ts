@@ -13,10 +13,6 @@ export const introSchema = object({
 
 export type IntroInput = TypeOf<typeof introSchema>;
 
-const booleanToDeclineSchema = boolean().refine((value) => value === true, {
-  message: t('You need to check at least this option to Decline the Scheme'),
-});
-
 const UUIDType = string().optional();
 
 export const applicationBaseSchema = object({
@@ -26,9 +22,12 @@ export const applicationBaseSchema = object({
 export type ApplicationBaseInput = TypeOf<typeof applicationBaseSchema>;
 
 export const declineApplicationSchema = object({
-  decline_this: booleanToDeclineSchema,
+  decline_this: boolean(),
   decline_all: boolean(),
   uuid: UUIDType,
+}).refine((data) => data.decline_this || data.decline_all, {
+  path: ['decline_all'],
+  message: t('You need to check at least one option to Decline the Scheme'),
 });
 
 export type DeclineApplicationInput = TypeOf<typeof declineApplicationSchema>;
