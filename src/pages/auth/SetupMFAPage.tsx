@@ -78,7 +78,7 @@ export function SetupMFAPage() {
                 borderRadius: 0,
               }}>
               <Title type="section" className="self-center mb-8" label={t('Configure MFA')} />
-              <Text>label={t('Install an Authenticator App or use the Google Chrome Authenticator extension.')}</Text>
+              <Text>{t('Install an Authenticator App or use the Google Chrome Authenticator extension.')}</Text>
               <Text>{t('Use this QR')}</Text>
               <QRCode
                 className="self-center"

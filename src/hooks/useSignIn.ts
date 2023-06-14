@@ -1,4 +1,3 @@
- 
 import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useT } from '@transifex/react';
 import axios from 'axios';
@@ -34,8 +33,8 @@ export default function useSignIn(): IUseSignIn {
       },
       onError: (error) => {
         if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
-          if (error.response.data && error.response.data.message) {
-            enqueueSnackbar(t('Error: {error}', { error: error.response.data.message }), {
+          if (error.response.data && error.response.data.detail) {
+            enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
               variant: 'error',
             });
           } else {

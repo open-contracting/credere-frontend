@@ -2,7 +2,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useT } from '@transifex/react';
 import axios from 'axios';
-import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
@@ -22,7 +21,6 @@ export default function PublicApplicationLayout() {
   const location = useLocation();
   const [queryError, setQueryError] = useState<string>('');
   const applicationContext = useApplicationContext();
-  const { enqueueSnackbar } = useSnackbar();
   const { uuid } = useParamsTypeSafe(
     z.object({
       uuid: z.coerce.string(),
@@ -36,6 +34,8 @@ export default function PublicApplicationLayout() {
       const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
       if (application.borrower_accepted_at) {
         if (lastSegment !== 'credit-options' && lastSegment !== 'submition-completed') navigate('./credit-options');
+      } else if (!application.borrower_accepted_at && !application.borrower_declined_at) {
+        if (lastSegment !== 'intro' && lastSegment !== 'decline') navigate('./intro');
       } else if (application.pending_documents) {
         // show pending documents page
       } else if (
@@ -66,9 +66,7 @@ export default function PublicApplicationLayout() {
       if (axios.isAxiosError(error) && error.response && error.response.data && error.response.data.detail) {
         setQueryError(error.response.data.detail);
       } else {
-        enqueueSnackbar(t('Invalid link'), {
-          variant: 'error',
-        });
+        setQueryError(t('Invalid link'));
       }
     },
   });

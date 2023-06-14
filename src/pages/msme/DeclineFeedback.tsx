@@ -1,11 +1,8 @@
- 
-
 /* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box } from '@mui/material';
 import { useT } from '@transifex/react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import FAQComponent from 'src/components/FAQComponent';
 import useApplicationContext from 'src/hooks/useApplicationContext';
 import useDeclineFeedbackApplication from 'src/hooks/useDeclineFeedbackApplication';
@@ -18,9 +15,9 @@ import Title from 'src/stories/title/Title';
 
 function DeclineFeedback() {
   const t = useT();
-  const navigate = useNavigate();
+
   const applicationContext = useApplicationContext();
-  const { declineFeedbackMutation, isLoading } = useDeclineFeedbackApplication();
+  const { declineFeedbackMutation, declineRollbackMutation, isLoading } = useDeclineFeedbackApplication();
 
   const methods = useForm<DeclineFeedbackInput>({
     resolver: zodResolver(declineFeedbackSchema),
@@ -31,6 +28,7 @@ function DeclineFeedback() {
     watch,
     // formState: { touchedFields },
   } = methods;
+
   const onSubmitHandler: SubmitHandler<DeclineFeedbackInput> = (values) => {
     const payload: DeclineFeedbackInput = {
       ...values,
@@ -41,7 +39,7 @@ function DeclineFeedback() {
   };
 
   const onBackHandler = () => {
-    navigate('../decline');
+    declineRollbackMutation({ uuid: applicationContext.state.data?.application.uuid });
   };
 
   return (

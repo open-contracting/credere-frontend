@@ -69,9 +69,9 @@ export interface IUser {
   id?: string;
   name: string;
   email: string;
-  role?: string;
-  createdAt?: string;
-  updatedAt?: string;
+  type?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface IUserResponse {

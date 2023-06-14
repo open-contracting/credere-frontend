@@ -21,6 +21,11 @@ export const declineApplicationFeedbackFn = async (payload: DeclineFeedbackInput
   return response.data;
 };
 
+export const declineApplicationRollbackFn = async (payload: ApplicationBaseInput) => {
+  const response = await publicApi.post<IApplicationResponse>('applications/rollback-decline', payload);
+  return response.data;
+};
+
 export const getApplicationFn = async (uuid: string) => {
   const response = await publicApi.get<IApplicationResponse>(`applications/uuid/${uuid}`);
   return response.data;
