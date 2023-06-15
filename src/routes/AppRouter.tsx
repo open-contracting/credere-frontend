@@ -2,11 +2,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import BaseLayout from 'src/layout/BaseLayout';
-import PageLayout from 'src/layout/PageLayout';
 import PublicApplicationLayout from 'src/layout/PublicApplicationLayout';
 import PublicPageLayout from 'src/layout/PublicPageLayout';
 import MuiTheme from 'src/mui-theme';
-import App from 'src/pages/App';
+import AppHome from 'src/pages/AppHome';
 import RouterErrorPage from 'src/pages/RouterErrorPage';
 import SelectLanguage from 'src/pages/SelectLanguage';
 import CreatePasswordPage from 'src/pages/auth/CreatePasswordPage';
@@ -40,9 +39,7 @@ const router = createBrowserRouter([
     path: '/',
     element: (
       <ProtectedRoute>
-        <PageLayout>
-          <App />
-        </PageLayout>
+        <AppHome />
       </ProtectedRoute>
     ),
     errorElement: <RouterErrorPage />,
