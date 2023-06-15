@@ -32,7 +32,7 @@ function DeclineFeedback() {
   const onSubmitHandler: SubmitHandler<DeclineFeedbackInput> = (values) => {
     const payload: DeclineFeedbackInput = {
       ...values,
-      other_commnets: values.other ? values.other_commnets : '',
+      other_comments: values.other ? values.other_comments : '',
       uuid: applicationContext.state.data?.application.uuid,
     };
     declineFeedbackMutation(payload);

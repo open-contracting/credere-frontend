@@ -38,7 +38,7 @@ export const declineFeedbackSchema = object({
   preffer_to_go_to_bank: boolean(),
   dont_want_access_credit: boolean(),
   other: boolean(),
-  other_commnets: string().optional(),
+  other_comments: string().optional(),
   uuid: UUIDType,
 });
 
