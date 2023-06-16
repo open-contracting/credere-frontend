@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 import { useT } from '@transifex/react';
 import { useSnackbar } from 'notistack';
@@ -26,11 +25,13 @@ export default function useResetPassword(): IUseResetPassword {
         });
         navigate('/login');
       },
-      onError: (error) => {
-        console.log(error);
-        enqueueSnackbar(` ${t('Error trying to reset password.')} ${error}`, {
-          variant: 'error',
+      onError: () => {
+        // console.log(error);
+        // show success message always to avoid email enumeration
+        enqueueSnackbar(t('Check your email to continue'), {
+          variant: 'info',
         });
+        navigate('/login');
       },
     },
   );
