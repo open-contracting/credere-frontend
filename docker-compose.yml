@@ -9,7 +9,7 @@ services:
       - VITE_DEFAULT_LANG=${VITE_DEFAULT_LANG}
       - VITE_CREDERE_PHONE_NUMBER=${VITE_CREDERE_PHONE_NUMBER}
     ports:
-      - '80:80'
+      - '8000:80'
   backend:
     build: ../credere-backend/
     environment:
@@ -31,6 +31,7 @@ services:
       - FACEBOOK_LINK=${FACEBOOK_LINK}
       - TWITTER_LINK=${TWITTER_LINK}
       - LINK_LINK=${LINK_LINK}
-
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
     ports:
-      - '8000:8000'
+      - '3000:8000'
