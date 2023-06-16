@@ -1,0 +1,12 @@
+/node_modules
+/scripts
+/dist
+/config
+.DS_Store
+/package.json
+/tsconfig.json
+**/*.md
+build
+
+.eslintrc.js
+env.d.ts
