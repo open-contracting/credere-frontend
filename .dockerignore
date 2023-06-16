@@ -1,0 +1,22 @@
+# Docker
+docker-compose.yml
+Dockerfile
+
+# Documentation
+LICENSE
+README.md
+
+# Generated files
+node_modules
+dist
+.storybook
+.husky
+.vscode
+.vite
+.git
+.env.example
+.commitlintrc.json
+.env.example
+.pre-commit-config.yaml
+
+

@@ -30,7 +30,7 @@ export function SignInPage() {
     <Box className="bg-background">
       <Title
         type="page"
-        className="lg:pt-16 lg:pl-20 md:pt-10 md:pl-12 sm:pt-9 sm:pl-10 pt-8 pl-6 lg:mb-16 mb-10"
+        className="lg:pt-16 lg:pl-20 md:pt-10 md:pl-12 sm:pt-9 sm:pl-10 pt-8 pl-6 lg:mb-10 mb-6"
         label={t('Login to Credere')}
       />
       <Container
