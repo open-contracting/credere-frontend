@@ -6,6 +6,7 @@ import PublicApplicationLayout from 'src/layout/PublicApplicationLayout';
 import PublicPageLayout from 'src/layout/PublicPageLayout';
 import MuiTheme from 'src/mui-theme';
 import AppHome from 'src/pages/AppHome';
+import AppSettingsOCP from 'src/pages/AppSettingsOCP';
 import RouterErrorPage from 'src/pages/RouterErrorPage';
 import SelectLanguage from 'src/pages/SelectLanguage';
 import CreatePasswordPage from 'src/pages/auth/CreatePasswordPage';
@@ -40,6 +41,15 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <AppHome />
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/ocp-settings',
+    element: (
+      <ProtectedRoute>
+        <AppSettingsOCP />
       </ProtectedRoute>
     ),
     errorElement: <RouterErrorPage />,
