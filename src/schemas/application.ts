@@ -90,8 +90,22 @@ export interface IBorrower {
   declined_at?: any;
 }
 
+export interface ILender {
+  id: number;
+  name: string;
+  email_group: string;
+  type: string;
+  sla_days: number;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface IApplication {
   id: number;
+  borrower: IBorrower;
+  award: IAward;
+  lender?: ILender;
   award_id: number;
   uuid: string;
   primary_email: string;
@@ -124,8 +138,34 @@ export interface IApplication {
   archived_at?: any;
 }
 
+export interface IExtendedApplication {
+  buyer_name: string;
+  borrower_name: string;
+  lender_name: string;
+}
+
+export const EXTENDED_APPLICATION_FROM: IExtendedApplication = {
+  buyer_name: 'award.buyer_name',
+  borrower_name: 'borrower.legal_name',
+  lender_name: 'lender.name',
+};
+
 export interface IApplicationResponse {
   application: IApplication;
   borrower: IBorrower;
   award: IAward;
+}
+
+export interface PaginationInput {
+  page: number;
+  page_size: number;
+  sort_field: string;
+  sort_order: 'asc' | 'desc';
+}
+
+export interface IApplicationsListResponse {
+  items: IApplication[];
+  count: number;
+  page: number;
+  page_size: number;
 }

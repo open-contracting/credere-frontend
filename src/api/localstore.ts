@@ -1,5 +1,6 @@
 import { ACCESS_TOKEN_LOCAL_STORAGE_KEY, LANG_STORAGE_KEY, USER_LOCAL_STORAGE_KEY } from '../constants';
 import { IUser } from '../schemas/auth';
+import { setHeaderFromLocalStorage } from './axios';
 
 export function saveUser(user: IUser | null): void {
   if (user) {
@@ -11,6 +12,7 @@ export function saveUser(user: IUser | null): void {
 
 export function saveAccessToken(accessToken: string): void {
   localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY, accessToken);
+  setHeaderFromLocalStorage();
 }
 
 export function getAccessToken(): string | null {
@@ -25,6 +27,7 @@ export function getUser(): IUser | null {
 export function removeUser(): void {
   localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
   localStorage.removeItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY);
+  setHeaderFromLocalStorage();
 }
 
 export function saveLang(lang: string | null): void {

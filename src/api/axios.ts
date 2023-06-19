@@ -17,10 +17,12 @@ export const globalConfig: RetryConfig = {
   },
 };
 
-const setHeaderFromLocalStorage = () => {
+export const setHeaderFromLocalStorage = () => {
   const token = getAccessToken();
   if (token && token !== 'undefined' && globalConfig.headers) {
-    globalConfig.headers.Authorization = `${token}`; // `Bearer ${token)}`;
+    globalConfig.headers.Authorization = `Bearer ${token}`;
+  } else if (globalConfig.headers) {
+    globalConfig.headers.Authorization = '';
   }
 };
 
@@ -43,7 +45,7 @@ export const setAccessTokenToHeaders = (accessToken: string | null) => {
   authApi.interceptors.request.use(
     (config) => {
       // eslint-disable-next-line no-param-reassign
-      config.headers.Authorization = `${accessToken}`; // `Bearer ${token)}`;
+      config.headers.Authorization = `Bearer ${accessToken}`;
       return config;
     },
     (error) => Promise.reject(error),
