@@ -36,6 +36,40 @@ const theme = createTheme({
         container: rootElement,
       },
     },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'GT Eesti Pro Text',
+          padding: 10,
+        },
+      },
+    },
+    MuiTableSortLabel: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'GT Eesti Pro Text',
+        },
+      },
+    },
+    MuiTablePagination: {
+      styleOverrides: {
+        selectLabel: {
+          fontFamily: 'GT Eesti Pro Text',
+        },
+        select: {
+          fontFamily: 'GT Eesti Pro Text',
+        },
+        menuItem: {
+          fontFamily: 'GT Eesti Pro Text',
+        },
+        input: {
+          fontFamily: 'GT Eesti Pro Text',
+        },
+        displayedRows: {
+          fontFamily: 'GT Eesti Pro Text',
+        },
+      },
+    },
   },
 });
 
