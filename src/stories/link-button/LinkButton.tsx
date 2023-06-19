@@ -30,8 +30,8 @@ export function LinkButton<C extends React.ElementType>({
       startIcon={!noIcon ? <img className={iconClassName} src={icon} alt="button-icon" /> : undefined}
       className={twMerge(
         [
-          'w-max text-lg text-darkest font-normal disabled:opacity-50',
-          size === 'large' ? 'px-6 py-4' : 'px-4 py-2',
+          'w-max text-darkest font-normal disabled:opacity-50',
+          size === 'large' ? 'px-6 py-4 text-lg' : 'px-4 py-2 text-sm',
           `bg-transparent hover:bg-transparent normal-case ${className}`,
         ].join(' '),
       )}

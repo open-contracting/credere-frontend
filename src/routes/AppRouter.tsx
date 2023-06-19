@@ -25,6 +25,9 @@ import LangContextProvider from 'src/providers/LangContextProvider';
 import StateContextProvider from 'src/providers/StateContextProvider';
 import ProtectedRoute from 'src/routes/ProtectedRoute';
 
+import PageLayout from '../layout/PageLayout';
+import Applications from '../pages/ocp/Applications';
+
 // Create a React Query client
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,7 +42,20 @@ const router = createBrowserRouter([
     path: '/',
     element: (
       <ProtectedRoute>
-        <AppHome />
+        <PageLayout>
+          <AppHome />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/admin/applications',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <Applications />
+        </PageLayout>
       </ProtectedRoute>
     ),
     errorElement: <RouterErrorPage />,

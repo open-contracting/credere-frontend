@@ -1,7 +1,9 @@
+import { Container } from '@mui/material';
 import { useT } from '@transifex/react';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
+import ApplicationsList from '../../components/ApplicationsList';
 import DashboardItemContainer from '../../stories/dashboard/DashboardItemContainer';
 
 export function HomeFI() {
@@ -21,44 +23,47 @@ export function HomeFI() {
         )}
       </Text>
       <Title type="section" label={t('Dashboard')} className="mb-6" />
-      <div className="grid lg:gap-10 grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-        <div className="col-span-1">
-          <DashboardItemContainer description={t('Application(s) received')} value="15" />
+      <Container className="p-0 lg:pr-20 ml-0">
+        <div className="grid lg:gap-10 grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+          <div className="col-span-1">
+            <DashboardItemContainer description={t('Application(s) received')} value="15" />
+          </div>
+          <div className="col-span-1">
+            <DashboardItemContainer description={t('Application(s) in progress')} value="17" />
+          </div>
+          <div className="col-span-1">
+            <DashboardItemContainer description={t('Application(s) approved')} value="59" />
+          </div>
+          <div className="col-span-1">
+            <DashboardItemContainer color="red" description={t('Application(s) declined')} value="1" />
+          </div>
         </div>
-        <div className="col-span-1">
-          <DashboardItemContainer description={t('Application(s) in progress')} value="17" />
+        <div className="grid lg:gap-10 grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+          <div className="col-span-1">
+            <DashboardItemContainer description={t('Applications with credit disbursed')} value="15" />
+          </div>
+          <div className="col-span-1">
+            <DashboardItemContainer description={t('Approved applications with credit disbursed')} value="62%" />
+          </div>
+          <div className="col-span-1">
+            <DashboardItemContainer color="red" description={t('Application(s) overdue')} value="59" />
+          </div>
+          <div className="col-span-1">
+            <DashboardItemContainer
+              color="red"
+              description={t('Average time to process an application')}
+              value="5.5 days"
+            />
+          </div>
         </div>
-        <div className="col-span-1">
-          <DashboardItemContainer description={t('Application(s) approved')} value="59" />
-        </div>
-        <div className="col-span-1">
-          <DashboardItemContainer color="red" description={t('Application(s) declined')} value="1" />
-        </div>
-      </div>
-      <div className="grid lg:gap-10 grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-        <div className="col-span-1">
-          <DashboardItemContainer description={t('Applications with credit disbursed')} value="15" />
-        </div>
-        <div className="col-span-1">
-          <DashboardItemContainer description={t('Approved applications with credit disbursed')} value="62%" />
-        </div>
-        <div className="col-span-1">
-          <DashboardItemContainer color="red" description={t('Application(s) overdue')} value="59" />
-        </div>
-        <div className="col-span-1">
-          <DashboardItemContainer
-            color="red"
-            description={t('Average time to process an application')}
-            value="5.5 days"
-          />
-        </div>
-      </div>
+      </Container>
       <Title type="section" label={t('MSME applications')} className="mb-6 mt-4" />
       <Text className="mb-8">
         {t(
           'Approve applications by selecting the start or continue options. Completed applications are only stored for one week after approval.',
         )}
       </Text>
+      <ApplicationsList type="FI" />
     </>
   );
 }
