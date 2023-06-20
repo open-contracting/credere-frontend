@@ -22,7 +22,6 @@ function IntroMsme() {
   const applicationContext = useApplicationContext();
   const { accessSchemeMutation, isLoading } = useAccessScheme();
 
-  console.log('applicationContext', applicationContext.state);
   const methods = useForm<IntroInput>({
     resolver: zodResolver(introSchema),
   });
@@ -101,7 +100,7 @@ function IntroMsme() {
                 label={t('A agree for my details to be passed onto the banking partner.')}
               />
               <Checkbox
-                name="acept_terms_and_conditions"
+                name="accept_terms_and_conditions"
                 defaultValue={false}
                 label={t('I have read the terms and conditions for the credit guarantee scheme.')}
               />

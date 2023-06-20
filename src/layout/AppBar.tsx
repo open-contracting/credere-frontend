@@ -17,7 +17,7 @@ export function AppBar({ auth = true, logout }: AppBarProps) {
   const t = useT();
   return (
     <MuiAppBar position="static" className="bg-darkest" elevation={0}>
-      <Container maxWidth={false} className="lg:pl-20 md:pl-12 sm:pl-10 pl-6 mx-0">
+      <Container maxWidth={false} className="lg:px-20 md:px-12 sm:px-10 px-6 mx-0">
         <Toolbar disableGutters sx={{ height: '100px' }}>
           <Link to="/" style={{ textDecoration: 'none', color: '#fff' }}>
             <img src={OCPLogo} alt="logo" />

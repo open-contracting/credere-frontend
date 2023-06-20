@@ -3,7 +3,8 @@ import { FormControl, FormHelperText, MenuItem, Select } from '@mui/material';
 import { useMemo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { Input } from '../form-input/FormInput';
+import { getProperty } from '../../util';
+import { FieldErrorType, Input } from '../form-input/FormInput';
 import { Text } from '../text/Text';
 
 export type FormSelectOption = {
@@ -15,6 +16,7 @@ export type FormSelectProps = {
   name: string;
   label: string;
   placeholder?: string;
+  className?: string;
   options: FormSelectOption[] | string[];
   renderOption?: (option: FormSelectOption) => string;
 };
@@ -24,7 +26,14 @@ const defaultRenderOption = (option: FormSelectOption) => option.label;
 const isStringArray = (obj: unknown): obj is string[] =>
   Array.isArray(obj) && obj.every((item) => typeof item === 'string');
 
-export function FormSelect({ name, label, placeholder, renderOption = defaultRenderOption, options }: FormSelectProps) {
+export function FormSelect({
+  name,
+  label,
+  className,
+  placeholder,
+  renderOption = defaultRenderOption,
+  options,
+}: FormSelectProps) {
   const {
     control,
     formState: { errors },
@@ -40,23 +49,28 @@ export function FormSelect({ name, label, placeholder, renderOption = defaultRen
     return options;
   }, [options]);
 
+  const fieldError: FieldErrorType = getProperty(errors, name);
+
   return (
     <Controller
       control={control}
       defaultValue=""
       name={name}
       render={({ field }) => (
-        <FormControl fullWidth sx={{ mb: 2 }}>
+        <FormControl fullWidth sx={{ mb: 2 }} className={className}>
           <Text>{label}</Text>
           <Select
             displayEmpty
             disableUnderline
+            error={!!fieldError}
             input={<Input />}
-            inputProps={{ name, error: !!errors[name] }}
+            inputProps={{ name, error: !!fieldError }}
             {...field}>
             {placeholder && (
               <MenuItem disabled value="">
-                <div className="text-softGray">{placeholder}</div>
+                <div className={` ${fieldError ? 'text-red opacity-50' : 'text-softGray opacity-30'}`}>
+                  {placeholder}
+                </div>
               </MenuItem>
             )}
             {optionsChecked.map((option) => (
@@ -66,8 +80,8 @@ export function FormSelect({ name, label, placeholder, renderOption = defaultRen
             ))}
           </Select>
 
-          <FormHelperText className="text-red text-base mx-0" error={!!errors[name]}>{`${
-            errors[name] ? errors[name]?.message : ''
+          <FormHelperText className="text-red text-base mx-0" error={!!fieldError}>{`${
+            fieldError ? fieldError?.message : ''
           }`}</FormHelperText>
         </FormControl>
       )}
@@ -77,6 +91,7 @@ export function FormSelect({ name, label, placeholder, renderOption = defaultRen
 
 FormSelect.defaultProps = {
   placeholder: undefined,
+  className: '',
   renderOption: defaultRenderOption,
 };
 

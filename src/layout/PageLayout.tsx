@@ -5,7 +5,7 @@ import useSignOut from '../hooks/useLogout';
 import useUser from '../hooks/useUser';
 import BaseLayout from './BaseLayout';
 
-export default function AuthPageLayout({ children }: PropsWithChildren) {
+export default function PageLayout({ children }: PropsWithChildren) {
   const user = useUser();
   const signOut = useSignOut();
 
@@ -15,7 +15,20 @@ export default function AuthPageLayout({ children }: PropsWithChildren) {
 
   return (
     <BaseLayout auth={!!user} logout={handleLogout}>
-      <Container className="lg:pt-16 lg:px-20 md:pt-10 md:px-12 sm:pt-9 sm:px-10 pt-8 px-6 mx-0">{children}</Container>
+      {user?.type === 'OCP' && (
+        <Container
+          maxWidth={false}
+          className="lg:pt-14 lg:px-20 md:pt-8 md:px-12 sm:pt-7 sm:px-10 pt-6 px-6 pb-12 mx-0">
+          {children}
+        </Container>
+      )}
+      {user?.type === 'FI' && (
+        <Container
+          maxWidth={false}
+          className="lg:pt-16 lg:px-20 md:pt-10 md:px-12 sm:pt-9 sm:px-10 pt-8 px-6 pb-12 mx-0">
+          {children}
+        </Container>
+      )}
     </BaseLayout>
   );
 }

@@ -25,6 +25,11 @@ import LangContextProvider from 'src/providers/LangContextProvider';
 import StateContextProvider from 'src/providers/StateContextProvider';
 import ProtectedRoute from 'src/routes/ProtectedRoute';
 
+import PageLayout from '../layout/PageLayout';
+import Applications from '../pages/ocp/Applications';
+import { LenderForm, LoadLender } from '../pages/ocp/LenderForm';
+import Settings from '../pages/ocp/Settings';
+
 // Create a React Query client
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,7 +44,53 @@ const router = createBrowserRouter([
     path: '/',
     element: (
       <ProtectedRoute>
-        <AppHome />
+        <PageLayout>
+          <AppHome />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/admin/applications',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <Applications />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/settings',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <Settings />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/settings/lender/new',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <LenderForm />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/settings/lender/:id/edit',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <LoadLender />
+        </PageLayout>
       </ProtectedRoute>
     ),
     errorElement: <RouterErrorPage />,
