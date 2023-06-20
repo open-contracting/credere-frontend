@@ -28,7 +28,7 @@ export default function useAccesScheme(): IUseAccesScheme {
     unknown
   >((payload) => applicationAccessSchemeFn(payload), {
     onSuccess: (data) => {
-      queryClient.setQueryData([QUERY_KEYS.application, data.application.uuid], data);
+      queryClient.setQueryData([QUERY_KEYS.application_uuid, data.application.uuid], data);
       applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });
       navigate('../credit-options');
     },

@@ -8,7 +8,7 @@ const booleanRequiredSchema = boolean().refine((value) => value === true, {
 
 export const introSchema = object({
   agree_topass_info_to_banking_partner: booleanRequiredSchema,
-  acept_terms_and_conditions: booleanRequiredSchema,
+  accept_terms_and_conditions: booleanRequiredSchema,
 });
 
 export type IntroInput = TypeOf<typeof introSchema>;
@@ -90,13 +90,20 @@ export interface IBorrower {
   declined_at?: any;
 }
 
-export interface ILender {
-  id: number;
+export interface ILenderBase {
   name: string;
   email_group: string;
+  borrower_type_preferences: any;
+  limits_preferences: any;
   type: string;
   sla_days: number;
-  status: string;
+}
+
+export interface ILenderUpdate extends ILenderBase {
+  id: number;
+}
+
+export interface ILender extends ILenderUpdate {
   created_at: string;
   updated_at: string;
 }
@@ -130,7 +137,7 @@ export interface IApplication {
   lender_approved_at?: any;
   lender_approved_data: any;
   lender_rejected_data: any;
-  borrewed_uploaded_contracted_at?: any;
+  borrower_uploaded_contracted_at?: any;
   completed_in_days?: any;
   created_at: string;
   updated_at: string;
@@ -165,6 +172,13 @@ export interface PaginationInput {
 
 export interface IApplicationsListResponse {
   items: IApplication[];
+  count: number;
+  page: number;
+  page_size: number;
+}
+
+export interface ILenderListResponse {
+  items: ILender[];
   count: number;
   page: number;
   page_size: number;

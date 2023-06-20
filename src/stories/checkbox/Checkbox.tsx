@@ -5,27 +5,32 @@ import { twMerge } from 'tailwind-merge';
 
 import Checked from '../../assets/icons/check-checked.svg';
 import NotChecked from '../../assets/icons/check-empty.svg';
+import { getProperty } from '../../util';
+import { FieldErrorType } from '../form-input/FormInput';
 
 export type CheckboxProps = {
   name: string;
   label: string;
   className?: string;
+  fieldClassName?: string;
   defaultValue?: boolean;
 };
 
-export function Checkbox({ name, label, defaultValue = false, className }: CheckboxProps) {
+export function Checkbox({ name, label, fieldClassName, defaultValue = false, className }: CheckboxProps) {
   const {
     control,
-    formState: { errors },
+    formState: { errors, defaultValues },
   } = useFormContext();
 
+  const fieldError: FieldErrorType = getProperty(errors, name);
+  const defultValueForm = getProperty(defaultValues, name) || defaultValue;
   return (
     <Controller
       control={control}
-      defaultValue={defaultValue}
+      defaultValue={defultValueForm}
       name={name}
       render={({ field }) => (
-        <FormControl fullWidth sx={{ mb: '8px' }}>
+        <FormControl fullWidth className={`mb-2 ${fieldClassName}`}>
           <FormControlLabel
             sx={{ alignItems: 'flex-start' }}
             control={
@@ -34,16 +39,19 @@ export function Checkbox({ name, label, defaultValue = false, className }: Check
                 icon={<img className="mb-0.5" src={NotChecked} alt="check-icon-empty" />}
                 checkedIcon={<img className="mb-0.5" src={Checked} alt="check-icon-checked" />}
                 {...field}
+                defaultChecked={defultValueForm}
               />
             }
             label={
-              <Typography variant="body1" className={twMerge(`text-darkest text-lg ${className}`)}>
+              <Typography
+                variant="body1"
+                className={twMerge(`text-darkest text-lg ${fieldError ? 'text-red' : ''} ${className}`)}>
                 {label}
               </Typography>
             }
           />
-          <FormHelperText className="text-red text-base mx-0" error={!!errors[name]}>{`${
-            errors[name] ? errors[name]?.message : ''
+          <FormHelperText className="text-red text-base mx-0" error={!!fieldError}>{`${
+            fieldError ? fieldError?.message : ''
           }`}</FormHelperText>
         </FormControl>
       )}
@@ -53,6 +61,7 @@ export function Checkbox({ name, label, defaultValue = false, className }: Check
 
 Checkbox.defaultProps = {
   className: undefined,
+  fieldClassName: '',
   defaultValue: false,
 };
 

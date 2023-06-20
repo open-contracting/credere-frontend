@@ -6,7 +6,6 @@ import PublicApplicationLayout from 'src/layout/PublicApplicationLayout';
 import PublicPageLayout from 'src/layout/PublicPageLayout';
 import MuiTheme from 'src/mui-theme';
 import AppHome from 'src/pages/AppHome';
-import AppSettingsOCP from 'src/pages/AppSettingsOCP';
 import RouterErrorPage from 'src/pages/RouterErrorPage';
 import SelectLanguage from 'src/pages/SelectLanguage';
 import CreatePasswordPage from 'src/pages/auth/CreatePasswordPage';
@@ -28,6 +27,8 @@ import ProtectedRoute from 'src/routes/ProtectedRoute';
 
 import PageLayout from '../layout/PageLayout';
 import Applications from '../pages/ocp/Applications';
+import { LenderForm, LoadLender } from '../pages/ocp/LenderForm';
+import Settings from '../pages/ocp/Settings';
 
 // Create a React Query client
 const queryClient = new QueryClient({
@@ -62,10 +63,34 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/ocp-settings',
+    path: '/settings',
     element: (
       <ProtectedRoute>
-        <AppSettingsOCP />
+        <PageLayout>
+          <Settings />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/settings/lender/new',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <LenderForm />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/settings/lender/:id/edit',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <LoadLender />
+        </PageLayout>
       </ProtectedRoute>
     ),
     errorElement: <RouterErrorPage />,

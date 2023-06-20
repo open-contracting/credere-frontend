@@ -29,7 +29,7 @@ export default function useDeclineFeedbackApplication(): IUseDeclineFeedbackAppl
     unknown
   >((payload) => declineApplicationFeedbackFn(payload), {
     onSuccess: (data) => {
-      queryClient.setQueryData([QUERY_KEYS.application, data.application.uuid], data);
+      queryClient.setQueryData([QUERY_KEYS.application_uuid, data.application.uuid], data);
       applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });
       navigate('../decline-completed');
     },
@@ -55,7 +55,7 @@ export default function useDeclineFeedbackApplication(): IUseDeclineFeedbackAppl
     unknown
   >((payload) => declineApplicationRollbackFn(payload), {
     onSuccess: (data) => {
-      queryClient.setQueryData([QUERY_KEYS.application, data.application.uuid], data);
+      queryClient.setQueryData([QUERY_KEYS.application_uuid, data.application.uuid], data);
       applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });
       navigate('../decline');
     },

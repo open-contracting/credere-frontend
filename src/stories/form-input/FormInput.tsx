@@ -1,11 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { FormControl, FormHelperText, InputAdornment, InputProps, Input as _Input } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, FieldError, FieldErrorsImpl, Merge, useFormContext } from 'react-hook-form';
 
 import EmailIcon from '../../assets/icons/email.svg';
 import KeyIcon from '../../assets/icons/key.svg';
 import { COLORS } from '../../constants';
+import { getProperty } from '../../util';
 import { Text } from '../text/Text';
 
 export const Input = styled(_Input)`
@@ -53,6 +54,29 @@ const getIcon = (type: string | undefined) => {
   return undefined;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type FieldErrorType = FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
+interface FormInputErrorProps {
+  fieldError: FieldErrorType;
+  className?: string;
+}
+
+export function FormInputError({ fieldError, className = '' }: FormInputErrorProps) {
+  if (!fieldError) {
+    return null;
+  }
+
+  return (
+    <FormHelperText className={`text-red text-base mx-0 ${className}`} error={!!fieldError}>{`${
+      fieldError ? fieldError?.message : ''
+    }`}</FormHelperText>
+  );
+}
+
+FormInputError.defaultProps = {
+  className: '',
+};
+
 const AUTH_LABELS_CLASSNAMES = 'text-moodyBlue text-xl mb-3';
 export function FormInput({
   name,
@@ -68,6 +92,7 @@ export function FormInput({
     formState: { errors },
   } = useFormContext();
 
+  const fieldError: FieldErrorType = getProperty(errors, name);
   return (
     <Controller
       control={control}
@@ -83,12 +108,10 @@ export function FormInput({
             fullWidth
             placeholder={placeholder}
             disableUnderline
-            error={!!errors[name]}
+            error={!!fieldError}
             {...otherProps}
           />
-          <FormHelperText className="text-red text-base mx-0" error={!!errors[name]}>{`${
-            errors[name] ? errors[name]?.message : ''
-          }`}</FormHelperText>
+          <FormInputError fieldError={fieldError} />
         </FormControl>
       )}
     />
