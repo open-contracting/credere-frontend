@@ -4,7 +4,7 @@ import { TypeOf, object, string } from 'zod';
 const emailSchema = string().min(1, t('Email address is required')).email(t('Email Address is invalid'));
 const passwordSchema = string()
   .min(1, t('Password is required'))
-  .min(12, t('Password must be more than 12 characters'));
+  .min(14, t('Password must be more than 14 characters'));
 const otp = string().min(6, t('OTP length must be 6 digits')).max(6, t('OTP length must be 6 digits'));
 
 export const loginSchema = object({
