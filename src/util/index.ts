@@ -52,6 +52,9 @@ export const renderLenderPreferences = (preferences: PreferencesType) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getProperty(obj: any, propertyString: string): any {
+  if (!obj) {
+    return undefined;
+  }
   const properties = propertyString.split('.');
   let result = obj;
 
