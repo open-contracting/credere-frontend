@@ -1,3 +1,5 @@
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { tx } from '@transifex/native';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -10,7 +12,9 @@ const renderApp = () => {
   const rootElement = document.getElementById('root-app');
   ReactDOM.createRoot(rootElement as HTMLElement).render(
     <React.StrictMode>
-      <AppRouter />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <AppRouter />
+      </LocalizationProvider>
     </React.StrictMode>,
   );
 };

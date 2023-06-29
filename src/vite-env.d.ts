@@ -7,6 +7,8 @@ interface ImportMetaEnv {
   readonly VITE_TRANSIFEX_TOKEN: string;
   readonly VITE_DEFAULT_LANG: string;
   readonly VITE_CREDERE_PHONE_NUMBER: string;
+  readonly VITE_LOCALE: string;
+  readonly VITE_CURRENCY: string;
   // more env variables...
 }
 
