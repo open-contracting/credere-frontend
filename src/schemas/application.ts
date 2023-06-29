@@ -44,11 +44,6 @@ export const declineFeedbackSchema = object({
 
 export type DeclineFeedbackInput = TypeOf<typeof declineFeedbackSchema>;
 
-interface Paymentmethod {
-  habilita_pago_adelantado: string;
-  valor_de_pago_adelantado: string;
-}
-
 export interface IAward {
   id: number;
   borrower_id: number;
@@ -58,9 +53,10 @@ export interface IAward {
   award_date: string;
   award_amount: number;
   award_currency: string;
-  contractperiod_startdate?: any;
-  contractperiod_enddate?: any;
-  payment_method: Paymentmethod;
+  contractperiod_startdate: string;
+  contractperiod_enddate: string;
+  missing_data: { [key: string]: boolean };
+  payment_method: any;
   buyer_name: string;
   source_url: string;
   entity_code: string;
@@ -74,6 +70,23 @@ export interface IAward {
   updated_at: string;
 }
 
+export type IUpdateAward = Partial<
+  Omit<IAward, 'id' | 'borrower_id' | 'missing_data' | 'created_at' | 'updated_at'>
+> & {
+  application_id: number;
+};
+//     title?: string;
+//     description?: string;
+//     award_date?: string;
+//     award_amount?: number;
+//     contractperiod_startdate?: string;
+//     contractperiod_enddate?: string;
+//     payment_method?: any;
+//     buyer_name?: string;
+//     procurement_method?: string;
+//     procurement_category?: string;
+// }
+
 export interface IBorrower {
   id: number;
   borrower_identifier: string;
@@ -85,6 +98,7 @@ export interface IBorrower {
   sector: string;
   size: string;
   status: string;
+  missing_data: { [key: string]: boolean };
   created_at: string;
   updated_at: string;
   declined_at?: any;
