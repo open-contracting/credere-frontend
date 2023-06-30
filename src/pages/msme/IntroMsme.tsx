@@ -16,6 +16,8 @@ import Checkbox from 'src/stories/checkbox/Checkbox';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
+import { formatCurrency } from '../../util';
+
 function IntroMsme() {
   const t = useT();
   const navigate = useNavigate();
@@ -38,9 +40,12 @@ function IntroMsme() {
   const paramsForText = useMemo(() => {
     if (!applicationContext.state.data) return {};
     return {
-      award_title: applicationContext.state.data.award.description,
+      award_title: applicationContext.state.data.award.title,
       buyer_name: applicationContext.state.data.award.buyer_name,
-      award_contract_value: applicationContext.state.data.award.award_amount,
+      award_contract_value: `${applicationContext.state.data.award.award_currency} ${formatCurrency(
+        applicationContext.state.data.award.award_amount,
+        applicationContext.state.data.award.award_currency,
+      )}`,
     };
   }, [applicationContext.state.data]);
 
@@ -51,9 +56,9 @@ function IntroMsme() {
         <div className="col-span-1 md:col-span-2 md:mr-10">
           <Text className="mb-8">
             {t(
-              'Congratulations on winning the award for the public sector contract for {award_title} with {buyer_name}.',
+              'Congratulations on winning the award for the public sector contract for "{award_title}" with {buyer_name}.',
               {
-                award_title: paramsForText.buyer_name,
+                award_title: paramsForText.award_title,
                 buyer_name: paramsForText.buyer_name,
               },
             )}

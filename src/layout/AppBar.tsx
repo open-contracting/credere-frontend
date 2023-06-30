@@ -4,6 +4,7 @@ import { useT } from '@transifex/react';
 import { Link } from 'react-router-dom';
 
 import OCPLogo from '../assets/ocp-logo.svg';
+import SelectLanguageComponent from '../components/SelectLanguageComponent';
 import { Button } from '../stories/button/Button';
 
 export interface AppBarProps {
@@ -23,18 +24,11 @@ export function AppBar({ auth = true, logout }: AppBarProps) {
             <img src={OCPLogo} alt="logo" />
           </Link>
 
-          <>
-            {auth && !!logout && (
-              <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'flex-end' }}>
-                <Button size="small" label={t('Logout')} onClick={() => logout()} />
-              </Box>
-            )}
-            {!auth && (
-              <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'flex-end' }}>
-                <Button size="small" label={t('Login')} component={Link} to="/login" />
-              </Box>
-            )}
-          </>
+          <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'flex-end' }}>
+            <SelectLanguageComponent />
+            {auth && !!logout && <Button className="ml-2" size="small" label={t('Logout')} onClick={() => logout()} />}
+            {!auth && <Button className="ml-2" size="small" label={t('Login')} component={Link} to="/login" />}
+          </Box>
         </Toolbar>
       </Container>
     </MuiAppBar>

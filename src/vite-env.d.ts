@@ -9,6 +9,7 @@ interface ImportMetaEnv {
   readonly VITE_CREDERE_PHONE_NUMBER: string;
   readonly VITE_LOCALE: string;
   readonly VITE_CURRENCY: string;
+  readonly VITE_MORE_INFO_OCP_URL: string;
   // more env variables...
 }
 
