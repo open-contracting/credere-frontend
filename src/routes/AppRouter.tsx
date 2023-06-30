@@ -26,6 +26,7 @@ import StateContextProvider from 'src/providers/StateContextProvider';
 import ProtectedRoute from 'src/routes/ProtectedRoute';
 
 import PageLayout from '../layout/PageLayout';
+import { LoadApplication } from '../pages/ocp/ApplicationDetail';
 import Applications from '../pages/ocp/Applications';
 import { LenderForm, LoadLender } from '../pages/ocp/LenderForm';
 import Settings from '../pages/ocp/Settings';
@@ -57,6 +58,28 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <PageLayout>
           <Applications />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/admin/applications/:id/view',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <LoadApplication readonly />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/admin/applications/:id/update',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <LoadApplication />
         </PageLayout>
       </ProtectedRoute>
     ),

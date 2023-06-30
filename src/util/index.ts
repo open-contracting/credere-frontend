@@ -1,6 +1,8 @@
 import { t } from '@transifex/native';
+import lodash from 'lodash';
 
 import { APPLICATION_STATUS_NAMES, LENDER_TYPES, MSME_TYPES, MSME_TYPES_NAMES } from '../constants';
+import CURRENCY_FORMAT_OPTIONS from '../constants/intl';
 import { PreferencesType } from '../schemas/OCPsettings';
 import { FormSelectOption } from '../stories/form-select/FormSelect';
 
@@ -12,16 +14,39 @@ const dateFormatOptions: Intl.DateTimeFormatOptions = {
 
 export const formatDate = (date: Date) => date.toLocaleDateString('en-US', dateFormatOptions);
 
-export const formatDateFromString = (date: string) => {
+export const formatDateFromString = (date: string | null | undefined) => {
+  if (!date) {
+    return t('No defined');
+  }
+
   const dateObj = new Date(date);
   return dateObj.toLocaleDateString('en-US', dateFormatOptions);
 };
 
-const currencyFormatOptions = {
-  style: 'currency',
-  currency: 'COP',
+export const formatCurrency = (amount: number, currency?: string) => {
+  const currencyFormatOptions = CURRENCY_FORMAT_OPTIONS[currency || 'default'] || CURRENCY_FORMAT_OPTIONS.default;
+
+  const formatter = new Intl.NumberFormat(currencyFormatOptions.locale, currencyFormatOptions.options);
+  return formatter.format(amount);
 };
-export const formatCurrency = (amount: number) => amount.toLocaleString('es-CO', currencyFormatOptions);
+
+export const formatPaymentMethod = (value: { [key: string]: string }) => {
+  if (!value) {
+    return t('No defined');
+  }
+
+  let paymentMethodString = '';
+
+  Object.keys(value).forEach((key) => {
+    if (Number(value[key])) {
+      paymentMethodString += `${lodash.startCase(key)}: ${formatCurrency(Number(value[key]))}\n`;
+    } else {
+      paymentMethodString += `${lodash.startCase(key)}: ${value[key]}\n`;
+    }
+  });
+
+  return paymentMethodString;
+};
 
 export const renderApplicationStatus = (status: string) => APPLICATION_STATUS_NAMES[status] || t('INVALID_STATUS');
 

@@ -1,9 +1,13 @@
+/* eslint-disable camelcase */
 import {
+  IApplication,
   IApplicationsListResponse,
   ILender,
   ILenderBase,
   ILenderListResponse,
   ILenderUpdate,
+  IUpdateAward,
+  IUpdateBorrower,
   PaginationInput,
 } from '../schemas/application';
 import { authApi } from './axios';
@@ -15,6 +19,11 @@ export const getApplicationsOCP = async (payload: PaginationInput) => {
 
 export const getApplicationsFI = async (payload: PaginationInput) => {
   const response = await authApi.get<IApplicationsListResponse>('applications', { params: payload });
+  return response.data;
+};
+
+export const getApplicationFn = async (id: string) => {
+  const response = await authApi.get<IApplication>(`applications/id/${id}`);
   return response.data;
 };
 
@@ -30,6 +39,18 @@ export const getLendersFn = async () => {
 
 export const createLenderFn = async (payload: ILenderBase) => {
   const response = await authApi.post<ILender>('lenders', payload);
+  return response.data;
+};
+
+export const updateAwardFn = async (awardData: IUpdateAward) => {
+  const { application_id, ...payload } = awardData;
+  const response = await authApi.put<IApplication>(`applications/${application_id}/award`, payload);
+  return response.data;
+};
+
+export const updateBorrowerFn = async (awardData: IUpdateBorrower) => {
+  const { application_id, ...payload } = awardData;
+  const response = await authApi.put<IApplication>(`applications/${application_id}/borrower`, payload);
   return response.data;
 };
 

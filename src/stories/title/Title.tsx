@@ -15,7 +15,7 @@ export function Title({ label, type = 'section', className }: TitleProps) {
   let fontSizeClass = 'text-2xl font-medium';
   if (type === 'page') {
     variant = 'h1';
-    fontSizeClass = 'text-3xl';
+    fontSizeClass = 'text-[32px]';
   }
   return (
     <Typography variant={variant} className={twMerge(`text-darkest font-bold mb-4 ${fontSizeClass} ${className}`)}>

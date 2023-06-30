@@ -15,6 +15,7 @@ export const COLORS: { [key: string]: string } = {
   darkGreen: '#17736B',
   fieldBorder: '#DADADA',
   white: '#FFFFFF',
+  black: '#000000',
   transparent: 'transparent',
 };
 

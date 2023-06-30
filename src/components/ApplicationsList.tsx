@@ -46,6 +46,7 @@ const headCellsBase: HeadCell<IApplication & IExtendedApplication>[] = [
     disablePadding: false,
     label: t('Submission Date'),
     sortable: false,
+    width: 155,
   },
   {
     id: 'status',
@@ -64,6 +65,7 @@ const headCellsOCP: HeadCell<IApplication & IExtendedApplication>[] = [
     disablePadding: false,
     label: t('Credit Provider'),
     sortable: true,
+    width: 174,
   },
 ];
 
@@ -118,7 +120,7 @@ const actionsOCP = (row: ExtendendApplication) => (
     <LinkButton
       className="p-1 justify-start"
       component={Link}
-      to={`/applications/${row.id}/view`}
+      to={`/admin/applications/${row.id}/view`}
       label={t('View')}
       size="small"
       noIcon
@@ -127,7 +129,7 @@ const actionsOCP = (row: ExtendendApplication) => (
       <LinkButton
         className="p-1 justify-start"
         component={Link}
-        to={`/applications/${row.id}/update`}
+        to={`/admin/applications/${row.id}/update`}
         label={t('Update')}
         size="small"
         noIcon
