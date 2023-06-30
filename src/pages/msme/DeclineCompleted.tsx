@@ -1,6 +1,4 @@
- 
-
- 
+import { Link as MUILink } from '@mui/material';
 import { useT } from '@transifex/react';
 import FAQComponent from 'src/components/FAQComponent';
 import { Button } from 'src/stories/button/Button';
@@ -9,10 +7,6 @@ import Title from 'src/stories/title/Title';
 
 function DeclineCompleted() {
   const t = useT();
-
-  const onCloseWindowHandler = () => {
-    window.close();
-  };
 
   return (
     <>
@@ -30,7 +24,14 @@ function DeclineCompleted() {
 
           <div className="mt-5 grid grid-cols-1 gap-4 md:flex md:gap-0">
             <div>
-              <Button className="md:mr-4" label={t('Close window')} onClick={onCloseWindowHandler} />
+              <Button
+                className="md:mr-4"
+                label={t('Learn more about OCP')}
+                target="_blank"
+                rel="noreferrer"
+                component={MUILink}
+                href={`${import.meta.env.VITE_MORE_INFO_OCP_URL || 'https://www.open-contracting.org/es/'}`}
+              />
             </div>
           </div>
         </div>
