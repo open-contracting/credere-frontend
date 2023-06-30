@@ -11,6 +11,7 @@ import { z } from 'zod';
 
 import { getApplicationFn } from '../../api/private';
 import ApplicationAwardTable from '../../components/ApplicationAwardTable';
+import ApplicationBorrowerTable from '../../components/ApplicationBorrowerTable';
 import { QUERY_KEYS } from '../../constants';
 import { useParamsTypeSafe } from '../../hooks/useParamsTypeSafe';
 import { IApplication } from '../../schemas/application';
@@ -20,9 +21,10 @@ import ApplicationErrorPage from '../msme/ApplicationErrorPage';
 
 export interface ApplicationDetailProps {
   application: IApplication;
+  readonly: boolean;
 }
 
-export function ApplicationDetail({ application }: ApplicationDetailProps) {
+export function ApplicationDetail({ application, readonly }: ApplicationDetailProps) {
   const t = useT();
 
   return (
@@ -53,7 +55,9 @@ export function ApplicationDetail({ application }: ApplicationDetailProps) {
         component={MUILink}
         href={`${application.award.source_url}`}
       />
-      <ApplicationAwardTable application={application} />
+      <ApplicationAwardTable application={application} readonly={readonly} />
+      <Title type="section" className="mt-10 mb-4" label={t('MSME Data')} />
+      <ApplicationBorrowerTable application={application} readonly={readonly} />
       <Button className="my-8" primary={false} label={t('Go back')} component={Link} to="/admin/applications" />
     </>
   );
@@ -61,7 +65,11 @@ export function ApplicationDetail({ application }: ApplicationDetailProps) {
 
 export default ApplicationDetail;
 
-export function LoadApplication() {
+export interface LoadApplicationProps {
+  readonly?: boolean;
+}
+
+export function LoadApplication({ readonly }: LoadApplicationProps) {
   const t = useT();
   const [queryError, setQueryError] = useState<string>('');
 
@@ -91,8 +99,12 @@ export function LoadApplication() {
   return (
     <>
       {isLoading && <Loader />}
-      {!isLoading && !queryError && data && <ApplicationDetail application={data} />}
+      {!isLoading && !queryError && data && <ApplicationDetail application={data} readonly={!!readonly} />}
       {queryError && <ApplicationErrorPage message={queryError} />}
     </>
   );
 }
+
+LoadApplication.defaultProps = {
+  readonly: false,
+};

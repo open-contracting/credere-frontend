@@ -3,87 +3,28 @@ import { Box, Paper, Table, TableBody, TableContainer, TableHead, TableRow } fro
 import { useT } from '@transifex/react';
 
 import useUpdateAward from '../hooks/useUpdateAward';
-import { IApplication, IAward, IUpdateAward } from '../schemas/application';
+import { IApplication, IUpdateAward } from '../schemas/application';
 import { formatCurrency, formatDateFromString, formatPaymentMethod } from '../util';
-import DataAvailability from './DataAvailability';
-import DataAvailabilityForm from './DataAvailabilityForm';
-import { DataTableCell, DataTableHeadCell, DataTableHeadLabel } from './DataTable';
-
-export interface ApplicationTableDataRowProps {
-  label: string;
-  name: keyof IAward;
-  formLabel?: string;
-  award: IAward;
-  missingData: { [key: string]: boolean };
-  type?: 'currency' | 'date-picker' | 'date-field';
-  preWhitespace?: boolean;
-  formatter?: (value: any) => string;
-  updateValue?: (value: any, name: keyof IUpdateAward) => void;
-  isLoading: boolean;
-}
-
-export function ApplicationTableDataRow({
-  label,
-  name,
-  award,
-  formLabel,
-  missingData,
-  type,
-  formatter,
-  preWhitespace,
-  updateValue,
-  isLoading,
-}: ApplicationTableDataRowProps) {
-  const value = award[name];
-  const missing = missingData[name];
-  const formattedValue = formatter ? formatter(value) : value;
-
-  return (
-    <TableRow>
-      <DataTableCell>{label}</DataTableCell>
-      <DataTableCell>
-        <DataAvailability available={!missing} name={label} />
-      </DataTableCell>
-      {!missing && <DataTableCell className={preWhitespace ? 'whitespace-pre' : ''}>{formattedValue}</DataTableCell>}
-      {missing && updateValue && (
-        <DataTableCell>
-          <DataAvailabilityForm
-            type={type}
-            name={formLabel || label}
-            value={value ? formattedValue : value}
-            isLoading={isLoading}
-            // eslint-disable-next-line no-shadow
-            updateValue={(value: any) => updateValue(value, name as keyof IUpdateAward)}
-          />
-        </DataTableCell>
-      )}
-    </TableRow>
-  );
-}
-
-ApplicationTableDataRow.defaultProps = {
-  formatter: undefined,
-  updateValue: undefined,
-  preWhitespace: false,
-  type: undefined,
-  formLabel: undefined,
-};
+import ApplicationTableDataAwardRow from './ApplicationTableDataAwardRow';
+import { DataTableHeadCell, DataTableHeadLabel } from './DataTable';
 
 export interface ApplicationAwardTableProps {
   application: IApplication;
+  readonly: boolean;
 }
 
-export function ApplicationAwardTable({ application }: ApplicationAwardTableProps) {
+export function ApplicationAwardTable({ application, readonly }: ApplicationAwardTableProps) {
   const t = useT();
   const { updateAwardMutation, isLoading } = useUpdateAward();
 
   const { award } = application;
 
-  const udpateValue = (value: any, name: keyof IUpdateAward) => {
+  const updateValue = (value: any, name: keyof IUpdateAward) => {
     const payload: IUpdateAward = {
       application_id: application.id,
+      [name]: value,
     };
-    payload[name] = value;
+
     updateAwardMutation(payload);
   };
 
@@ -106,44 +47,49 @@ export function ApplicationAwardTable({ application }: ApplicationAwardTableProp
               </TableRow>
             </TableHead>
             <TableBody>
-              <ApplicationTableDataRow
+              <ApplicationTableDataAwardRow
                 isLoading={isLoading}
-                updateValue={udpateValue}
+                readonly={readonly}
+                updateValue={updateValue}
                 missingData={award.missing_data}
                 name="title"
                 label={t('Award Title')}
                 award={award}
               />
-              <ApplicationTableDataRow
+              <ApplicationTableDataAwardRow
                 isLoading={isLoading}
-                updateValue={udpateValue}
+                readonly={readonly}
+                updateValue={updateValue}
                 missingData={award.missing_data}
                 name="contracting_process_id"
                 label={t('Contracting Process ID')}
                 award={award}
               />
-              <ApplicationTableDataRow
+              <ApplicationTableDataAwardRow
                 isLoading={isLoading}
-                updateValue={udpateValue}
+                readonly={readonly}
+                updateValue={updateValue}
                 missingData={award.missing_data}
                 name="description"
                 label={t('Award Description')}
                 award={award}
               />
-              <ApplicationTableDataRow
+              <ApplicationTableDataAwardRow
                 type="date-field"
                 isLoading={isLoading}
-                updateValue={udpateValue}
+                readonly={readonly}
+                updateValue={updateValue}
                 missingData={award.missing_data}
                 name="award_date"
                 label={t('Award Date')}
                 award={award}
                 formatter={formatDateFromString}
               />
-              <ApplicationTableDataRow
+              <ApplicationTableDataAwardRow
                 type="currency"
                 isLoading={isLoading}
-                updateValue={udpateValue}
+                readonly={readonly}
+                updateValue={updateValue}
                 missingData={award.missing_data}
                 name="award_amount"
                 label={t('Award Value Currency & Amount')}
@@ -151,55 +97,61 @@ export function ApplicationAwardTable({ application }: ApplicationAwardTableProp
                 award={award}
                 formatter={(value) => `${award.award_currency} ${formatCurrency(value, award.award_currency)}`}
               />
-              <ApplicationTableDataRow
+              <ApplicationTableDataAwardRow
                 type="date-field"
                 isLoading={isLoading}
-                updateValue={udpateValue}
+                readonly={readonly}
+                updateValue={updateValue}
                 missingData={award.missing_data}
                 name="contractperiod_startdate"
                 label={t('Contract Start Date')}
                 award={award}
                 formatter={formatDateFromString}
               />
-              <ApplicationTableDataRow
+              <ApplicationTableDataAwardRow
                 type="date-field"
                 isLoading={isLoading}
-                updateValue={udpateValue}
+                readonly={readonly}
+                updateValue={updateValue}
                 missingData={award.missing_data}
                 name="contractperiod_enddate"
                 label={t('Contract End Date')}
                 award={award}
                 formatter={formatDateFromString}
               />
-              <ApplicationTableDataRow
+              <ApplicationTableDataAwardRow
                 preWhitespace
                 isLoading={isLoading}
-                updateValue={udpateValue}
+                readonly={readonly}
+                updateValue={updateValue}
                 missingData={award.missing_data}
                 name="payment_method"
                 label={t('Payment Method')}
                 award={award}
                 formatter={formatPaymentMethod}
               />
-              <ApplicationTableDataRow
+              <ApplicationTableDataAwardRow
                 isLoading={isLoading}
-                updateValue={udpateValue}
+                readonly={readonly}
+                updateValue={updateValue}
                 missingData={award.missing_data}
                 name="buyer_name"
                 label={t('Buyer Name')}
                 award={award}
               />
-              <ApplicationTableDataRow
+              <ApplicationTableDataAwardRow
                 isLoading={isLoading}
-                updateValue={udpateValue}
+                readonly={readonly}
+                updateValue={updateValue}
                 missingData={award.missing_data}
                 name="procurement_method"
                 label={t('Procurement Method')}
                 award={award}
               />
-              <ApplicationTableDataRow
+              <ApplicationTableDataAwardRow
                 isLoading={isLoading}
-                updateValue={udpateValue}
+                readonly={readonly}
+                updateValue={updateValue}
                 missingData={award.missing_data}
                 name="procurement_category"
                 label={t('Contract Type')}

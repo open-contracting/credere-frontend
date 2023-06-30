@@ -120,7 +120,7 @@ const actionsOCP = (row: ExtendendApplication) => (
     <LinkButton
       className="p-1 justify-start"
       component={Link}
-      to={`/admin/applications/${row.id}/detail`}
+      to={`/admin/applications/${row.id}/view`}
       label={t('View')}
       size="small"
       noIcon
@@ -129,7 +129,7 @@ const actionsOCP = (row: ExtendendApplication) => (
       <LinkButton
         className="p-1 justify-start"
         component={Link}
-        to={`/applications/${row.id}/update`}
+        to={`/admin/applications/${row.id}/update`}
         label={t('Update')}
         size="small"
         noIcon

@@ -64,7 +64,18 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/admin/applications/:id/detail',
+    path: '/admin/applications/:id/view',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <LoadApplication readonly />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/admin/applications/:id/update',
     element: (
       <ProtectedRoute>
         <PageLayout>

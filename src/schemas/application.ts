@@ -75,17 +75,6 @@ export type IUpdateAward = Partial<
 > & {
   application_id: number;
 };
-//     title?: string;
-//     description?: string;
-//     award_date?: string;
-//     award_amount?: number;
-//     contractperiod_startdate?: string;
-//     contractperiod_enddate?: string;
-//     payment_method?: any;
-//     buyer_name?: string;
-//     procurement_method?: string;
-//     procurement_category?: string;
-// }
 
 export interface IBorrower {
   id: number;
@@ -103,6 +92,15 @@ export interface IBorrower {
   updated_at: string;
   declined_at?: any;
 }
+
+export type IUpdateBorrower = Partial<
+  Omit<
+    IBorrower,
+    'id' | 'borrower_identifier' | 'status' | 'missing_data' | 'created_at' | 'updated_at' | 'declined_at'
+  >
+> & {
+  application_id: number;
+};
 
 export interface ILenderBase {
   name: string;
@@ -147,7 +145,7 @@ export interface IApplication {
   borrower_declined_preferences_data: any;
   borrower_declined_data: any;
   lender_started_at?: any;
-  secop_data_verification: any;
+  secop_data_verification: { [key: string]: boolean };
   lender_approved_at?: any;
   lender_approved_data: any;
   lender_rejected_data: any;

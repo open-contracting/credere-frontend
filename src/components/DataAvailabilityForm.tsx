@@ -18,6 +18,7 @@ interface DataAvailabilityFormProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   updateValue: (value: any) => void;
   isLoading: boolean;
+  readonly: boolean;
 }
 
 const formCellSchema = object({
@@ -26,7 +27,14 @@ const formCellSchema = object({
 
 type FormCellInput = TypeOf<typeof formCellSchema>;
 
-export function DataAvailabilityForm({ name, value, isLoading, type, updateValue }: DataAvailabilityFormProps) {
+export function DataAvailabilityForm({
+  name,
+  value,
+  isLoading,
+  readonly,
+  type,
+  updateValue,
+}: DataAvailabilityFormProps) {
   const t = useT();
   const [open, setOpen] = useState(false);
 
@@ -50,50 +58,52 @@ export function DataAvailabilityForm({ name, value, isLoading, type, updateValue
 
   return (
     <Box className="py-2 flex flex-col">
-      <Text fontVariant className="mb-0 text-sm">
+      <Text fontVariant className={`mb-0 text-sm ${!value ? 'opacity-50' : ''}`}>
         {value || t('(Blank)')}
       </Text>
-      <Box className="flex flex-col align-top">
-        <Box className="flex flex-col align-top" onClick={handleToggle}>
-          <Text fontVariant className="mb-0 mt-1 text-sm text-red">
-            {open ? '-' : '+'} {value ? t('Edit manually') : t('Add manually')}
-          </Text>
+      {!readonly && (
+        <Box className="flex flex-col align-top">
+          <Box className="flex flex-col align-top" onClick={handleToggle}>
+            <Text fontVariant className="mb-0 mt-1 text-sm text-red">
+              {open ? '-' : '+'} {value ? t('Edit manually') : t('Add manually')}
+            </Text>
+          </Box>
+
+          <Collapse in={open}>
+            <FormProvider {...methods}>
+              <Box
+                component="form"
+                className="flex flex-col mt-4 pr-4 align-top justify-end"
+                onSubmit={handleSubmit(onSubmitHandler)}
+                noValidate
+                autoComplete="off">
+                <FormInput
+                  inputCell
+                  fontVariant
+                  type={type}
+                  rows={!type ? 3 : undefined}
+                  multiline={!type}
+                  formControlClasses="mb-2"
+                  labelClassName="mb-0 text-sm"
+                  big={false}
+                  noIcon
+                  name="value"
+                  size="small"
+                  label={name}
+                />
+
+                <LinkButton
+                  disabled={isLoading}
+                  noIcon
+                  className="min-w-min px-0 py-0 text-sm self-end justify-end"
+                  label={t('Update')}
+                  type="submit"
+                />
+              </Box>
+            </FormProvider>
+          </Collapse>
         </Box>
-
-        <Collapse in={open}>
-          <FormProvider {...methods}>
-            <Box
-              component="form"
-              className="flex flex-col mt-4 pr-4 align-top justify-end"
-              onSubmit={handleSubmit(onSubmitHandler)}
-              noValidate
-              autoComplete="off">
-              <FormInput
-                inputCell
-                fontVariant
-                type={type}
-                rows={!type ? 3 : undefined}
-                multiline={!type}
-                formControlClasses="mb-2"
-                labelClassName="mb-0 text-sm"
-                big={false}
-                noIcon
-                name="value"
-                size="small"
-                label={name}
-              />
-
-              <LinkButton
-                disabled={isLoading}
-                noIcon
-                className="min-w-min px-0 py-0 text-sm self-end justify-end"
-                label={t('Update')}
-                type="submit"
-              />
-            </Box>
-          </FormProvider>
-        </Collapse>
-      </Box>
+      )}
     </Box>
   );
 }

@@ -7,6 +7,7 @@ import {
   ILenderListResponse,
   ILenderUpdate,
   IUpdateAward,
+  IUpdateBorrower,
   PaginationInput,
 } from '../schemas/application';
 import { authApi } from './axios';
@@ -44,6 +45,12 @@ export const createLenderFn = async (payload: ILenderBase) => {
 export const updateAwardFn = async (awardData: IUpdateAward) => {
   const { application_id, ...payload } = awardData;
   const response = await authApi.put<IApplication>(`applications/${application_id}/award`, payload);
+  return response.data;
+};
+
+export const updateBorrowerFn = async (awardData: IUpdateBorrower) => {
+  const { application_id, ...payload } = awardData;
+  const response = await authApi.put<IApplication>(`applications/${application_id}/borrower`, payload);
   return response.data;
 };
 

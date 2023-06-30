@@ -35,6 +35,9 @@ const LabeledSwitch = styled(MUISwitch)(() => ({
       content: '""',
     },
   },
+  '& .Mui-disabled+.MuiSwitch-track': {
+    opacity: 0.5,
+  },
   '& .MuiSwitch-track': {
     width: 59,
     height: 29,
@@ -69,12 +72,13 @@ const LabeledSwitch = styled(MUISwitch)(() => ({
 export type SwitchProps = {
   name: string;
   label: string;
+  disabled?: boolean;
   className?: string;
   fieldClassName?: string;
   defaultValue?: boolean;
 };
 
-export function Switch({ name, label, fieldClassName, defaultValue = false, className }: SwitchProps) {
+export function Switch({ name, label, disabled, fieldClassName, defaultValue = false, className }: SwitchProps) {
   const {
     control,
     formState: { errors, defaultValues },
@@ -88,7 +92,7 @@ export function Switch({ name, label, fieldClassName, defaultValue = false, clas
       defaultValue={defultValueForm}
       name={name}
       render={({ field }) => (
-        <FormControl fullWidth className={`mb-2 ${fieldClassName}`}>
+        <FormControl fullWidth className={`${fieldClassName}`}>
           <FormControlLabel
             sx={{ alignItems: 'flex-start' }}
             control={
@@ -97,6 +101,7 @@ export function Switch({ name, label, fieldClassName, defaultValue = false, clas
                 icon={<img className="" src={ToggleSwitch} alt="check-icon-empty" />}
                 checkedIcon={<img className="" src={ToggleSwitch} alt="check-icon-checked" />}
                 {...field}
+                disabled={disabled}
                 defaultChecked={defultValueForm}
               />
             }
@@ -121,6 +126,7 @@ Switch.defaultProps = {
   className: undefined,
   fieldClassName: '',
   defaultValue: false,
+  disabled: undefined,
 };
 
 export default Switch;

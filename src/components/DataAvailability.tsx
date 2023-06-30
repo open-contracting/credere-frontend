@@ -19,9 +19,10 @@ const getIcon = (available: boolean, name: string) => {
 interface DataAvailabilityProps {
   available: boolean;
   name: string;
+  readonly: boolean;
 }
 
-export function DataAvailability({ available, name }: DataAvailabilityProps) {
+export function DataAvailability({ available, name, readonly }: DataAvailabilityProps) {
   const t = useT();
   const [open, setOpen] = useState(false);
 
@@ -29,13 +30,13 @@ export function DataAvailability({ available, name }: DataAvailabilityProps) {
     setOpen(!open);
   };
 
-  if (available) {
+  if (available || readonly) {
     return (
       <Box className="py-2 flex flex-row">
         {getIcon(available, name)}
 
         <Text fontVariant className="ml-3 mb-0 text-sm">
-          {t('Yes')}
+          {available ? t('Yes') : t('Data missing')}
         </Text>
       </Box>
     );
