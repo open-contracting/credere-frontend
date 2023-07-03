@@ -32,12 +32,15 @@ export default function PublicApplicationLayout() {
       const { application } = applicationContext.state.data;
       const { pathname } = location;
       const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
-      if (application.borrower_accepted_at) {
+      if (application.pending_documents) {
+        if (lastSegment !== 'documents') navigate('./documents');
+      } else if (application.credit_product_id && !application.lender_id) {
+        if (lastSegment !== 'confirm-credit-product' && lastSegment !== 'submition-completed')
+          navigate('./confirm-credit-product');
+      } else if (application.borrower_accepted_at) {
         if (lastSegment !== 'credit-options' && lastSegment !== 'submition-completed') navigate('./credit-options');
       } else if (!application.borrower_accepted_at && !application.borrower_declined_at) {
         if (lastSegment !== 'intro' && lastSegment !== 'decline') navigate('./intro');
-      } else if (application.pending_documents) {
-        // show pending documents page
       } else if (
         application.borrower_declined_at &&
         Object.keys(application.borrower_declined_preferences_data).length === 0

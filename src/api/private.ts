@@ -2,6 +2,9 @@
 import {
   IApplication,
   IApplicationsListResponse,
+  ICreditProduct,
+  ICreditProductBase,
+  ICreditProductUpdate,
   ILender,
   ILenderBase,
   ILenderListResponse,
@@ -56,5 +59,20 @@ export const updateBorrowerFn = async (awardData: IUpdateBorrower) => {
 
 export const updateLenderFn = async (payload: ILenderUpdate) => {
   const response = await authApi.put<ILender>(`lenders/${payload.id}`, payload);
+  return response.data;
+};
+
+export const getCreditProductFn = async (id: string) => {
+  const response = await authApi.get<ICreditProduct>(`credit-products/${id}`);
+  return response.data;
+};
+
+export const createCreditProductFn = async (payload: ICreditProductBase) => {
+  const response = await authApi.post<ICreditProduct>(`lenders/${payload.lender_id}/credit-products`, payload);
+  return response.data;
+};
+
+export const updateCreditProductFn = async (payload: ICreditProductUpdate) => {
+  const response = await authApi.put<ICreditProduct>(`credit-products/${payload.id}`, payload);
   return response.data;
 };

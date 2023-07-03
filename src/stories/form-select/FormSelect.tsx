@@ -68,7 +68,7 @@ export function FormSelect({
             {...field}>
             {placeholder && (
               <MenuItem disabled value="">
-                <div className={` ${fieldError ? 'text-red opacity-50' : 'text-softGray opacity-30'}`}>
+                <div className={` ${fieldError ? 'text-red opacity-50' : 'text-darkest opacity-50'}`}>
                   {placeholder}
                 </div>
               </MenuItem>

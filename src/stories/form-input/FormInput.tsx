@@ -78,7 +78,7 @@ export const DateField = styled(MUIDateField)`
   }
 `;
 
-export const DatePicker = styled(MUIDatePicker)`
+export const DatePickerCell = styled(MUIDatePicker)`
   .MuiInputBase-root.MuiInput-root:before,
   .MuiInputBase-root.MuiInput-root:after,
   .MuiInputBase-root.MuiInput-root:hover:before,
@@ -105,6 +105,46 @@ export const DatePicker = styled(MUIDatePicker)`
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
     &.Mui-error {
+      border-color: ${COLORS.red};
+      color: ${COLORS.red};
+    }
+  }
+  & input {
+    font-size: 14px;
+  }
+  & .MuiInputAdornment-root.MuiInputAdornment-positionEnd .MuiButtonBase-root.MuiIconButton-root {
+    margin-right: -8px;
+    padding-top: 1px;
+    padding-bottom: 0px;
+  }
+`;
+
+export const DatePicker = styled(MUIDatePicker)`
+  .MuiInputBase-root.MuiInput-root:before,
+  .MuiInputBase-root.MuiInput-root:after,
+  .MuiInputBase-root.MuiInput-root:hover:before,
+  .MuiInputBase-root.MuiInput-root:hover {
+    content: '';
+    border-bottom: 0px;
+  }
+  .Mui-error {
+    input {
+      border-color: ${COLORS.red};
+      color: ${COLORS.red};
+    }
+  }
+  &.MuiTextField-root {
+    background-color: white;
+    padding: 17px 18px;
+    margin-bottom: 0.5rem;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 14px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: ${COLORS.fieldBorder};
+    &.Mui-error,
+    &:has(.Mui-error) {
       border-color: ${COLORS.red};
       color: ${COLORS.red};
     }
@@ -148,6 +188,7 @@ export type FormInputProps = {
   big?: boolean;
   noIcon?: boolean;
   placeholder?: string;
+  helperText?: string;
   labelClassName?: string;
   formControlClasses?: string;
   fontVariant?: boolean;
@@ -178,6 +219,7 @@ const getIcon = (type: string | undefined) => {
   return undefined;
 };
 
+const TEXT_TYPES = ['text', 'email', 'password', 'number'];
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type FieldErrorType = FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
 interface FormInputErrorProps {
@@ -206,11 +248,13 @@ export function FormInput({
   name,
   label,
   placeholder,
+  helperText,
   big = true,
   noIcon = false,
   type,
   labelClassName,
   fontVariant,
+  className,
   inputCell,
   formControlClasses,
   ...otherProps
@@ -227,11 +271,11 @@ export function FormInput({
       defaultValue=""
       name={name}
       render={({ field }) => (
-        <FormControl fullWidth sx={{ mb: 2 }} className={formControlClasses}>
+        <FormControl fullWidth sx={{ mb: 2 }} className={formControlClasses} error={!!fieldError}>
           <Text fontVariant={fontVariant} className={`${big ? AUTH_LABELS_CLASSNAMES : ''} ${labelClassName}`}>
             {label}
           </Text>
-          {!inputCell && !type && (
+          {!inputCell && (!type || TEXT_TYPES.includes(type)) && (
             <Input
               type={type}
               startAdornment={noIcon ? undefined : getIcon(type)}
@@ -248,6 +292,24 @@ export function FormInput({
                   : {}
               }
               {...otherProps}
+              className={className}
+            />
+          )}
+          {!inputCell && type === 'currency' && (
+            <Input
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              inputComponent={NumericFormatCustom as any}
+              type={type}
+              startAdornment={noIcon ? undefined : getIcon(type)}
+              value={field.value}
+              onBlur={field.onBlur}
+              onChange={field.onChange}
+              fullWidth
+              placeholder={placeholder}
+              disableUnderline
+              error={!!fieldError}
+              {...otherProps}
+              className={className}
             />
           )}
           {inputCell && !type && (
@@ -267,11 +329,13 @@ export function FormInput({
                   : {}
               }
               {...otherProps}
+              className={className}
             />
           )}
-          {type === 'date-picker' && (
-            <DatePicker
+          {inputCell && type === 'date-picker' && (
+            <DatePickerCell
               autoFocus
+              className={className}
               onChange={(value: unknown) => {
                 const date = value as Dayjs;
                 if (date.isValid()) {
@@ -297,7 +361,36 @@ export function FormInput({
               }
             />
           )}
-          {type === 'date-field' && (
+          {!inputCell && type === 'date-picker' && (
+            <DatePicker
+              autoFocus
+              className={className}
+              onChange={(value: unknown) => {
+                const date = value as Dayjs;
+                if (date.isValid()) {
+                  field.onChange(date.toISOString());
+                }
+              }}
+              slotProps={{
+                textField: {
+                  variant: 'standard',
+                  value: dayjs(field.value),
+                  onBlur: field.onBlur,
+                  fullWidth: true,
+                  placeholder,
+                  error: !!fieldError,
+                },
+              }}
+              sx={
+                fontVariant
+                  ? {
+                      fontFamily: 'GT Eesti Pro Text',
+                    }
+                  : {}
+              }
+            />
+          )}
+          {inputCell && type === 'date-field' && (
             <DateField
               autoFocus
               onChange={(value: unknown) => {
@@ -325,7 +418,7 @@ export function FormInput({
               }
             />
           )}
-          {type === 'currency' && (
+          {inputCell && type === 'currency' && (
             <InputFormCell
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               inputComponent={NumericFormatCustom as any}
@@ -346,7 +439,11 @@ export function FormInput({
                   : {}
               }
               {...otherProps}
+              className={className}
             />
+          )}
+          {helperText && (
+            <FormHelperText className={`font-light text-sm mx-0 ${className}`}>{helperText}</FormHelperText>
           )}
           <FormInputError className={labelClassName} fieldError={fieldError} />
         </FormControl>
@@ -359,10 +456,11 @@ FormInput.defaultProps = {
   noIcon: false,
   big: true,
   placeholder: undefined,
-  labelClassName: undefined,
+  helperText: undefined,
+  labelClassName: '',
   fontVariant: undefined,
   inputCell: undefined,
-  formControlClasses: undefined,
+  formControlClasses: '',
 };
 
 export default FormInput;

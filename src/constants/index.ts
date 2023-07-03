@@ -30,6 +30,7 @@ export enum QUERY_KEYS {
   applications_fi = 'applications_fi',
   applications_ocp = 'applications_ocp',
   lenders = 'lenders',
+  credit_product = 'credit_product',
 }
 
 export const DISPATCH_ACTIONS = {
@@ -99,8 +100,35 @@ export const LENDER_TYPES: FormSelectOption[] = [
   },
 ];
 
+export const CREDIT_PRODUCT_TYPE = {
+  LOAN: 'LOAN',
+  CREDIT_LINE: 'CREDIT_LINE',
+};
+
+export const CREDIT_PRODUCT_OPTIONS: FormSelectOption[] = [
+  {
+    value: CREDIT_PRODUCT_TYPE.LOAN,
+    label: t('Loan'),
+  },
+  {
+    value: CREDIT_PRODUCT_TYPE.CREDIT_LINE,
+    label: t('Credit line'),
+  },
+];
+
+export const DOCUMENTS_TYPE = {
+  INCORPORATION_DOCUMENT: 'INCORPORATION_DOCUMENT',
+  SUPPLIER_REGISTRATION_DOCUMENT: 'SUPPLIER_REGISTRATION_DOCUMENT',
+  BANK_NAME: 'BANK_NAME',
+  BANK_CERTIFICATION_DOCUMENT: 'BANK_CERTIFICATION_DOCUMENT',
+  FINANCIAL_STATEMENT: 'FINANCIAL_STATEMENT',
+  SIGNED_CONTRACT: 'SIGNED_CONTRACT',
+  COMPLIANCE_REPORT: 'COMPLIANCE_REPORT',
+};
+
 // eslint-disable-next-line no-shadow
 export enum MSME_TYPES {
+  NOT_INFORMED = 'NOT_INFORMED',
   MICRO = 'MICRO',
   SMALL = 'SMALL',
   MEDIUM = 'MEDIUM',
@@ -111,3 +139,103 @@ export const MSME_TYPES_NAMES: { [key: string]: string } = {
   [MSME_TYPES.SMALL]: t('11 to 50'),
   [MSME_TYPES.MEDIUM]: t('51 to 200'),
 };
+
+export const MSME_TYPES_OPTIONS: FormSelectOption[] = [
+  {
+    value: MSME_TYPES.MICRO,
+    label: MSME_TYPES_NAMES.MICRO,
+  },
+  {
+    value: MSME_TYPES.SMALL,
+    label: MSME_TYPES_NAMES.SMALL,
+  },
+  {
+    value: MSME_TYPES.MEDIUM,
+    label: MSME_TYPES_NAMES.MEDIUM,
+  },
+];
+
+export const DOCUMENT_TYPES_NAMES: { [key: string]: string } = {
+  [DOCUMENTS_TYPE.INCORPORATION_DOCUMENT]: t('Incorporation document'),
+  [DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT]: t('Supplier registration document'),
+  [DOCUMENTS_TYPE.BANK_CERTIFICATION_DOCUMENT]: t('Bank certification document'),
+  [DOCUMENTS_TYPE.FINANCIAL_STATEMENT]: t('Financial statement'),
+  [DOCUMENTS_TYPE.SIGNED_CONTRACT]: t('Signed contract'),
+  [DOCUMENTS_TYPE.COMPLIANCE_REPORT]: t('Compliance report'),
+};
+
+// https://www.ibisworld.com/united-states/list-of-industries/
+export const SECTOR_TYPES: FormSelectOption[] = [
+  {
+    value: 'accommodation_and_food_services',
+    label: t('Accommodation and Food Services'),
+  },
+  {
+    value: 'administration',
+    label: t('Administration'),
+  },
+  {
+    value: 'agriculture_forestry_fishing_and_hunting',
+    label: t('Agriculture, Forestry, Fishing and Hunting'),
+  },
+  {
+    value: 'arts_entertainment_and_recreation',
+    label: t('Arts, Entertainment and Recreation'),
+  },
+  {
+    value: 'construction',
+    label: t('Construction'),
+  },
+  {
+    value: 'educational_services',
+    label: t('Educational Services'),
+  },
+  {
+    value: 'finance_and_insurance',
+    label: t('Finance and Insurance'),
+  },
+  {
+    value: 'healthcare_and_social_assistance',
+    label: t('Healthcare and Social Assistance'),
+  },
+  {
+    value: 'information',
+    label: t('Information'),
+  },
+  {
+    value: 'manufacturing',
+    label: t('Manufacturing'),
+  },
+  {
+    value: 'mining',
+    label: t('Mining'),
+  },
+  {
+    value: 'other_services',
+    label: t('Other Services'),
+  },
+  {
+    value: 'professional_scientific_and_technical_services',
+    label: t('Professional, Scientific and Technical Services'),
+  },
+  {
+    value: 'real_estate_and_rental_and_leasing',
+    label: t('Real Estate and Rental and Leasing'),
+  },
+  {
+    value: 'retail_trade',
+    label: t('Retail Trade'),
+  },
+  {
+    value: 'transportation_and_warehousing',
+    label: t('Transportation and Warehousing'),
+  },
+  {
+    value: 'utilities',
+    label: t('Utilities'),
+  },
+  {
+    value: 'wholesale_trade',
+    label: t('Wholesale Trade'),
+  },
+];

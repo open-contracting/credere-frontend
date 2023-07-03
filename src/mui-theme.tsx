@@ -12,10 +12,10 @@ const rootElement = document.getElementById('root');
 const theme = createTheme({
   palette: {
     primary: {
-      main: COLORS.grass,
+      main: COLORS.moodyBlue,
     },
     secondary: {
-      main: COLORS.darkest,
+      main: COLORS.grass,
     },
   },
   typography: {
@@ -77,6 +77,15 @@ const theme = createTheme({
         },
         displayedRows: {
           fontFamily: 'GT Eesti Pro Text',
+        },
+      },
+    },
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    MuiPickersDay: {
+      styleOverrides: {
+        root: {
+          borderRadius: 2,
         },
       },
     },
