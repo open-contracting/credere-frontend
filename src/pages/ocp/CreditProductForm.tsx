@@ -199,7 +199,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
             label={t('Enter the URL where the MSME can find more information about the credit product')}
             name="more_info_url"
             big={false}
-            placeholder={t('More info url')}
+            placeholder={t('More info URL')}
           />
 
           <div className="mt-5 grid grid-cols-1 gap-4 md:flex md:gap-0">

@@ -26,6 +26,8 @@ import StateContextProvider from 'src/providers/StateContextProvider';
 import ProtectedRoute from 'src/routes/ProtectedRoute';
 
 import PageLayout from '../layout/PageLayout';
+import ConfirmCreditProduct from '../pages/msme/ConfirmCreditProduct';
+import UploadDocuments from '../pages/msme/UploadDocuments';
 import { LoadApplication } from '../pages/ocp/ApplicationDetail';
 import Applications from '../pages/ocp/Applications';
 import { LoadCreditProduct } from '../pages/ocp/CreditProductForm';
@@ -215,6 +217,14 @@ const router = createBrowserRouter([
       {
         path: 'credit-options',
         element: <ViewCreditOptions />,
+      },
+      {
+        path: 'confirm-credit-product',
+        element: <ConfirmCreditProduct />,
+      },
+      {
+        path: 'documents',
+        element: <UploadDocuments />,
       },
       {
         path: 'submition-completed',

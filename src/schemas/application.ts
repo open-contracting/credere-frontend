@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { t } from '@transifex/native';
-import { TypeOf, boolean, object, string } from 'zod';
+import { TypeOf, boolean, coerce, nativeEnum, object, string } from 'zod';
 
 import { MSME_TYPES } from '../constants';
 
@@ -46,6 +46,43 @@ export const declineFeedbackSchema = object({
 
 export type DeclineFeedbackInput = TypeOf<typeof declineFeedbackSchema>;
 
+export const creditOptionsSchema = object({
+  borrower_size: nativeEnum(MSME_TYPES, {
+    errorMap: (issue) => {
+      switch (issue.code) {
+        case 'invalid_type':
+        case 'invalid_enum_value':
+          return { message: t('Borrower size is required') };
+        default:
+          return { message: t('Select an option') };
+      }
+    },
+  }),
+  sector: string().nonempty(t('Sector is required')),
+  amount_requested: coerce.number().min(1, t('Amount requested must be greater than 0')),
+  uuid: UUIDType,
+});
+
+export type CreditOptionsInput = TypeOf<typeof creditOptionsSchema>;
+
+export const repaymentTermsSchema = object({
+  repayment_years: coerce
+    .number({
+      required_error: t('Years is required'),
+      invalid_type_error: t('Years must be a number'),
+    })
+    .gte(0, t('Years must be greater or equal than ')),
+  repayment_months: coerce.number().min(1, t('Months must be greater or equal than 1')),
+  payment_start_date: string().nonempty(t('Payment start date is required')),
+});
+
+export type RepaymentTermsInput = TypeOf<typeof repaymentTermsSchema>;
+
+export type GetCreditProductsOptionsInput = Omit<CreditOptionsInput, 'sector'>;
+
+export type SelectCreditProductInput = CreditOptionsInput &
+  Partial<RepaymentTermsInput> & { credit_product_id: number };
+
 export interface IAward {
   id: number;
   borrower_id: number;
@@ -87,7 +124,7 @@ export interface IBorrower {
   legal_identifier: string;
   type: string;
   sector: string;
-  size: string;
+  size: MSME_TYPES;
   status: string;
   missing_data: { [key: string]: boolean };
   created_at: string;
@@ -133,7 +170,7 @@ export interface ICreditProductUpdate extends ICreditProductBase {
 }
 
 export interface ICreditProduct extends ICreditProductUpdate {
-  lender?: ILenderUpdate;
+  lender: ILenderUpdate;
   created_at?: string;
   updated_at?: string;
 }
@@ -213,6 +250,11 @@ export interface IApplicationsListResponse {
   count: number;
   page: number;
   page_size: number;
+}
+
+export interface IApplicationCreditOptions {
+  loans: ICreditProduct[];
+  credit_lines: ICreditProduct[];
 }
 
 export interface ILenderListResponse {
