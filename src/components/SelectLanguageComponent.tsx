@@ -43,7 +43,7 @@ function SelectLanguageComponent() {
     if (languages && languages.length > 0) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const optionsChecked: FormSelectOption[] = languages.map((lang: any) => ({
-        label: lang.name,
+        label: lang.localized_name,
         value: lang.code,
       }));
       setOptions(optionsChecked);
