@@ -1,7 +1,13 @@
 import { t } from '@transifex/native';
 import lodash from 'lodash';
 
-import { APPLICATION_STATUS_NAMES, LENDER_TYPES, MSME_TYPES, MSME_TYPES_NAMES } from '../constants';
+import {
+  APPLICATION_STATUS_NAMES,
+  CREDIT_PRODUCT_OPTIONS,
+  LENDER_TYPES,
+  MSME_TYPES,
+  MSME_TYPES_NAMES,
+} from '../constants';
 import CURRENCY_FORMAT_OPTIONS from '../constants/intl';
 import { PreferencesType } from '../schemas/OCPsettings';
 import { FormSelectOption } from '../stories/form-select/FormSelect';
@@ -56,6 +62,8 @@ function findLabelByValue(value: string, options: FormSelectOption[]): string {
 }
 
 export const renderLenderType = (type: string) => findLabelByValue(type, LENDER_TYPES);
+export const renderCreditProductType = (type: string) => findLabelByValue(type, CREDIT_PRODUCT_OPTIONS);
+export const renderBorrowerSizeType = (type: string) => MSME_TYPES_NAMES[type as MSME_TYPES];
 
 export const renderLenderPreferences = (preferences: PreferencesType) => {
   let preferencesString = '';

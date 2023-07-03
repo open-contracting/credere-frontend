@@ -30,6 +30,7 @@ export enum QUERY_KEYS {
   applications_fi = 'applications_fi',
   applications_ocp = 'applications_ocp',
   lenders = 'lenders',
+  credit_product = 'credit_product',
 }
 
 export const DISPATCH_ACTIONS = {
@@ -99,6 +100,32 @@ export const LENDER_TYPES: FormSelectOption[] = [
   },
 ];
 
+export const CREDIT_PRODUCT_TYPE = {
+  LOAN: 'LOAN',
+  CREDIT_LINE: 'CREDIT_LINE',
+};
+
+export const CREDIT_PRODUCT_OPTIONS: FormSelectOption[] = [
+  {
+    value: CREDIT_PRODUCT_TYPE.LOAN,
+    label: t('Loan'),
+  },
+  {
+    value: CREDIT_PRODUCT_TYPE.CREDIT_LINE,
+    label: t('Credit line'),
+  },
+];
+
+export const DOCUMENTS_TYPE = {
+  INCORPORATION_DOCUMENT: 'INCORPORATION_DOCUMENT',
+  SUPPLIER_REGISTRATION_DOCUMENT: 'SUPPLIER_REGISTRATION_DOCUMENT',
+  BANK_NAME: 'BANK_NAME',
+  BANK_CERTIFICATION_DOCUMENT: 'BANK_CERTIFICATION_DOCUMENT',
+  FINANCIAL_STATEMENT: 'FINANCIAL_STATEMENT',
+  SIGNED_CONTRACT: 'SIGNED_CONTRACT',
+  COMPLIANCE_REPORT: 'COMPLIANCE_REPORT',
+};
+
 // eslint-disable-next-line no-shadow
 export enum MSME_TYPES {
   MICRO = 'MICRO',
@@ -110,4 +137,28 @@ export const MSME_TYPES_NAMES: { [key: string]: string } = {
   [MSME_TYPES.MICRO]: t('0 to 10'),
   [MSME_TYPES.SMALL]: t('11 to 50'),
   [MSME_TYPES.MEDIUM]: t('51 to 200'),
+};
+
+export const MSME_TYPES_OPTIONS: FormSelectOption[] = [
+  {
+    value: MSME_TYPES.MICRO,
+    label: MSME_TYPES_NAMES.MICRO,
+  },
+  {
+    value: MSME_TYPES.SMALL,
+    label: MSME_TYPES_NAMES.SMALL,
+  },
+  {
+    value: MSME_TYPES.MEDIUM,
+    label: MSME_TYPES_NAMES.MEDIUM,
+  },
+];
+
+export const DOCUMENT_TYPES_NAMES: { [key: string]: string } = {
+  [DOCUMENTS_TYPE.INCORPORATION_DOCUMENT]: t('Incorporation document'),
+  [DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT]: t('Supplier registration document'),
+  [DOCUMENTS_TYPE.BANK_CERTIFICATION_DOCUMENT]: t('Bank certification document'),
+  [DOCUMENTS_TYPE.FINANCIAL_STATEMENT]: t('Financial statement'),
+  [DOCUMENTS_TYPE.SIGNED_CONTRACT]: t('Signed contract'),
+  [DOCUMENTS_TYPE.COMPLIANCE_REPORT]: t('Compliance report'),
 };

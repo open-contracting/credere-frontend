@@ -178,6 +178,7 @@ const getIcon = (type: string | undefined) => {
   return undefined;
 };
 
+const TEXT_TYPES = ['text', 'email', 'password', 'number'];
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type FieldErrorType = FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
 interface FormInputErrorProps {
@@ -231,7 +232,7 @@ export function FormInput({
           <Text fontVariant={fontVariant} className={`${big ? AUTH_LABELS_CLASSNAMES : ''} ${labelClassName}`}>
             {label}
           </Text>
-          {!inputCell && !type && (
+          {!inputCell && (!type || TEXT_TYPES.includes(type)) && (
             <Input
               type={type}
               startAdornment={noIcon ? undefined : getIcon(type)}
@@ -247,6 +248,22 @@ export function FormInput({
                     }
                   : {}
               }
+              {...otherProps}
+            />
+          )}
+          {!inputCell && type === 'currency' && (
+            <Input
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              inputComponent={NumericFormatCustom as any}
+              type={type}
+              startAdornment={noIcon ? undefined : getIcon(type)}
+              value={field.value}
+              onBlur={field.onBlur}
+              onChange={field.onChange}
+              fullWidth
+              placeholder={placeholder}
+              disableUnderline
+              error={!!fieldError}
               {...otherProps}
             />
           )}
@@ -269,7 +286,7 @@ export function FormInput({
               {...otherProps}
             />
           )}
-          {type === 'date-picker' && (
+          {inputCell && type === 'date-picker' && (
             <DatePicker
               autoFocus
               onChange={(value: unknown) => {
@@ -297,7 +314,7 @@ export function FormInput({
               }
             />
           )}
-          {type === 'date-field' && (
+          {inputCell && type === 'date-field' && (
             <DateField
               autoFocus
               onChange={(value: unknown) => {
@@ -325,7 +342,7 @@ export function FormInput({
               }
             />
           )}
-          {type === 'currency' && (
+          {inputCell && type === 'currency' && (
             <InputFormCell
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               inputComponent={NumericFormatCustom as any}

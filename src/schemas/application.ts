@@ -2,6 +2,8 @@
 import { t } from '@transifex/native';
 import { TypeOf, boolean, object, string } from 'zod';
 
+import { MSME_TYPES } from '../constants';
+
 const booleanRequiredSchema = boolean().refine((value) => value === true, {
   message: t('You need to check this option to Access the Scheme'),
 });
@@ -105,8 +107,6 @@ export type IUpdateBorrower = Partial<
 export interface ILenderBase {
   name: string;
   email_group: string;
-  borrower_type_preferences: any;
-  limits_preferences: any;
   type: string;
   sla_days: number;
 }
@@ -115,9 +115,33 @@ export interface ILenderUpdate extends ILenderBase {
   id: number;
 }
 
+export interface ICreditProductBase {
+  borrower_size: MSME_TYPES;
+  lower_limit: number;
+  upper_limit: number;
+  interest_rate: number;
+  type: string;
+  required_document_types: { [key: string]: boolean };
+  other_fees_total_amount: number;
+  other_fees_description: string;
+  more_info_url: string;
+  lender_id: number;
+}
+
+export interface ICreditProductUpdate extends ICreditProductBase {
+  id: number;
+}
+
+export interface ICreditProduct extends ICreditProductUpdate {
+  lender?: ILenderUpdate;
+  created_at?: string;
+  updated_at?: string;
+}
+
 export interface ILender extends ILenderUpdate {
   created_at: string;
   updated_at: string;
+  credit_products: ICreditProduct[];
 }
 
 export interface IApplication {
@@ -131,7 +155,7 @@ export interface IApplication {
   status: string;
   award_borrowed_identifier: string;
   borrower_id: number;
-  lender_id?: any;
+  lender_id?: number;
   contract_amount_submitted?: any;
   amount_requested?: any;
   currency: string;
@@ -155,6 +179,8 @@ export interface IApplication {
   updated_at: string;
   expired_at: string;
   archived_at?: any;
+  credit_product_id?: number;
+  credit_product?: ICreditProduct;
 }
 
 export interface IExtendedApplication {

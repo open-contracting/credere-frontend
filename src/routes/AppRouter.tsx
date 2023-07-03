@@ -28,6 +28,7 @@ import ProtectedRoute from 'src/routes/ProtectedRoute';
 import PageLayout from '../layout/PageLayout';
 import { LoadApplication } from '../pages/ocp/ApplicationDetail';
 import Applications from '../pages/ocp/Applications';
+import { LoadCreditProduct } from '../pages/ocp/CreditProductForm';
 import { LenderForm, LoadLender } from '../pages/ocp/LenderForm';
 import Settings from '../pages/ocp/Settings';
 
@@ -113,6 +114,28 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <PageLayout>
           <LoadLender />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/settings/lender/:lenderId/credit-product/new',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <LoadCreditProduct />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/settings/lender/:lenderId/credit-product/:id/edit',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <LoadCreditProduct />
         </PageLayout>
       </ProtectedRoute>
     ),

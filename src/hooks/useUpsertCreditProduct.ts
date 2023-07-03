@@ -4,33 +4,31 @@ import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 
-import { createLenderFn, updateLenderFn } from '../api/private';
+import { createCreditProductFn, updateCreditProductFn } from '../api/private';
 import { QUERY_KEYS } from '../constants';
-import { ILender, ILenderBase, ILenderUpdate } from '../schemas/application';
+import { ICreditProduct, ICreditProductBase, ICreditProductUpdate } from '../schemas/application';
 
-type IUseUpsertLender = {
-  createLenderMutation: UseMutateFunction<ILender, unknown, ILenderBase, unknown>;
-  updateLenderMutation: UseMutateFunction<ILender, unknown, ILenderUpdate, unknown>;
+type IUseUpsertCreditProduct = {
+  createCreditProductMutation: UseMutateFunction<ICreditProduct, unknown, ICreditProductBase, unknown>;
+  updateCreditProductMutation: UseMutateFunction<ICreditProduct, unknown, ICreditProductUpdate, unknown>;
   isLoading: boolean;
   isError: boolean;
 };
 
-export default function useUpsertLender(): IUseUpsertLender {
+export default function useUpsertCreditProduct(): IUseUpsertCreditProduct {
   const t = useT();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
 
   const {
-    mutate: createLenderMutation,
+    mutate: createCreditProductMutation,
     isError,
     isLoading,
-  } = useMutation<ILender, unknown, ILenderBase, unknown>((payload) => createLenderFn(payload), {
+  } = useMutation<ICreditProduct, unknown, ICreditProductBase, unknown>((payload) => createCreditProductFn(payload), {
     onSuccess: (data) => {
-      enqueueSnackbar(t('Credit Provider "{lenderName}" created', { lenderName: data.name }), {
-        variant: 'success',
-      });
-      navigate(`/settings/lender/${data.id}/credit-product/new`);
+      queryClient.invalidateQueries([QUERY_KEYS.lenders, `${data.lender_id}`]);
+      navigate(`/settings/lender/${data.lender_id}/edit`);
       return data;
     },
     onError: (error) => {
@@ -41,7 +39,7 @@ export default function useUpsertLender(): IUseUpsertLender {
           });
         }
       } else {
-        enqueueSnackbar(t('Error creating lender. {error}', { error }), {
+        enqueueSnackbar(t('Error creating credit product. {error}', { error }), {
           variant: 'error',
         });
       }
@@ -49,13 +47,14 @@ export default function useUpsertLender(): IUseUpsertLender {
   });
 
   const {
-    mutate: updateLenderMutation,
+    mutate: updateCreditProductMutation,
     isLoading: isLoadingUpdate,
     isError: isErrorUpdate,
-  } = useMutation<ILender, unknown, ILenderUpdate, unknown>((payload) => updateLenderFn(payload), {
+  } = useMutation<ICreditProduct, unknown, ICreditProductUpdate, unknown>((payload) => updateCreditProductFn(payload), {
     onSuccess: (data) => {
-      queryClient.invalidateQueries([QUERY_KEYS.lenders]);
-      navigate('/settings');
+      queryClient.invalidateQueries([QUERY_KEYS.lenders, `${data.lender_id}`]);
+      queryClient.invalidateQueries([QUERY_KEYS.credit_product, `${data.id}`]);
+      navigate(`/settings/lender/${data.lender_id}/edit`);
       return data;
     },
     onError: (error) => {
@@ -66,7 +65,7 @@ export default function useUpsertLender(): IUseUpsertLender {
           });
         }
       } else {
-        enqueueSnackbar(t('Error updating lender. {error}', { error }), {
+        enqueueSnackbar(t('Error updating credit product. {error}', { error }), {
           variant: 'error',
         });
       }
@@ -74,8 +73,8 @@ export default function useUpsertLender(): IUseUpsertLender {
   });
 
   return {
-    createLenderMutation,
-    updateLenderMutation,
+    createCreditProductMutation,
+    updateCreditProductMutation,
     isLoading: isLoading || isLoadingUpdate,
     isError: isError || isErrorUpdate,
   };
