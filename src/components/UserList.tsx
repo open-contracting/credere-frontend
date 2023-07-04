@@ -7,10 +7,10 @@ import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { renderUserType } from 'src/util';
 
 import { getUsersFn } from '../api/private';
 import { QUERY_KEYS } from '../constants';
-// import { ICreateUserBase } from '../schemas/application';
 import { IUser, IUsersListResponse } from '../schemas/auth';
 import LinkButton from '../stories/link-button/LinkButton';
 import { DataTable, HeadCell } from './DataTable';
@@ -34,6 +34,7 @@ const headCells: HeadCell<IUser>[] = [
     disablePadding: false,
     label: t('Type'),
     sortable: false,
+    render: (row: IUser) => <>{renderUserType(row.type)}</>,
   },
 ];
 
@@ -44,7 +45,6 @@ const actions = (row: IUser) => (
     className="p-1 justify-start"
     component={Link}
     to={`/settings/user/${row.id}/edit`}
-    // to="/settings/user/new"
     label={t('Edit')}
     size="small"
     noIcon

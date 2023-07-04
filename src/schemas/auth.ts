@@ -94,7 +94,7 @@ export interface IUser {
   id?: string;
   name: string;
   email: string;
-  type?: USER_TYPES;
+  type: USER_TYPES;
   created_at?: string;
   updated_at?: string;
 }
