@@ -20,6 +20,7 @@ import FrequentlyAskedQuestionsPage from 'src/pages/msme/FrequentlyAskedQuestion
 import IntroMsme from 'src/pages/msme/IntroMsme';
 import SubmitionCompleted from 'src/pages/msme/SubmitionCompleted';
 import ViewCreditOptions from 'src/pages/msme/ViewCreditOptions';
+import RegisterUserPage from 'src/pages/ocp/RegisterUserPage';
 import ApplicationContextProvider from 'src/providers/ApplicationContextProvider';
 import LangContextProvider from 'src/providers/LangContextProvider';
 import StateContextProvider from 'src/providers/StateContextProvider';
@@ -108,6 +109,18 @@ const router = createBrowserRouter([
     ),
     errorElement: <RouterErrorPage />,
   },
+  {
+    path: '/register-user',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <RegisterUserPage />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+
   {
     path: '/settings/lender/:id/edit',
     element: (

@@ -2,6 +2,7 @@
 import {
   IApplication,
   IApplicationsListResponse,
+  ICreateUserBase,
   ICreditProduct,
   ICreditProductBase,
   ICreditProductUpdate,
@@ -74,5 +75,10 @@ export const createCreditProductFn = async (payload: ICreditProductBase) => {
 
 export const updateCreditProductFn = async (payload: ICreditProductUpdate) => {
   const response = await authApi.put<ICreditProduct>(`credit-products/${payload.id}`, payload);
+  return response.data;
+};
+
+export const createUserFn = async (payload: ICreateUserBase) => {
+  const response = await authApi.post<ICreateUserBase>(`users`, payload);
   return response.data;
 };

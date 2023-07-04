@@ -162,3 +162,14 @@ export const DOCUMENT_TYPES_NAMES: { [key: string]: string } = {
   [DOCUMENTS_TYPE.SIGNED_CONTRACT]: t('Signed contract'),
   [DOCUMENTS_TYPE.COMPLIANCE_REPORT]: t('Compliance report'),
 };
+
+export const USER_TYPE_OPTIONS: FormSelectOption[] = [
+  {
+    value: 'OCP',
+    label: 'OCP',
+  },
+  {
+    value: 'FI',
+    label: 'FI',
+  },
+];

@@ -221,3 +221,10 @@ export interface ILenderListResponse {
   page: number;
   page_size: number;
 }
+
+export interface ICreateUserBase {
+  email: string;
+  name: string;
+  type: string;
+  // lender: number;
+}
