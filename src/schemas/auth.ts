@@ -57,7 +57,7 @@ export const createUserSchema = object({
 
 export type CreateUserInput = TypeOf<typeof createUserSchema>;
 
-export type UpdateUserInput = Omit<CreateUserInput, 'email'> & { id: string };
+export type UpdateUserInput = Omit<CreateUserInput, 'email'> & { id: string | undefined };
 
 export const setPasswordSchema = object({
   password: passwordSchema,
@@ -101,6 +101,12 @@ export interface IUser {
 
 export interface IUserResponse {
   user: IUser;
+}
+export interface IUsersListResponse {
+  items: IUser[];
+  count: number;
+  page: number;
+  page_size: number;
 }
 
 export interface ILoginResponse extends IUserResponse {

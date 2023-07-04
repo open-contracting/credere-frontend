@@ -12,20 +12,23 @@ import { Button } from 'src/stories/button/Button';
 import FormInput from 'src/stories/form-input/FormInput';
 import FormSelect, { FormSelectOption } from 'src/stories/form-select/FormSelect';
 import Title from 'src/stories/title/Title';
+import { z } from 'zod';
 
-import { getLendersFn } from '../../api/private';
+import { getLendersFn, getUserFn } from '../../api/private';
 import { QUERY_KEYS, USER_TYPES, USER_TYPE_OPTIONS } from '../../constants';
+import { useParamsTypeSafe } from '../../hooks/useParamsTypeSafe';
 import useUpsertUser from '../../hooks/useUpsertUser';
 import { ILender, ILenderListResponse } from '../../schemas/application';
 import { CreateUserInput, IUser, createUserSchema } from '../../schemas/auth';
+import Loader from '../../stories/loader/Loader';
+import ApplicationErrorPage from '../msme/ApplicationErrorPage';
 
 export interface UserFormProps {
   user?: IUser | null;
 }
-
 export function UserForm({ user }: UserFormProps) {
   const t = useT();
-  const { createUserMutation, isLoading } = useUpsertUser();
+  const { createUserMutation, updateUserMutation, isLoading } = useUpsertUser();
 
   const [options, setOptions] = useState<FormSelectOption[]>([]);
 
@@ -36,7 +39,7 @@ export function UserForm({ user }: UserFormProps) {
   const { handleSubmit, watch } = methods;
 
   const [typeValue] = watch(['type']);
-
+  // Get the lenders from the API
   const { data } = useQuery({
     queryKey: [QUERY_KEYS.lenders],
     queryFn: async (): Promise<ILenderListResponse | null> => {
@@ -56,7 +59,7 @@ export function UserForm({ user }: UserFormProps) {
       }
     },
   });
-
+  // Asignate the lenders to the options
   useEffect(() => {
     if (data && data.items.length > 0) {
       const lenderOptions: FormSelectOption[] = data.items.map((lender: ILender) => ({
@@ -68,7 +71,11 @@ export function UserForm({ user }: UserFormProps) {
   }, [data]);
 
   const onSubmitHandler: SubmitHandler<CreateUserInput> = (values) => {
-    createUserMutation(values);
+    if (user) {
+      updateUserMutation({ ...values, id: user.id });
+    } else {
+      createUserMutation(values);
+    }
   };
 
   return (
@@ -153,4 +160,39 @@ UserForm.defaultProps = {
   user: null,
 };
 
+export function LoadUser() {
+  const t = useT();
+  const [queryError, setQueryError] = useState<string>('');
+
+  const { id } = useParamsTypeSafe(
+    z.object({
+      id: z.coerce.string(),
+    }),
+  );
+
+  const { isLoading, data } = useQuery({
+    queryKey: [QUERY_KEYS.users, `${id}`],
+    queryFn: async (): Promise<IUser | null> => {
+      const user = await getUserFn(id);
+      return user;
+    },
+    retry: 1,
+    enabled: !!id,
+    onError: (error) => {
+      if (axios.isAxiosError(error) && error.response && error.response.data && error.response.data.detail) {
+        setQueryError(error.response.data.detail);
+      } else {
+        setQueryError(t('Error loading lender'));
+      }
+    },
+  });
+
+  return (
+    <>
+      {isLoading && <Loader />}
+      {!isLoading && !queryError && <UserForm user={data} />}
+      {queryError && <ApplicationErrorPage message={queryError} />}
+    </>
+  );
+}
 export default UserForm;

@@ -20,7 +20,7 @@ import FrequentlyAskedQuestionsPage from 'src/pages/msme/FrequentlyAskedQuestion
 import IntroMsme from 'src/pages/msme/IntroMsme';
 import SubmitionCompleted from 'src/pages/msme/SubmitionCompleted';
 import ViewCreditOptions from 'src/pages/msme/ViewCreditOptions';
-import { UserForm } from 'src/pages/ocp/UserForm';
+import { LoadUser, UserForm } from 'src/pages/ocp/UserForm';
 import ApplicationContextProvider from 'src/providers/ApplicationContextProvider';
 import LangContextProvider from 'src/providers/LangContextProvider';
 import StateContextProvider from 'src/providers/StateContextProvider';
@@ -112,6 +112,17 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
+    path: '/settings/lender/:id/edit',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <LoadLender />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
     path: '/settings/user/new',
     element: (
       <ProtectedRoute>
@@ -122,13 +133,12 @@ const router = createBrowserRouter([
     ),
     errorElement: <RouterErrorPage />,
   },
-
   {
-    path: '/settings/lender/:id/edit',
+    path: '/settings/user/:id/edit',
     element: (
       <ProtectedRoute>
         <PageLayout>
-          <LoadLender />
+          <LoadUser />
         </PageLayout>
       </ProtectedRoute>
     ),

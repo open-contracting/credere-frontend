@@ -13,7 +13,7 @@ import {
   IUpdateBorrower,
   PaginationInput,
 } from '../schemas/application';
-import { CreateUserInput, IUser, UpdateUserInput } from '../schemas/auth';
+import { CreateUserInput, IUser, IUsersListResponse, UpdateUserInput } from '../schemas/auth';
 import { authApi } from './axios';
 
 export const getApplicationsOCP = async (payload: PaginationInput) => {
@@ -85,5 +85,15 @@ export const createUserFn = async (payload: CreateUserInput) => {
 
 export const updateUserFn = async (payload: UpdateUserInput) => {
   const response = await authApi.put<IUser>(`users/${payload.id}`, payload);
+  return response.data;
+};
+
+export const getUserFn = async (id: string) => {
+  const response = await authApi.get<IUser>(`users/${id}`);
+  return response.data;
+};
+
+export const getUsersFn = async () => {
+  const response = await authApi.get<IUsersListResponse>('users');
   return response.data;
 };
