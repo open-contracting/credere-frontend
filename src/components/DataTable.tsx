@@ -134,11 +134,10 @@ function DataTableHead<T>({
   return (
     <TableHead>
       <TableRow>
-        {headCells.map((headCell, index) => (
+        {headCells.map((headCell) => (
           <DataTableHeadCell
             width={headCell.width}
             key={String(headCell.id)}
-            className={`${index !== 0 ? 'opacity-50' : ''}`}
             align="left"
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}>

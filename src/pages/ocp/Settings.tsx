@@ -29,6 +29,9 @@ export function Settings() {
       <Title type="section" label={t('Credit Providers')} className="mb-6" />
       <LenderList />
       <Button className="mt-10" label={t('Add New Credit Provider')} component={Link} to="/settings/lender/new" />
+
+      <Title type="section" label={t('Users')} className="mb-6" />
+      <Button className="mt-10" label={t('Add New User')} component={Link} to="/settings/user/new" />
     </>
   );
 }
