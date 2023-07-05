@@ -34,6 +34,7 @@ export function UserForm({ user }: UserFormProps) {
 
   const methods = useForm<CreateUserInput>({
     resolver: zodResolver(createUserSchema),
+    defaultValues: user || {},
   });
 
   const { handleSubmit, watch } = methods;
