@@ -88,7 +88,7 @@ export function DataTableHeadCell(props: TableCellProps) {
     <TableCell
       sx={{ width: width || 'auto' }}
       {...props}
-      className={`px-4 py-5 border-solid border-l border-r-0 border-t-0 border-background opacity-50 ${className}`}>
+      className={`px-4 py-5 border-solid border-l border-r-0 border-t-0 border-background bg-white ${className}`}>
       {children}
     </TableCell>
   );
@@ -103,7 +103,16 @@ export function DataTableCell(props: TableCellProps) {
   return (
     <TableCell
       {...props}
-      className={`px-4 text-darkest text-sm font-normal border-solid border-l border-r-0 border-t-0 border-background ${className}`}>
+      className={`px-4 text-darkest text-sm font-normal border-solid border-l border-r-0 border-t-0 border-background bg-white ${className}`}>
+      {children}
+    </TableCell>
+  );
+}
+
+export function TransparentDataTableCell(props: TableCellProps) {
+  const { children, className } = props;
+  return (
+    <TableCell {...props} className={`px-4 text-darkest text-sm font-normal border-0 bg-background ${className}`}>
       {children}
     </TableCell>
   );
@@ -125,11 +134,10 @@ function DataTableHead<T>({
   return (
     <TableHead>
       <TableRow>
-        {headCells.map((headCell, index) => (
+        {headCells.map((headCell) => (
           <DataTableHeadCell
             width={headCell.width}
             key={String(headCell.id)}
-            className={`${index !== 0 ? 'opacity-50' : ''}`}
             align="left"
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}>
@@ -246,7 +254,7 @@ export function DataTable<T>({
 
   return (
     <Box>
-      <Paper elevation={0} square>
+      <Paper elevation={0} square className="bg-background">
         <TableContainer>
           <Table aria-labelledby="data-table" size="medium">
             <DataTableHead
@@ -281,7 +289,7 @@ export function DataTable<T>({
         </TableContainer>
         {pagination && (
           <TablePagination
-            className="border-solid border-l border-r-0 border-t-0 border-background"
+            className="border-solid border-l border-r-0 border-t-0 border-background  bg-white"
             classes={{
               selectLabel: 'text-darkest text-sm font-normal',
               select: 'text-darkest text-sm font-normal',

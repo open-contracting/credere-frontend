@@ -4,18 +4,12 @@ import { useQuery } from '@tanstack/react-query';
 import { t } from '@transifex/native';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getApplicationsFI, getApplicationsOCP } from '../api/private';
-import {
-  APPLICATION_STATUS,
-  COMPLETED_STATUS,
-  NOT_STARTED_STATUS,
-  PAGE_SIZES,
-  QUERY_KEYS,
-  STARTED_STATUS,
-} from '../constants';
+import { COMPLETED_STATUS, NOT_STARTED_STATUS, PAGE_SIZES, QUERY_KEYS, STARTED_STATUS } from '../constants';
+import useStartApplication from '../hooks/useStartApplication';
 import {
   EXTENDED_APPLICATION_FROM,
   IApplication,
@@ -72,29 +66,28 @@ const headCellsOCP: HeadCell<IApplication & IExtendedApplication>[] = [
 type ExtendendApplication = IApplication & IExtendedApplication;
 const ApplicationDataTable = DataTable<ExtendendApplication>;
 
-const actionsFI = (row: ExtendendApplication) => (
+const actionsFIBase = (row: ExtendendApplication, onStartApplicationHandler: (id: number) => void) => (
   <Box className="flex flex-row">
-    {STARTED_STATUS.includes(row.status as APPLICATION_STATUS) && (
+    {STARTED_STATUS.includes(row.status) && (
       <LinkButton
         className="p-1 justify-start"
         component={Link}
-        to={`/applications/${row.id}/continue`}
+        to={`/applications/${row.id}/stage-one`}
         label={t('Continue')}
         size="small"
         noIcon
       />
     )}
-    {NOT_STARTED_STATUS.includes(row.status as APPLICATION_STATUS) && (
+    {NOT_STARTED_STATUS.includes(row.status) && (
       <LinkButton
         className="p-1 justify-start"
-        component={Link}
-        to={`/applications/${row.id}/start`}
+        onClick={() => onStartApplicationHandler(row.id)}
         label={t('Start')}
         size="small"
         noIcon
       />
     )}
-    {COMPLETED_STATUS.includes(row.status as APPLICATION_STATUS) && (
+    {COMPLETED_STATUS.includes(row.status) && (
       <LinkButton
         className="p-1 justify-start"
         component={Link}
@@ -125,7 +118,7 @@ const actionsOCP = (row: ExtendendApplication) => (
       size="small"
       noIcon
     />
-    {!COMPLETED_STATUS.includes(row.status as APPLICATION_STATUS) && (
+    {!COMPLETED_STATUS.includes(row.status) && (
       <LinkButton
         className="p-1 justify-start"
         component={Link}
@@ -144,8 +137,9 @@ interface ApplicationListProps {
 
 export function ApplicationList({ type }: ApplicationListProps) {
   const { enqueueSnackbar } = useSnackbar();
+  const { startApplicationMutation } = useStartApplication();
   const [payload, setPayload] = useState<PaginationInput>({
-    page: 1,
+    page: 0,
     page_size: PAGE_SIZES[0],
     sort_field: 'application.created_at',
     sort_order: 'desc',
@@ -212,6 +206,15 @@ export function ApplicationList({ type }: ApplicationListProps) {
   }, [data]);
 
   const headCells = useMemo(() => (type === 'OCP' ? [...headCellsBase, ...headCellsOCP] : headCellsBase), [type]);
+
+  const onStartApplicationHandler = useCallback(
+    (id: number) => {
+      startApplicationMutation(id);
+    },
+    [startApplicationMutation],
+  );
+
+  const actionsFI = (row: ExtendendApplication) => actionsFIBase(row, onStartApplicationHandler);
 
   return (
     <ApplicationDataTable

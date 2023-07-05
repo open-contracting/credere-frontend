@@ -2,7 +2,12 @@ import {
   ApplicationBaseInput,
   DeclineApplicationInput,
   DeclineFeedbackInput,
+  GetCreditProductsOptionsInput,
+  IApplicationCreditOptions,
   IApplicationResponse,
+  IBorrowerDocument,
+  SelectCreditProductInput,
+  UploadFileInput,
 } from '../schemas/application';
 import { publicApi } from './axios';
 
@@ -28,5 +33,35 @@ export const declineApplicationRollbackFn = async (payload: ApplicationBaseInput
 
 export const getApplicationFn = async (uuid: string) => {
   const response = await publicApi.get<IApplicationResponse>(`applications/uuid/${uuid}`);
+  return response.data;
+};
+
+export const getCreditProductOptionsFn = async (payload: GetCreditProductsOptionsInput) => {
+  const response = await publicApi.post<IApplicationCreditOptions>('applications/credit-product-options', payload);
+  return response.data;
+};
+
+export const selectCreditProductFn = async (payload: SelectCreditProductInput) => {
+  const response = await publicApi.post<IApplicationResponse>('applications/select-credit-product', payload);
+  return response.data;
+};
+
+export const rollbackSelectCreditProductFn = async (payload: ApplicationBaseInput) => {
+  const response = await publicApi.post<IApplicationResponse>('applications/rollback-select-credit-product', payload);
+  return response.data;
+};
+
+export const confirmCreditProductFn = async (payload: ApplicationBaseInput) => {
+  const response = await publicApi.post<IApplicationResponse>('applications/confirm-credit-product', payload);
+  return response.data;
+};
+
+export const uploadFileFn = async (payload: UploadFileInput) => {
+  const response = await publicApi.postForm<IBorrowerDocument>('applications/upload-document', payload);
+  return response.data;
+};
+
+export const applicationSubmitFn = async (payload: ApplicationBaseInput) => {
+  const response = await publicApi.post<IApplicationResponse>('applications/submit', payload);
   return response.data;
 };

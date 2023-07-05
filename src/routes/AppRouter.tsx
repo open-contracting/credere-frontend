@@ -23,14 +23,17 @@ import DeclineCompleted from 'src/pages/msme/DeclineCompleted';
 import DeclineFeedback from 'src/pages/msme/DeclineFeedback';
 import FrequentlyAskedQuestionsPage from 'src/pages/msme/FrequentlyAskedQuestionsPage';
 import IntroMsme from 'src/pages/msme/IntroMsme';
-import SubmitionCompleted from 'src/pages/msme/SubmitionCompleted';
+import SubmissionCompleted from 'src/pages/msme/SubmissionCompleted';
 import ViewCreditOptions from 'src/pages/msme/ViewCreditOptions';
 import ApplicationContextProvider from 'src/providers/ApplicationContextProvider';
 import LangContextProvider from 'src/providers/LangContextProvider';
+import SecureApplicationContextProvider from 'src/providers/SecureApplicationContextProvider';
 import StateContextProvider from 'src/providers/StateContextProvider';
 import ProtectedRoute from 'src/routes/ProtectedRoute';
 
 import PageLayout from '../layout/PageLayout';
+import ConfirmCreditProduct from '../pages/msme/ConfirmCreditProduct';
+import UploadDocuments from '../pages/msme/UploadDocuments';
 import { LoadApplication } from '../pages/ocp/ApplicationDetail';
 import Applications from '../pages/ocp/Applications';
 import { LoadCreditProduct } from '../pages/ocp/CreditProductForm';
@@ -222,8 +225,16 @@ const router = createBrowserRouter([
         element: <ViewCreditOptions />,
       },
       {
-        path: 'submition-completed',
-        element: <SubmitionCompleted />,
+        path: 'confirm-credit-product',
+        element: <ConfirmCreditProduct />,
+      },
+      {
+        path: 'documents',
+        element: <UploadDocuments />,
+      },
+      {
+        path: 'submission-completed',
+        element: <SubmissionCompleted />,
       },
       {
         path: 'decline',
@@ -302,12 +313,14 @@ export function AppRouter() {
     <MuiTheme>
       <StateContextProvider>
         <LangContextProvider>
-          <ApplicationContextProvider>
-            <QueryClientProvider client={queryClient}>
-              <RouterProvider router={router} />
-              <ReactQueryDevtools initialIsOpen={false} />
-            </QueryClientProvider>
-          </ApplicationContextProvider>
+          <SecureApplicationContextProvider>
+            <ApplicationContextProvider>
+              <QueryClientProvider client={queryClient}>
+                <RouterProvider router={router} />
+                <ReactQueryDevtools initialIsOpen={false} />
+              </QueryClientProvider>
+            </ApplicationContextProvider>
+          </SecureApplicationContextProvider>
         </LangContextProvider>
       </StateContextProvider>
     </MuiTheme>

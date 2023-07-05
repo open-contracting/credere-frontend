@@ -76,3 +76,8 @@ export const updateCreditProductFn = async (payload: ICreditProductUpdate) => {
   const response = await authApi.put<ICreditProduct>(`credit-products/${payload.id}`, payload);
   return response.data;
 };
+
+export const applicationStartFn = async (id: number) => {
+  const response = await authApi.post<IApplication>(`applications/${id}/start`);
+  return response.data;
+};

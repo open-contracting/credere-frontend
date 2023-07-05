@@ -26,6 +26,7 @@ export const LANG_STORAGE_KEY = 'CREDERE_LANG';
 // eslint-disable-next-line no-shadow
 export enum QUERY_KEYS {
   user = 'user',
+  application = 'application',
   application_uuid = 'application_uuid',
   applications_fi = 'applications_fi',
   applications_ocp = 'applications_ocp',
@@ -63,7 +64,7 @@ export const COMPLETED_STATUS = [
   APPLICATION_STATUS.LAPSED,
 ];
 
-export const NOT_STARTED_STATUS = [APPLICATION_STATUS.ACCEPTED];
+export const NOT_STARTED_STATUS = [APPLICATION_STATUS.SUBMITTED];
 
 export const STARTED_STATUS = [
   APPLICATION_STATUS.STARTED,
@@ -116,18 +117,20 @@ export const CREDIT_PRODUCT_OPTIONS: FormSelectOption[] = [
   },
 ];
 
-export const DOCUMENTS_TYPE = {
-  INCORPORATION_DOCUMENT: 'INCORPORATION_DOCUMENT',
-  SUPPLIER_REGISTRATION_DOCUMENT: 'SUPPLIER_REGISTRATION_DOCUMENT',
-  BANK_NAME: 'BANK_NAME',
-  BANK_CERTIFICATION_DOCUMENT: 'BANK_CERTIFICATION_DOCUMENT',
-  FINANCIAL_STATEMENT: 'FINANCIAL_STATEMENT',
-  SIGNED_CONTRACT: 'SIGNED_CONTRACT',
-  COMPLIANCE_REPORT: 'COMPLIANCE_REPORT',
-};
+// eslint-disable-next-line no-shadow
+export enum DOCUMENTS_TYPE {
+  INCORPORATION_DOCUMENT = 'INCORPORATION_DOCUMENT',
+  SUPPLIER_REGISTRATION_DOCUMENT = 'SUPPLIER_REGISTRATION_DOCUMENT',
+  BANK_NAME = 'BANK_NAME',
+  BANK_CERTIFICATION_DOCUMENT = 'BANK_CERTIFICATION_DOCUMENT',
+  FINANCIAL_STATEMENT = 'FINANCIAL_STATEMENT',
+  SIGNED_CONTRACT = 'SIGNED_CONTRACT',
+  COMPLIANCE_REPORT = 'COMPLIANCE_REPORT',
+}
 
 // eslint-disable-next-line no-shadow
 export enum MSME_TYPES {
+  NOT_INFORMED = 'NOT_INFORMED',
   MICRO = 'MICRO',
   SMALL = 'SMALL',
   MEDIUM = 'MEDIUM',
@@ -162,3 +165,79 @@ export const DOCUMENT_TYPES_NAMES: { [key: string]: string } = {
   [DOCUMENTS_TYPE.SIGNED_CONTRACT]: t('Signed contract'),
   [DOCUMENTS_TYPE.COMPLIANCE_REPORT]: t('Compliance report'),
 };
+
+// https://www.ibisworld.com/united-states/list-of-industries/
+export const SECTOR_TYPES: FormSelectOption[] = [
+  {
+    value: 'accommodation_and_food_services',
+    label: t('Accommodation and Food Services'),
+  },
+  {
+    value: 'administration',
+    label: t('Administration'),
+  },
+  {
+    value: 'agriculture_forestry_fishing_and_hunting',
+    label: t('Agriculture, Forestry, Fishing and Hunting'),
+  },
+  {
+    value: 'arts_entertainment_and_recreation',
+    label: t('Arts, Entertainment and Recreation'),
+  },
+  {
+    value: 'construction',
+    label: t('Construction'),
+  },
+  {
+    value: 'educational_services',
+    label: t('Educational Services'),
+  },
+  {
+    value: 'finance_and_insurance',
+    label: t('Finance and Insurance'),
+  },
+  {
+    value: 'healthcare_and_social_assistance',
+    label: t('Healthcare and Social Assistance'),
+  },
+  {
+    value: 'information',
+    label: t('Information'),
+  },
+  {
+    value: 'manufacturing',
+    label: t('Manufacturing'),
+  },
+  {
+    value: 'mining',
+    label: t('Mining'),
+  },
+  {
+    value: 'other_services',
+    label: t('Other Services'),
+  },
+  {
+    value: 'professional_scientific_and_technical_services',
+    label: t('Professional, Scientific and Technical Services'),
+  },
+  {
+    value: 'real_estate_and_rental_and_leasing',
+    label: t('Real Estate and Rental and Leasing'),
+  },
+  {
+    value: 'retail_trade',
+    label: t('Retail Trade'),
+  },
+  {
+    value: 'transportation_and_warehousing',
+    label: t('Transportation and Warehousing'),
+  },
+  {
+    value: 'utilities',
+    label: t('Utilities'),
+  },
+  {
+    value: 'wholesale_trade',
+    label: t('Wholesale Trade'),
+  },
+];
