@@ -22,6 +22,7 @@ import SubmissionCompleted from 'src/pages/msme/SubmissionCompleted';
 import ViewCreditOptions from 'src/pages/msme/ViewCreditOptions';
 import ApplicationContextProvider from 'src/providers/ApplicationContextProvider';
 import LangContextProvider from 'src/providers/LangContextProvider';
+import SecureApplicationContextProvider from 'src/providers/SecureApplicationContextProvider';
 import StateContextProvider from 'src/providers/StateContextProvider';
 import ProtectedRoute from 'src/routes/ProtectedRoute';
 
@@ -252,12 +253,14 @@ export function AppRouter() {
     <MuiTheme>
       <StateContextProvider>
         <LangContextProvider>
-          <ApplicationContextProvider>
-            <QueryClientProvider client={queryClient}>
-              <RouterProvider router={router} />
-              <ReactQueryDevtools initialIsOpen={false} />
-            </QueryClientProvider>
-          </ApplicationContextProvider>
+          <SecureApplicationContextProvider>
+            <ApplicationContextProvider>
+              <QueryClientProvider client={queryClient}>
+                <RouterProvider router={router} />
+                <ReactQueryDevtools initialIsOpen={false} />
+              </QueryClientProvider>
+            </ApplicationContextProvider>
+          </SecureApplicationContextProvider>
         </LangContextProvider>
       </StateContextProvider>
     </MuiTheme>

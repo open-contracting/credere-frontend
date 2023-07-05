@@ -134,11 +134,10 @@ function DataTableHead<T>({
   return (
     <TableHead>
       <TableRow>
-        {headCells.map((headCell, index) => (
+        {headCells.map((headCell) => (
           <DataTableHeadCell
             width={headCell.width}
             key={String(headCell.id)}
-            className={`${index !== 0 ? 'opacity-50' : ''}`}
             align="left"
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}>
@@ -290,7 +289,7 @@ export function DataTable<T>({
         </TableContainer>
         {pagination && (
           <TablePagination
-            className="border-solid border-l border-r-0 border-t-0 border-background"
+            className="border-solid border-l border-r-0 border-t-0 border-background  bg-white"
             classes={{
               selectLabel: 'text-darkest text-sm font-normal',
               select: 'text-darkest text-sm font-normal',

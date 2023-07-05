@@ -26,6 +26,7 @@ export const LANG_STORAGE_KEY = 'CREDERE_LANG';
 // eslint-disable-next-line no-shadow
 export enum QUERY_KEYS {
   user = 'user',
+  application = 'application',
   application_uuid = 'application_uuid',
   applications_fi = 'applications_fi',
   applications_ocp = 'applications_ocp',
@@ -63,7 +64,7 @@ export const COMPLETED_STATUS = [
   APPLICATION_STATUS.LAPSED,
 ];
 
-export const NOT_STARTED_STATUS = [APPLICATION_STATUS.ACCEPTED];
+export const NOT_STARTED_STATUS = [APPLICATION_STATUS.SUBMITTED];
 
 export const STARTED_STATUS = [
   APPLICATION_STATUS.STARTED,
