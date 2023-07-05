@@ -13,11 +13,11 @@ import PasswordCreated from 'src/pages/auth/PasswordCreated';
 import ResetPasswordPage from 'src/pages/auth/ResetPasswordPage';
 import SetupMFAPage from 'src/pages/auth/SetupMFAPage';
 import SignInPage from 'src/pages/auth/SignInPage';
-import StageFive from 'src/pages/fi/stageFive';
-import StageFour from 'src/pages/fi/stageFour';
-import StageOne from 'src/pages/fi/stageOne';
-import StageThree from 'src/pages/fi/stageThree';
-import StageTwo from 'src/pages/fi/stageTwo';
+import StageFive from 'src/pages/fi/StageFive';
+import StageFour from 'src/pages/fi/StageFour';
+import StageOne from 'src/pages/fi/StageOne';
+import StageThree from 'src/pages/fi/StageThree';
+import StageTwo from 'src/pages/fi/StageTwo';
 import Decline from 'src/pages/msme/Decline';
 import DeclineCompleted from 'src/pages/msme/DeclineCompleted';
 import DeclineFeedback from 'src/pages/msme/DeclineFeedback';
@@ -32,6 +32,7 @@ import StateContextProvider from 'src/providers/StateContextProvider';
 import ProtectedRoute from 'src/routes/ProtectedRoute';
 
 import PageLayout from '../layout/PageLayout';
+import SecureApplicationLayout from '../layout/SecureApplicationLayout';
 import ConfirmCreditProduct from '../pages/msme/ConfirmCreditProduct';
 import UploadDocuments from '../pages/msme/UploadDocuments';
 import { LoadApplication } from '../pages/ocp/ApplicationDetail';
@@ -252,58 +253,30 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/stage-one',
-    element: (
-      <ProtectedRoute>
-        <PageLayout>
-          <StageOne />
-        </PageLayout>
-      </ProtectedRoute>
-    ),
-    errorElement: <RouterErrorPage />,
-  },
-  {
-    path: '/stage-two',
-    element: (
-      <ProtectedRoute>
-        <PageLayout>
-          <StageTwo />
-        </PageLayout>
-      </ProtectedRoute>
-    ),
-    errorElement: <RouterErrorPage />,
-  },
-  {
-    path: '/stage-three',
-    element: (
-      <ProtectedRoute>
-        <PageLayout>
-          <StageThree />
-        </PageLayout>
-      </ProtectedRoute>
-    ),
-    errorElement: <RouterErrorPage />,
-  },
-  {
-    path: '/stage-four',
-    element: (
-      <ProtectedRoute>
-        <PageLayout>
-          <StageFour />
-        </PageLayout>
-      </ProtectedRoute>
-    ),
-    errorElement: <RouterErrorPage />,
-  },
-  {
-    path: '/stage-five',
-    element: (
-      <ProtectedRoute>
-        <PageLayout>
-          <StageFive />
-        </PageLayout>
-      </ProtectedRoute>
-    ),
+    path: '/applications/:id',
+    element: <SecureApplicationLayout />,
+    children: [
+      {
+        path: 'stage-one',
+        element: <StageOne />,
+      },
+      {
+        path: 'stage-two',
+        element: <StageTwo />,
+      },
+      {
+        path: 'stage-three',
+        element: <StageThree />,
+      },
+      {
+        path: 'stage-four',
+        element: <StageFour />,
+      },
+      {
+        path: 'stage-five',
+        element: <StageFive />,
+      },
+    ],
     errorElement: <RouterErrorPage />,
   },
 ]);

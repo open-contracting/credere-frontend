@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 type TileTypeType = 'page' | 'section';
 
 export type TitleProps = {
-  label: string;
+  label?: string;
   type?: 'page' | 'section' | 'subsection';
   className?: string;
 };
@@ -31,6 +31,7 @@ export function Title({ label, type = 'section', className }: TitleProps) {
 Title.defaultProps = {
   type: 'section' as TileTypeType,
   className: '',
+  label: '',
 };
 
 export default Title;
