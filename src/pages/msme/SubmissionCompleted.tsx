@@ -4,8 +4,11 @@ import { Button } from 'src/stories/button/Button';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
-function SubmitionCompleted() {
+import useApplicationContext from '../../hooks/useApplicationContext';
+
+function SubmissionCompleted() {
   const t = useT();
+  const applicationContext = useApplicationContext();
 
   return (
     <>
@@ -16,7 +19,7 @@ function SubmitionCompleted() {
             {t(
               'Thank you for submitting your credit application using Credere, Your application has been sent to {fi_name}.',
               {
-                fi_name: 'FI Name',
+                fi_name: applicationContext.state.data?.lender.name,
               },
             )}
           </Text>
@@ -24,7 +27,7 @@ function SubmitionCompleted() {
             {t(
               'Pending some checks by {fi_name}, we will be in touch via email to let you know if the application has been approved and tell you the next steps for funds to be disbursed to you.',
               {
-                fi_name: 'FI Name',
+                fi_name: applicationContext.state.data?.lender.name,
               },
             )}
           </Text>
@@ -53,4 +56,4 @@ function SubmitionCompleted() {
   );
 }
 
-export default SubmitionCompleted;
+export default SubmissionCompleted;

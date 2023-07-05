@@ -2,7 +2,7 @@
 import { t } from '@transifex/native';
 import { TypeOf, boolean, coerce, nativeEnum, object, string } from 'zod';
 
-import { MSME_TYPES } from '../constants';
+import { APPLICATION_STATUS, DOCUMENTS_TYPE, MSME_TYPES } from '../constants';
 
 const booleanRequiredSchema = boolean().refine((value) => value === true, {
   message: t('You need to check this option to Access the Scheme'),
@@ -189,7 +189,7 @@ export interface IApplication {
   award_id: number;
   uuid: string;
   primary_email: string;
-  status: string;
+  status: APPLICATION_STATUS;
   award_borrowed_identifier: string;
   borrower_id: number;
   lender_id?: number;
@@ -226,6 +226,19 @@ export interface IExtendedApplication {
   lender_name: string;
 }
 
+export interface IBorrowerDocument {
+  id: number;
+  type: DOCUMENTS_TYPE;
+  verified: boolean;
+  name: string;
+}
+
+export interface UploadFileInput {
+  type: DOCUMENTS_TYPE;
+  file: File;
+  uuid: string;
+}
+
 export const EXTENDED_APPLICATION_FROM: IExtendedApplication = {
   buyer_name: 'award.buyer_name',
   borrower_name: 'borrower.legal_name',
@@ -236,6 +249,9 @@ export interface IApplicationResponse {
   application: IApplication;
   borrower: IBorrower;
   award: IAward;
+  lender: ILender;
+  documents: IBorrowerDocument[];
+  creditProduct: ICreditProduct;
 }
 
 export interface PaginationInput {

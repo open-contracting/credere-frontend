@@ -18,7 +18,7 @@ import DeclineCompleted from 'src/pages/msme/DeclineCompleted';
 import DeclineFeedback from 'src/pages/msme/DeclineFeedback';
 import FrequentlyAskedQuestionsPage from 'src/pages/msme/FrequentlyAskedQuestionsPage';
 import IntroMsme from 'src/pages/msme/IntroMsme';
-import SubmitionCompleted from 'src/pages/msme/SubmitionCompleted';
+import SubmissionCompleted from 'src/pages/msme/SubmissionCompleted';
 import ViewCreditOptions from 'src/pages/msme/ViewCreditOptions';
 import ApplicationContextProvider from 'src/providers/ApplicationContextProvider';
 import LangContextProvider from 'src/providers/LangContextProvider';
@@ -227,8 +227,8 @@ const router = createBrowserRouter([
         element: <UploadDocuments />,
       },
       {
-        path: 'submition-completed',
-        element: <SubmitionCompleted />,
+        path: 'submission-completed',
+        element: <SubmissionCompleted />,
       },
       {
         path: 'decline',
