@@ -7,6 +7,7 @@ import {
   LENDER_TYPES,
   MSME_TYPES,
   MSME_TYPES_NAMES,
+  SECTOR_TYPES,
 } from '../constants';
 import CURRENCY_FORMAT_OPTIONS from '../constants/intl';
 import { PreferencesType } from '../schemas/OCPsettings';
@@ -65,6 +66,7 @@ export const renderLenderType = (type: string) => findLabelByValue(type, LENDER_
 export const renderCreditProductType = (type: string) => findLabelByValue(type, CREDIT_PRODUCT_OPTIONS);
 export const renderBorrowerSizeType = (type: string) => MSME_TYPES_NAMES[type as MSME_TYPES];
 
+export const renderSector = (type: string) => findLabelByValue(type, SECTOR_TYPES);
 export const renderLenderPreferences = (preferences: PreferencesType) => {
   let preferencesString = '';
   if (preferences.MICRO) {

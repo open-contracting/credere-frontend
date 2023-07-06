@@ -81,3 +81,9 @@ export const applicationStartFn = async (id: number) => {
   const response = await authApi.post<IApplication>(`applications/${id}/start`);
   return response.data;
 };
+
+export const verifyDataFieldFn = async (awardData: IUpdateBorrower) => {
+  const { application_id, ...payload } = awardData;
+  const response = await authApi.put<IApplication>(`applications/${application_id}/verify-data-field`, payload);
+  return response.data;
+};

@@ -23,10 +23,10 @@ export function StageFour() {
   return (
     <>
       <Title type="page" label={t('Application Approval Process')} className="mb-4" />
-      <Text className="text-ig mb-12">{application?.borrower.legal_name}</Text>
+      <Text className="text-lg mb-12">{application?.borrower.legal_name}</Text>
       <img className="mb-14 ml-8" src={StepImage} alt="step" />
       <Title type="section" label={t('Stage 4: Summary')} className="mb-8" />
-      <div className="mt-5 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
+      <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
         <div>
           <Button className="md:mr-4" label={t('Go Back')} onClick={onBackHandler} />
         </div>

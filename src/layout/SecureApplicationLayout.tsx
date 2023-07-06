@@ -43,7 +43,7 @@ export default function SecureApplicationLayout() {
   }, [applicationContext.state.data, navigate, location]);
 
   const { isLoading } = useQuery({
-    queryKey: [QUERY_KEYS.applications_ocp, `${id}`],
+    queryKey: [QUERY_KEYS.applications, `${id}`],
     queryFn: async (): Promise<IApplication | null> => {
       const application = await getApplicationFn(id);
       applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: application });

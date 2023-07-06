@@ -23,7 +23,7 @@ export default function useUpdateAward(): IUseUpdateAward {
     (payload) => updateAwardFn(payload),
     {
       onSuccess: (data) => {
-        queryClient.setQueryData([QUERY_KEYS.applications_ocp, `${data.id}`], data);
+        queryClient.setQueryData([QUERY_KEYS.applications, `${data.id}`], data);
         enqueueSnackbar(t('Award Updated'), {
           variant: 'success',
         });

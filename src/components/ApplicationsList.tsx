@@ -169,7 +169,7 @@ export function ApplicationList({ type }: ApplicationListProps) {
   };
 
   const { data } = useQuery({
-    queryKey: [QUERY_KEYS.applications_fi, payload],
+    queryKey: [QUERY_KEYS.applications, payload],
     queryFn: async (): Promise<IApplicationsListResponse | null> => {
       if (type === 'OCP') {
         const response = await getApplicationsOCP(payload);

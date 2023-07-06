@@ -74,7 +74,7 @@ function UploadDocuments() {
               documentType={DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT}
             />
           )}
-          <div className="mt-5 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
+          <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
             <div>
               <Button className="md:mr-4" label={t('Back')} />
             </div>

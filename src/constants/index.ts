@@ -26,10 +26,8 @@ export const LANG_STORAGE_KEY = 'CREDERE_LANG';
 // eslint-disable-next-line no-shadow
 export enum QUERY_KEYS {
   user = 'user',
-  application = 'application',
   application_uuid = 'application_uuid',
-  applications_fi = 'applications_fi',
-  applications_ocp = 'applications_ocp',
+  applications = 'applications',
   lenders = 'lenders',
   credit_product = 'credit_product',
 }

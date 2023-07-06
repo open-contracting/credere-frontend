@@ -25,7 +25,7 @@ export default function useStartApplication(): IUseStartApplication {
     (id) => applicationStartFn(id),
     {
       onSuccess: (data) => {
-        queryClient.setQueryData([QUERY_KEYS.application, data.id], data);
+        queryClient.setQueryData([QUERY_KEYS.applications, data.id], data);
         applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });
         navigate(`/applications/${data.id}/stage-one`);
       },

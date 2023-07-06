@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { FormControl, FormControlLabel, FormHelperText, Switch as MUISwitch, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { ChangeEvent } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 
@@ -69,7 +70,7 @@ const LabeledSwitch = styled(MUISwitch)(() => ({
   },
 }));
 
-export type SwitchProps = {
+export type ControlledSwitchProps = {
   name: string;
   label: string;
   disabled?: boolean;
@@ -78,7 +79,71 @@ export type SwitchProps = {
   defaultValue?: boolean;
 };
 
-export function Switch({ name, label, disabled, fieldClassName, defaultValue = false, className }: SwitchProps) {
+export type SwitchProps = ControlledSwitchProps & {
+  onChange?: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+  value?: boolean;
+  fieldError?: FieldErrorType;
+};
+
+export function Switch({
+  name,
+  label,
+  disabled,
+  fieldClassName,
+  onChange,
+  fieldError,
+  defaultValue = false,
+  value,
+  className,
+}: SwitchProps) {
+  return (
+    <FormControl fullWidth className={`${fieldClassName}`}>
+      <FormControlLabel
+        sx={{ alignItems: 'flex-start' }}
+        control={
+          <LabeledSwitch
+            id={name}
+            sx={{ px: '10px', py: '2px', ':hover': { backgroundColor: 'transparent' } }}
+            icon={<img className="" src={ToggleSwitch} alt="check-icon-empty" />}
+            checkedIcon={<img className="" src={ToggleSwitch} alt="check-icon-checked" />}
+            onChange={onChange}
+            value={value}
+            disabled={disabled}
+            defaultChecked={defaultValue}
+          />
+        }
+        label={
+          <Typography
+            variant="body1"
+            className={twMerge(`text-darkest text-lg ${fieldError ? 'text-red' : ''} ${className}`)}>
+            {label}
+          </Typography>
+        }
+      />
+      <FormHelperText className="text-red text-base mx-0" error={!!fieldError}>{`${
+        fieldError ? fieldError?.message : ''
+      }`}</FormHelperText>
+    </FormControl>
+  );
+}
+
+Switch.defaultProps = {
+  className: undefined,
+  value: undefined,
+  fieldClassName: '',
+  defaultValue: false,
+  disabled: undefined,
+  onChange: undefined,
+  fieldError: undefined,
+};
+export function ControlledSwitch({
+  name,
+  label,
+  disabled,
+  fieldClassName,
+  defaultValue = false,
+  className,
+}: ControlledSwitchProps) {
   const {
     control,
     formState: { errors, defaultValues },
@@ -92,41 +157,26 @@ export function Switch({ name, label, disabled, fieldClassName, defaultValue = f
       defaultValue={defultValueForm}
       name={name}
       render={({ field }) => (
-        <FormControl fullWidth className={`${fieldClassName}`}>
-          <FormControlLabel
-            sx={{ alignItems: 'flex-start' }}
-            control={
-              <LabeledSwitch
-                sx={{ px: '10px', py: '2px', ':hover': { backgroundColor: 'transparent' } }}
-                icon={<img className="" src={ToggleSwitch} alt="check-icon-empty" />}
-                checkedIcon={<img className="" src={ToggleSwitch} alt="check-icon-checked" />}
-                {...field}
-                disabled={disabled}
-                defaultChecked={defultValueForm}
-              />
-            }
-            label={
-              <Typography
-                variant="body1"
-                className={twMerge(`text-darkest text-lg ${fieldError ? 'text-red' : ''} ${className}`)}>
-                {label}
-              </Typography>
-            }
-          />
-          <FormHelperText className="text-red text-base mx-0" error={!!fieldError}>{`${
-            fieldError ? fieldError?.message : ''
-          }`}</FormHelperText>
-        </FormControl>
+        <Switch
+          name={name}
+          value={field.value}
+          onChange={(_event, checked) => field.onChange(checked)}
+          label={label}
+          disabled={disabled}
+          fieldError={fieldError}
+          className={className}
+          fieldClassName={fieldClassName}
+        />
       )}
     />
   );
 }
 
-Switch.defaultProps = {
+ControlledSwitch.defaultProps = {
   className: undefined,
   fieldClassName: '',
   defaultValue: false,
   disabled: undefined,
 };
 
-export default Switch;
+export default ControlledSwitch;
