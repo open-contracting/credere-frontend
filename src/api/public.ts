@@ -7,6 +7,7 @@ import {
   IApplicationResponse,
   IBorrowerDocument,
   SelectCreditProductInput,
+  UploadContractInput,
   UploadFileInput,
 } from '../schemas/application';
 import { publicApi } from './axios';
@@ -68,5 +69,10 @@ export const applicationSubmitFn = async (payload: ApplicationBaseInput) => {
 
 export const aditionalDataSubmitFn = async (payload: ApplicationBaseInput) => {
   const response = await publicApi.post<IApplicationResponse>('applications/complete-information-request', payload);
+  return response.data;
+};
+
+export const uploadContractFn = async (payload: UploadContractInput) => {
+  const response = await publicApi.postForm<IBorrowerDocument>('applications/upload-contract', payload);
   return response.data;
 };

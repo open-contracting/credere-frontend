@@ -5,75 +5,121 @@ import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 import Text from 'src/stories/text/Text';
 
-import { uploadFileFn } from '../api/public';
+import { uploadComplianceFn } from '../api/private';
+import { uploadContractFn, uploadFileFn } from '../api/public';
 import { DOCUMENTS_TYPE } from '../constants';
 import useApplicationContext from '../hooks/useApplicationContext';
-import { IBorrowerDocument, UploadFileInput } from '../schemas/application';
+import useSecureApplicationContext from '../hooks/useSecureApplicationContext';
+import { IBorrowerDocument, UploadComplianceInput, UploadContractInput, UploadFileInput } from '../schemas/application';
 import LinkButton from '../stories/link-button/LinkButton';
 import FileUploader from './FileUploader';
 
 interface DocumentFieldProps {
   className?: string;
   label: string;
+  secure?: boolean;
   documentType: DOCUMENTS_TYPE;
-  setUploadState: React.Dispatch<
+  setUploadState?: React.Dispatch<
     React.SetStateAction<{
       [key: string]: boolean;
     }>
   >;
 }
 
-export function DocumentField({ label, documentType, className, setUploadState }: DocumentFieldProps) {
+export function DocumentField({ label, documentType, secure = false, className, setUploadState }: DocumentFieldProps) {
   const t = useT();
   const { enqueueSnackbar } = useSnackbar();
   const [current, setCurrent] = useState<IBorrowerDocument | undefined>();
   const [showUploader, setShowUploader] = useState<boolean>(true);
 
   const applicationContext = useApplicationContext();
+  const secureApplicationContext = useSecureApplicationContext();
 
   useEffect(() => {
-    if (applicationContext.state.data?.documents) {
-      const currentDocument = applicationContext.state.data?.documents.find(
-        (document: IBorrowerDocument) => document.type === documentType,
-      );
+    let documents = applicationContext.state.data?.documents;
+    if (secure) {
+      documents = secureApplicationContext.state.data?.borrower_documents;
+    }
+
+    if (documents) {
+      const currentDocument = documents.find((document: IBorrowerDocument) => document.type === documentType);
 
       if (currentDocument) {
         setCurrent(currentDocument);
         setShowUploader(false);
-        setUploadState((prev) => ({ ...prev, [documentType]: true }));
+        if (setUploadState) setUploadState((prev) => ({ ...prev, [documentType]: true }));
       }
     }
-  }, [applicationContext.state.data?.documents, documentType, setUploadState]);
+  }, [
+    applicationContext.state.data?.documents,
+    documentType,
+    secure,
+    secureApplicationContext.state.data?.borrower_documents,
+    setUploadState,
+  ]);
 
   const onAcceptedFile = useCallback(
     async (file: File) => {
-      if (applicationContext.state.data?.application?.uuid) {
-        const payload: UploadFileInput = {
-          file,
-          type: documentType,
-          uuid: applicationContext.state.data?.application?.uuid,
-        };
-        try {
+      let application = applicationContext.state.data?.application;
+      if (secure) {
+        application = secureApplicationContext.state.data || undefined;
+      }
+
+      if (!application) return;
+
+      try {
+        if (documentType === DOCUMENTS_TYPE.COMPLIANCE_REPORT) {
+          const payload: UploadComplianceInput = {
+            file,
+            id: application?.id,
+          };
+
+          const uploaded = await uploadComplianceFn(payload);
+          setCurrent(uploaded);
+        } else if (documentType === DOCUMENTS_TYPE.SIGNED_CONTRACT) {
+          const payload: UploadContractInput = {
+            file,
+            uuid: application?.uuid,
+          };
+
+          const uploaded = await uploadContractFn(payload);
+          setCurrent(uploaded);
+        } else {
+          const payload: UploadFileInput = {
+            file,
+            type: documentType,
+            uuid: application?.uuid,
+          };
+
           const uploaded = await uploadFileFn(payload);
           setCurrent(uploaded);
-          setShowUploader(false);
-          setUploadState((prev) => ({ ...prev, [documentType]: true }));
-        } catch (error) {
-          if (axios.isAxiosError(error) && error.response) {
-            if (error.response.data && error.response.data.detail) {
-              enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-                variant: 'error',
-              });
-            }
-          } else {
-            enqueueSnackbar(t('Error uploading file. {error}', { error }), {
+        }
+
+        setShowUploader(false);
+        if (setUploadState) setUploadState((prev) => ({ ...prev, [documentType]: true }));
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          if (error.response.data && error.response.data.detail) {
+            enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
               variant: 'error',
             });
           }
+        } else {
+          enqueueSnackbar(t('Error uploading file. {error}', { error }), {
+            variant: 'error',
+          });
         }
       }
     },
-    [applicationContext.state.data?.application?.uuid, documentType, enqueueSnackbar, setUploadState, t],
+    [
+      applicationContext.state.data?.application,
+      documentType,
+      enqueueSnackbar,
+      secure,
+      secureApplicationContext.state.data,
+      setUploadState,
+      t,
+    ],
   );
 
   return (
@@ -100,6 +146,8 @@ export function DocumentField({ label, documentType, className, setUploadState }
 
 DocumentField.defaultProps = {
   className: '',
+  secure: false,
+  setUploadState: undefined,
 };
 
 export default DocumentField;

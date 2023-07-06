@@ -132,14 +132,17 @@ export interface IBorrower {
   declined_at?: any;
 }
 
+export type PrivateApplicationInput = {
+  application_id: number;
+};
+
 export type IUpdateBorrower = Partial<
   Omit<
     IBorrower,
     'id' | 'borrower_identifier' | 'status' | 'missing_data' | 'created_at' | 'updated_at' | 'declined_at'
   >
-> & {
-  application_id: number;
-};
+> &
+  PrivateApplicationInput;
 
 export type IVerifyDocument = {
   document_id: number;
@@ -207,7 +210,9 @@ export interface IApplication {
   contract_amount_submitted?: any;
   amount_requested?: any;
   currency: string;
-  repayment_months?: any;
+  repayment_months?: number;
+  repayment_years?: number;
+  payment_start_date?: string;
   calculator_data: any;
   pending_documents: boolean;
   pending_email_confirmation: boolean;
@@ -240,6 +245,16 @@ export interface IExtendedApplication {
 
 export interface UploadFileInput {
   type: DOCUMENTS_TYPE;
+  file: File;
+  uuid: string;
+}
+
+export interface UploadComplianceInput {
+  id: number;
+  file: File;
+}
+
+export interface UploadContractInput {
   file: File;
   uuid: string;
 }
@@ -291,4 +306,14 @@ export const formEmailSchema = object({
 
 export type FormEmailInput = TypeOf<typeof formEmailSchema>;
 
-export type EmailToSMEInput = FormEmailInput & { application_id: number };
+export type EmailToSMEInput = FormEmailInput & PrivateApplicationInput;
+
+export const approveSchema = object({
+  compliant_checks_completed: boolean(),
+  compliant_checks_passed: boolean(),
+  additional_comments: string(),
+});
+
+export type FormApprovedInput = TypeOf<typeof approveSchema>;
+
+export type ApproveApplicationInput = FormApprovedInput & PrivateApplicationInput;

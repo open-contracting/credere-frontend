@@ -1,8 +1,10 @@
 /* eslint-disable camelcase */
 import {
+  ApproveApplicationInput,
   EmailToSMEInput,
   IApplication,
   IApplicationsListResponse,
+  IBorrowerDocument,
   ICreditProduct,
   ICreditProductBase,
   ICreditProductUpdate,
@@ -14,6 +16,7 @@ import {
   IUpdateBorrower,
   IVerifyDocument,
   PaginationInput,
+  UploadComplianceInput,
 } from '../schemas/application';
 import { authApi } from './axios';
 
@@ -107,5 +110,16 @@ export const downloadDocumentFn = async (id: number) => {
 export const emailToSME = async (emailToSMEPayload: EmailToSMEInput) => {
   const { application_id, ...payload } = emailToSMEPayload;
   const response = await authApi.post<IApplication>(`applications/email-sme/${application_id}`, payload);
+  return response.data;
+};
+
+export const approveApplicationFn = async (approvePayload: ApproveApplicationInput) => {
+  const { application_id, ...payload } = approvePayload;
+  const response = await authApi.post<IApplication>(`applications/${application_id}/approve-application`, payload);
+  return response.data;
+};
+
+export const uploadComplianceFn = async (payload: UploadComplianceInput) => {
+  const response = await authApi.postForm<IBorrowerDocument>(`applications/${payload.id}/upload-compliance`, payload);
   return response.data;
 };

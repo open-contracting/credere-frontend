@@ -4,7 +4,7 @@ import { useT } from '@transifex/react';
 import useUpdateBorrower from '../hooks/useUpdateBorrower';
 import useVerifyDataField from '../hooks/useVerifyDataField';
 import { IApplication, IUpdateBorrower } from '../schemas/application';
-import { renderSector } from '../util';
+import { renderSector, renderSize } from '../util';
 import ApplicationTableDataBorrowerRow from './ApplicationTableDataBorrowerRow';
 import { DataTableHeadCell, DataTableHeadLabel } from './DataTable';
 
@@ -110,6 +110,18 @@ export function ApplicationBorrowerTable({
               name="type"
               label={t('Registration Type')}
               borrower={borrower}
+            />
+            <ApplicationTableDataBorrowerRow
+              isLoading={isLoading || isLoadingVerifyDataField}
+              readonly={readonly}
+              verifiedData={application.secop_data_verification}
+              updateValue={updateValue}
+              verifyData={allowDataVerification ? verifyDataField : undefined}
+              missingData={borrower.missing_data}
+              name="size"
+              label={t('Size')}
+              borrower={borrower}
+              formatter={renderSize}
             />
             <ApplicationTableDataBorrowerRow
               isLoading={isLoading || isLoadingVerifyDataField}

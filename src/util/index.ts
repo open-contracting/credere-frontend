@@ -7,6 +7,7 @@ import {
   LENDER_TYPES,
   MSME_TYPES,
   MSME_TYPES_NAMES,
+  MSME_TYPES_OPTIONS,
   SECTOR_TYPES,
 } from '../constants';
 import CURRENCY_FORMAT_OPTIONS from '../constants/intl';
@@ -67,6 +68,12 @@ export const renderCreditProductType = (type: string) => findLabelByValue(type, 
 export const renderBorrowerSizeType = (type: string) => MSME_TYPES_NAMES[type as MSME_TYPES];
 
 export const renderSector = (type: string) => findLabelByValue(type, SECTOR_TYPES);
+export const renderSize = (type: string) => {
+  if (type === 'NOT_INFORMED') {
+    return t('Not informed');
+  }
+  return findLabelByValue(type, MSME_TYPES_OPTIONS);
+};
 export const renderLenderPreferences = (preferences: PreferencesType) => {
   let preferencesString = '';
   if (preferences.MICRO) {

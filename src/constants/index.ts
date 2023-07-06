@@ -240,3 +240,14 @@ export const SECTOR_TYPES: FormSelectOption[] = [
     label: t('Wholesale Trade'),
   },
 ];
+
+// eslint-disable-next-line no-shadow
+export enum ERROR_CODES {
+  BORROWER_FIELD_VERIFICATION_MISSING = 'BORROWER_FIELD_VERIFICATION_MISSING',
+  DOCUMENT_VERIFICATION_MISSING = 'DOCUMENT_VERIFICATION_MISSING',
+}
+
+export const ERRORS_MESSAGES: { [key: string]: string } = {
+  [ERROR_CODES.BORROWER_FIELD_VERIFICATION_MISSING]: t('Some borrower data field are not verified'),
+  [ERROR_CODES.DOCUMENT_VERIFICATION_MISSING]: t('Some documents are not verified'),
+};
