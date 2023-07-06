@@ -8,7 +8,7 @@ import { Button } from 'src/stories/button/Button';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
-import { getCreditProductFn } from '../../api/private';
+import { getCreditProductFn } from '../../api/public';
 import CreditProductConfirmation from '../../components/CreditProductConfirmation';
 import NeedHelpComponent from '../../components/NeedHelpComponent';
 import { QUERY_KEYS } from '../../constants';

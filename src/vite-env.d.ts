@@ -10,6 +10,7 @@ interface ImportMetaEnv {
   readonly VITE_LOCALE: string;
   readonly VITE_CURRENCY: string;
   readonly VITE_MORE_INFO_OCP_URL: string;
+  readonly VITE_MAX_FILE_SIZE_MB: number;
   // more env variables...
 }
 

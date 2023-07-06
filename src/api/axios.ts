@@ -67,14 +67,14 @@ authApi.interceptors.response.use(
       }, config.retryDelay || 1000);
     });
 
-    if (error.request.status === 401) {
-      const url = document.location.href.replace(document.location.origin, '');
+    // if (error.request.status === 401) {
+    //   const url = document.location.href.replace(document.location.origin, '');
 
-      if (!config.retry && url !== '/login') {
-        document.location.href = '/login';
-        return Promise.reject(error);
-      }
-    }
+    //   if (!config.retry && url !== '/login') {
+    //     document.location.href = '/login';
+    //     return Promise.reject(error);
+    //   }
+    // }
 
     if (!config.retry) {
       return Promise.reject(error);

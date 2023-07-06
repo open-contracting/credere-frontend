@@ -5,10 +5,14 @@ import FAQContainer from '../stories/faq/FAQContainer';
 import FAQSection from '../stories/faq/FAQSection';
 import LinkButton from '../stories/link-button/LinkButton';
 
-export function FAQComponent() {
+interface FAQComponentProps {
+  className?: string;
+}
+
+export function FAQComponent({ className }: FAQComponentProps) {
   const t = useT();
   return (
-    <FAQContainer>
+    <FAQContainer className={className}>
       <FAQSection title={t('What is the MSME credit scheme?')}>
         {t(
           'Guaranteed loans give high-risk borrowers a way to access financing, and provide protection for the lender.',
@@ -28,5 +32,9 @@ export function FAQComponent() {
     </FAQContainer>
   );
 }
+
+FAQComponent.defaultProps = {
+  className: '',
+};
 
 export default FAQComponent;

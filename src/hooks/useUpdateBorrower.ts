@@ -23,7 +23,7 @@ export default function useUpdateBorrower(): IUseUpdateBorrower {
     (payload) => updateBorrowerFn(payload),
     {
       onSuccess: (data) => {
-        queryClient.setQueryData([QUERY_KEYS.applications_ocp, `${data.id}`], data);
+        queryClient.setQueryData([QUERY_KEYS.applications, `${data.id}`], data);
         enqueueSnackbar(t('Borrower Updated'), {
           variant: 'success',
         });

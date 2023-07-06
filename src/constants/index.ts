@@ -27,11 +27,11 @@ export const LANG_STORAGE_KEY = 'CREDERE_LANG';
 export enum QUERY_KEYS {
   user = 'user',
   application_uuid = 'application_uuid',
-  applications_fi = 'applications_fi',
-  applications_ocp = 'applications_ocp',
+  applications = 'applications',
   lenders = 'lenders',
   users = 'users',
   credit_product = 'credit_product',
+  downloadDocument = 'downloadDocument',
 }
 
 export const DISPATCH_ACTIONS = {
@@ -64,7 +64,7 @@ export const COMPLETED_STATUS = [
   APPLICATION_STATUS.LAPSED,
 ];
 
-export const NOT_STARTED_STATUS = [APPLICATION_STATUS.ACCEPTED];
+export const NOT_STARTED_STATUS = [APPLICATION_STATUS.SUBMITTED];
 
 export const STARTED_STATUS = [
   APPLICATION_STATUS.STARTED,
@@ -117,15 +117,16 @@ export const CREDIT_PRODUCT_OPTIONS: FormSelectOption[] = [
   },
 ];
 
-export const DOCUMENTS_TYPE = {
-  INCORPORATION_DOCUMENT: 'INCORPORATION_DOCUMENT',
-  SUPPLIER_REGISTRATION_DOCUMENT: 'SUPPLIER_REGISTRATION_DOCUMENT',
-  BANK_NAME: 'BANK_NAME',
-  BANK_CERTIFICATION_DOCUMENT: 'BANK_CERTIFICATION_DOCUMENT',
-  FINANCIAL_STATEMENT: 'FINANCIAL_STATEMENT',
-  SIGNED_CONTRACT: 'SIGNED_CONTRACT',
-  COMPLIANCE_REPORT: 'COMPLIANCE_REPORT',
-};
+// eslint-disable-next-line no-shadow
+export enum DOCUMENTS_TYPE {
+  INCORPORATION_DOCUMENT = 'INCORPORATION_DOCUMENT',
+  SUPPLIER_REGISTRATION_DOCUMENT = 'SUPPLIER_REGISTRATION_DOCUMENT',
+  BANK_NAME = 'BANK_NAME',
+  BANK_CERTIFICATION_DOCUMENT = 'BANK_CERTIFICATION_DOCUMENT',
+  FINANCIAL_STATEMENT = 'FINANCIAL_STATEMENT',
+  SIGNED_CONTRACT = 'SIGNED_CONTRACT',
+  COMPLIANCE_REPORT = 'COMPLIANCE_REPORT',
+}
 
 // eslint-disable-next-line no-shadow
 export enum MSME_TYPES {
@@ -257,3 +258,14 @@ export const USER_TYPE_OPTIONS: FormSelectOption[] = [
     label: t('FI User'),
   },
 ];
+
+// eslint-disable-next-line no-shadow
+export enum ERROR_CODES {
+  BORROWER_FIELD_VERIFICATION_MISSING = 'BORROWER_FIELD_VERIFICATION_MISSING',
+  DOCUMENT_VERIFICATION_MISSING = 'DOCUMENT_VERIFICATION_MISSING',
+}
+
+export const ERRORS_MESSAGES: { [key: string]: string } = {
+  [ERROR_CODES.BORROWER_FIELD_VERIFICATION_MISSING]: t('Some borrower data field are not verified'),
+  [ERROR_CODES.DOCUMENT_VERIFICATION_MISSING]: t('Some documents are not verified'),
+};

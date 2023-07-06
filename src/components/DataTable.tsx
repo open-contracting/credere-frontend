@@ -289,7 +289,7 @@ export function DataTable<T>({
         </TableContainer>
         {pagination && (
           <TablePagination
-            className="border-solid border-l border-r-0 border-t-0 border-background"
+            className="border-solid border-l border-r-0 border-t-0 border-background  bg-white"
             classes={{
               selectLabel: 'text-darkest text-sm font-normal',
               select: 'text-darkest text-sm font-normal',

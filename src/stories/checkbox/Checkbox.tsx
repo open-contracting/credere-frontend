@@ -30,14 +30,14 @@ export function Checkbox({ name, label, fieldClassName, defaultValue = false, cl
       defaultValue={defultValueForm}
       name={name}
       render={({ field }) => (
-        <FormControl fullWidth className={`mb-2 ${fieldClassName}`}>
+        <FormControl fullWidth className={twMerge(`mb-2 ${fieldClassName}`)}>
           <FormControlLabel
             sx={{ alignItems: 'flex-start' }}
             control={
               <MUICheckbox
                 sx={{ px: '10px', py: '2px', ':hover': { backgroundColor: 'transparent' } }}
-                icon={<img className="mb-0.5" src={NotChecked} alt="check-icon-empty" />}
-                checkedIcon={<img className="mb-0.5" src={Checked} alt="check-icon-checked" />}
+                icon={<img src={NotChecked} alt="check-icon-empty" />}
+                checkedIcon={<img src={Checked} alt="check-icon-checked" />}
                 {...field}
                 defaultChecked={defultValueForm}
               />

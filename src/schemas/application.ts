@@ -2,7 +2,7 @@
 import { t } from '@transifex/native';
 import { TypeOf, boolean, coerce, nativeEnum, object, string } from 'zod';
 
-import { MSME_TYPES } from '../constants';
+import { APPLICATION_STATUS, DOCUMENTS_TYPE, MSME_TYPES } from '../constants';
 
 const booleanRequiredSchema = boolean().refine((value) => value === true, {
   message: t('You need to check this option to Access the Scheme'),
@@ -132,15 +132,22 @@ export interface IBorrower {
   declined_at?: any;
 }
 
+export type PrivateApplicationInput = {
+  application_id: number;
+};
+
 export type IUpdateBorrower = Partial<
   Omit<
     IBorrower,
     'id' | 'borrower_identifier' | 'status' | 'missing_data' | 'created_at' | 'updated_at' | 'declined_at'
   >
-> & {
-  application_id: number;
-};
+> &
+  PrivateApplicationInput;
 
+export type IVerifyDocument = {
+  document_id: number;
+  verified: boolean;
+};
 export interface ILenderBase {
   name: string;
   email_group: string;
@@ -181,6 +188,13 @@ export interface ILender extends ILenderUpdate {
   credit_products: ICreditProduct[];
 }
 
+export interface IBorrowerDocument {
+  id: number;
+  type: DOCUMENTS_TYPE;
+  verified: boolean;
+  name: string;
+}
+
 export interface IApplication {
   id: number;
   borrower: IBorrower;
@@ -189,14 +203,16 @@ export interface IApplication {
   award_id: number;
   uuid: string;
   primary_email: string;
-  status: string;
+  status: APPLICATION_STATUS;
   award_borrowed_identifier: string;
   borrower_id: number;
   lender_id?: number;
   contract_amount_submitted?: any;
   amount_requested?: any;
   currency: string;
-  repayment_months?: any;
+  repayment_months?: number;
+  repayment_years?: number;
+  payment_start_date?: string;
   calculator_data: any;
   pending_documents: boolean;
   pending_email_confirmation: boolean;
@@ -218,12 +234,29 @@ export interface IApplication {
   archived_at?: any;
   credit_product_id?: number;
   credit_product?: ICreditProduct;
+  borrower_documents: IBorrowerDocument[];
 }
 
 export interface IExtendedApplication {
   buyer_name: string;
   borrower_name: string;
   lender_name: string;
+}
+
+export interface UploadFileInput {
+  type: DOCUMENTS_TYPE;
+  file: File;
+  uuid: string;
+}
+
+export interface UploadComplianceInput {
+  id: number;
+  file: File;
+}
+
+export interface UploadContractInput {
+  file: File;
+  uuid: string;
 }
 
 export const EXTENDED_APPLICATION_FROM: IExtendedApplication = {
@@ -236,6 +269,9 @@ export interface IApplicationResponse {
   application: IApplication;
   borrower: IBorrower;
   award: IAward;
+  lender: ILender;
+  documents: IBorrowerDocument[];
+  creditProduct: ICreditProduct;
 }
 
 export interface PaginationInput {
@@ -263,3 +299,33 @@ export interface ILenderListResponse {
   page: number;
   page_size: number;
 }
+
+export const formEmailSchema = object({
+  message: string().min(1, t('A message is required')),
+});
+
+export type FormEmailInput = TypeOf<typeof formEmailSchema>;
+
+export type EmailToSMEInput = FormEmailInput & PrivateApplicationInput;
+
+export const approveSchema = object({
+  compliant_checks_completed: boolean(),
+  compliant_checks_passed: boolean(),
+  additional_comments: string(),
+});
+
+export type FormApprovedInput = TypeOf<typeof approveSchema>;
+
+export type ApproveApplicationInput = FormApprovedInput & PrivateApplicationInput;
+
+export const rejectSchema = object({
+  compliance_checks_failed: boolean(),
+  poor_credit_history: boolean(),
+  risk_of_fraud: boolean(),
+  other: boolean(),
+  other_reason: string(),
+});
+
+export type FormRejectInput = TypeOf<typeof rejectSchema>;
+
+export type RejectApplicationInput = FormRejectInput & PrivateApplicationInput;
