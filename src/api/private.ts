@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import {
+  EmailToSMEInput,
   IApplication,
   IApplicationsListResponse,
   ICreditProduct,
@@ -11,6 +12,7 @@ import {
   ILenderUpdate,
   IUpdateAward,
   IUpdateBorrower,
+  IVerifyDocument,
   PaginationInput,
 } from '../schemas/application';
 import { authApi } from './axios';
@@ -85,5 +87,25 @@ export const applicationStartFn = async (id: number) => {
 export const verifyDataFieldFn = async (awardData: IUpdateBorrower) => {
   const { application_id, ...payload } = awardData;
   const response = await authApi.put<IApplication>(`applications/${application_id}/verify-data-field`, payload);
+  return response.data;
+};
+
+export const verifyDocumentFn = async (verifyDocumentPayload: IVerifyDocument) => {
+  const { document_id, ...payload } = verifyDocumentPayload;
+  const response = await authApi.put<IApplication>(`applications/documents/${document_id}/verify-document`, payload);
+  return response.data;
+};
+
+export const downloadDocumentFn = async (id: number) => {
+  const response = await authApi.get(`applications/documents/id/${id}`, {
+    responseType: 'blob',
+  });
+
+  return response.data;
+};
+
+export const emailToSME = async (emailToSMEPayload: EmailToSMEInput) => {
+  const { application_id, ...payload } = emailToSMEPayload;
+  const response = await authApi.post<IApplication>(`applications/email-sme/${application_id}`, payload);
   return response.data;
 };

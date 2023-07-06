@@ -6,14 +6,16 @@ import Title from 'src/stories/title/Title';
 import DocumentField from '../../components/DocumentField';
 import FAQComponent from '../../components/FAQComponent';
 import NeedHelpComponent from '../../components/NeedHelpComponent';
-import { DOCUMENTS_TYPE } from '../../constants';
+import { APPLICATION_STATUS, DOCUMENTS_TYPE } from '../../constants';
 import useApplicationContext from '../../hooks/useApplicationContext';
+import useSubmitAdditionalData from '../../hooks/useSubmitAdditionalData';
 import useSubmitApplication from '../../hooks/useSubmitApplication';
 import Button from '../../stories/button/Button';
 
 function UploadDocuments() {
   const t = useT();
   const { isLoading, submitApplicationMutation } = useSubmitApplication();
+  const { isLoading: isLoadingAdditionalData, submitAdditionalDataMutation } = useSubmitAdditionalData();
   const applicationContext = useApplicationContext();
   const [uploadState, setUploadState] = useState<{ [key: string]: boolean }>({});
 
@@ -29,12 +31,24 @@ function UploadDocuments() {
   );
 
   const submitApplicationHandler = () => {
-    submitApplicationMutation({ uuid: applicationContext.state.data?.application.uuid });
+    if (applicationContext.state.data?.application.status === APPLICATION_STATUS.INFORMATION_REQUESTED) {
+      submitAdditionalDataMutation({ uuid: applicationContext.state.data?.application.uuid });
+    } else {
+      submitApplicationMutation({ uuid: applicationContext.state.data?.application.uuid });
+    }
   };
 
   return (
     <>
-      <Title type="page" label={t('Credit Application')} className="mb-10" />
+      <Title
+        type="page"
+        label={
+          applicationContext.state.data?.application.status === APPLICATION_STATUS.INFORMATION_REQUESTED
+            ? t('Submit Additional Data')
+            : t('Credit Application')
+        }
+        className="mb-10"
+      />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 md:col-span-2 md:mr-10">
           <Text className="mb-8">
@@ -83,7 +97,7 @@ function UploadDocuments() {
               <Button
                 label={t('Submit Application')}
                 onClick={submitApplicationHandler}
-                disabled={!allUploaded || isLoading}
+                disabled={!allUploaded || isLoading || isLoadingAdditionalData}
               />
             </div>
           </div>

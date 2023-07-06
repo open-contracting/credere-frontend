@@ -32,7 +32,7 @@ export default function PublicApplicationLayout() {
       const { application } = applicationContext.state.data;
       const { pathname } = location;
       const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
-      if (application.status === APPLICATION_STATUS.SUBMITTED) {
+      if (application.status === APPLICATION_STATUS.SUBMITTED || application.status === APPLICATION_STATUS.STARTED) {
         if (lastSegment !== 'submission-completed') navigate('./submission-completed');
       } else if (application.pending_documents || application.status === APPLICATION_STATUS.INFORMATION_REQUESTED) {
         if (lastSegment !== 'documents') navigate('./documents');

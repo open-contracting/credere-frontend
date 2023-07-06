@@ -3,28 +3,28 @@ import { useT } from '@transifex/react';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 
-import { verifyDataFieldFn } from '../api/private';
+import { verifyDocumentFn } from '../api/private';
 import { QUERY_KEYS } from '../constants';
-import { IApplication, IUpdateBorrower } from '../schemas/application';
+import { IApplication, IVerifyDocument } from '../schemas/application';
 
-type IUseVerifyDataField = {
-  verifyDataFieldMutation: UseMutateFunction<IApplication, unknown, IUpdateBorrower, unknown>;
+type IUseVerifyDocument = {
+  verifyDocumentMutation: UseMutateFunction<IApplication, unknown, IVerifyDocument, unknown>;
   isLoading: boolean;
 };
 
-export default function useVerifyDataField(): IUseVerifyDataField {
+export default function useVerifyDocument(): IUseVerifyDocument {
   const t = useT();
 
   const queryClient = useQueryClient();
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const { mutate: verifyDataFieldMutation, isLoading } = useMutation<IApplication, unknown, IUpdateBorrower, unknown>(
-    (payload) => verifyDataFieldFn(payload),
+  const { mutate: verifyDocumentMutation, isLoading } = useMutation<IApplication, unknown, IVerifyDocument, unknown>(
+    (payload) => verifyDocumentFn(payload),
     {
       onSuccess: (data) => {
         queryClient.setQueryData([QUERY_KEYS.applications, `${data.id}`], data);
-        enqueueSnackbar(t('Field verification state updated'), {
+        enqueueSnackbar(t('Document verification state updated'), {
           variant: 'info',
         });
       },
@@ -36,7 +36,7 @@ export default function useVerifyDataField(): IUseVerifyDataField {
             });
           }
         } else {
-          enqueueSnackbar(t('Error verifying data field. {error}', { error }), {
+          enqueueSnackbar(t('Error verifying document. {error}', { error }), {
             variant: 'error',
           });
         }
@@ -44,5 +44,5 @@ export default function useVerifyDataField(): IUseVerifyDataField {
     },
   );
 
-  return { verifyDataFieldMutation, isLoading };
+  return { verifyDocumentMutation, isLoading };
 }

@@ -65,3 +65,8 @@ export const applicationSubmitFn = async (payload: ApplicationBaseInput) => {
   const response = await publicApi.post<IApplicationResponse>('applications/submit', payload);
   return response.data;
 };
+
+export const aditionalDataSubmitFn = async (payload: ApplicationBaseInput) => {
+  const response = await publicApi.post<IApplicationResponse>('applications/complete-information-request', payload);
+  return response.data;
+};

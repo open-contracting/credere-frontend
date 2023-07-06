@@ -1,21 +1,31 @@
-import { Link as MUILink } from '@mui/material';
+/* eslint-disable react/jsx-props-no-spreading */
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Box, Dialog } from '@mui/material';
 import { useT } from '@transifex/react';
+import { useEffect, useState } from 'react';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import EmailIcon from 'src/assets/icons/email.svg';
 import StepImage from 'src/assets/pages/stage-two.svg';
 import useApplicationContext from 'src/hooks/useSecureApplicationContext';
 import Button from 'src/stories/button/Button';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
-import ApplicationBorrowerTable from '../../components/ApplicationBorrowerTable';
+import ApplicationDocumentsTable from '../../components/ApplicationDocumentsTable';
+import useEmailToSME from '../../hooks/useEmailToSME';
+import { FormEmailInput, formEmailSchema } from '../../schemas/application';
+import FormInput from '../../stories/form-input/FormInput';
 import LinkButton from '../../stories/link-button/LinkButton';
 
 export function StageTwo() {
   const t = useT();
+  const [openEmailDialog, setOpenEmailDialog] = useState<boolean>(false);
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;
-
+  const { isLoading, isError, emailToSMEMutation } = useEmailToSME();
+  const [emailSent, setEmailSent] = useState(false);
   const onBackHandler = () => {
     navigate('../stage-one');
   };
@@ -24,15 +34,47 @@ export function StageTwo() {
     navigate('../stage-three');
   };
 
+  const onComposeEmailHandler = () => {
+    setOpenEmailDialog(true);
+  };
+
+  const handleClose = () => {
+    setOpenEmailDialog(false);
+  };
+
+  const methods = useForm<FormEmailInput>({
+    resolver: zodResolver(formEmailSchema),
+  });
+
+  const {
+    reset,
+    handleSubmit,
+    formState: { isSubmitSuccessful },
+  } = methods;
+
+  useEffect(() => {
+    if (isSubmitSuccessful && !isError && !isLoading) {
+      reset();
+      setEmailSent(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSubmitSuccessful, isError, isLoading]);
+
+  const onSubmitHandler: SubmitHandler<FormEmailInput> = (values) => {
+    if (application?.id) {
+      emailToSMEMutation({ application_id: application.id, message: values.message });
+    }
+  };
+
+  const rootElement = document.getElementById('root-app');
+
   return (
     <>
       <Title type="page" label={t('Application Approval Process')} className="mb-4" />
       <Text className="text-lg mb-12">{application?.borrower.legal_name}</Text>
       <img className="mb-14 ml-8" src={StepImage} alt="step" />
       <Title type="section" label={t('Stage 2: MSME Documents')} className="mb-8" />
-      <Text className="mb-4">
-        {t('Review and verify the data for the MSME. Where information is missing it can be edited manually.')}
-      </Text>
+      <Text className="mb-4">{t('Review and verify the data for the MSME.')}</Text>
       <Text className="mb-4">
         {t(
           'If a document looks incorrect or is not clearly visible, contact the MSME and ask them to provide the document again.',
@@ -40,13 +82,13 @@ export function StageTwo() {
       </Text>
       <LinkButton
         className="mb-2 px-1"
-        target="_blank"
-        rel="noreferrer"
-        label={t('View data in SECOP II')}
-        component={MUILink}
-        href={`${application?.award.source_url}`}
+        icon={EmailIcon}
+        label={t('Email SME for documents')}
+        onClick={onComposeEmailHandler}
       />
-      {application && <ApplicationBorrowerTable className="xl:w-4/5" application={application} />}
+      {application && (
+        <ApplicationDocumentsTable allowDataVerification className="xl:w-4/5" application={application} />
+      )}
       <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
         <div>
           <Button className="md:mr-4" label={t('Go Back')} onClick={onBackHandler} />
@@ -56,6 +98,39 @@ export function StageTwo() {
           <Button label={t('Next')} onClick={onNextHandler} />
         </div>
       </div>
+      <Dialog fullWidth maxWidth="sm" container={rootElement} open={openEmailDialog} onClose={handleClose}>
+        <FormProvider {...methods}>
+          <Box
+            component="form"
+            className="flex flex-col py-7 px-8"
+            onSubmit={handleSubmit(onSubmitHandler)}
+            noValidate
+            autoComplete="off">
+            <Title type="section" label={emailSent ? t('Email sent') : t('Send email to MSME')} className="mb-1" />
+
+            {!emailSent && (
+              <FormInput rows={10} multiline formControlClasses="mb-0" big={false} noIcon name="message" label="" />
+            )}
+
+            <div className="mt-4 grid grid-cols-1 gap-4 md:flex md:justify-end md:gap-0">
+              <div>
+                <Button
+                  primary={emailSent}
+                  className="md:mr-4"
+                  label={emailSent ? t('Close') : t('Cancel')}
+                  onClick={handleClose}
+                />
+              </div>
+
+              {!emailSent && (
+                <div>
+                  <Button label={t('Send')} type="submit" disabled={isLoading} />
+                </div>
+              )}
+            </div>
+          </Box>
+        </FormProvider>
+      </Dialog>
     </>
   );
 }

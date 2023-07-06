@@ -141,6 +141,10 @@ export type IUpdateBorrower = Partial<
   application_id: number;
 };
 
+export type IVerifyDocument = {
+  document_id: number;
+  verified: boolean;
+};
 export interface ILenderBase {
   name: string;
   email_group: string;
@@ -181,6 +185,13 @@ export interface ILender extends ILenderUpdate {
   credit_products: ICreditProduct[];
 }
 
+export interface IBorrowerDocument {
+  id: number;
+  type: DOCUMENTS_TYPE;
+  verified: boolean;
+  name: string;
+}
+
 export interface IApplication {
   id: number;
   borrower: IBorrower;
@@ -218,19 +229,13 @@ export interface IApplication {
   archived_at?: any;
   credit_product_id?: number;
   credit_product?: ICreditProduct;
+  borrower_documents: IBorrowerDocument[];
 }
 
 export interface IExtendedApplication {
   buyer_name: string;
   borrower_name: string;
   lender_name: string;
-}
-
-export interface IBorrowerDocument {
-  id: number;
-  type: DOCUMENTS_TYPE;
-  verified: boolean;
-  name: string;
 }
 
 export interface UploadFileInput {
@@ -279,3 +284,11 @@ export interface ILenderListResponse {
   page: number;
   page_size: number;
 }
+
+export const formEmailSchema = object({
+  message: string().min(1, t('A message is required')),
+});
+
+export type FormEmailInput = TypeOf<typeof formEmailSchema>;
+
+export type EmailToSMEInput = FormEmailInput & { application_id: number };
