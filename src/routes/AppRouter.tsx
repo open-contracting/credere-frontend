@@ -33,6 +33,9 @@ import ProtectedRoute from 'src/routes/ProtectedRoute';
 
 import PageLayout from '../layout/PageLayout';
 import SecureApplicationLayout from '../layout/SecureApplicationLayout';
+import StageFiveApproved from '../pages/fi/StageFiveApproved';
+import StageFiveRejected from '../pages/fi/StageFiveRejected';
+import ViewApplication from '../pages/fi/ViewApplication';
 import ConfirmCreditProduct from '../pages/msme/ConfirmCreditProduct';
 import UploadDocuments from '../pages/msme/UploadDocuments';
 import { LoadApplication } from '../pages/ocp/ApplicationDetail';
@@ -257,6 +260,10 @@ const router = createBrowserRouter([
     element: <SecureApplicationLayout />,
     children: [
       {
+        path: 'view',
+        element: <ViewApplication />,
+      },
+      {
         path: 'stage-one',
         element: <StageOne />,
       },
@@ -275,6 +282,14 @@ const router = createBrowserRouter([
       {
         path: 'stage-five',
         element: <StageFive />,
+      },
+      {
+        path: 'stage-five-approved',
+        element: <StageFiveApproved />,
+      },
+      {
+        path: 'stage-five-rejected',
+        element: <StageFiveRejected />,
       },
     ],
     errorElement: <RouterErrorPage />,

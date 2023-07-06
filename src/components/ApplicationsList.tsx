@@ -35,7 +35,7 @@ const headCellsBase: HeadCell<IApplication & IExtendedApplication>[] = [
     sortable: true,
   },
   {
-    id: 'created_at',
+    id: 'borrower_submitted_at',
     type: 'date',
     disablePadding: false,
     label: t('Submission Date'),

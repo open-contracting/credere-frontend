@@ -4,18 +4,18 @@ import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 
-import { approveApplicationFn } from '../api/private';
+import { rejectApplicationFn } from '../api/private';
 import { DISPATCH_ACTIONS, ERRORS_MESSAGES, QUERY_KEYS } from '../constants';
-import { ApproveApplicationInput, IApplication } from '../schemas/application';
+import { IApplication, RejectApplicationInput } from '../schemas/application';
 import useApplicationContext from './useSecureApplicationContext';
 
-type IUseApproveApplication = {
-  approveApplicationMutation: UseMutateFunction<IApplication, unknown, ApproveApplicationInput, unknown>;
+type IUseRejectApplication = {
+  rejectApplicationMutation: UseMutateFunction<IApplication, unknown, RejectApplicationInput, unknown>;
   isLoading: boolean;
   isError: boolean;
 };
 
-export default function useApproveApplication(): IUseApproveApplication {
+export default function useRejectApplication(): IUseRejectApplication {
   const t = useT();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -23,14 +23,14 @@ export default function useApproveApplication(): IUseApproveApplication {
   const { enqueueSnackbar } = useSnackbar();
 
   const {
-    mutate: approveApplicationMutation,
+    mutate: rejectApplicationMutation,
     isError,
     isLoading,
-  } = useMutation<IApplication, unknown, ApproveApplicationInput, unknown>((payload) => approveApplicationFn(payload), {
+  } = useMutation<IApplication, unknown, RejectApplicationInput, unknown>((payload) => rejectApplicationFn(payload), {
     onSuccess: (data) => {
       queryClient.setQueryData([QUERY_KEYS.applications, data.id], data);
       applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });
-      navigate('../stage-five-approved');
+      navigate('../stage-five-rejected');
     },
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
@@ -46,12 +46,12 @@ export default function useApproveApplication(): IUseApproveApplication {
           }
         }
       } else {
-        enqueueSnackbar(t('Error approving the application. {error}', { error }), {
+        enqueueSnackbar(t('Error rejecting the application. {error}', { error }), {
           variant: 'error',
         });
       }
     },
   });
 
-  return { approveApplicationMutation, isLoading, isError };
+  return { rejectApplicationMutation, isLoading, isError };
 }

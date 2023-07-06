@@ -7,7 +7,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
 import { getApplicationFn } from '../api/private';
-import { DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
+import { APPLICATION_STATUS, DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
 import { useParamsTypeSafe } from '../hooks/useParamsTypeSafe';
 import useApplicationContext from '../hooks/useSecureApplicationContext';
 import ApplicationErrorPage from '../pages/msme/ApplicationErrorPage';
@@ -33,12 +33,14 @@ export default function SecureApplicationLayout() {
       const application = applicationContext.state.data;
       const { pathname } = location;
       const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
-      console.log('application', application);
-      console.log('lastSegment', lastSegment);
 
-      // if (application.status === APPLICATION_STATUS.SUBMITTED) {
-      //   if (lastSegment !== 'submission-completed') navigate('./submission-completed');
-      // }
+      if (lastSegment !== 'view') {
+        if (application.status === APPLICATION_STATUS.APPROVED) {
+          if (lastSegment !== 'stage-five-approved') navigate('./stage-five-approved');
+        } else if (application.status === APPLICATION_STATUS.REJECTED) {
+          if (lastSegment !== 'stage-five-rejected') navigate('./stage-five-rejected');
+        }
+      }
     }
   }, [applicationContext.state.data, navigate, location]);
 

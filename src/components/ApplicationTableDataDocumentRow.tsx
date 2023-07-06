@@ -34,8 +34,10 @@ export function ApplicationTableDataDocumentRow({
       <DataTableCell>
         <DataAvailability available={!missing} name={document.type} readonly={readonly} />
       </DataTableCell>
-      {readonly && <DataTableCell className={preWhitespace ? 'whitespace-pre' : ''}>{formattedValue}</DataTableCell>}
-      {!readonly && downloadDocument && (
+      {!downloadDocument && (
+        <DataTableCell className={preWhitespace ? 'whitespace-pre' : ''}>{formattedValue}</DataTableCell>
+      )}
+      {downloadDocument && (
         <DataTableCell>
           <LinkButton
             className="p-1 justify-start"

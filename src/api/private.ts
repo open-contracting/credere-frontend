@@ -16,6 +16,7 @@ import {
   IUpdateBorrower,
   IVerifyDocument,
   PaginationInput,
+  RejectApplicationInput,
   UploadComplianceInput,
 } from '../schemas/application';
 import { authApi } from './axios';
@@ -121,5 +122,11 @@ export const approveApplicationFn = async (approvePayload: ApproveApplicationInp
 
 export const uploadComplianceFn = async (payload: UploadComplianceInput) => {
   const response = await authApi.postForm<IBorrowerDocument>(`applications/${payload.id}/upload-compliance`, payload);
+  return response.data;
+};
+
+export const rejectApplicationFn = async (rejectPayload: RejectApplicationInput) => {
+  const { application_id, ...payload } = rejectPayload;
+  const response = await authApi.post<IApplication>(`applications/${application_id}/reject-application`, payload);
   return response.data;
 };

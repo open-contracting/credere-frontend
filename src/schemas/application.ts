@@ -317,3 +317,15 @@ export const approveSchema = object({
 export type FormApprovedInput = TypeOf<typeof approveSchema>;
 
 export type ApproveApplicationInput = FormApprovedInput & PrivateApplicationInput;
+
+export const rejectSchema = object({
+  compliance_checks_failed: boolean(),
+  poor_credit_history: boolean(),
+  risk_of_fraud: boolean(),
+  other: boolean(),
+  other_reason: string(),
+});
+
+export type FormRejectInput = TypeOf<typeof rejectSchema>;
+
+export type RejectApplicationInput = FormRejectInput & PrivateApplicationInput;
