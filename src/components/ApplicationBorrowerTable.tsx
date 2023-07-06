@@ -48,7 +48,7 @@ export function ApplicationBorrowerTable({
   return (
     <Paper elevation={0} square className={className}>
       <TableContainer>
-        <Table aria-labelledby="application-table" size="medium">
+        <Table aria-labelledby="borrower-table" size="medium">
           <TableHead>
             <TableRow>
               <DataTableHeadCell width={260}>

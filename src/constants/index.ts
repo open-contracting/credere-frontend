@@ -30,6 +30,7 @@ export enum QUERY_KEYS {
   applications = 'applications',
   lenders = 'lenders',
   credit_product = 'credit_product',
+  downloadDocument = 'downloadDocument',
 }
 
 export const DISPATCH_ACTIONS = {

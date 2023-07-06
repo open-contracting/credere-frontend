@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IAward, IBorrower, IUpdateAward, IUpdateBorrower } from '../schemas/application';
+import { IAward, IBorrower, IBorrowerDocument, IUpdateAward, IUpdateBorrower } from '../schemas/application';
 
 export interface ApplicationTableDataRowProps {
   label: string;
@@ -24,4 +24,10 @@ export interface ApplicationTableBorrowerDataRowProps extends ApplicationTableDa
   verifiedData: { [key: string]: boolean };
   updateValue?: (value: any, name: keyof IUpdateBorrower) => void;
   verifyData?: (value: boolean, name: keyof IUpdateBorrower) => void;
+}
+
+export interface ApplicationTableDocumentDataRowProps extends Partial<ApplicationTableDataRowProps> {
+  document: IBorrowerDocument;
+  downloadDocument?: (id: number, filename: string) => void;
+  verifyData?: (value: boolean, id: number) => void;
 }
