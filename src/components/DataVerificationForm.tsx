@@ -1,10 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { zodResolver } from '@hookform/resolvers/zod';
 import { Box } from '@mui/material';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { TypeOf, boolean, object } from 'zod';
 
-import Switch from '../stories/switch/Switch';
+import { Switch } from '../stories/switch/Switch';
+import DataVerificationStatus from './DataVerificationStatus';
 
 interface DataVerificationFormProps {
   name: string;
@@ -14,39 +12,24 @@ interface DataVerificationFormProps {
   isLoading: boolean;
 }
 
-const formCellSchema = object({
-  value: boolean(),
-});
-
-type FormCellInput = TypeOf<typeof formCellSchema>;
-
 export function DataVerificationForm({ name, value, isLoading, readonly, verifyData }: DataVerificationFormProps) {
-  const methods = useForm<FormCellInput>({
-    resolver: zodResolver(formCellSchema),
-    defaultValues: {
-      value,
-    },
-  });
-
-  const { handleSubmit } = methods;
-
-  const onSubmitHandler: SubmitHandler<FormCellInput> = (values) => {
-    verifyData(values.value);
-  };
+  if (readonly) {
+    return <DataVerificationStatus verified={value} name={name} />;
+  }
 
   return (
     <Box className="py-2 flex flex-col">
       <Box className="flex flex-col align-top">
-        <FormProvider {...methods}>
-          <Box
-            component="form"
-            className="flex flex-col pr-4 align-top justify-end"
-            onSubmit={handleSubmit(onSubmitHandler)}
-            noValidate
-            autoComplete="off">
-            <Switch disabled={isLoading || readonly} name={name} label="" defaultValue={value} />
-          </Box>
-        </FormProvider>
+        <Box className="flex flex-col pr-4 align-top justify-end">
+          <Switch
+            fieldError={undefined}
+            disabled={isLoading}
+            name={name}
+            label=""
+            defaultValue={value}
+            onChange={(_event, checked) => verifyData(checked)}
+          />
+        </Box>
       </Box>
     </Box>
   );

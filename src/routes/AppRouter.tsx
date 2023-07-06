@@ -13,6 +13,11 @@ import PasswordCreated from 'src/pages/auth/PasswordCreated';
 import ResetPasswordPage from 'src/pages/auth/ResetPasswordPage';
 import SetupMFAPage from 'src/pages/auth/SetupMFAPage';
 import SignInPage from 'src/pages/auth/SignInPage';
+import StageFive from 'src/pages/fi/StageFive';
+import StageFour from 'src/pages/fi/StageFour';
+import StageOne from 'src/pages/fi/StageOne';
+import StageThree from 'src/pages/fi/StageThree';
+import StageTwo from 'src/pages/fi/StageTwo';
 import Decline from 'src/pages/msme/Decline';
 import DeclineCompleted from 'src/pages/msme/DeclineCompleted';
 import DeclineFeedback from 'src/pages/msme/DeclineFeedback';
@@ -22,10 +27,15 @@ import SubmissionCompleted from 'src/pages/msme/SubmissionCompleted';
 import ViewCreditOptions from 'src/pages/msme/ViewCreditOptions';
 import ApplicationContextProvider from 'src/providers/ApplicationContextProvider';
 import LangContextProvider from 'src/providers/LangContextProvider';
+import SecureApplicationContextProvider from 'src/providers/SecureApplicationContextProvider';
 import StateContextProvider from 'src/providers/StateContextProvider';
 import ProtectedRoute from 'src/routes/ProtectedRoute';
 
 import PageLayout from '../layout/PageLayout';
+import SecureApplicationLayout from '../layout/SecureApplicationLayout';
+import StageFiveApproved from '../pages/fi/StageFiveApproved';
+import StageFiveRejected from '../pages/fi/StageFiveRejected';
+import ViewApplication from '../pages/fi/ViewApplication';
 import ConfirmCreditProduct from '../pages/msme/ConfirmCreditProduct';
 import UploadDocuments from '../pages/msme/UploadDocuments';
 import { LoadApplication } from '../pages/ocp/ApplicationDetail';
@@ -38,7 +48,7 @@ import Settings from '../pages/ocp/Settings';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 10,
+      staleTime: 1000 * 60 * 2, // 2 minutes
     },
   },
 });
@@ -245,6 +255,45 @@ const router = createBrowserRouter([
     ],
     errorElement: <RouterErrorPage />,
   },
+  {
+    path: '/applications/:id',
+    element: <SecureApplicationLayout />,
+    children: [
+      {
+        path: 'view',
+        element: <ViewApplication />,
+      },
+      {
+        path: 'stage-one',
+        element: <StageOne />,
+      },
+      {
+        path: 'stage-two',
+        element: <StageTwo />,
+      },
+      {
+        path: 'stage-three',
+        element: <StageThree />,
+      },
+      {
+        path: 'stage-four',
+        element: <StageFour />,
+      },
+      {
+        path: 'stage-five',
+        element: <StageFive />,
+      },
+      {
+        path: 'stage-five-approved',
+        element: <StageFiveApproved />,
+      },
+      {
+        path: 'stage-five-rejected',
+        element: <StageFiveRejected />,
+      },
+    ],
+    errorElement: <RouterErrorPage />,
+  },
 ]);
 
 export function AppRouter() {
@@ -252,12 +301,14 @@ export function AppRouter() {
     <MuiTheme>
       <StateContextProvider>
         <LangContextProvider>
-          <ApplicationContextProvider>
-            <QueryClientProvider client={queryClient}>
-              <RouterProvider router={router} />
-              <ReactQueryDevtools initialIsOpen={false} />
-            </QueryClientProvider>
-          </ApplicationContextProvider>
+          <SecureApplicationContextProvider>
+            <ApplicationContextProvider>
+              <QueryClientProvider client={queryClient}>
+                <RouterProvider router={router} />
+                <ReactQueryDevtools initialIsOpen={false} />
+              </QueryClientProvider>
+            </ApplicationContextProvider>
+          </SecureApplicationContextProvider>
         </LangContextProvider>
       </StateContextProvider>
     </MuiTheme>

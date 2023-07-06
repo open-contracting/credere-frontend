@@ -3,29 +3,29 @@ import { useT } from '@transifex/react';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 
-import { updateBorrowerFn } from '../api/private';
+import { verifyDocumentFn } from '../api/private';
 import { QUERY_KEYS } from '../constants';
-import { IApplication, IUpdateBorrower } from '../schemas/application';
+import { IApplication, IVerifyDocument } from '../schemas/application';
 
-type IUseUpdateBorrower = {
-  updateBorrowerMutation: UseMutateFunction<IApplication, unknown, IUpdateBorrower, unknown>;
+type IUseVerifyDocument = {
+  verifyDocumentMutation: UseMutateFunction<IApplication, unknown, IVerifyDocument, unknown>;
   isLoading: boolean;
 };
 
-export default function useUpdateBorrower(): IUseUpdateBorrower {
+export default function useVerifyDocument(): IUseVerifyDocument {
   const t = useT();
 
   const queryClient = useQueryClient();
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const { mutate: updateBorrowerMutation, isLoading } = useMutation<IApplication, unknown, IUpdateBorrower, unknown>(
-    (payload) => updateBorrowerFn(payload),
+  const { mutate: verifyDocumentMutation, isLoading } = useMutation<IApplication, unknown, IVerifyDocument, unknown>(
+    (payload) => verifyDocumentFn(payload),
     {
       onSuccess: (data) => {
         queryClient.setQueryData([QUERY_KEYS.applications, `${data.id}`], data);
-        enqueueSnackbar(t('Borrower Updated'), {
-          variant: 'success',
+        enqueueSnackbar(t('Document verification state updated'), {
+          variant: 'info',
         });
       },
       onError: (error) => {
@@ -36,7 +36,7 @@ export default function useUpdateBorrower(): IUseUpdateBorrower {
             });
           }
         } else {
-          enqueueSnackbar(t('Error updating borrower. {error}', { error }), {
+          enqueueSnackbar(t('Error verifying document. {error}', { error }), {
             variant: 'error',
           });
         }
@@ -44,5 +44,5 @@ export default function useUpdateBorrower(): IUseUpdateBorrower {
     },
   );
 
-  return { updateBorrowerMutation, isLoading };
+  return { verifyDocumentMutation, isLoading };
 }

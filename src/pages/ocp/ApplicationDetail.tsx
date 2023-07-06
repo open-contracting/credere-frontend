@@ -80,7 +80,7 @@ export function LoadApplication({ readonly }: LoadApplicationProps) {
   );
 
   const { isLoading, data } = useQuery({
-    queryKey: [QUERY_KEYS.applications_ocp, `${id}`],
+    queryKey: [QUERY_KEYS.applications, `${id}`],
     queryFn: async (): Promise<IApplication | null> => {
       const application = await getApplicationFn(id);
       return application;
