@@ -6,6 +6,7 @@ import {
   IApplicationCreditOptions,
   IApplicationResponse,
   IBorrowerDocument,
+  ICreditProduct,
   SelectCreditProductInput,
   UploadContractInput,
   UploadFileInput,
@@ -39,6 +40,11 @@ export const getApplicationFn = async (uuid: string) => {
 
 export const getCreditProductOptionsFn = async (payload: GetCreditProductsOptionsInput) => {
   const response = await publicApi.post<IApplicationCreditOptions>('applications/credit-product-options', payload);
+  return response.data;
+};
+
+export const getCreditProductFn = async (id: string) => {
+  const response = await publicApi.get<ICreditProduct>(`credit-products/${id}`);
   return response.data;
 };
 
