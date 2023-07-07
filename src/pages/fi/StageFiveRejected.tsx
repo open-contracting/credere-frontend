@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading */
+ 
 import { useT } from '@transifex/react';
 import { useNavigate } from 'react-router-dom';
 import StepImage from 'src/assets/pages/stage-five.svg';

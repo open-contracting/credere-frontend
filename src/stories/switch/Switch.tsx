@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading */
+ 
 import { FormControl, FormControlLabel, FormHelperText, Switch as MUISwitch, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { ChangeEvent } from 'react';

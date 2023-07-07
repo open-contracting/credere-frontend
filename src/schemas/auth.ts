@@ -2,6 +2,7 @@ import { t } from '@transifex/native';
 import { TypeOf, coerce, nativeEnum, object, string } from 'zod';
 
 import { USER_TYPES } from '../constants';
+import { ILender } from './application';
 
 const emailSchema = string().min(1, t('Email address is required')).email(t('Email Address is invalid'));
 const passwordSchema = string()
@@ -97,6 +98,8 @@ export interface IUser {
   type: USER_TYPES;
   created_at?: string;
   updated_at?: string;
+  lender_id?: number;
+  lender?: ILender;
 }
 
 export interface IUserResponse {

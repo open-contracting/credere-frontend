@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+ 
 
 /* eslint-disable react/jsx-props-no-spreading */
 import { t as tNative } from '@transifex/native';

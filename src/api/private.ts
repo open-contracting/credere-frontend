@@ -99,8 +99,8 @@ export const getUserFn = async (id: string) => {
   return response.data;
 };
 
-export const getUsersFn = async () => {
-  const response = await authApi.get<IUsersListResponse>('users');
+export const getUsersFn = async (payload: PaginationInput) => {
+  const response = await authApi.get<IUsersListResponse>('users', { params: payload });
   return response.data;
 };
 

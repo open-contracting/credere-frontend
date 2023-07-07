@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading */
+ 
 import { Box } from '@mui/material';
 
 import { Switch } from '../stories/switch/Switch';
