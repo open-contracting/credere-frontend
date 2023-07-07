@@ -12,17 +12,18 @@ function UploadContractCompleted() {
 
   return (
     <>
-      <Title type="page" label={t('Upload Contract Complete')} className="mb-8" />
+      <Title type="page" label={t('Contract Uploaded')} className="mb-8" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 md:col-span-2 md:mr-10">
           <Text className="mb-8">
-            {t('We have received the signed copy for your contract with {buyer_name} for the award {award_title}.', {
-              award_title: applicationContext.state.data?.award.title,
-              buyer_name: applicationContext.state.data?.award.buyer_name,
+            {t('Thank you for uploading your signed contract using Credere. The contract has been sent to {fi_name}.', {
+              fi_name: applicationContext.state.data?.lender.name,
             })}
           </Text>
           <Text className="mb-8">
-            {t('The credit provider will now review the contract and reach out to you to release the funds.')}
+            {t('{fi_name} will be in touch via email to arrange for funds to be disbursed to you.', {
+              fi_name: applicationContext.state.data?.lender.name,
+            })}
           </Text>
           <Text className="mb-8">
             {t(
@@ -30,7 +31,7 @@ function UploadContractCompleted() {
             )}
           </Text>
 
-          <div className="mt-5 grid grid-cols-1 gap-4 md:flex md:gap-0">
+          <div className="mt-5 mb-10 grid grid-cols-1 gap-4 md:flex md:gap-0">
             <div>
               <Button
                 className="md:mr-4"

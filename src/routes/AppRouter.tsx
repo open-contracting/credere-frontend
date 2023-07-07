@@ -34,6 +34,8 @@ import ProtectedRoute from 'src/routes/ProtectedRoute';
 
 import PageLayout from '../layout/PageLayout';
 import SecureApplicationLayout from '../layout/SecureApplicationLayout';
+import ApplicationCompleted from '../pages/fi/ApplicationCompleted';
+import ReviewContract from '../pages/fi/ReviewContract';
 import StageFiveApproved from '../pages/fi/StageFiveApproved';
 import StageFiveRejected from '../pages/fi/StageFiveRejected';
 import ViewApplication from '../pages/fi/ViewApplication';
@@ -51,7 +53,7 @@ import Settings from '../pages/ocp/Settings';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 2, // 2 minutes
+      staleTime: 1000 * 60 * 1, // 1 minute
     },
   },
 });
@@ -323,6 +325,14 @@ const router = createBrowserRouter([
       {
         path: 'stage-five-rejected',
         element: <StageFiveRejected />,
+      },
+      {
+        path: 'complete-application',
+        element: <ReviewContract />,
+      },
+      {
+        path: 'application-completed',
+        element: <ApplicationCompleted />,
       },
     ],
     errorElement: <RouterErrorPage />,

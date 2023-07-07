@@ -8,7 +8,14 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getApplicationsFI, getApplicationsOCP } from '../api/private';
-import { COMPLETED_STATUS, NOT_STARTED_STATUS, PAGE_SIZES, QUERY_KEYS, STARTED_STATUS } from '../constants';
+import {
+  APPLICATION_STATUS,
+  COMPLETED_STATUS,
+  NOT_STARTED_STATUS,
+  PAGE_SIZES,
+  QUERY_KEYS,
+  STARTED_STATUS,
+} from '../constants';
 import useStartApplication from '../hooks/useStartApplication';
 import {
   EXTENDED_APPLICATION_FROM,
@@ -83,6 +90,16 @@ const actionsFIBase = (row: ExtendendApplication, onStartApplicationHandler: (id
         className="p-1 justify-start"
         onClick={() => onStartApplicationHandler(row.id)}
         label={t('Start')}
+        size="small"
+        noIcon
+      />
+    )}
+    {APPLICATION_STATUS.CONTRACT_UPLOADED === row.status && (
+      <LinkButton
+        className="p-1 justify-start"
+        component={Link}
+        to={`/applications/${row.id}/complete-application`}
+        label={t('Review')}
         size="small"
         noIcon
       />

@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import {
   ApproveApplicationInput,
+  CompleteApplicationInput,
   EmailToSMEInput,
   IApplication,
   IApplicationsListResponse,
@@ -149,5 +150,11 @@ export const uploadComplianceFn = async (payload: UploadComplianceInput) => {
 export const rejectApplicationFn = async (rejectPayload: RejectApplicationInput) => {
   const { application_id, ...payload } = rejectPayload;
   const response = await authApi.post<IApplication>(`applications/${application_id}/reject-application`, payload);
+  return response.data;
+};
+
+export const completeApplicationFn = async (completePayload: CompleteApplicationInput) => {
+  const { application_id, ...payload } = completePayload;
+  const response = await authApi.post<IApplication>(`applications/${application_id}/complete-application`, payload);
   return response.data;
 };

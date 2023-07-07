@@ -346,10 +346,10 @@ export type FormContractAmountInput = TypeOf<typeof uploadContractSchema>;
 
 export type ContractAmountInput = FormContractAmountInput & ApplicationBaseInput;
 
-export const complateApplicationSchema = object({
+export const completeApplicationSchema = object({
   disbursed_final_amount: amountSchema,
 });
 
-export type FormCompleteApplicationInput = TypeOf<typeof complateApplicationSchema>;
+export type FormCompleteApplicationInput = TypeOf<typeof completeApplicationSchema>;
 
-export type CompleteApplicationInput = FormContractAmountInput & PrivateApplicationInput;
+export type CompleteApplicationInput = FormCompleteApplicationInput & PrivateApplicationInput;

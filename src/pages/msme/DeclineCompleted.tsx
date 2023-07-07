@@ -22,7 +22,7 @@ function DeclineCompleted() {
             )}
           </Text>
 
-          <div className="mt-5 grid grid-cols-1 gap-4 md:flex md:gap-0">
+          <div className="mt-5 mb-10 grid grid-cols-1 gap-4 md:flex md:gap-0">
             <div>
               <Button
                 className="md:mr-4"
