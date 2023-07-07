@@ -62,6 +62,10 @@ export function StageFive() {
     navigate('/');
   };
 
+  const onGoBackHandler = () => {
+    navigate('../stage-four');
+  };
+
   return (
     <>
       <Title type="page" label={t('Application Approval Process')} className="mb-4" />
@@ -122,6 +126,10 @@ export function StageFive() {
           <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
             <div>
               <Button primary={false} className="md:mr-4" label={t('Go Home')} onClick={onGoHomeHandler} />
+            </div>
+
+            <div>
+              <Button primary={false} className="md:mr-4" label={t('Go Back')} onClick={onGoBackHandler} />
             </div>
 
             <div>

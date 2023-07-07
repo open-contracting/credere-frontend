@@ -109,11 +109,12 @@ export interface IAward {
   updated_at: string;
 }
 
-export type IUpdateAward = Partial<
-  Omit<IAward, 'id' | 'borrower_id' | 'missing_data' | 'created_at' | 'updated_at'>
-> & {
+export type PrivateApplicationInput = {
   application_id: number;
 };
+
+export type IUpdateAward = Partial<Omit<IAward, 'id' | 'borrower_id' | 'missing_data' | 'created_at' | 'updated_at'>> &
+  PrivateApplicationInput;
 
 export interface IBorrower {
   id: number;
@@ -131,10 +132,6 @@ export interface IBorrower {
   updated_at: string;
   declined_at?: any;
 }
-
-export type PrivateApplicationInput = {
-  application_id: number;
-};
 
 export type IUpdateBorrower = Partial<
   Omit<
@@ -339,3 +336,20 @@ export const rejectSchema = object({
 export type FormRejectInput = TypeOf<typeof rejectSchema>;
 
 export type RejectApplicationInput = FormRejectInput & PrivateApplicationInput;
+
+const amountSchema = coerce.number().min(1, t('Amount must be greater than 0'));
+export const uploadContractSchema = object({
+  contract_amount_submitted: amountSchema,
+});
+
+export type FormContractAmountInput = TypeOf<typeof uploadContractSchema>;
+
+export type ContractAmountInput = FormContractAmountInput & ApplicationBaseInput;
+
+export const complateApplicationSchema = object({
+  disbursed_final_amount: amountSchema,
+});
+
+export type FormCompleteApplicationInput = TypeOf<typeof complateApplicationSchema>;
+
+export type CompleteApplicationInput = FormContractAmountInput & PrivateApplicationInput;

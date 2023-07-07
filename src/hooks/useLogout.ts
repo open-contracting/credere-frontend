@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { logoutUserFn } from '../api/auth';
 import { setAccessTokenToHeaders } from '../api/axios';
-import { DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
+import { DISPATCH_ACTIONS } from '../constants';
 import useStateContext from './useStateContext';
 
 type IUseSignOut = () => void;
@@ -28,7 +28,7 @@ export default function useSignOut(): IUseSignOut {
         variant: 'error',
       });
     } finally {
-      queryClient.setQueryData([QUERY_KEYS.user], null);
+      queryClient.invalidateQueries();
       stateContext.dispatch({ type: DISPATCH_ACTIONS.SET_USER, payload: null });
       setAccessTokenToHeaders(null);
       navigate('/login');

@@ -1,5 +1,6 @@
 import {
   ApplicationBaseInput,
+  ContractAmountInput,
   DeclineApplicationInput,
   DeclineFeedbackInput,
   GetCreditProductsOptionsInput,
@@ -80,5 +81,10 @@ export const aditionalDataSubmitFn = async (payload: ApplicationBaseInput) => {
 
 export const uploadContractFn = async (payload: UploadContractInput) => {
   const response = await publicApi.postForm<IBorrowerDocument>('applications/upload-contract', payload);
+  return response.data;
+};
+
+export const uploadContractConfirmationFn = async (payload: ContractAmountInput) => {
+  const response = await publicApi.post<IApplicationResponse>('applications/confirm-upload-contract', payload);
   return response.data;
 };

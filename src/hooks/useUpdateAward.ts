@@ -4,8 +4,9 @@ import axios from 'axios';
 import { useSnackbar } from 'notistack';
 
 import { updateAwardFn } from '../api/private';
-import { QUERY_KEYS } from '../constants';
+import { DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
 import { IApplication, IUpdateAward } from '../schemas/application';
+import useApplicationContext from './useSecureApplicationContext';
 
 type IUseUpdateAward = {
   updateAwardMutation: UseMutateFunction<IApplication, unknown, IUpdateAward, unknown>;
@@ -16,7 +17,7 @@ export default function useUpdateAward(): IUseUpdateAward {
   const t = useT();
 
   const queryClient = useQueryClient();
-
+  const applicationContext = useApplicationContext();
   const { enqueueSnackbar } = useSnackbar();
 
   const { mutate: updateAwardMutation, isLoading } = useMutation<IApplication, unknown, IUpdateAward, unknown>(
@@ -24,6 +25,8 @@ export default function useUpdateAward(): IUseUpdateAward {
     {
       onSuccess: (data) => {
         queryClient.setQueryData([QUERY_KEYS.applications, `${data.id}`], data);
+        applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });
+
         enqueueSnackbar(t('Award Updated'), {
           variant: 'success',
         });

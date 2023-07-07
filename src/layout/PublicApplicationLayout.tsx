@@ -32,7 +32,16 @@ export default function PublicApplicationLayout() {
       const { application } = applicationContext.state.data;
       const { pathname } = location;
       const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
-      if (application.status === APPLICATION_STATUS.SUBMITTED || application.status === APPLICATION_STATUS.STARTED) {
+      if (application.status === APPLICATION_STATUS.APPROVED) {
+        if (lastSegment !== 'upload-contract' && !application.contract_amount_submitted) {
+          navigate('./upload-contract');
+        } else if (lastSegment !== 'upload-contract-completed' && application.contract_amount_submitted) {
+          navigate('./upload-contract-completed');
+        }
+      } else if (
+        application.status === APPLICATION_STATUS.SUBMITTED ||
+        application.status === APPLICATION_STATUS.STARTED
+      ) {
         if (lastSegment !== 'submission-completed') navigate('./submission-completed');
       } else if (application.pending_documents || application.status === APPLICATION_STATUS.INFORMATION_REQUESTED) {
         if (lastSegment !== 'documents') navigate('./documents');

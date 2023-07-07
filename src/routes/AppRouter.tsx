@@ -38,6 +38,8 @@ import StageFiveApproved from '../pages/fi/StageFiveApproved';
 import StageFiveRejected from '../pages/fi/StageFiveRejected';
 import ViewApplication from '../pages/fi/ViewApplication';
 import ConfirmCreditProduct from '../pages/msme/ConfirmCreditProduct';
+import UploadContract from '../pages/msme/UploadContract';
+import UploadContractCompleted from '../pages/msme/UploadContractCompleted';
 import UploadDocuments from '../pages/msme/UploadDocuments';
 import { LoadApplication } from '../pages/ocp/ApplicationDetail';
 import Applications from '../pages/ocp/Applications';
@@ -258,6 +260,14 @@ const router = createBrowserRouter([
       {
         path: 'documents',
         element: <UploadDocuments />,
+      },
+      {
+        path: 'upload-contract',
+        element: <UploadContract />,
+      },
+      {
+        path: 'upload-contract-completed',
+        element: <UploadContractCompleted />,
       },
       {
         path: 'submission-completed',
