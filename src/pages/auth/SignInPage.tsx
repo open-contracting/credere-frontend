@@ -63,7 +63,7 @@ export function SignInPage() {
                 borderRadius: 0,
               }}>
               <Title type="section" className="self-center mb-8" label={t('Log in')} />
-              <FormInput name="username" label={t('Email Address')} type="email" placeholder="example@email.com" />
+              <FormInput name="username" label={t('Email Address')} type="email" placeholder={t('example@email.com')} />
               <FormInput name="password" label={t('Password')} type="password" />
               <FormInput name="temp_password" label={t('One-Time Password Code (MFA)')} />
 
@@ -76,7 +76,7 @@ export function SignInPage() {
               <Button className="mb-10" label={t('Login')} type="submit" disabled={isLoading} />
               <Box>
                 <Text className="inline-block">{t("Don't have an account? Email")}</Text>
-                <Text className="inline-block underline ml-1">
+                <Text className="inline-block underline ml-1 mb-X">
                   <a className="text-darkest" href="mailto:credere@open-contracting.org">
                     credere@open-contracting.org
                   </a>
