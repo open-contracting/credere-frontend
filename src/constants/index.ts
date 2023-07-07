@@ -29,6 +29,7 @@ export enum QUERY_KEYS {
   application_uuid = 'application_uuid',
   applications = 'applications',
   lenders = 'lenders',
+  users = 'users',
   credit_product = 'credit_product',
   downloadDocument = 'downloadDocument',
 }
@@ -238,6 +239,23 @@ export const SECTOR_TYPES: FormSelectOption[] = [
   {
     value: 'wholesale_trade',
     label: t('Wholesale Trade'),
+  },
+];
+
+// eslint-disable-next-line no-shadow
+export enum USER_TYPES {
+  OCP = 'OCP',
+  FI = 'FI',
+}
+
+export const USER_TYPE_OPTIONS: FormSelectOption[] = [
+  {
+    value: USER_TYPES.OCP,
+    label: t('OCP Admin'),
+  },
+  {
+    value: USER_TYPES.FI,
+    label: t('FI User'),
   },
 ];
 

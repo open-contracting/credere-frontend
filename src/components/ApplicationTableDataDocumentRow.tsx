@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { TableRow } from '@mui/material';
 import DocumentIcon from 'src/assets/icons/document.svg';
 

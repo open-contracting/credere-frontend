@@ -1,6 +1,6 @@
-/* eslint-disable no-console */
+ 
 
-/* eslint-disable react/jsx-props-no-spreading */
+ 
 import { MenuItem, Select, Input as _Input } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { t as tNative, tx } from '@transifex/native';

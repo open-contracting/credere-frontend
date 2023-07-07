@@ -25,6 +25,7 @@ import FrequentlyAskedQuestionsPage from 'src/pages/msme/FrequentlyAskedQuestion
 import IntroMsme from 'src/pages/msme/IntroMsme';
 import SubmissionCompleted from 'src/pages/msme/SubmissionCompleted';
 import ViewCreditOptions from 'src/pages/msme/ViewCreditOptions';
+import { LoadUser, UserForm } from 'src/pages/ocp/UserForm';
 import ApplicationContextProvider from 'src/providers/ApplicationContextProvider';
 import LangContextProvider from 'src/providers/LangContextProvider';
 import SecureApplicationContextProvider from 'src/providers/SecureApplicationContextProvider';
@@ -126,6 +127,28 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <PageLayout>
           <LoadLender />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/settings/user/new',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <UserForm />
+        </PageLayout>
+      </ProtectedRoute>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/settings/user/:id/edit',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <LoadUser />
         </PageLayout>
       </ProtectedRoute>
     ),

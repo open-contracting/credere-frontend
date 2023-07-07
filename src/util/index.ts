@@ -9,6 +9,7 @@ import {
   MSME_TYPES_NAMES,
   MSME_TYPES_OPTIONS,
   SECTOR_TYPES,
+  USER_TYPE_OPTIONS,
 } from '../constants';
 import CURRENCY_FORMAT_OPTIONS from '../constants/intl';
 import { PreferencesType } from '../schemas/OCPsettings';
@@ -64,6 +65,7 @@ function findLabelByValue(value: string, options: FormSelectOption[]): string {
 }
 
 export const renderLenderType = (type: string) => findLabelByValue(type, LENDER_TYPES);
+export const renderUserType = (type: string) => findLabelByValue(type, USER_TYPE_OPTIONS);
 export const renderCreditProductType = (type: string) => findLabelByValue(type, CREDIT_PRODUCT_OPTIONS);
 export const renderBorrowerSizeType = (type: string) => MSME_TYPES_NAMES[type as MSME_TYPES];
 

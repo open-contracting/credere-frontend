@@ -1,5 +1,8 @@
 import { t } from '@transifex/native';
-import { TypeOf, object, string } from 'zod';
+import { TypeOf, coerce, nativeEnum, object, string } from 'zod';
+
+import { USER_TYPES } from '../constants';
+import { ILender } from './application';
 
 const emailSchema = string().min(1, t('Email address is required')).email(t('Email Address is invalid'));
 const passwordSchema = string()
@@ -27,12 +30,35 @@ export interface SetupMFAInput {
   secret: string;
 }
 
+const nameSchema = string().nonempty(t('Full name is required'));
+
 const registerSchema = object({
-  name: string().min(1, t('Full name is required')).max(100),
+  name: nameSchema,
   email: emailSchema,
 });
 
 export type RegisterInput = TypeOf<typeof registerSchema>;
+
+export const createUserSchema = object({
+  name: nameSchema,
+  email: emailSchema,
+  type: nativeEnum(USER_TYPES, {
+    errorMap: (issue) => {
+      switch (issue.code) {
+        case 'invalid_type':
+        case 'invalid_enum_value':
+          return { message: t('Type of user is required') };
+        default:
+          return { message: t('Select an option') };
+      }
+    },
+  }),
+  lender_id: coerce.number().positive().optional(),
+});
+
+export type CreateUserInput = TypeOf<typeof createUserSchema>;
+
+export type UpdateUserInput = Omit<CreateUserInput, 'email'> & { id: string | undefined };
 
 export const setPasswordSchema = object({
   password: passwordSchema,
@@ -69,13 +95,21 @@ export interface IUser {
   id?: string;
   name: string;
   email: string;
-  type?: string;
+  type: USER_TYPES;
   created_at?: string;
   updated_at?: string;
+  lender_id?: number;
+  lender?: ILender;
 }
 
 export interface IUserResponse {
   user: IUser;
+}
+export interface IUsersListResponse {
+  items: IUser[];
+  count: number;
+  page: number;
+  page_size: number;
 }
 
 export interface ILoginResponse extends IUserResponse {

@@ -4,6 +4,7 @@ import Button from 'src/stories/button/Button';
 import Title from 'src/stories/title/Title';
 
 import LenderList from '../../components/LenderList';
+import UserList from '../../components/UserList';
 
 export function Settings() {
   const t = useT();
@@ -28,7 +29,10 @@ export function Settings() {
       </div>
       <Title type="section" label={t('Credit Providers')} className="mb-6" />
       <LenderList />
-      <Button className="mt-10" label={t('Add New Credit Provider')} component={Link} to="/settings/lender/new" />
+      <Button className="mt-8" label={t('Add New Credit Provider')} component={Link} to="/settings/lender/new" />
+      <Title type="section" label={t('Users')} className="mb-6 mt-8" />
+      <UserList />
+      <Button className="mt-8" label={t('Add New User')} component={Link} to="/settings/user/new" />
     </>
   );
 }

@@ -265,6 +265,16 @@ export const EXTENDED_APPLICATION_FROM: IExtendedApplication = {
   lender_name: 'lender.name',
 };
 
+export interface IExtendedUser {
+  lender_name: string;
+  user_name: string;
+}
+
+export const EXTENDED_USER_FROM: IExtendedUser = {
+  lender_name: 'lender.name',
+  user_name: 'user_name',
+};
+
 export interface IApplicationResponse {
   application: IApplication;
   borrower: IBorrower;

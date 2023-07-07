@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+ 
 import { t } from '@transifex/native';
 import { Link } from 'react-router-dom';
 
