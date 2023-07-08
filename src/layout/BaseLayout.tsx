@@ -1,6 +1,7 @@
 import { Container } from '@mui/material';
 import { PropsWithChildren } from 'react';
 
+import ScrollToTop from '../components/ScrollToTop';
 import { AppBar, AppBarProps } from './AppBar';
 
 export default function BaseLayout({ children, auth, logout }: AppBarProps & PropsWithChildren) {
@@ -11,6 +12,7 @@ export default function BaseLayout({ children, auth, logout }: AppBarProps & Pro
       sx={{
         minHeight: '100vh',
       }}>
+      <ScrollToTop />
       <AppBar auth={auth} logout={logout} />
       {children}
     </Container>

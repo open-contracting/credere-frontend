@@ -3,6 +3,7 @@ import { t } from '@transifex/native';
 import { TypeOf, boolean, coerce, nativeEnum, object, string } from 'zod';
 
 import { APPLICATION_STATUS, DOCUMENTS_TYPE, MSME_TYPES } from '../constants';
+import { emailSchema } from './auth';
 
 const booleanRequiredSchema = boolean().refine((value) => value === true, {
   message: t('You need to check this option to Access the Scheme'),
@@ -353,3 +354,16 @@ export const completeApplicationSchema = object({
 export type FormCompleteApplicationInput = TypeOf<typeof completeApplicationSchema>;
 
 export type CompleteApplicationInput = FormCompleteApplicationInput & PrivateApplicationInput;
+
+export const changeEmailSchema = object({
+  new_email: emailSchema,
+});
+
+export type FormChangeEmailInput = TypeOf<typeof changeEmailSchema>;
+
+export type ChangeEmailInput = FormChangeEmailInput & ApplicationBaseInput;
+
+export interface ConfirmChangeEmailInput {
+  uuid: string;
+  confirmation_email_token: string;
+}

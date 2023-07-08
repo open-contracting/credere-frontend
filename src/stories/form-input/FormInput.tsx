@@ -186,6 +186,7 @@ export type FormInputProps = {
   name: string;
   label: string;
   big?: boolean;
+  fullWidth?: boolean;
   noIcon?: boolean;
   placeholder?: string;
   helperText?: string;
@@ -250,6 +251,7 @@ export function FormInput({
   placeholder,
   helperText,
   big = true,
+  fullWidth = true,
   noIcon = false,
   type,
   labelClassName,
@@ -271,7 +273,7 @@ export function FormInput({
       defaultValue=""
       name={name}
       render={({ field }) => (
-        <FormControl fullWidth sx={{ mb: 2 }} className={formControlClasses} error={!!fieldError}>
+        <FormControl fullWidth={fullWidth} sx={{ mb: 2 }} className={formControlClasses} error={!!fieldError}>
           <Text fontVariant={fontVariant} className={`${big ? AUTH_LABELS_CLASSNAMES : ''} ${labelClassName}`}>
             {label}
           </Text>
@@ -280,7 +282,7 @@ export function FormInput({
               type={type}
               startAdornment={noIcon ? undefined : getIcon(type)}
               {...field}
-              fullWidth
+              fullWidth={fullWidth}
               placeholder={placeholder}
               disableUnderline
               error={!!fieldError}
@@ -304,7 +306,7 @@ export function FormInput({
               value={field.value}
               onBlur={field.onBlur}
               onChange={field.onChange}
-              fullWidth
+              fullWidth={fullWidth}
               placeholder={placeholder}
               disableUnderline
               error={!!fieldError}
@@ -317,7 +319,7 @@ export function FormInput({
               type={type}
               startAdornment={noIcon ? undefined : getIcon(type)}
               {...field}
-              fullWidth
+              fullWidth={fullWidth}
               placeholder={placeholder}
               disableUnderline
               error={!!fieldError}
@@ -347,7 +349,7 @@ export function FormInput({
                   variant: 'standard',
                   value: dayjs(field.value),
                   onBlur: field.onBlur,
-                  fullWidth: true,
+                  fullWidth,
                   placeholder,
                   error: !!fieldError,
                 },
@@ -376,7 +378,7 @@ export function FormInput({
                   variant: 'standard',
                   value: dayjs(field.value),
                   onBlur: field.onBlur,
-                  fullWidth: true,
+                  fullWidth,
                   placeholder,
                   error: !!fieldError,
                 },
@@ -404,7 +406,7 @@ export function FormInput({
                 textField: {
                   value: dayjs(field.value),
                   onBlur: field.onBlur,
-                  fullWidth: true,
+                  fullWidth,
                   placeholder,
                   error: !!fieldError,
                 },
@@ -427,7 +429,7 @@ export function FormInput({
               value={field.value}
               onBlur={field.onBlur}
               onChange={field.onChange}
-              fullWidth
+              fullWidth={fullWidth}
               placeholder={placeholder}
               disableUnderline
               error={!!fieldError}
@@ -455,6 +457,7 @@ export function FormInput({
 FormInput.defaultProps = {
   noIcon: false,
   big: true,
+  fullWidth: true,
   placeholder: undefined,
   helperText: undefined,
   labelClassName: '',

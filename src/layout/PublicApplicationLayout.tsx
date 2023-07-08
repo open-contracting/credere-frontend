@@ -32,7 +32,12 @@ export default function PublicApplicationLayout() {
       const { application } = applicationContext.state.data;
       const { pathname } = location;
       const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
-      if (application.status === APPLICATION_STATUS.APPROVED) {
+      if (lastSegment === 'change-primary-email') return;
+      if (application.status === APPLICATION_STATUS.CONTRACT_UPLOADED) {
+        if (lastSegment !== 'upload-contract-completed') {
+          navigate('./upload-contract-completed');
+        }
+      } else if (application.status === APPLICATION_STATUS.APPROVED) {
         if (lastSegment !== 'upload-contract' && !application.contract_amount_submitted) {
           navigate('./upload-contract');
         } else if (lastSegment !== 'upload-contract-completed' && application.contract_amount_submitted) {

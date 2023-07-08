@@ -1,5 +1,7 @@
 import {
   ApplicationBaseInput,
+  ChangeEmailInput,
+  ConfirmChangeEmailInput,
   ContractAmountInput,
   DeclineApplicationInput,
   DeclineFeedbackInput,
@@ -86,5 +88,15 @@ export const uploadContractFn = async (payload: UploadContractInput) => {
 
 export const uploadContractConfirmationFn = async (payload: ContractAmountInput) => {
   const response = await publicApi.post<IApplicationResponse>('applications/confirm-upload-contract', payload);
+  return response.data;
+};
+
+export const changeEmailFn = async (payload: ChangeEmailInput) => {
+  const response = await publicApi.post<ChangeEmailInput>('applications/change-email', payload);
+  return response.data;
+};
+
+export const confirmChangeEmailFn = async (payload: ConfirmChangeEmailInput) => {
+  const response = await publicApi.post<ChangeEmailInput>('applications/confirm-change-email', payload);
   return response.data;
 };

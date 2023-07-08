@@ -1,5 +1,3 @@
- 
-
 /* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box } from '@mui/material';
@@ -102,7 +100,7 @@ function IntroMsme() {
               <Checkbox
                 name="agree_topass_info_to_banking_partner"
                 defaultValue={false}
-                label={t('A agree for my details to be passed onto the banking partner.')}
+                label={t('I agree for my details to be passed onto the banking partner.')}
               />
               <Checkbox
                 name="accept_terms_and_conditions"

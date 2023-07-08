@@ -1,5 +1,4 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import BaseLayout from 'src/layout/BaseLayout';
 import PublicApplicationLayout from 'src/layout/PublicApplicationLayout';
@@ -39,6 +38,7 @@ import ReviewContract from '../pages/fi/ReviewContract';
 import StageFiveApproved from '../pages/fi/StageFiveApproved';
 import StageFiveRejected from '../pages/fi/StageFiveRejected';
 import ViewApplication from '../pages/fi/ViewApplication';
+import ChangePrimaryEmail from '../pages/msme/ChangePrimaryEmail';
 import ConfirmCreditProduct from '../pages/msme/ConfirmCreditProduct';
 import UploadContract from '../pages/msme/UploadContract';
 import UploadContractCompleted from '../pages/msme/UploadContractCompleted';
@@ -53,7 +53,7 @@ import Settings from '../pages/ocp/Settings';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 1, // 1 minute
+      staleTime: 1000 * 5, // 5 seconds
     },
   },
 });
@@ -287,6 +287,10 @@ const router = createBrowserRouter([
         path: 'decline-completed',
         element: <DeclineCompleted />,
       },
+      {
+        path: 'change-primary-email',
+        element: <ChangePrimaryEmail />,
+      },
     ],
     errorElement: <RouterErrorPage />,
   },
@@ -348,7 +352,7 @@ export function AppRouter() {
             <ApplicationContextProvider>
               <QueryClientProvider client={queryClient}>
                 <RouterProvider router={router} />
-                <ReactQueryDevtools initialIsOpen={false} />
+                {/* <ReactQueryDevtools initialIsOpen={false} /> */}
               </QueryClientProvider>
             </ApplicationContextProvider>
           </SecureApplicationContextProvider>

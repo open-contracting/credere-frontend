@@ -12,7 +12,7 @@ import { z } from 'zod';
 import { getApplicationFn } from '../../api/private';
 import ApplicationAwardTable from '../../components/ApplicationAwardTable';
 import ApplicationBorrowerTable from '../../components/ApplicationBorrowerTable';
-import { QUERY_KEYS } from '../../constants';
+import { COMPLETED_STATUS, QUERY_KEYS } from '../../constants';
 import { useParamsTypeSafe } from '../../hooks/useParamsTypeSafe';
 import { IApplication } from '../../schemas/application';
 import LinkButton from '../../stories/link-button/LinkButton';
@@ -45,7 +45,9 @@ export function ApplicationDetail({ application, readonly }: ApplicationDetailPr
           </div>
         </div>
       </div>
-      <Text className="mb-8">{t('Review and update missing data.')}</Text>
+      {!COMPLETED_STATUS.includes(application.status) && (
+        <Text className="mb-8">{t('Review and update missing data.')}</Text>
+      )}
       <Title type="section" className="mb-0" label={t('Award Data')} />
       <LinkButton
         className="my-2 px-1"

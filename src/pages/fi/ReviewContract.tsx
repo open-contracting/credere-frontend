@@ -33,11 +33,6 @@ function ReviewContract() {
   const application = applicationContext.state.data;
   const borrower_documents = application?.borrower_documents;
 
-  const onDownloadApplication = () => {
-    // eslint-disable-next-line no-console
-    console.log('download application');
-  };
-
   const onDownloadContract = () => {
     setIdToDownload(contract?.id);
   };
@@ -71,6 +66,11 @@ function ReviewContract() {
 
   const onGoHomeHandler = () => {
     navigate('/');
+  };
+
+  const onDownloadApplication = () => {
+    // eslint-disable-next-line no-console
+    console.log('download application');
   };
 
   const methods = useForm<FormCompleteApplicationInput>({

@@ -90,7 +90,7 @@ export const creditProductSchema = object({
       .gte(0, t('Other fees total amount must be greater or equal than 0')),
   ),
   other_fees_description: string().min(1, t('Other fees description is required')),
-  more_info_url: string().url(t('More info URL is invalid')),
+  more_info_url: string().url(t('URL is invalid (Hint: include http:// or https://)')),
 })
   .refine((data) => data.lower_limit < data.upper_limit, {
     path: ['lower_limit'],
