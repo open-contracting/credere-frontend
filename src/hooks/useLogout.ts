@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { logoutUserFn } from '../api/auth';
-import { setAccessTokenToHeaders } from '../api/axios';
+import { resetAuthApi } from '../api/axios';
 import { DISPATCH_ACTIONS } from '../constants';
 import useStateContext from './useStateContext';
 
@@ -29,8 +29,9 @@ export default function useSignOut(): IUseSignOut {
       });
     } finally {
       queryClient.invalidateQueries();
+      queryClient.clear();
       stateContext.dispatch({ type: DISPATCH_ACTIONS.SET_USER, payload: null });
-      setAccessTokenToHeaders(null);
+      resetAuthApi();
       navigate('/login');
     }
   }, [enqueueSnackbar, navigate, queryClient, stateContext, t]);

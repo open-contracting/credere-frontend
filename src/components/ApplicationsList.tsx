@@ -15,6 +15,7 @@ import {
   PAGE_SIZES,
   QUERY_KEYS,
   STARTED_STATUS,
+  USER_TYPES,
 } from '../constants';
 import useStartApplication from '../hooks/useStartApplication';
 import {
@@ -149,7 +150,7 @@ const actionsOCP = (row: ExtendendApplication) => (
 );
 
 interface ApplicationListProps {
-  type: 'FI' | 'OCP';
+  type: USER_TYPES;
 }
 
 export function ApplicationList({ type }: ApplicationListProps) {
@@ -188,7 +189,7 @@ export function ApplicationList({ type }: ApplicationListProps) {
   const { data } = useQuery({
     queryKey: [QUERY_KEYS.applications, payload],
     queryFn: async (): Promise<IApplicationsListResponse | null> => {
-      if (type === 'OCP') {
+      if (type === USER_TYPES.OCP) {
         const response = await getApplicationsOCP(payload);
         return response;
       }
@@ -222,7 +223,10 @@ export function ApplicationList({ type }: ApplicationListProps) {
     }
   }, [data]);
 
-  const headCells = useMemo(() => (type === 'OCP' ? [...headCellsBase, ...headCellsOCP] : headCellsBase), [type]);
+  const headCells = useMemo(
+    () => (type === USER_TYPES.OCP ? [...headCellsBase, ...headCellsOCP] : headCellsBase),
+    [type],
+  );
 
   const onStartApplicationHandler = useCallback(
     (id: number) => {
@@ -236,14 +240,14 @@ export function ApplicationList({ type }: ApplicationListProps) {
   return (
     <ApplicationDataTable
       rows={rows}
-      useEmptyRows={false}
+      useEmptyRows
       handleRequestSort={handleRequestSort}
       headCells={headCells}
       pagination={{
         totalCount,
         handleChangePage,
       }}
-      actions={type === 'OCP' ? actionsOCP : actionsFI}
+      actions={type === USER_TYPES.OCP ? actionsOCP : actionsFI}
     />
   );
 }

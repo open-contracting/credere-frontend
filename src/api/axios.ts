@@ -35,6 +35,13 @@ export const refreshAccessTokenFn = async () => {
   return response.data;
 };
 
+export const resetAuthApi = () => {
+  if (globalConfig.headers) {
+    delete globalConfig.headers.Authorization;
+  }
+  delete authApi.defaults.headers.Authorization;
+};
+
 export const setAccessTokenToHeaders = (accessToken: string | null) => {
   if (!accessToken) {
     removeUser();
@@ -42,14 +49,7 @@ export const setAccessTokenToHeaders = (accessToken: string | null) => {
   }
 
   saveAccessToken(accessToken);
-  authApi.interceptors.request.use(
-    (config) => {
-      // eslint-disable-next-line no-param-reassign
-      config.headers.Authorization = `Bearer ${accessToken}`;
-      return config;
-    },
-    (error) => Promise.reject(error),
-  );
+  authApi.defaults.headers.Authorization = `Bearer ${accessToken}`;
 };
 
 authApi.interceptors.response.use(

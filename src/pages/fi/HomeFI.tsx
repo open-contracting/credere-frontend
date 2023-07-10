@@ -4,6 +4,7 @@ import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
 import ApplicationsList from '../../components/ApplicationsList';
+import { USER_TYPES } from '../../constants';
 import DashboardItemContainer from '../../stories/dashboard/DashboardItemContainer';
 
 export function HomeFI() {
@@ -63,7 +64,7 @@ export function HomeFI() {
           'Approve applications by selecting the start or continue options. Completed applications are only stored for one week after approval.',
         )}
       </Text>
-      <ApplicationsList type="FI" />
+      <ApplicationsList type={USER_TYPES.FI} />
     </>
   );
 }

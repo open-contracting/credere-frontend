@@ -281,7 +281,7 @@ export function DataTable<T>({
                   style={{
                     height: 53 * emptyRows,
                   }}>
-                  <DataTableCell colSpan={5} />
+                  <DataTableCell colSpan={headCells.length + (actions ? 1 : 0)} />
                 </TableRow>
               )}
             </TableBody>
