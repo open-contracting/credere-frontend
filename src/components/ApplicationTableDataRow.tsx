@@ -21,6 +21,7 @@ export interface ApplicationTableAwardDataRowProps extends ApplicationTableDataR
 export interface ApplicationTableBorrowerDataRowProps extends ApplicationTableDataRowProps {
   name: keyof IBorrower;
   borrower: IBorrower;
+  withoutVerify?: boolean;
   verifiedData: { [key: string]: boolean };
   updateValue?: (value: any, name: keyof IUpdateBorrower) => void;
   verifyData?: (value: boolean, name: keyof IUpdateBorrower) => void;

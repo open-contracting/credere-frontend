@@ -113,25 +113,23 @@ export function ApplicationBorrowerTable({
             />
             <ApplicationTableDataBorrowerRow
               isLoading={isLoading || isLoadingVerifyDataField}
-              readonly={readonly}
-              verifiedData={application.secop_data_verification}
-              updateValue={updateValue}
-              verifyData={allowDataVerification ? verifyDataField : undefined}
-              missingData={borrower.missing_data}
+              readonly
+              withoutVerify
               name="size"
               label={t('Size')}
+              missingData={borrower.missing_data}
+              verifiedData={application.secop_data_verification}
               borrower={borrower}
               formatter={renderSize}
             />
             <ApplicationTableDataBorrowerRow
               isLoading={isLoading || isLoadingVerifyDataField}
-              readonly={readonly}
-              verifiedData={application.secop_data_verification}
-              updateValue={updateValue}
-              verifyData={allowDataVerification ? verifyDataField : undefined}
-              missingData={borrower.missing_data}
+              readonly
+              withoutVerify
               name="sector"
               label={t('Sector')}
+              missingData={borrower.missing_data}
+              verifiedData={application.secop_data_verification}
               borrower={borrower}
               formatter={renderSector}
             />

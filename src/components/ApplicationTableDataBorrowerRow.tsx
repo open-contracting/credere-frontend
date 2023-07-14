@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TableRow } from '@mui/material';
+import { useT } from '@transifex/react';
 
 import { IUpdateBorrower } from '../schemas/application';
 import { ApplicationTableBorrowerDataRowProps } from './ApplicationTableDataRow';
@@ -8,6 +9,7 @@ import DataAvailabilityForm from './DataAvailabilityForm';
 import { DataTableCell } from './DataTable';
 import DataVerificationForm from './DataVerificationForm';
 
+const DATA_REQUESTED_FROM_MSME = ['size', 'sector'];
 export function ApplicationTableDataBorrowerRow({
   label,
   name,
@@ -20,12 +22,16 @@ export function ApplicationTableDataBorrowerRow({
   preWhitespace,
   updateValue,
   verifyData,
+  withoutVerify,
   isLoading,
   readonly,
 }: ApplicationTableBorrowerDataRowProps) {
+  const t = useT();
+
   const value = borrower[name];
   const missing = missingData[name] === undefined ? true : missingData[name];
-  const verified = verifiedData[name] || false;
+
+  const verified = (verifiedData && verifiedData[name]) || false;
 
   const formattedValue = formatter ? formatter(value) : value;
   const verifyDataValue = (verify: boolean) => {
@@ -38,9 +44,15 @@ export function ApplicationTableDataBorrowerRow({
     <TableRow>
       <DataTableCell>{label}</DataTableCell>
       <DataTableCell>
-        <DataAvailability available={!missing} name={label} readonly={readonly} />
+        <DataAvailability
+          available={DATA_REQUESTED_FROM_MSME.includes(name) || !missing}
+          name={label}
+          readonly={readonly}
+        />
       </DataTableCell>
-      {!missing && <DataTableCell className={preWhitespace ? 'whitespace-pre' : ''}>{formattedValue}</DataTableCell>}
+      {(!missing || withoutVerify) && (
+        <DataTableCell className={preWhitespace ? 'whitespace-pre' : ''}>{formattedValue}</DataTableCell>
+      )}
       {missing && updateValue && (
         <DataTableCell>
           <DataAvailabilityForm
@@ -57,6 +69,7 @@ export function ApplicationTableDataBorrowerRow({
       <DataTableCell>
         <DataVerificationForm
           name={name}
+          customLabel={withoutVerify ? t('Completed by MSME') : undefined}
           value={verified}
           readonly={readonly}
           verifyData={verifyDataValue}
@@ -73,6 +86,7 @@ ApplicationTableDataBorrowerRow.defaultProps = {
   preWhitespace: false,
   type: undefined,
   formLabel: undefined,
+  withoutVerify: false,
 };
 
 export default ApplicationTableDataBorrowerRow;

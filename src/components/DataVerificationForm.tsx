@@ -1,4 +1,3 @@
- 
 import { Box } from '@mui/material';
 
 import { Switch } from '../stories/switch/Switch';
@@ -8,13 +7,21 @@ interface DataVerificationFormProps {
   name: string;
   value: boolean;
   readonly: boolean;
+  customLabel?: string;
   verifyData: (value: boolean) => void;
   isLoading: boolean;
 }
 
-export function DataVerificationForm({ name, value, isLoading, readonly, verifyData }: DataVerificationFormProps) {
+export function DataVerificationForm({
+  name,
+  value,
+  isLoading,
+  readonly,
+  customLabel,
+  verifyData,
+}: DataVerificationFormProps) {
   if (readonly) {
-    return <DataVerificationStatus verified={value} name={name} />;
+    return <DataVerificationStatus verified={value} name={name} customLabel={customLabel} />;
   }
 
   return (
@@ -34,5 +41,9 @@ export function DataVerificationForm({ name, value, isLoading, readonly, verifyD
     </Box>
   );
 }
+
+DataVerificationForm.defaultProps = {
+  customLabel: undefined,
+};
 
 export default DataVerificationForm;

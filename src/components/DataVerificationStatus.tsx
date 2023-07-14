@@ -18,9 +18,10 @@ const getIcon = (verified: boolean, name: string) => {
 interface DataVerificationStatusProps {
   verified: boolean;
   name: string;
+  customLabel?: string;
 }
 
-export function DataVerificationStatus({ verified, name }: DataVerificationStatusProps) {
+export function DataVerificationStatus({ verified, name, customLabel }: DataVerificationStatusProps) {
   const t = useT();
 
   return (
@@ -28,10 +29,14 @@ export function DataVerificationStatus({ verified, name }: DataVerificationStatu
       {getIcon(verified, name)}
 
       <Text fontVariant className="ml-3 mb-0 text-sm">
-        {verified ? t('Yes') : t('No')}
+        {customLabel || (verified ? t('Yes') : t('No'))}
       </Text>
     </Box>
   );
 }
+
+DataVerificationStatus.defaultProps = {
+  customLabel: undefined,
+};
 
 export default DataVerificationStatus;
