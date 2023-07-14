@@ -27,7 +27,7 @@ import {
 import FormInput from '../../stories/form-input/FormInput';
 import FormSelect from '../../stories/form-select/FormSelect';
 import RadioGroup from '../../stories/radio-group/RadioGroup';
-import { formatCurrency, formatDateFromString } from '../../util';
+import { addMonthsToDate, formatCurrency, formatDateFromString, isDateBeforeMonths } from '../../util';
 
 const DEBOUNCE_TIME = 800;
 function ViewCreditOptions() {
@@ -38,7 +38,22 @@ function ViewCreditOptions() {
   const { isLoading, selectCreditProductMutation } = useSelectCreditProduct();
 
   const methodsMainForm = useForm<CreditOptionsInput>({
-    resolver: zodResolver(creditOptionsSchema),
+    resolver: zodResolver(
+      creditOptionsSchema.refine(
+        (formData) =>
+          !Number(applicationContext.state.data?.award.award_amount) ||
+          Number(formData.amount_requested) <= Number(applicationContext.state.data?.award.award_amount) * 0.9,
+        {
+          path: ['amount_requested'],
+          message: t('Value limit is {max_value}', {
+            max_value: `${applicationContext.state.data?.award.award_currency} ${formatCurrency(
+              Number(applicationContext.state.data?.award.award_amount) * 0.9,
+              applicationContext.state.data?.award.award_currency,
+            )}`,
+          }),
+        },
+      ),
+    ),
     defaultValues: {
       borrower_size: applicationContext.state.data?.application.calculator_data.borrower_size || undefined,
       sector: applicationContext.state.data?.borrower.sector || undefined,
@@ -53,7 +68,23 @@ function ViewCreditOptions() {
   } = methodsMainForm;
 
   const methodsLoanForm = useForm<RepaymentTermsInput>({
-    resolver: zodResolver(repaymentTermsSchema),
+    resolver: zodResolver(
+      repaymentTermsSchema.refine(
+        (formData) =>
+          !applicationContext.state.data?.award.contractperiod_startdate ||
+          isDateBeforeMonths(
+            formData.payment_start_date,
+            applicationContext.state.data?.award.contractperiod_startdate,
+            3,
+          ),
+        {
+          path: ['payment_start_date'],
+          message: t('Start date should be before {max_date}', {
+            max_date: addMonthsToDate(applicationContext.state.data?.award.contractperiod_startdate, 3),
+          }),
+        },
+      ),
+    ),
     defaultValues: {
       repayment_years: applicationContext.state.data?.application.calculator_data.repayment_years || undefined,
       repayment_months: applicationContext.state.data?.application.calculator_data.repayment_months || undefined,
@@ -141,10 +172,12 @@ function ViewCreditOptions() {
   const paramsForText = useMemo(() => {
     if (!applicationContext.state.data) return {};
     return {
-      award_contract_value: `${applicationContext.state.data.award.award_currency} ${formatCurrency(
-        applicationContext.state.data.award.award_amount,
-        applicationContext.state.data.award.award_currency,
-      )}`,
+      award_contract_value: Number(applicationContext.state.data.award.award_amount)
+        ? `${applicationContext.state.data.award.award_currency} ${formatCurrency(
+            applicationContext.state.data.award.award_amount,
+            applicationContext.state.data.award.award_currency,
+          )}`
+        : '',
       award_contract_startdate: `${formatDateFromString(applicationContext.state.data.award.contractperiod_startdate)}`,
     };
   }, [applicationContext.state.data]);
@@ -252,7 +285,7 @@ function ViewCreditOptions() {
 
       {/* Loan Form */}
 
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="mt-8 pb-10 grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 md:mr-10">
           <Title type="subsection" className="mb-2" label={t('For loans')} />
 
@@ -275,12 +308,12 @@ function ViewCreditOptions() {
                 helperText={
                   applicationContext.state.data?.award.contractperiod_startdate
                     ? t(
-                        'The latest the payment start date can be is three months after your contract begins on {award_contract_startdate}.',
+                        'The latest the payment start date can is three months after your contract begins on {award_contract_startdate}.',
                         {
                           award_contract_startdate: paramsForText.award_contract_startdate,
                         },
                       )
-                    : t('The latest the payment start date can be is three months after your contract begins.')
+                    : t('The latest the payment start date can be three months after your contract begins.')
                 }
                 big={false}
                 label={t('Payment start date')}

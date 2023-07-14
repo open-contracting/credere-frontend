@@ -3,6 +3,7 @@ import { t } from '@transifex/native';
 import { TypeOf, boolean, coerce, nativeEnum, object, string } from 'zod';
 
 import { APPLICATION_STATUS, DOCUMENTS_TYPE, MSME_TYPES } from '../constants';
+import { isDateAfterCurrentDate } from '../util';
 import { emailSchema } from './auth';
 
 const booleanRequiredSchema = boolean().refine((value) => value === true, {
@@ -74,7 +75,11 @@ export const repaymentTermsSchema = object({
     })
     .gte(0, t('Years must be greater or equal than ')),
   repayment_months: coerce.number().min(1, t('Months must be greater or equal than 1')),
-  payment_start_date: string().nonempty(t('Payment start date is required')),
+  payment_start_date: string()
+    .nonempty(t('Payment start date is required'))
+    .refine((value) => isDateAfterCurrentDate(value), {
+      message: t('Payment start date must be after current date'),
+    }),
 });
 
 export type RepaymentTermsInput = TypeOf<typeof repaymentTermsSchema>;

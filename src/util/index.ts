@@ -1,4 +1,5 @@
 import { t } from '@transifex/native';
+import dayjs from 'dayjs';
 import lodash from 'lodash';
 
 import {
@@ -113,3 +114,24 @@ export function getProperty(obj: any, propertyString: string): any {
 
   return result;
 }
+
+export const isDateBeforeMonths = (date: string, referenceDate: string, months: number) => {
+  const diffInMonths = dayjs(referenceDate).diff(date, 'month');
+
+  return diffInMonths > 0 && diffInMonths <= months;
+};
+
+export const addMonthsToDate = (date: string | undefined, months: number) => {
+  if (!date) {
+    return '';
+  }
+
+  const addedDate = dayjs(date).add(months, 'month');
+
+  return formatDate(addedDate.toDate());
+};
+
+export const isDateAfterCurrentDate = (date: string) => {
+  const currentDate = dayjs();
+  return dayjs(date).isAfter(currentDate, 'day');
+};
