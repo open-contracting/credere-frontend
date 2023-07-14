@@ -100,3 +100,8 @@ export const confirmChangeEmailFn = async (payload: ConfirmChangeEmailInput) => 
   const response = await publicApi.post<ChangeEmailInput>('applications/confirm-change-email', payload);
   return response.data;
 };
+
+export const findAlternativeCreditOptionFn = async (payload: ApplicationBaseInput) => {
+  const response = await publicApi.post<IApplicationResponse>('applications/find-alternative-credit-option', payload);
+  return response.data;
+};

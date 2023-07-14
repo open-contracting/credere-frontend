@@ -33,7 +33,9 @@ export default function PublicApplicationLayout() {
       const { pathname } = location;
       const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
       if (lastSegment === 'change-primary-email') return;
-      if (application.status === APPLICATION_STATUS.CONTRACT_UPLOADED) {
+      if (application.status === APPLICATION_STATUS.REJECTED) {
+        if (lastSegment !== 'find-alternative-credit' && lastSegment !== 'rejected') navigate('./rejected');
+      } else if (application.status === APPLICATION_STATUS.CONTRACT_UPLOADED) {
         if (lastSegment !== 'upload-contract-completed') {
           navigate('./upload-contract-completed');
         }

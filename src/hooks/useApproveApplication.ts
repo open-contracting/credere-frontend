@@ -1,12 +1,12 @@
 import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useT } from '@transifex/react';
-import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 
 import { approveApplicationFn } from '../api/private';
-import { DISPATCH_ACTIONS, ERRORS_MESSAGES, QUERY_KEYS } from '../constants';
+import { DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
 import { ApproveApplicationInput, IApplication } from '../schemas/application';
+import { handleRequestError } from '../util/validation';
 import useApplicationContext from './useSecureApplicationContext';
 
 type IUseApproveApplication = {
@@ -33,23 +33,7 @@ export default function useApproveApplication(): IUseApproveApplication {
       navigate('../stage-five-approved');
     },
     onError: (error) => {
-      if (axios.isAxiosError(error) && error.response) {
-        if (error.response.data && error.response.data.detail) {
-          if (ERRORS_MESSAGES[error.response.data.detail]) {
-            enqueueSnackbar(t(ERRORS_MESSAGES[error.response.data.detail]), {
-              variant: 'error',
-            });
-          } else {
-            enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-              variant: 'error',
-            });
-          }
-        }
-      } else {
-        enqueueSnackbar(t('Error approving the application. {error}', { error }), {
-          variant: 'error',
-        });
-      }
+      handleRequestError(error, enqueueSnackbar, t('Error approving the application. {error}', { error }));
     },
   });
 

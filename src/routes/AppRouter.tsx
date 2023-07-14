@@ -40,6 +40,8 @@ import StageFiveRejected from '../pages/fi/StageFiveRejected';
 import ViewApplication from '../pages/fi/ViewApplication';
 import ChangePrimaryEmail from '../pages/msme/ChangePrimaryEmail';
 import ConfirmCreditProduct from '../pages/msme/ConfirmCreditProduct';
+import ConfirmFindAlternativeCredit from '../pages/msme/ConfirmFindAlternativeCredit';
+import Rejected from '../pages/msme/Rejected';
 import UploadContract from '../pages/msme/UploadContract';
 import UploadContractCompleted from '../pages/msme/UploadContractCompleted';
 import UploadDocuments from '../pages/msme/UploadDocuments';
@@ -290,6 +292,14 @@ const router = createBrowserRouter([
       {
         path: 'change-primary-email',
         element: <ChangePrimaryEmail />,
+      },
+      {
+        path: 'rejected',
+        element: <Rejected />,
+      },
+      {
+        path: 'find-alternative-credit',
+        element: <ConfirmFindAlternativeCredit />,
       },
     ],
     errorElement: <RouterErrorPage />,

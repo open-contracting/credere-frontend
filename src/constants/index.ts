@@ -259,9 +259,11 @@ export const USER_TYPE_OPTIONS: FormSelectOption[] = [
 export enum ERROR_CODES {
   BORROWER_FIELD_VERIFICATION_MISSING = 'BORROWER_FIELD_VERIFICATION_MISSING',
   DOCUMENT_VERIFICATION_MISSING = 'DOCUMENT_VERIFICATION_MISSING',
+  APPLICATION_ALREADY_COPIED = 'APPLICATION_ALREADY_COPIED',
 }
 
 export const ERRORS_MESSAGES: { [key: string]: string } = {
   [ERROR_CODES.BORROWER_FIELD_VERIFICATION_MISSING]: t('Some borrower data field are not verified'),
   [ERROR_CODES.DOCUMENT_VERIFICATION_MISSING]: t('Some documents are not verified'),
+  [ERROR_CODES.APPLICATION_ALREADY_COPIED]: t('A new application has alredy been created from this one'),
 };
