@@ -162,6 +162,11 @@ function UploadDocuments() {
                   {t('Email changed! Check your old and new email addresses to confirm.')}
                 </Text>
               )}
+              {!data && application?.pending_email_confirmation && (
+                <Text className="mb-10 text-sm text-red font-light">
+                  {t('There is a pending email confirmation, check your inbox to confirm the new email.')}
+                </Text>
+              )}
             </Box>
           </FormProvider>
           <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
