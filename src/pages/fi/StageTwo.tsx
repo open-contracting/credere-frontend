@@ -13,6 +13,7 @@ import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
 import ApplicationDocumentsTable from '../../components/ApplicationDocumentsTable';
+import { APPLICATION_STATUS } from '../../constants';
 import useEmailToSME from '../../hooks/useEmailToSME';
 import { FormEmailInput, formEmailSchema } from '../../schemas/application';
 import FormInput from '../../stories/form-input/FormInput';
@@ -83,6 +84,7 @@ export function StageTwo() {
       <LinkButton
         className="mb-2 px-1"
         icon={EmailIcon}
+        disabled={application?.status === APPLICATION_STATUS.INFORMATION_REQUESTED}
         label={t('Email SME for documents')}
         onClick={onComposeEmailHandler}
       />

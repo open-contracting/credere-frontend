@@ -70,8 +70,8 @@ export function ApplicationTableDataBorrowerRow({
         <DataVerificationForm
           name={name}
           customLabel={withoutVerify ? t('Completed by MSME') : undefined}
-          value={verified}
-          readonly={readonly}
+          value={verified || Boolean(withoutVerify)}
+          readonly={readonly || !verifyData}
           verifyData={verifyDataValue}
           isLoading={verifyData ? isLoading : true}
         />

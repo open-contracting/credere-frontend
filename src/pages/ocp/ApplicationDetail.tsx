@@ -1,4 +1,4 @@
-import { Link as MUILink } from '@mui/material';
+import { Box, Link as MUILink } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { useT } from '@transifex/react';
 import axios from 'axios';
@@ -12,11 +12,14 @@ import { z } from 'zod';
 import { getApplicationFn } from '../../api/private';
 import ApplicationAwardTable from '../../components/ApplicationAwardTable';
 import ApplicationBorrowerTable from '../../components/ApplicationBorrowerTable';
-import { COMPLETED_STATUS, QUERY_KEYS } from '../../constants';
+import ApplicationDocumentsTable from '../../components/ApplicationDocumentsTable';
+import DataDisplay from '../../components/DataDisplay';
+import { APPLICATION_STATUS, COMPLETED_STATUS, QUERY_KEYS } from '../../constants';
 import { useParamsTypeSafe } from '../../hooks/useParamsTypeSafe';
 import { IApplication } from '../../schemas/application';
 import LinkButton from '../../stories/link-button/LinkButton';
 import { Loader } from '../../stories/loader/Loader';
+import { renderApplicationStatus } from '../../util';
 import ApplicationErrorPage from '../msme/ApplicationErrorPage';
 
 export interface ApplicationDetailProps {
@@ -45,7 +48,15 @@ export function ApplicationDetail({ application, readonly }: ApplicationDetailPr
           </div>
         </div>
       </div>
-      {!COMPLETED_STATUS.includes(application.status) && (
+      <Box className="flex flex-row items-center mb-2">
+        <Text className="text-lg mr-2">{t('Status:')}</Text>
+        <Text className="text-lg font-light">{renderApplicationStatus(application.status)}</Text>
+      </Box>
+
+      {application.status === APPLICATION_STATUS.APPROVED && <DataDisplay data={application.lender_approved_data} />}
+
+      {application.status === APPLICATION_STATUS.REJECTED && <DataDisplay data={application.lender_rejected_data} />}
+      {!COMPLETED_STATUS.includes(application.status) && !readonly && (
         <Text className="mb-8">{t('Review and update missing data.')}</Text>
       )}
       <Title type="section" className="mb-0" label={t('Award Data')} />
@@ -59,7 +70,9 @@ export function ApplicationDetail({ application, readonly }: ApplicationDetailPr
       />
       <ApplicationAwardTable application={application} readonly={readonly} />
       <Title type="section" className="mt-10 mb-4" label={t('MSME Data')} />
-      <ApplicationBorrowerTable application={application} readonly={readonly} />
+      <ApplicationBorrowerTable application={application} readonly={readonly} allowDataVerification={false} />
+      <Title type="section" className="mt-10 mb-4" label={t('MSME Documents')} />
+      <ApplicationDocumentsTable readonly application={application} />
       <Button className="my-8" primary={false} label={t('Go back')} component={Link} to="/admin/applications" />
     </>
   );
