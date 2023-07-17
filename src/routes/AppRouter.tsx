@@ -42,6 +42,7 @@ import ChangePrimaryEmail from '../pages/msme/ChangePrimaryEmail';
 import ConfirmCreditProduct from '../pages/msme/ConfirmCreditProduct';
 import ConfirmFindAlternativeCredit from '../pages/msme/ConfirmFindAlternativeCredit';
 import Rejected from '../pages/msme/Rejected';
+import TermsAndConditions from '../pages/msme/TermsAndConditions';
 import UploadContract from '../pages/msme/UploadContract';
 import UploadContractCompleted from '../pages/msme/UploadContractCompleted';
 import UploadDocuments from '../pages/msme/UploadDocuments';
@@ -241,6 +242,15 @@ const router = createBrowserRouter([
     element: (
       <PublicPageLayout>
         <FrequentlyAskedQuestionsPage />
+      </PublicPageLayout>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/terms-and-conditions',
+    element: (
+      <PublicPageLayout>
+        <TermsAndConditions />
       </PublicPageLayout>
     ),
     errorElement: <RouterErrorPage />,

@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import { useT } from '@transifex/react';
 import { useMemo } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FAQComponent from 'src/components/FAQComponent';
 import useAccessScheme from 'src/hooks/useAccessScheme';
 import useApplicationContext from 'src/hooks/useApplicationContext';
@@ -107,6 +107,13 @@ function IntroMsme() {
                 defaultValue={false}
                 label={t('I have read the terms and conditions for the credit guarantee scheme.')}
               />
+              <Box>
+                <Text className="inline-block">{t('You can read')} </Text>
+
+                <Link className="text-darkest" to="/terms-and-conditions">
+                  <Text className="inline-block underline ml-1 mb-X">{t('the terms and conditions in this link')}</Text>
+                </Link>
+              </Box>
               <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
                 <div>
                   <Button className="md:mr-4" label={t('Acces the scheme')} type="submit" disabled={isLoading} />
