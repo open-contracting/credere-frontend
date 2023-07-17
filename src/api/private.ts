@@ -21,6 +21,7 @@ import {
   UploadComplianceInput,
 } from '../schemas/application';
 import { CreateUserInput, IUser, IUsersListResponse, UpdateUserInput } from '../schemas/auth';
+import { StatisticsFI, StatisticsOCPoptIn, StatisticsParmsInput } from '../schemas/statitics';
 import { authApi } from './axios';
 
 export const getApplicationsOCP = async (payload: PaginationInput) => {
@@ -156,5 +157,20 @@ export const rejectApplicationFn = async (rejectPayload: RejectApplicationInput)
 export const completeApplicationFn = async (completePayload: CompleteApplicationInput) => {
   const { application_id, ...payload } = completePayload;
   const response = await authApi.post<IApplication>(`applications/${application_id}/complete-application`, payload);
+  return response.data;
+};
+
+export const getStatisticsFI = async () => {
+  const response = await authApi.get<StatisticsFI>('statistics-fi');
+  return response.data;
+};
+
+export const getStatisticsOCPoptIn = async () => {
+  const response = await authApi.get<StatisticsOCPoptIn>('statistics-ocp/opt-in');
+  return response.data;
+};
+
+export const getStatisticsOCP = async (params: StatisticsParmsInput) => {
+  const response = await authApi.get<StatisticsFI>('statistics-ocp', { params });
   return response.data;
 };

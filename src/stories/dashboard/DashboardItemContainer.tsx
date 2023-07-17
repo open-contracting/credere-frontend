@@ -5,16 +5,20 @@ export type DashboardColor = 'default' | 'red';
 
 type DashboardItemContainerProps = {
   className?: string;
+  valueClassName?: string;
   boxClassName?: string;
-  value: string;
+  value: string | number;
+  suffix?: string;
   description: string;
   color?: DashboardColor;
 };
 
 export function DashboardItemContainer({
   className,
+  valueClassName,
   boxClassName,
   value,
+  suffix,
   description,
   color = 'default',
 }: DashboardItemContainerProps) {
@@ -23,27 +27,18 @@ export function DashboardItemContainer({
       <Box
         className={twMerge([
           color === 'default' ? 'border-moodyBlue' : 'border-red',
-          `px-6 py-4 border-solid border-2 overflow-hidden bg-white ${boxClassName}`,
+          `px-6 py-4 flex flex-col justify-center border-solid border-2 overflow-hidden bg-white ${boxClassName}`,
         ])}
         sx={{
           borderTopLeftRadius: '20px',
           width: '230px',
           height: '110px',
         }}>
-        <Typography
-          variant="h2"
-          sx={{
-            fontSize: '38px',
-          }}
-          className={twMerge(`text-darkest font-medium mb-0 ${className}`)}>
+        <Typography variant="h2" className={twMerge(`text-darkest text-[35px] font-medium mb-0 ${valueClassName}`)}>
           {value}
+          {suffix}
         </Typography>
-        <Typography
-          variant="h2"
-          sx={{
-            fontSize: '15px',
-          }}
-          className={twMerge(`text-darkest font-normal mb-0 ${className}`)}>
+        <Typography variant="h2" className={twMerge(`text-darkest text-[15px] font-normal mb-0 ${className}`)}>
           {description}
         </Typography>
       </Box>
@@ -53,7 +48,9 @@ export function DashboardItemContainer({
 
 DashboardItemContainer.defaultProps = {
   className: '',
+  valueClassName: '',
   boxClassName: '',
+  suffix: '',
   color: 'default' as DashboardColor,
 };
 

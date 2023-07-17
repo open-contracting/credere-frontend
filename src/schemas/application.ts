@@ -36,12 +36,29 @@ export const declineApplicationSchema = object({
 
 export type DeclineApplicationInput = TypeOf<typeof declineApplicationSchema>;
 
+// eslint-disable-next-line no-shadow
+export enum DECLINE_FEEDBACK {
+  dont_need_access_credit = 'dont_need_access_credit',
+  already_have_acredit = 'already_have_acredit',
+  preffer_to_go_to_bank = 'preffer_to_go_to_bank',
+  dont_want_access_credit = 'dont_want_access_credit',
+  other = 'other',
+}
+
+export const DECLINE_FEEDBACK_NAMES: { [key: string]: string } = {
+  [DECLINE_FEEDBACK.dont_need_access_credit]: t("Don't need access credit"),
+  [DECLINE_FEEDBACK.already_have_acredit]: t('Already have acredit'),
+  [DECLINE_FEEDBACK.preffer_to_go_to_bank]: t('Preffer to go to bank'),
+  [DECLINE_FEEDBACK.dont_want_access_credit]: t("Don't want access credit"),
+  [DECLINE_FEEDBACK.other]: t('Other'),
+};
+
 export const declineFeedbackSchema = object({
-  dont_need_access_credit: boolean(),
-  already_have_acredit: boolean(),
-  preffer_to_go_to_bank: boolean(),
-  dont_want_access_credit: boolean(),
-  other: boolean(),
+  [DECLINE_FEEDBACK.dont_need_access_credit]: boolean(),
+  [DECLINE_FEEDBACK.already_have_acredit]: boolean(),
+  [DECLINE_FEEDBACK.preffer_to_go_to_bank]: boolean(),
+  [DECLINE_FEEDBACK.dont_want_access_credit]: boolean(),
+  [DECLINE_FEEDBACK.other]: boolean(),
   other_comments: string().optional(),
   uuid: UUIDType,
 });

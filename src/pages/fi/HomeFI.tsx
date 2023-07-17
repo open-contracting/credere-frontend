@@ -5,10 +5,15 @@ import Title from 'src/stories/title/Title';
 
 import ApplicationsList from '../../components/ApplicationsList';
 import { USER_TYPES } from '../../constants';
+import CURRENCY_FORMAT_OPTIONS from '../../constants/intl';
+import useGetStatisticsFI from '../../hooks/useGetStatisticsFI';
 import DashboardItemContainer from '../../stories/dashboard/DashboardItemContainer';
+import Loader from '../../stories/loader/Loader';
+import { formatCurrency } from '../../util';
 
 export function HomeFI() {
   const t = useT();
+  const { data, isLoading } = useGetStatisticsFI();
 
   return (
     <>
@@ -24,40 +29,108 @@ export function HomeFI() {
         )}
       </Text>
       <Title type="section" label={t('Dashboard')} className="mb-6" />
-      <Container className="p-0 lg:pr-20 ml-0">
-        <div className="grid lg:gap-10 grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-          <div className="col-span-1">
-            <DashboardItemContainer description={t('Application(s) received')} value="15" />
+      {data && !isLoading && (
+        <Container className="p-0 lg:pr-20 ml-0">
+          <div className="grid lg:gap-10 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+            <div className="col-span-1">
+              <DashboardItemContainer
+                description={t('Application(s) received')}
+                value={data.statistics_kpis.applications_received_count}
+              />
+            </div>
+            <div className="col-span-1">
+              <DashboardItemContainer
+                description={t('Application(s) in progress')}
+                value={data.statistics_kpis.applications_in_progress_count}
+              />
+            </div>
+            <div className="col-span-1">
+              <DashboardItemContainer
+                description={t('Application(s) approved')}
+                value={data.statistics_kpis.applications_approved_count}
+              />
+            </div>
+            <div className="col-span-1">
+              <DashboardItemContainer
+                color="red"
+                description={t('Application(s) rejected')}
+                value={data.statistics_kpis.applications_rejected_count}
+              />
+            </div>
           </div>
-          <div className="col-span-1">
-            <DashboardItemContainer description={t('Application(s) in progress')} value="17" />
+          <div className="grid lg:gap-10 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+            <div className="col-span-1">
+              <DashboardItemContainer
+                description={t('Application(s) with credit disbursed')}
+                value={data.statistics_kpis.applications_with_credit_disbursed_count}
+              />
+            </div>
+            <div className="col-span-1">
+              <DashboardItemContainer
+                suffix="%"
+                description={t('Approved application(s) with credit disbursed')}
+                value={data.statistics_kpis.proportion_of_disbursed}
+              />
+            </div>
+            <div className="col-span-1">
+              <DashboardItemContainer
+                color="red"
+                description={t('Application(s) overdue')}
+                value={data.statistics_kpis.applications_overdue_count}
+              />
+            </div>
+            <div className="col-span-1">
+              <DashboardItemContainer
+                color="red"
+                valueClassName="text-[30px]"
+                suffix={` ${t('days')}`}
+                description={t('Average time to process an application')}
+                value={data.statistics_kpis.average_processing_time}
+              />
+            </div>
           </div>
-          <div className="col-span-1">
-            <DashboardItemContainer description={t('Application(s) approved')} value="59" />
+          <div className="grid lg:gap-10 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+            <div className="col-span-1">
+              <DashboardItemContainer
+                suffix="%"
+                color="red"
+                description={t('MSME selecting your credit option')}
+                value={data.statistics_kpis.proportion_of_submitted_out_of_opt_in}
+              />
+            </div>
+            <div className="col-span-1">
+              <DashboardItemContainer
+                valueClassName="text-[20px]"
+                description={t('Average amount of credit requested')}
+                value={`${CURRENCY_FORMAT_OPTIONS.default.options.currency} ${formatCurrency(
+                  data.statistics_kpis.average_amount_requested,
+                  CURRENCY_FORMAT_OPTIONS.default.options.currency,
+                )}`}
+              />
+            </div>
+            <div className="col-span-1">
+              <DashboardItemContainer
+                valueClassName="text-[30px]"
+                suffix={` ${t('months')}`}
+                description={t('Average repayment period requested')}
+                value={data.statistics_kpis.average_repayment_period}
+              />
+            </div>
+            <div className="col-span-1">
+              <DashboardItemContainer
+                color="red"
+                description={t('Application(s) waiting on MSME for information')}
+                value={data.statistics_kpis.applications_waiting_for_information_count}
+              />
+            </div>
           </div>
-          <div className="col-span-1">
-            <DashboardItemContainer color="red" description={t('Application(s) declined')} value="1" />
-          </div>
-        </div>
-        <div className="grid lg:gap-10 grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-          <div className="col-span-1">
-            <DashboardItemContainer description={t('Applications with credit disbursed')} value="15" />
-          </div>
-          <div className="col-span-1">
-            <DashboardItemContainer description={t('Approved applications with credit disbursed')} value="62%" />
-          </div>
-          <div className="col-span-1">
-            <DashboardItemContainer color="red" description={t('Application(s) overdue')} value="59" />
-          </div>
-          <div className="col-span-1">
-            <DashboardItemContainer
-              color="red"
-              description={t('Average time to process an application')}
-              value="5.5 days"
-            />
-          </div>
-        </div>
-      </Container>
+        </Container>
+      )}
+      {!data && isLoading && (
+        <Container className="p-0 lg:pr-20 ml-0">
+          <Loader />
+        </Container>
+      )}
       <Title type="section" label={t('MSME applications')} className="mb-6 mt-4" />
       <Text className="mb-8">
         {t(

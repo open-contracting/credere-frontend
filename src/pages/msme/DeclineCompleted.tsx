@@ -18,7 +18,7 @@ function DeclineCompleted() {
           </Text>
           <Text className="mb-8">
             {t(
-              'If you have any more comments or questions, you can reach out to member of the Open Contracting Partnership team at: accesstocredit@open-contracting.org.',
+              'If you have any more comments or questions, you can reach out to member of the Open Contracting Partnership team at: credere@open-contracting.org.',
             )}
           </Text>
 

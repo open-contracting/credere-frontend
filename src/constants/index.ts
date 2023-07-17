@@ -32,6 +32,9 @@ export enum QUERY_KEYS {
   users = 'users',
   credit_product = 'credit_product',
   downloadDocument = 'downloadDocument',
+  statistics_fi = 'statistics_fi',
+  statistics_ocp = 'statistics_ocp',
+  statistics_ocp_opt_in = 'statistics_ocp_opt_in',
 }
 
 export const DISPATCH_ACTIONS = {

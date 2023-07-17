@@ -1,0 +1,45 @@
+import { useQuery } from '@tanstack/react-query';
+import { useT } from '@transifex/react';
+import { useSnackbar } from 'notistack';
+
+import { getStatisticsOCP } from '../api/private';
+import { QUERY_KEYS } from '../constants';
+import { StatisticsFI, StatisticsParmsInput } from '../schemas/statitics';
+import { handleRequestError } from '../util/validation';
+
+type IUseGetStatisticsOCP = {
+  data?: StatisticsFI;
+  isLoading: boolean;
+};
+
+export default function useGetStatisticsOCP(
+  initialDate: string | null,
+  finalDate: string | null,
+  lenderId: number | null,
+): IUseGetStatisticsOCP {
+  const t = useT();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const { data, isLoading } = useQuery<StatisticsFI>({
+    queryKey: [QUERY_KEYS.statistics_ocp, `${initialDate}-${finalDate}-${lenderId}`],
+    queryFn: () => {
+      const params: StatisticsParmsInput = {};
+      if (initialDate !== null) {
+        params.initial_date = initialDate;
+      }
+      if (finalDate !== null) {
+        params.final_date = finalDate;
+      }
+      if (lenderId !== null) {
+        params.lender_id = lenderId;
+      }
+      return getStatisticsOCP(params);
+    },
+    onSuccess: (dataResult) => dataResult,
+    onError: (error) => {
+      handleRequestError(error, enqueueSnackbar, t('Error getting statistics opt-in . {error}', { error }));
+    },
+  });
+
+  return { data, isLoading };
+}
