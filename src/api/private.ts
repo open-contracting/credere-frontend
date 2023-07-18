@@ -5,6 +5,7 @@ import {
   EmailToSMEInput,
   IApplication,
   IApplicationsListResponse,
+  IAward,
   IBorrowerDocument,
   ICreditProduct,
   ICreditProductBase,
@@ -157,6 +158,11 @@ export const rejectApplicationFn = async (rejectPayload: RejectApplicationInput)
 export const completeApplicationFn = async (completePayload: CompleteApplicationInput) => {
   const { application_id, ...payload } = completePayload;
   const response = await authApi.post<IApplication>(`applications/${application_id}/complete-application`, payload);
+  return response.data;
+};
+
+export const getPreviousAwardsFn = async (application_id: number) => {
+  const response = await authApi.get<IAward[]>(`applications/${application_id}/previous-awards`);
   return response.data;
 };
 

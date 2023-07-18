@@ -2,10 +2,12 @@
 import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
 import { useT } from '@transifex/react';
 
+import useGetPreviousAwards from '../hooks/useGetPreviousAwards';
 import useUpdateAward from '../hooks/useUpdateAward';
 import { IApplication, IUpdateAward } from '../schemas/application';
 import { formatCurrency, formatDateFromString, formatPaymentMethod } from '../util';
 import ApplicationTableDataAwardRow from './ApplicationTableDataAwardRow';
+import ApplicationTableDataPreviousAwardRow from './ApplicationTableDataPreviousAwardRow';
 import { DataTableHeadCell, DataTableHeadLabel } from './DataTable';
 
 export interface ApplicationAwardTableProps {
@@ -17,6 +19,7 @@ export interface ApplicationAwardTableProps {
 export function ApplicationAwardTable({ application, readonly = false, className }: ApplicationAwardTableProps) {
   const t = useT();
   const { updateAwardMutation, isLoading } = useUpdateAward();
+  const { data: previousAwards, isLoading: isLoadingPreviousAwards } = useGetPreviousAwards(application.id);
 
   const { award } = application;
 
@@ -156,6 +159,11 @@ export function ApplicationAwardTable({ application, readonly = false, className
               name="procurement_category"
               label={t('Contract Type')}
               award={award}
+            />
+            <ApplicationTableDataPreviousAwardRow
+              label={t('Previous Public Sector Contracts')}
+              isLoading={isLoadingPreviousAwards}
+              previousAwards={previousAwards}
             />
           </TableBody>
         </Table>

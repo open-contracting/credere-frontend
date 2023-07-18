@@ -15,6 +15,7 @@ import { useEffect, useMemo } from 'react';
 import SorterDownIcon from 'src/assets/icons/sorter-down.svg';
 import SorterUpIcon from 'src/assets/icons/sorter-up.svg';
 import SorterIcon from 'src/assets/icons/sorter.svg';
+import { twMerge } from 'tailwind-merge';
 
 import { PAGE_SIZES } from '../constants';
 import { formatCurrency, formatDateFromString } from '../util';
@@ -88,7 +89,9 @@ export function DataTableHeadCell(props: TableCellProps) {
     <TableCell
       sx={{ width: width || 'auto' }}
       {...props}
-      className={`px-4 py-5 border-solid border-l border-r-0 border-t-0 border-background bg-white ${className}`}>
+      className={twMerge(
+        `px-4 py-5 border-solid border-l border-r-0 border-t-0 border-background bg-white ${className}`,
+      )}>
       {children}
     </TableCell>
   );
@@ -103,7 +106,9 @@ export function DataTableCell(props: TableCellProps) {
   return (
     <TableCell
       {...props}
-      className={`px-4 text-darkest text-sm font-normal border-solid border-l border-r-0 border-t-0 border-background bg-white ${className}`}>
+      className={twMerge(
+        `px-4 text-darkest text-sm font-normal border-solid border-l border-r-0 border-t-0 border-background bg-white ${className}`,
+      )}>
       {children}
     </TableCell>
   );
@@ -112,7 +117,9 @@ export function DataTableCell(props: TableCellProps) {
 export function TransparentDataTableCell(props: TableCellProps) {
   const { children, className } = props;
   return (
-    <TableCell {...props} className={`px-4 text-darkest text-sm font-normal border-0 bg-background ${className}`}>
+    <TableCell
+      {...props}
+      className={twMerge(`px-4 text-darkest text-sm font-normal border-0 bg-background ${className}`)}>
       {children}
     </TableCell>
   );

@@ -32,6 +32,7 @@ export enum QUERY_KEYS {
   users = 'users',
   credit_product = 'credit_product',
   downloadDocument = 'downloadDocument',
+  awards = 'awards',
   statistics_fi = 'statistics_fi',
   statistics_ocp = 'statistics_ocp',
   statistics_ocp_opt_in = 'statistics_ocp_opt_in',
