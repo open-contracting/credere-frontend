@@ -255,7 +255,7 @@ export function HomeOCP() {
         <div className="grid lg:gap-10 grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1">
           <div className="col-span-1">
             <DashboardChartContainer label={t('Breakdown of FIs chosen by MSME')}>
-              <ChartBar data={data.fis_choosen_by_msme} />
+              <ChartBar data={data.opt_in_stat.fis_choosen_by_msme} />
             </DashboardChartContainer>
           </div>
         </div>
