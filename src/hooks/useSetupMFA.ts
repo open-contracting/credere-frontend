@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 import { useT } from '@transifex/react';
 import axios from 'axios';
@@ -20,12 +19,11 @@ export default function useSetupMFA(): IUseSetupMFA {
   const { mutate: setupMFAMutation, isLoading } = useMutation<IResponse, unknown, SetupMFAInput, unknown>(
     (payload) => setupMFAFn(payload),
     {
-      onSuccess: (data) => {
-        console.log(data);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      onSuccess: (_data) => {
         navigate(`/password-created`);
       },
       onError: (error) => {
-        console.log(error);
         if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
           enqueueSnackbar(t('MFA code setup failed'), {
             variant: 'error',
