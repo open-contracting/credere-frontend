@@ -1,4 +1,4 @@
-/* eslint-disable react/require-default-props */
+ 
 
 /* eslint-disable react/no-array-index-key */
 
@@ -32,7 +32,7 @@ export function ChartPie({ data }: ChartsProps) {
       <PieChart width={400} height={400}>
         <Pie data={data} cx="50%" cy="50%" labelLine={false} outerRadius={80} fill="#8884d8" dataKey="value">
           {data.map((_entry, index) => (
-            // eslint-disable-next-line react/no-array-index-key
+             
             <Cell key={`cell-${index}`} fill={COLORS_TO_FILL[index % COLORS_TO_FILL.length]} />
           ))}
         </Pie>
