@@ -1,6 +1,18 @@
 import { t } from '@transifex/native';
+import dayjs from 'dayjs';
+import lodash from 'lodash';
 
-import { APPLICATION_STATUS_NAMES, LENDER_TYPES, MSME_TYPES, MSME_TYPES_NAMES } from '../constants';
+import {
+  APPLICATION_STATUS_NAMES,
+  CREDIT_PRODUCT_OPTIONS,
+  LENDER_TYPES,
+  MSME_TYPES,
+  MSME_TYPES_NAMES,
+  MSME_TYPES_OPTIONS,
+  SECTOR_TYPES,
+  USER_TYPE_OPTIONS,
+} from '../constants';
+import CURRENCY_FORMAT_OPTIONS from '../constants/intl';
 import { PreferencesType } from '../schemas/OCPsettings';
 import { FormSelectOption } from '../stories/form-select/FormSelect';
 
@@ -12,16 +24,39 @@ const dateFormatOptions: Intl.DateTimeFormatOptions = {
 
 export const formatDate = (date: Date) => date.toLocaleDateString('en-US', dateFormatOptions);
 
-export const formatDateFromString = (date: string) => {
+export const formatDateFromString = (date: string | null | undefined) => {
+  if (!date) {
+    return t('No defined');
+  }
+
   const dateObj = new Date(date);
   return dateObj.toLocaleDateString('en-US', dateFormatOptions);
 };
 
-const currencyFormatOptions = {
-  style: 'currency',
-  currency: 'COP',
+export const formatCurrency = (amount: number, currency?: string) => {
+  const currencyFormatOptions = CURRENCY_FORMAT_OPTIONS[currency || 'default'] || CURRENCY_FORMAT_OPTIONS.default;
+
+  const formatter = new Intl.NumberFormat(currencyFormatOptions.locale, currencyFormatOptions.options);
+  return formatter.format(amount);
 };
-export const formatCurrency = (amount: number) => amount.toLocaleString('es-CO', currencyFormatOptions);
+
+export const formatPaymentMethod = (value: { [key: string]: string }) => {
+  if (!value) {
+    return t('No defined');
+  }
+
+  let paymentMethodString = '';
+
+  Object.keys(value).forEach((key) => {
+    if (Number(value[key])) {
+      paymentMethodString += `${lodash.startCase(key)}: ${formatCurrency(Number(value[key]))}\n`;
+    } else {
+      paymentMethodString += `${lodash.startCase(key)}: ${value[key]}\n`;
+    }
+  });
+
+  return paymentMethodString;
+};
 
 export const renderApplicationStatus = (status: string) => APPLICATION_STATUS_NAMES[status] || t('INVALID_STATUS');
 
@@ -31,7 +66,17 @@ function findLabelByValue(value: string, options: FormSelectOption[]): string {
 }
 
 export const renderLenderType = (type: string) => findLabelByValue(type, LENDER_TYPES);
+export const renderUserType = (type: string) => findLabelByValue(type, USER_TYPE_OPTIONS);
+export const renderCreditProductType = (type: string) => findLabelByValue(type, CREDIT_PRODUCT_OPTIONS);
+export const renderBorrowerSizeType = (type: string) => MSME_TYPES_NAMES[type as MSME_TYPES];
 
+export const renderSector = (type: string) => findLabelByValue(type, SECTOR_TYPES);
+export const renderSize = (type: string) => {
+  if (type === 'NOT_INFORMED') {
+    return t('Not informed');
+  }
+  return findLabelByValue(type, MSME_TYPES_OPTIONS);
+};
 export const renderLenderPreferences = (preferences: PreferencesType) => {
   let preferencesString = '';
   if (preferences.MICRO) {
@@ -69,3 +114,24 @@ export function getProperty(obj: any, propertyString: string): any {
 
   return result;
 }
+
+export const isDateBeforeMonths = (date: string, referenceDate: string, months: number) => {
+  const diffInMonths = dayjs(referenceDate).diff(date, 'month');
+
+  return diffInMonths > 0 && diffInMonths <= months;
+};
+
+export const addMonthsToDate = (date: string | undefined, months: number) => {
+  if (!date) {
+    return '';
+  }
+
+  const addedDate = dayjs(date).add(months, 'month');
+
+  return formatDate(addedDate.toDate());
+};
+
+export const isDateAfterCurrentDate = (date: string) => {
+  const currentDate = dayjs();
+  return dayjs(date).isAfter(currentDate, 'day');
+};

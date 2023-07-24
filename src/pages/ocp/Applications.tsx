@@ -5,6 +5,7 @@ import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
 import ApplicationsList from '../../components/ApplicationsList';
+import { USER_TYPES } from '../../constants';
 
 export function Applications() {
   const t = useT();
@@ -32,7 +33,7 @@ export function Applications() {
           'You can view applications and make updates to any missing or incomplete open contracting data. Approved and completed applications can be viewed, but the data is only stored for one week after the completion date.',
         )}
       </Text>
-      <ApplicationsList type="OCP" />
+      <ApplicationsList type={USER_TYPES.OCP} />
     </>
   );
 }

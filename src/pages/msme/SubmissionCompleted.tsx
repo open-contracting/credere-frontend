@@ -1,14 +1,14 @@
+import { Link as MUILink } from '@mui/material';
 import { useT } from '@transifex/react';
 import { Button } from 'src/stories/button/Button';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
-function SubmitionCompleted() {
-  const t = useT();
+import useApplicationContext from '../../hooks/useApplicationContext';
 
-  const onCloseWindowHandler = () => {
-    window.close();
-  };
+function SubmissionCompleted() {
+  const t = useT();
+  const applicationContext = useApplicationContext();
 
   return (
     <>
@@ -19,7 +19,7 @@ function SubmitionCompleted() {
             {t(
               'Thank you for submitting your credit application using Credere, Your application has been sent to {fi_name}.',
               {
-                fi_name: 'FI Name',
+                fi_name: applicationContext.state.data?.lender.name,
               },
             )}
           </Text>
@@ -27,7 +27,7 @@ function SubmitionCompleted() {
             {t(
               'Pending some checks by {fi_name}, we will be in touch via email to let you know if the application has been approved and tell you the next steps for funds to be disbursed to you.',
               {
-                fi_name: 'FI Name',
+                fi_name: applicationContext.state.data?.lender.name,
               },
             )}
           </Text>
@@ -37,9 +37,16 @@ function SubmitionCompleted() {
             )}
           </Text>
 
-          <div className="mt-5 grid grid-cols-1 gap-4 md:flex md:gap-0">
+          <div className="mt-5 mb-10 grid grid-cols-1 gap-4 md:flex md:gap-0">
             <div>
-              <Button className="md:mr-4" label={t('Close window')} onClick={onCloseWindowHandler} />
+              <Button
+                className="md:mr-4"
+                label={t('Learn more about OCP')}
+                target="_blank"
+                rel="noreferrer"
+                component={MUILink}
+                href={`${import.meta.env.VITE_MORE_INFO_OCP_URL || 'https://www.open-contracting.org/es/'}`}
+              />
             </div>
           </div>
         </div>
@@ -49,4 +56,4 @@ function SubmitionCompleted() {
   );
 }
 
-export default SubmitionCompleted;
+export default SubmissionCompleted;

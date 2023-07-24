@@ -7,6 +7,10 @@ interface ImportMetaEnv {
   readonly VITE_TRANSIFEX_TOKEN: string;
   readonly VITE_DEFAULT_LANG: string;
   readonly VITE_CREDERE_PHONE_NUMBER: string;
+  readonly VITE_LOCALE: string;
+  readonly VITE_CURRENCY: string;
+  readonly VITE_MORE_INFO_OCP_URL: string;
+  readonly VITE_MAX_FILE_SIZE_MB: number;
   // more env variables...
 }
 

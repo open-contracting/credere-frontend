@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { TableCellProps } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
@@ -14,6 +15,7 @@ import { useEffect, useMemo } from 'react';
 import SorterDownIcon from 'src/assets/icons/sorter-down.svg';
 import SorterUpIcon from 'src/assets/icons/sorter-up.svg';
 import SorterIcon from 'src/assets/icons/sorter.svg';
+import { twMerge } from 'tailwind-merge';
 
 import { PAGE_SIZES } from '../constants';
 import { formatCurrency, formatDateFromString } from '../util';
@@ -70,6 +72,7 @@ export interface HeadCell<T> {
   type?: DataCellType;
   render?: (row: T, headCell: HeadCell<T>) => JSX.Element;
   sortable?: boolean;
+  width?: number;
 }
 
 interface DataTableHeadProps<T> {
@@ -80,6 +83,48 @@ interface DataTableHeadProps<T> {
   hasActions?: boolean;
 }
 
+export function DataTableHeadCell(props: TableCellProps) {
+  const { children, className, width } = props;
+  return (
+    <TableCell
+      sx={{ width: width || 'auto' }}
+      {...props}
+      className={twMerge(
+        `px-4 py-5 border-solid border-l border-r-0 border-t-0 border-background bg-white ${className}`,
+      )}>
+      {children}
+    </TableCell>
+  );
+}
+
+export function DataTableHeadLabel({ label }: { label: string }) {
+  return <span className="flex flex-row justify-between text-moodyBlue text-sm font-normal">{label}</span>;
+}
+
+export function DataTableCell(props: TableCellProps) {
+  const { children, className } = props;
+  return (
+    <TableCell
+      {...props}
+      className={twMerge(
+        `px-4 text-darkest text-sm font-normal border-solid border-l border-r-0 border-t-0 border-background bg-white ${className}`,
+      )}>
+      {children}
+    </TableCell>
+  );
+}
+
+export function TransparentDataTableCell(props: TableCellProps) {
+  const { children, className } = props;
+  return (
+    <TableCell
+      {...props}
+      className={twMerge(`px-4 text-darkest text-sm font-normal border-0 bg-background ${className}`)}>
+      {children}
+    </TableCell>
+  );
+}
+
 function DataTableHead<T>({
   order = 'asc',
   orderBy,
@@ -87,6 +132,8 @@ function DataTableHead<T>({
   onRequestSort,
   headCells,
 }: DataTableHeadProps<T>) {
+  const t = useT();
+
   const createSortHandler = (property: Extract<keyof T, string>) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property);
   };
@@ -94,12 +141,10 @@ function DataTableHead<T>({
   return (
     <TableHead>
       <TableRow>
-        {headCells.map((headCell, index) => (
-          <TableCell
+        {headCells.map((headCell) => (
+          <DataTableHeadCell
+            width={headCell.width}
             key={String(headCell.id)}
-            className={`py-5 border-solid border-l border-r-0 border-t-0 border-background ${
-              index !== 0 ? 'opacity-50' : ''
-            }`}
             align="left"
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}>
@@ -107,21 +152,19 @@ function DataTableHead<T>({
               <TableSortLabel
                 active={orderBy === headCell.id}
                 direction={orderBy === headCell.id ? order : 'asc'}
-                className="flex flex-row justify-between text-moodyBlue text-sm font-medium"
+                className="flex flex-row justify-between text-moodyBlue text-sm font-normal"
                 IconComponent={orderBy === headCell.id ? SorterDirection : Sorter}
                 onClick={createSortHandler(headCell.id)}>
                 {headCell.label}
               </TableSortLabel>
             )}
-            {!headCell.sortable && (
-              <span className="flex flex-row justify-between text-moodyBlue text-sm font-medium">{headCell.label}</span>
-            )}
-          </TableCell>
+            {!headCell.sortable && <DataTableHeadLabel label={headCell.label} />}
+          </DataTableHeadCell>
         ))}
         {hasActions && (
-          <TableCell className="border-solid border-l border-r-0 border-t-0 border-background opacity-50">
-            <span className="flex flex-row justify-between text-moodyBlue text-sm font-medium">Actions</span>
-          </TableCell>
+          <DataTableHeadCell>
+            <DataTableHeadLabel label={t('Actions')} />
+          </DataTableHeadCell>
         )}
       </TableRow>
     </TableHead>
@@ -218,9 +261,9 @@ export function DataTable<T>({
 
   return (
     <Box>
-      <Paper elevation={0} square>
+      <Paper elevation={0} square className="bg-background">
         <TableContainer>
-          <Table aria-labelledby="tableTitle" size="medium">
+          <Table aria-labelledby="data-table" size="medium">
             <DataTableHead
               hasActions={Boolean(actions)}
               order={order}
@@ -232,17 +275,11 @@ export function DataTable<T>({
               {visibleRows.map((row: T, index) => (
                 <TableRow tabIndex={-1} key={`${String(index)}`}>
                   {headCells.map((headCell) => (
-                    <TableCell
-                      key={`${String(`${row[headCell.id]}-${index}-${headCell.id}`)}`}
-                      className="text-darkest text-sm font-thin border-solid border-l border-r-0 border-t-0 border-background">
+                    <DataTableCell key={`${String(`${row[headCell.id]}-${index}-${headCell.id}`)}`}>
                       {renderValue(row, headCell)}
-                    </TableCell>
+                    </DataTableCell>
                   ))}
-                  {actions && (
-                    <TableCell className="text-darkest text-sm font-thin border-solid border-l border-r-0 border-t-0 border-background">
-                      {actions(row)}
-                    </TableCell>
-                  )}
+                  {actions && <DataTableCell>{actions(row)}</DataTableCell>}
                 </TableRow>
               ))}
 
@@ -251,10 +288,7 @@ export function DataTable<T>({
                   style={{
                     height: 53 * emptyRows,
                   }}>
-                  <TableCell
-                    className="text-darkest text-sm font-thin border-solid border-l border-r-0 border-t-0 border-background"
-                    colSpan={5}
-                  />
+                  <DataTableCell colSpan={headCells.length + (actions ? 1 : 0)} />
                 </TableRow>
               )}
             </TableBody>
@@ -262,13 +296,13 @@ export function DataTable<T>({
         </TableContainer>
         {pagination && (
           <TablePagination
-            className="border-solid border-l border-r-0 border-t-0 border-background"
+            className="border-solid border-l border-r-0 border-t-0 border-background  bg-white"
             classes={{
-              selectLabel: 'text-darkest text-sm font-thin',
-              select: 'text-darkest text-sm font-thin',
-              menuItem: 'text-darkest text-sm font-thin',
-              input: 'text-darkest text-sm font-thin',
-              displayedRows: 'text-darkest text-sm font-thin',
+              selectLabel: 'text-darkest text-sm font-normal',
+              select: 'text-darkest text-sm font-normal',
+              menuItem: 'text-darkest text-sm font-normal',
+              input: 'text-darkest text-sm font-normal',
+              displayedRows: 'text-darkest text-sm font-normal',
             }}
             rowsPerPageOptions={PAGE_SIZES}
             labelRowsPerPage={t('Rows in page')}

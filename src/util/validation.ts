@@ -1,4 +1,9 @@
+import { t } from '@transifex/native';
+import axios from 'axios';
+import { EnqueueSnackbar } from 'notistack';
 import { ZodError, ZodType, z } from 'zod';
+
+import { ERRORS_MESSAGES } from '../constants';
 
 export class ValidationError extends Error {
   constructor(message: string, public readonly cause: ZodError) {
@@ -11,4 +16,24 @@ export const validation = <T extends ZodType>(schema: T, data: unknown, errorMes
   if (result.success) return result.data;
 
   throw new ValidationError(errorMessage ?? 'Validation error', result.error);
+};
+
+export const handleRequestError = (error: unknown, enqueueSnackbar: EnqueueSnackbar, defaultMessage: string) => {
+  if (axios.isAxiosError(error) && error.response) {
+    if (error.response.data && error.response.data.detail) {
+      if (ERRORS_MESSAGES[error.response.data.detail]) {
+        enqueueSnackbar(t(ERRORS_MESSAGES[error.response.data.detail]), {
+          variant: 'error',
+        });
+      } else {
+        enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
+          variant: 'error',
+        });
+      }
+    }
+  } else {
+    enqueueSnackbar(defaultMessage, {
+      variant: 'error',
+    });
+  }
 };

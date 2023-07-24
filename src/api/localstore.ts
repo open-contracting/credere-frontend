@@ -2,11 +2,17 @@ import { ACCESS_TOKEN_LOCAL_STORAGE_KEY, LANG_STORAGE_KEY, USER_LOCAL_STORAGE_KE
 import { IUser } from '../schemas/auth';
 import { setHeaderFromLocalStorage } from './axios';
 
+export function removeUser(): void {
+  localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
+  localStorage.removeItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY);
+  setHeaderFromLocalStorage();
+}
+
 export function saveUser(user: IUser | null): void {
   if (user) {
     localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(user));
   } else {
-    localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
+    removeUser();
   }
 }
 
@@ -22,12 +28,6 @@ export function getAccessToken(): string | null {
 export function getUser(): IUser | null {
   const user = localStorage.getItem(USER_LOCAL_STORAGE_KEY);
   return user ? JSON.parse(user) : null;
-}
-
-export function removeUser(): void {
-  localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
-  localStorage.removeItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY);
-  setHeaderFromLocalStorage();
 }
 
 export function saveLang(lang: string | null): void {

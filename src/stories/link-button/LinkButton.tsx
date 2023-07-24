@@ -10,6 +10,7 @@ export interface LinkButtonProps {
   size?: SizeType;
   noIcon?: boolean;
   iconClassName?: string;
+  labelClassName?: string;
   icon?: string; // svg imported
   onClick?: () => void;
 }
@@ -19,6 +20,7 @@ export function LinkButton<C extends React.ElementType>({
   label,
   noIcon,
   iconClassName,
+  labelClassName,
   className,
   icon,
   ...props
@@ -30,7 +32,7 @@ export function LinkButton<C extends React.ElementType>({
       startIcon={!noIcon ? <img className={iconClassName} src={icon} alt="button-icon" /> : undefined}
       className={twMerge(
         [
-          'w-max text-darkest font-normal disabled:opacity-50',
+          'text-darkest font-normal disabled:opacity-50',
           size === 'large' ? 'px-6 py-4 text-lg' : 'px-4 py-2 text-sm',
           `bg-transparent hover:bg-transparent normal-case ${className}`,
         ].join(' '),
@@ -38,7 +40,7 @@ export function LinkButton<C extends React.ElementType>({
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}>
       <Box
-        className="border-grass border-b-2"
+        className={`border-grass border-b-2 ${labelClassName}`}
         sx={{
           borderBottomStyle: 'solid',
         }}>
@@ -52,7 +54,8 @@ LinkButton.defaultProps = {
   size: 'large' as SizeType,
   noIcon: false,
   icon: ArrowInCircleIcon,
-  iconClassName: '',
+  iconClassName: undefined,
+  labelClassName: undefined,
   onClick: undefined,
 };
 

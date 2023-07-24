@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 
-/* eslint-disable camelcase */
+ 
 import { useQuery } from '@tanstack/react-query';
 import { t } from '@transifex/native';
 import axios from 'axios';
@@ -12,7 +12,7 @@ import { getLendersFn } from '../api/private';
 import { QUERY_KEYS } from '../constants';
 import { ILender, ILenderListResponse } from '../schemas/application';
 import LinkButton from '../stories/link-button/LinkButton';
-import { renderLenderPreferences, renderLenderType } from '../util';
+import { renderLenderType } from '../util';
 import { DataTable, HeadCell } from './DataTable';
 
 const headCells: HeadCell<ILender>[] = [
@@ -35,13 +35,6 @@ const headCells: HeadCell<ILender>[] = [
     label: t('Type'),
     sortable: false,
     render: (row: ILender) => <>{renderLenderType(row.type)}</>,
-  },
-  {
-    id: 'borrower_type_preferences',
-    disablePadding: false,
-    label: t('MSME Preference'),
-    sortable: false,
-    render: (row: ILender) => <>{renderLenderPreferences(row.borrower_type_preferences)}</>,
   },
 ];
 

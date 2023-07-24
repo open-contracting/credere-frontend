@@ -1,12 +1,10 @@
-/* eslint-disable no-console */
-
 /* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box } from '@mui/material';
 import { useT } from '@transifex/react';
 import { useMemo } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FAQComponent from 'src/components/FAQComponent';
 import useAccessScheme from 'src/hooks/useAccessScheme';
 import useApplicationContext from 'src/hooks/useApplicationContext';
@@ -15,6 +13,8 @@ import { Button } from 'src/stories/button/Button';
 import Checkbox from 'src/stories/checkbox/Checkbox';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
+
+import { formatCurrency } from '../../util';
 
 function IntroMsme() {
   const t = useT();
@@ -38,9 +38,12 @@ function IntroMsme() {
   const paramsForText = useMemo(() => {
     if (!applicationContext.state.data) return {};
     return {
-      award_title: applicationContext.state.data.award.description,
+      award_title: applicationContext.state.data.award.title,
       buyer_name: applicationContext.state.data.award.buyer_name,
-      award_contract_value: applicationContext.state.data.award.award_amount,
+      award_contract_value: `${applicationContext.state.data.award.award_currency} ${formatCurrency(
+        applicationContext.state.data.award.award_amount,
+        applicationContext.state.data.award.award_currency,
+      )}`,
     };
   }, [applicationContext.state.data]);
 
@@ -51,9 +54,9 @@ function IntroMsme() {
         <div className="col-span-1 md:col-span-2 md:mr-10">
           <Text className="mb-8">
             {t(
-              'Congratulations on winning the award for the public sector contract for {award_title} with {buyer_name}.',
+              'Congratulations on winning the award for the public sector contract for "{award_title}" with {buyer_name}.',
               {
-                award_title: paramsForText.buyer_name,
+                award_title: paramsForText.award_title,
                 buyer_name: paramsForText.buyer_name,
               },
             )}
@@ -97,14 +100,21 @@ function IntroMsme() {
               <Checkbox
                 name="agree_topass_info_to_banking_partner"
                 defaultValue={false}
-                label={t('A agree for my details to be passed onto the banking partner.')}
+                label={t('I agree for my details to be passed onto the banking partner.')}
               />
               <Checkbox
                 name="accept_terms_and_conditions"
                 defaultValue={false}
                 label={t('I have read the terms and conditions for the credit guarantee scheme.')}
               />
-              <div className="mt-5 grid grid-cols-1 gap-4 md:flex md:gap-0">
+              <Box>
+                <Text className="inline-block">{t('You can read')} </Text>
+
+                <Link className="text-darkest" to="/terms-and-conditions">
+                  <Text className="inline-block underline ml-1 mb-X">{t('the terms and conditions in this link')}</Text>
+                </Link>
+              </Box>
+              <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
                 <div>
                   <Button className="md:mr-4" label={t('Acces the scheme')} type="submit" disabled={isLoading} />
                 </div>

@@ -1,15 +1,18 @@
- 
 import { Box } from '@mui/material';
 import { useT } from '@transifex/react';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NeedHelpComponent from 'src/components/NeedHelpComponent';
 import FAQ_QUESTIONS from 'src/constants/faq-questions';
 import FAQPageSection from 'src/stories/faq/FAQPageSection';
 import LinkButton from 'src/stories/link-button/LinkButton';
 import Title from 'src/stories/title/Title';
 
+import Button from '../../stories/button/Button';
+
 function FrequentlyAskedQuestionsPage() {
   const t = useT();
+  const navigate = useNavigate();
 
   const [open, setOpen] = useState<Record<string, boolean>>({});
   const [allExpanded, setAllExpanded] = useState<boolean>(false);
@@ -84,6 +87,7 @@ function FrequentlyAskedQuestionsPage() {
           <NeedHelpComponent />
         </div>
       </div>
+      <Button className="my-8" primary={false} label={t('Go back')} onClick={() => navigate(-1)} />
     </>
   );
 }

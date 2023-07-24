@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { t } from '@transifex/native';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getApplicationsFI, getApplicationsOCP } from '../api/private';
@@ -15,7 +15,9 @@ import {
   PAGE_SIZES,
   QUERY_KEYS,
   STARTED_STATUS,
+  USER_TYPES,
 } from '../constants';
+import useStartApplication from '../hooks/useStartApplication';
 import {
   EXTENDED_APPLICATION_FROM,
   IApplication,
@@ -41,11 +43,12 @@ const headCellsBase: HeadCell<IApplication & IExtendedApplication>[] = [
     sortable: true,
   },
   {
-    id: 'created_at',
+    id: 'borrower_submitted_at',
     type: 'date',
     disablePadding: false,
     label: t('Submission Date'),
     sortable: false,
+    width: 155,
   },
   {
     id: 'status',
@@ -64,35 +67,45 @@ const headCellsOCP: HeadCell<IApplication & IExtendedApplication>[] = [
     disablePadding: false,
     label: t('Credit Provider'),
     sortable: true,
+    width: 174,
   },
 ];
 
 type ExtendendApplication = IApplication & IExtendedApplication;
 const ApplicationDataTable = DataTable<ExtendendApplication>;
 
-const actionsFI = (row: ExtendendApplication) => (
+const actionsFIBase = (row: ExtendendApplication, onStartApplicationHandler: (id: number) => void) => (
   <Box className="flex flex-row">
-    {STARTED_STATUS.includes(row.status as APPLICATION_STATUS) && (
+    {STARTED_STATUS.includes(row.status) && (
       <LinkButton
         className="p-1 justify-start"
         component={Link}
-        to={`/applications/${row.id}/continue`}
+        to={`/applications/${row.id}/stage-one`}
         label={t('Continue')}
         size="small"
         noIcon
       />
     )}
-    {NOT_STARTED_STATUS.includes(row.status as APPLICATION_STATUS) && (
+    {NOT_STARTED_STATUS.includes(row.status) && (
       <LinkButton
         className="p-1 justify-start"
-        component={Link}
-        to={`/applications/${row.id}/start`}
+        onClick={() => onStartApplicationHandler(row.id)}
         label={t('Start')}
         size="small"
         noIcon
       />
     )}
-    {COMPLETED_STATUS.includes(row.status as APPLICATION_STATUS) && (
+    {APPLICATION_STATUS.CONTRACT_UPLOADED === row.status && (
+      <LinkButton
+        className="p-1 justify-start"
+        component={Link}
+        to={`/applications/${row.id}/complete-application`}
+        label={t('Review')}
+        size="small"
+        noIcon
+      />
+    )}
+    {COMPLETED_STATUS.includes(row.status) && (
       <LinkButton
         className="p-1 justify-start"
         component={Link}
@@ -118,16 +131,16 @@ const actionsOCP = (row: ExtendendApplication) => (
     <LinkButton
       className="p-1 justify-start"
       component={Link}
-      to={`/applications/${row.id}/view`}
+      to={`/admin/applications/${row.id}/view`}
       label={t('View')}
       size="small"
       noIcon
     />
-    {!COMPLETED_STATUS.includes(row.status as APPLICATION_STATUS) && (
+    {!COMPLETED_STATUS.includes(row.status) && (
       <LinkButton
         className="p-1 justify-start"
         component={Link}
-        to={`/applications/${row.id}/update`}
+        to={`/admin/applications/${row.id}/update`}
         label={t('Update')}
         size="small"
         noIcon
@@ -137,13 +150,14 @@ const actionsOCP = (row: ExtendendApplication) => (
 );
 
 interface ApplicationListProps {
-  type: 'FI' | 'OCP';
+  type: USER_TYPES;
 }
 
 export function ApplicationList({ type }: ApplicationListProps) {
   const { enqueueSnackbar } = useSnackbar();
+  const { startApplicationMutation } = useStartApplication();
   const [payload, setPayload] = useState<PaginationInput>({
-    page: 1,
+    page: 0,
     page_size: PAGE_SIZES[0],
     sort_field: 'application.created_at',
     sort_order: 'desc',
@@ -173,9 +187,9 @@ export function ApplicationList({ type }: ApplicationListProps) {
   };
 
   const { data } = useQuery({
-    queryKey: [QUERY_KEYS.applications_fi, payload],
+    queryKey: [QUERY_KEYS.applications, payload],
     queryFn: async (): Promise<IApplicationsListResponse | null> => {
-      if (type === 'OCP') {
+      if (type === USER_TYPES.OCP) {
         const response = await getApplicationsOCP(payload);
         return response;
       }
@@ -209,19 +223,31 @@ export function ApplicationList({ type }: ApplicationListProps) {
     }
   }, [data]);
 
-  const headCells = useMemo(() => (type === 'OCP' ? [...headCellsBase, ...headCellsOCP] : headCellsBase), [type]);
+  const headCells = useMemo(
+    () => (type === USER_TYPES.OCP ? [...headCellsBase, ...headCellsOCP] : headCellsBase),
+    [type],
+  );
+
+  const onStartApplicationHandler = useCallback(
+    (id: number) => {
+      startApplicationMutation(id);
+    },
+    [startApplicationMutation],
+  );
+
+  const actionsFI = (row: ExtendendApplication) => actionsFIBase(row, onStartApplicationHandler);
 
   return (
     <ApplicationDataTable
       rows={rows}
-      useEmptyRows={false}
+      useEmptyRows
       handleRequestSort={handleRequestSort}
       headCells={headCells}
       pagination={{
         totalCount,
         handleChangePage,
       }}
-      actions={type === 'OCP' ? actionsOCP : actionsFI}
+      actions={type === USER_TYPES.OCP ? actionsOCP : actionsFI}
     />
   );
 }

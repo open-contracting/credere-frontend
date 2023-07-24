@@ -27,7 +27,10 @@ export default function useUpsertLender(): IUseUpsertLender {
     isLoading,
   } = useMutation<ILender, unknown, ILenderBase, unknown>((payload) => createLenderFn(payload), {
     onSuccess: (data) => {
-      navigate('/settings');
+      enqueueSnackbar(t('Credit Provider "{lenderName}" created', { lenderName: data.name }), {
+        variant: 'success',
+      });
+      navigate(`/settings/lender/${data.id}/credit-product/new`);
       return data;
     },
     onError: (error) => {

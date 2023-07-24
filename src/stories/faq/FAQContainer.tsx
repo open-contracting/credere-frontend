@@ -7,7 +7,6 @@ type FAQContainerProps = {
   boxClassName?: string;
   title?: string;
 };
-
 export function FAQContainer({
   className,
   title = 'Frequently Asked Questions',
@@ -15,7 +14,14 @@ export function FAQContainer({
   children,
 }: FAQContainerProps & PropsWithChildren) {
   return (
-    <Container maxWidth="md" className={twMerge(`mx-0 px-0 ${className}`)}>
+    <Container
+      maxWidth="md"
+      sx={{
+        minWidth: {
+          lg: 345,
+        },
+      }}
+      className={twMerge(`mx-0 px-0 ${className}`)}>
       <Box
         className={twMerge(`border-solid border-4 border-grass overflow-hidden bg-white ${boxClassName}`)}
         sx={{

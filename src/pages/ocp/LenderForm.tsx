@@ -1,6 +1,6 @@
-/* eslint-disable no-console */
+ 
 
-/* eslint-disable camelcase */
+ 
 
 /* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -11,17 +11,16 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { ProviderInput, checkProviderSchema } from 'src/schemas/OCPsettings';
+import { ProviderInput, lenderSchema } from 'src/schemas/OCPsettings';
 import Button from 'src/stories/button/Button';
-import Checkbox from 'src/stories/checkbox/Checkbox';
-import FormInput, { FormInputError } from 'src/stories/form-input/FormInput';
+import FormInput from 'src/stories/form-input/FormInput';
 import FormSelect from 'src/stories/form-select/FormSelect';
-import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 import { z } from 'zod';
 
 import { getLenderFn } from '../../api/private';
-import { LENDER_TYPES, MSME_TYPES, MSME_TYPES_NAMES, QUERY_KEYS } from '../../constants';
+import CreditProductList from '../../components/CreditProductList';
+import { LENDER_TYPES, QUERY_KEYS } from '../../constants';
 import { useParamsTypeSafe } from '../../hooks/useParamsTypeSafe';
 import useUpsertLender from '../../hooks/useUpsertLender';
 import { ILender } from '../../schemas/application';
@@ -37,37 +36,15 @@ export function LenderForm({ lender }: LenderFormProps) {
   const { createLenderMutation, updateLenderMutation, isLoading, isError } = useUpsertLender();
 
   const methods = useForm<ProviderInput>({
-    resolver: zodResolver(checkProviderSchema),
-    defaultValues: lender || {
-      borrower_type_preferences: {},
-      limits_preferences: {},
-    },
+    resolver: zodResolver(lenderSchema),
+    defaultValues: lender || {},
   });
   const {
-    watch,
     reset,
     handleSubmit,
-    setValue,
-    formState: { isSubmitSuccessful, errors },
+
+    formState: { isSubmitSuccessful },
   } = methods;
-
-  const [microCheck, smallCheck, mediumCheck] = watch([
-    'borrower_type_preferences.MICRO',
-    'borrower_type_preferences.SMALL',
-    'borrower_type_preferences.MEDIUM',
-  ]);
-
-  useEffect(() => {
-    if (!microCheck) {
-      setValue('limits_preferences.micro_limits', undefined);
-    }
-    if (!smallCheck) {
-      setValue('limits_preferences.small_limits', undefined);
-    }
-    if (!mediumCheck) {
-      setValue('limits_preferences.medium_limits', undefined);
-    }
-  }, [microCheck, smallCheck, mediumCheck, setValue]);
 
   useEffect(() => {
     if (isSubmitSuccessful && !isError && !isLoading) {
@@ -77,8 +54,6 @@ export function LenderForm({ lender }: LenderFormProps) {
   }, [isSubmitSuccessful, isError, isLoading]);
 
   const onSubmitHandler: SubmitHandler<ProviderInput> = (values) => {
-    console.log(values);
-    console.log('lender', lender);
     if (lender) {
       updateLenderMutation({ ...values, id: lender.id });
     } else {
@@ -136,98 +111,6 @@ export function LenderForm({ lender }: LenderFormProps) {
             options={LENDER_TYPES}
             placeholder={t('Type')}
           />
-          <Text className="mb-4">
-            {t('Select all of the types of MSMEs the credit provider is willing to offer credit to')}
-          </Text>
-          <Box className="mb-4">
-            <Box className="w-3/5 flex flex-row  items-start justify-start gap-2">
-              <Checkbox
-                label={MSME_TYPES_NAMES[MSME_TYPES.MICRO]}
-                name="borrower_type_preferences.MICRO"
-                className={errors.borrower_type_preferences ? 'text-red' : ''}
-              />
-              <Checkbox
-                label={MSME_TYPES_NAMES[MSME_TYPES.SMALL]}
-                name="borrower_type_preferences.SMALL"
-                className={errors.borrower_type_preferences ? 'text-red' : ''}
-              />
-              <Checkbox
-                label={MSME_TYPES_NAMES[MSME_TYPES.MEDIUM]}
-                name="borrower_type_preferences.MEDIUM"
-                className={errors.borrower_type_preferences ? 'text-red' : ''}
-              />
-            </Box>
-            <FormInputError fieldError={errors.borrower_type_preferences} />
-          </Box>
-          {microCheck && (
-            <>
-              <Text className="mb-1">
-                {t(
-                  'Enter the lower and upper limits that the credit provider will be willing to offer to a micro business',
-                )}
-              </Text>
-              <Box className="mb-2 w-3/5 flex flex-row items-start justify-start gap-2">
-                <FormInput
-                  label=""
-                  name="limits_preferences.micro_limits.lower"
-                  placeholder={t('Col$')}
-                  type="number"
-                />
-                <FormInput
-                  label=""
-                  name="limits_preferences.micro_limits.upper"
-                  placeholder={t('Col$')}
-                  type="number"
-                />
-              </Box>
-            </>
-          )}
-          {smallCheck && (
-            <>
-              <Text className="mb-1">
-                {t(
-                  'Enter the lower and upper limits that the credit provider will be willing to offer to a small business',
-                )}
-              </Text>
-              <Box className="mb-2 w-3/5 flex flex-row  items-start justify-start gap-2">
-                <FormInput
-                  label=""
-                  name="limits_preferences.small_limits.lower"
-                  placeholder={t('Col$')}
-                  type="number"
-                />
-                <FormInput
-                  label=""
-                  name="limits_preferences.small_limits.upper"
-                  placeholder={t('Col$')}
-                  type="number"
-                />
-              </Box>
-            </>
-          )}
-          {mediumCheck && (
-            <>
-              <Text className="mb-1">
-                {t(
-                  'Enter the lower and upper limits that the credit provider will be willing to offer to a medium business',
-                )}
-              </Text>
-              <Box className="mb-2 w-3/5 flex flex-row  items-start justify-start gap-2">
-                <FormInput
-                  label=""
-                  name="limits_preferences.medium_limits.lower"
-                  placeholder={t('Col$')}
-                  type="number"
-                />
-                <FormInput
-                  label=""
-                  name="limits_preferences.medium_limits.upper"
-                  placeholder={t('Col$')}
-                  type="number"
-                />
-              </Box>
-            </>
-          )}
           <FormInput
             className="w-3/5"
             label={t('Group destination to send notifications of new applications')}
@@ -247,14 +130,30 @@ export function LenderForm({ lender }: LenderFormProps) {
             placeholder={t('SLA days')}
           />
 
-          <div className="mt-5 grid grid-cols-1 gap-4 md:flex md:gap-0">
+          {lender && (
+            <>
+              <Title type="subsection" className="mt-5 mb-2" label={t('Credit Products of Lender')} />
+              <CreditProductList rows={lender.credit_products} />
+              <Button
+                size="small"
+                noIcon
+                primary={false}
+                className="my-2"
+                label={t('+ Add New Credit Product')}
+                component={Link}
+                to={`/settings/lender/${lender.id}/credit-product/new`}
+              />
+            </>
+          )}
+
+          <div className="mt-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
             <div>
               <Button className="md:mr-4" primary={false} label={t('Back')} component={Link} to="/settings" />
             </div>
             <div>
               <Button
                 disabled={isLoading}
-                label={lender ? t('Update Credit Provider') : t('Add New Credit Provider')}
+                label={lender ? t('Update Credit Provider') : t('Save and Add Credit Product')}
                 type="submit"
               />
             </div>

@@ -74,7 +74,7 @@ export function ResetPasswordPage() {
                 borderRadius: 0,
               }}>
               <Title type="section" className="self-center mb-8" label={t('Enter your email to reset password')} />
-              <FormInput name="username" label={t('Email Address')} type="email" placeholder="example@email.com" />
+              <FormInput name="username" label={t('Email Address')} type="email" placeholder={t('example@email.com')} />
 
               <Button className="mb-10" label={t('Submit')} type="submit" disabled={isLoading} />
               <Box>

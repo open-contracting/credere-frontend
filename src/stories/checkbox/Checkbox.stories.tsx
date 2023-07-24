@@ -32,8 +32,8 @@ function ComponentWithHooks(args: CheckboxProps) {
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const DefaultCheckbox: Story = {
   args: {
-    name: 'aceptTerms',
-    label: 'A agree for my details to be passed onto the banking partner.',
+    name: 'acceptTerms',
+    label: 'I agree for my details to be passed onto the banking partner.',
   },
   render: (args) => <ComponentWithHooks {...args} />,
 };
