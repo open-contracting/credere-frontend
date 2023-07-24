@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { Box, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
 import { useT } from '@transifex/react';
 import { useState } from 'react';
