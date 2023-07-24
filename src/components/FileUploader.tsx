@@ -1,4 +1,8 @@
- 
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 
 /* eslint-disable react/jsx-props-no-spreading */
 import { t as tNative } from '@transifex/native';
@@ -60,9 +64,12 @@ export function FileUploader({ className, onAcceptedFile }: FileUploaderProps) {
 
   return (
     <>
-      <div {...getRootProps({ className: `dropzone flex items-center justify-center ${className}` })}>
+      <div
+        {...getRootProps({ className: `dropzone flex items-center justify-center ${className}` })}
+        onClick={(e) => e.stopPropagation()}>
         <label
           htmlFor="dropzone-file"
+          onClick={(e) => e.stopPropagation()}
           className="flex flex-col items-center justify-center w-full h-64 border-1 border-fieldBorder border-dashed rounded-lg cursor-pointer bg-white dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100">
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
             <div className="flex flex-row items-center justify-center">

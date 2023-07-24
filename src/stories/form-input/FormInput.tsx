@@ -135,7 +135,7 @@ export const DatePicker = styled(MUIDatePicker)`
   }
   &.MuiTextField-root {
     background-color: white;
-    padding: 17px 18px;
+    padding: 18px 18px;
     margin-bottom: 0.5rem;
     border-width: 1px;
     border-style: solid;

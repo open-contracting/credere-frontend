@@ -38,7 +38,7 @@ export function LendersButtonGroup({ onLenderSelected }: LendersButtonGroupProps
 
   return (
     <Box className="py-2 flex flex-col">
-      <ButtonGroup variant="outlined" aria-label="lender selector">
+      <ButtonGroup className="rounded-none" variant="outlined" aria-label="lender selector">
         <Button
           className="bg-white text-moodyBlue font-medium"
           label={t('All FIs')}

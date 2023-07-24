@@ -23,6 +23,7 @@ export interface OptInStat {
   opt_in_percentage: number;
   sector_statistics: ChartData[];
   rejected_reasons_count_by_reason: ChartData[];
+  fis_choosen_by_msme: ChartData[];
 }
 
 export interface StatisticsFI {
@@ -31,10 +32,10 @@ export interface StatisticsFI {
 
 export interface StatisticsOCPoptIn {
   opt_in_stat: OptInStat;
-  fis_choosen_by_msme: ChartData[];
 }
 
 export interface StatisticsParmsInput {
+  custom_range?: string;
   initial_date?: string;
   final_date?: string;
   lender_id?: number;

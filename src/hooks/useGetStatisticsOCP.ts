@@ -13,6 +13,7 @@ type IUseGetStatisticsOCP = {
 };
 
 export default function useGetStatisticsOCP(
+  customRange: string,
   initialDate: string | null,
   finalDate: string | null,
   lenderId: number | null,
@@ -21,9 +22,11 @@ export default function useGetStatisticsOCP(
   const { enqueueSnackbar } = useSnackbar();
 
   const { data, isLoading } = useQuery<StatisticsFI>({
-    queryKey: [QUERY_KEYS.statistics_ocp, `${initialDate}-${finalDate}-${lenderId}`],
+    queryKey: [QUERY_KEYS.statistics_ocp, `${customRange}-${initialDate}-${finalDate}-${lenderId}`],
     queryFn: () => {
-      const params: StatisticsParmsInput = {};
+      const params: StatisticsParmsInput = {
+        custom_range: customRange,
+      };
       if (initialDate !== null) {
         params.initial_date = initialDate;
       }

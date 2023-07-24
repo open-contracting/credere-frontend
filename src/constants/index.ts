@@ -118,6 +118,28 @@ export const CREDIT_PRODUCT_OPTIONS: FormSelectOption[] = [
 ];
 
 // eslint-disable-next-line no-shadow
+export enum STATISTICS_DATE_FILTER {
+  CUSTOM_RANGE = 'CUSTOM_RANGE',
+  LAST_WEEK = 'LAST_WEEK',
+  LAST_MONTH = 'LAST_MONTH',
+}
+
+export const STATISTICS_DATE_FILTER_OPTIONS: FormSelectOption[] = [
+  {
+    value: STATISTICS_DATE_FILTER.CUSTOM_RANGE,
+    label: t('Custom range'),
+  },
+  {
+    value: STATISTICS_DATE_FILTER.LAST_WEEK,
+    label: t('Last week'),
+  },
+  {
+    value: STATISTICS_DATE_FILTER.LAST_MONTH,
+    label: t('Last month'),
+  },
+];
+
+// eslint-disable-next-line no-shadow
 export enum DOCUMENTS_TYPE {
   INCORPORATION_DOCUMENT = 'INCORPORATION_DOCUMENT',
   SUPPLIER_REGISTRATION_DOCUMENT = 'SUPPLIER_REGISTRATION_DOCUMENT',
