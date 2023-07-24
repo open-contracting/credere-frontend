@@ -21,7 +21,11 @@ export default function useUpdatePassword(): IUseUpdatePassword {
     unknown
   >((payload) => updatePasswordFn(payload), {
     onSuccess: (data) => {
-      navigate(`/setup-mfa/${data.secret_code}/${data.session}?username=${data.username}`);
+      if (data.secret_code && data.session && data.username) {
+        navigate(`/setup-mfa/${data.secret_code}/${data.session}?username=${data.username}`);
+      } else {
+        navigate(`/password-created`);
+      }
     },
     onError: (error) => {
       console.log(error);
