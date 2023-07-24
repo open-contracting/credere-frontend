@@ -35,6 +35,7 @@ export interface StatisticsOCPoptIn {
 }
 
 export interface StatisticsParmsInput {
+  custom_range?: string;
   initial_date?: string;
   final_date?: string;
   lender_id?: number;
