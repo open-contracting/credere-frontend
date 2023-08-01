@@ -2,7 +2,7 @@
 import { t } from '@transifex/native';
 import { TypeOf, boolean, coerce, nativeEnum, object, string } from 'zod';
 
-import { APPLICATION_STATUS, DOCUMENTS_TYPE, MSME_TYPES } from '../constants';
+import { APPLICATION_STATUS, DOCUMENTS_TYPE, MSME_TYPES, USER_TYPES } from '../constants';
 import { isDateAfterCurrentDate } from '../util';
 import { emailSchema } from './auth';
 
@@ -215,6 +215,12 @@ export interface IBorrowerDocument {
   name: string;
 }
 
+export interface IModifiedDataFields {
+  modified_at: string;
+  user: string;
+  user_type: USER_TYPES;
+}
+
 export interface IApplication {
   id: number;
   borrower: IBorrower;
@@ -255,6 +261,10 @@ export interface IApplication {
   credit_product_id?: number;
   credit_product?: ICreditProduct;
   borrower_documents: IBorrowerDocument[];
+  modified_data_fields?: {
+    award_updates: { [key: string]: IModifiedDataFields };
+    borrower_updates: { [key: string]: IModifiedDataFields };
+  };
 }
 
 export interface IExtendedApplication {

@@ -1,4 +1,3 @@
- 
 import { Box, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
 import { useT } from '@transifex/react';
 import { useState } from 'react';
@@ -49,7 +48,7 @@ export function ApplicationTableDataPreviousAwardRow({
       <TableRow>
         <DataTableCell>{label}</DataTableCell>
         <DataTableCell>
-          <DataAvailability available={!missing} name={label} readonly />
+          <DataAvailability available={!missing} label={label} readonly />
         </DataTableCell>
         {!missing && (
           <DataTableCell className={preWhitespace ? 'whitespace-pre' : ''}>

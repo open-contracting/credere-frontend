@@ -1,4 +1,3 @@
- 
 import { TableRow } from '@mui/material';
 import DocumentIcon from 'src/assets/icons/document.svg';
 
@@ -32,7 +31,7 @@ export function ApplicationTableDataDocumentRow({
     <TableRow>
       <DataTableCell>{DOCUMENT_TYPES_NAMES[document.type]}</DataTableCell>
       <DataTableCell>
-        <DataAvailability available={!missing} name={document.type} readonly={readonly} />
+        <DataAvailability available={!missing} label={document.type} readonly={readonly} />
       </DataTableCell>
       {!downloadDocument && (
         <DataTableCell className={preWhitespace ? 'whitespace-pre' : ''}>{formattedValue}</DataTableCell>

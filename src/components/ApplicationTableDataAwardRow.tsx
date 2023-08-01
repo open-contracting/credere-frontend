@@ -19,6 +19,7 @@ export function ApplicationTableDataAwardRow({
   updateValue,
   isLoading,
   readonly,
+  modifiedFields,
 }: ApplicationTableAwardDataRowProps) {
   const value = award[name];
   const missing = missingData[name];
@@ -28,7 +29,13 @@ export function ApplicationTableDataAwardRow({
     <TableRow>
       <DataTableCell>{label}</DataTableCell>
       <DataTableCell>
-        <DataAvailability available={!missing} name={label} readonly={readonly} />
+        <DataAvailability
+          available={!missing}
+          name={name}
+          label={label}
+          readonly={readonly}
+          modifiedFields={modifiedFields}
+        />
       </DataTableCell>
       {!missing && <DataTableCell className={preWhitespace ? 'whitespace-pre' : ''}>{formattedValue}</DataTableCell>}
       {missing && updateValue && (
@@ -54,6 +61,7 @@ ApplicationTableDataAwardRow.defaultProps = {
   preWhitespace: false,
   type: undefined,
   formLabel: undefined,
+  modifiedFields: undefined,
 };
 
 export default ApplicationTableDataAwardRow;
