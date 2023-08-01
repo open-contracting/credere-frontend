@@ -3,9 +3,10 @@ import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@m
 import { useT } from '@transifex/react';
 
 import useGetPreviousAwards from '../hooks/useGetPreviousAwards';
+import useLocalizedDateFormatter from '../hooks/useLocalizedDateFormatter';
 import useUpdateAward from '../hooks/useUpdateAward';
 import { IApplication, IUpdateAward } from '../schemas/application';
-import { formatCurrency, formatDateFromString, formatPaymentMethod } from '../util';
+import { formatCurrency, formatPaymentMethod } from '../util';
 import ApplicationTableDataAwardRow from './ApplicationTableDataAwardRow';
 import ApplicationTableDataPreviousAwardRow from './ApplicationTableDataPreviousAwardRow';
 import { DataTableHeadCell, DataTableHeadLabel } from './DataTable';
@@ -18,6 +19,7 @@ export interface ApplicationAwardTableProps {
 
 export function ApplicationAwardTable({ application, readonly = false, className }: ApplicationAwardTableProps) {
   const t = useT();
+  const { formatDateFromString } = useLocalizedDateFormatter();
   const { updateAwardMutation, isLoading } = useUpdateAward();
   const { data: previousAwards, isLoading: isLoadingPreviousAwards } = useGetPreviousAwards(application.id);
 

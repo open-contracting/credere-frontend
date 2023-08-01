@@ -4,9 +4,10 @@ import { useState } from 'react';
 import Minus from 'src/assets/icons/minus.svg';
 import Plus from 'src/assets/icons/plus.svg';
 
+import useLocalizedDateFormatter from '../hooks/useLocalizedDateFormatter';
 import { IAward } from '../schemas/application';
 import Loader from '../stories/loader/Loader';
-import { formatCurrency, formatDateFromString } from '../util';
+import { formatCurrency } from '../util';
 import { ApplicationTableAwardDataRowProps } from './ApplicationTableDataRow';
 import DataAvailability from './DataAvailability';
 import { DataTableCell, DataTableHeadCell, DataTableHeadLabel } from './DataTable';
@@ -35,6 +36,7 @@ export function ApplicationTableDataPreviousAwardRow({
   preWhitespace,
 }: ApplicationTableDataPreviousAwardRowProps) {
   const t = useT();
+  const { formatDateFromString } = useLocalizedDateFormatter();
 
   const [open, setOpen] = useState(false);
 

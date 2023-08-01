@@ -6,12 +6,13 @@ import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
 import FAQComponent from '../../components/FAQComponent';
-import { formatDate } from '../../util';
+import useLocalizedDateFormatter from '../../hooks/useLocalizedDateFormatter';
 
 function TermsAndConditions() {
   const t = useT();
   const navigate = useNavigate();
   const dateUpdate = new Date();
+  const { formatDate } = useLocalizedDateFormatter();
 
   return (
     <>

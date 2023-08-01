@@ -22,15 +22,15 @@ const dateFormatOptions: Intl.DateTimeFormatOptions = {
   year: 'numeric', // Display full year
 };
 
-export const formatDate = (date: Date) => date.toLocaleDateString('en-US', dateFormatOptions);
+export const formatLocalizedDate = (locale: string, date: Date) => date.toLocaleDateString(locale, dateFormatOptions);
 
-export const formatDateFromString = (date: string | null | undefined) => {
+export const formatLocalizedDateFromString = (locale: string, date: string | null | undefined) => {
   if (!date) {
     return t('No defined');
   }
 
   const dateObj = new Date(date);
-  return dateObj.toLocaleDateString('en-US', dateFormatOptions);
+  return dateObj.toLocaleDateString(locale, dateFormatOptions);
 };
 
 export const formatCurrency = (amount: number, currency?: string) => {
@@ -128,7 +128,7 @@ export const addMonthsToDate = (date: string | undefined, months: number) => {
 
   const addedDate = dayjs(date).add(months, 'month');
 
-  return formatDate(addedDate.toDate());
+  return addedDate.toDate().toLocaleDateString('en-US', dateFormatOptions);
 };
 
 export const isDateAfterCurrentDate = (date: string) => {

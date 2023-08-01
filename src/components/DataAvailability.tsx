@@ -4,9 +4,9 @@ import { useState } from 'react';
 
 import CheckGreen from '../assets/icons/check-green.svg';
 import WarnRed from '../assets/icons/warn-red.svg';
+import useLocalizedDateFormatter from '../hooks/useLocalizedDateFormatter';
 import { IModifiedDataFields } from '../schemas/application';
 import Text from '../stories/text/Text';
-import { formatDateFromString } from '../util';
 
 const getIcon = (available: boolean, name: string) => {
   let icon = CheckGreen;
@@ -28,6 +28,7 @@ interface DataAvailabilityProps {
 
 export function DataAvailability({ available, name, label, readonly, modifiedFields }: DataAvailabilityProps) {
   const t = useT();
+  const { formatDateFromString } = useLocalizedDateFormatter();
   const [open, setOpen] = useState(false);
 
   const handleToggle = () => {

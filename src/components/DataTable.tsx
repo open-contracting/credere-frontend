@@ -18,7 +18,8 @@ import SorterIcon from 'src/assets/icons/sorter.svg';
 import { twMerge } from 'tailwind-merge';
 
 import { PAGE_SIZES } from '../constants';
-import { formatCurrency, formatDateFromString } from '../util';
+import useLocalizedDateFormatter from '../hooks/useLocalizedDateFormatter';
+import { formatCurrency } from '../util';
 
 function Sorter() {
   return <img className="pl-2" src={SorterIcon} alt="sorter-icon" />;
@@ -194,10 +195,6 @@ function renderValue<T>(row: T, headCell: HeadCell<T>) {
     return headCell.render(row, headCell);
   }
 
-  if (headCell.type === 'date') {
-    return formatDateFromString(String(row[headCell.id]));
-  }
-
   if (headCell.type === 'currency') {
     return formatCurrency(Number(row[headCell.id]));
   }
@@ -213,6 +210,7 @@ export function DataTable<T>({
   actions,
 }: DataTableProps<T>) {
   const t = useT();
+  const { formatDateFromString } = useLocalizedDateFormatter();
   const [visibleRows, setVisibleRows] = React.useState<T[]>(rows);
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<Extract<keyof T, string> | undefined>();
@@ -276,7 +274,8 @@ export function DataTable<T>({
                 <TableRow tabIndex={-1} key={`${String(index)}`}>
                   {headCells.map((headCell) => (
                     <DataTableCell key={`${String(`${row[headCell.id]}-${index}-${headCell.id}`)}`}>
-                      {renderValue(row, headCell)}
+                      {headCell.type !== 'date' && renderValue(row, headCell)}
+                      {headCell.type === 'date' && formatDateFromString(String(row[headCell.id]))}
                     </DataTableCell>
                   ))}
                   {actions && <DataTableCell>{actions(row)}</DataTableCell>}
