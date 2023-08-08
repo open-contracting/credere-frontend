@@ -41,6 +41,7 @@ import ViewApplication from '../pages/fi/ViewApplication';
 import ChangePrimaryEmail from '../pages/msme/ChangePrimaryEmail';
 import ConfirmCreditProduct from '../pages/msme/ConfirmCreditProduct';
 import ConfirmFindAlternativeCredit from '../pages/msme/ConfirmFindAlternativeCredit';
+import ConfirmSubmission from '../pages/msme/ConfirmSubmission';
 import Rejected from '../pages/msme/Rejected';
 import TermsAndConditions from '../pages/msme/TermsAndConditions';
 import UploadContract from '../pages/msme/UploadContract';
@@ -282,6 +283,10 @@ const router = createBrowserRouter([
       {
         path: 'upload-contract-completed',
         element: <UploadContractCompleted />,
+      },
+      {
+        path: 'confirm-submission',
+        element: <ConfirmSubmission />,
       },
       {
         path: 'submission-completed',

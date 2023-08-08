@@ -29,7 +29,7 @@ export function FAQSection({ title, className, children }: FAQSectionProps & Pro
         <Typography variant="h6" className="text-darkest text-base font-normal">
           {title}
         </Typography>
-        <Box className="ml-auto p-2">
+        <Box className="ml-auto py-2 pr-2 pl-5">
           <img
             className={twMerge(`transition-transform duration-300 ease-in-out transform ${open ? '' : 'rotate-180'}`)}
             src={ArrowGreen}

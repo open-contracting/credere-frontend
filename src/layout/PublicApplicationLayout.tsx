@@ -51,7 +51,7 @@ export default function PublicApplicationLayout() {
       ) {
         if (lastSegment !== 'submission-completed') navigate('./submission-completed');
       } else if (application.pending_documents || application.status === APPLICATION_STATUS.INFORMATION_REQUESTED) {
-        if (lastSegment !== 'documents') navigate('./documents');
+        if (lastSegment !== 'documents' && lastSegment !== 'confirm-submission') navigate('./documents');
       } else if (application.credit_product_id && !application.lender_id) {
         if (lastSegment !== 'confirm-credit-product' && lastSegment !== 'submission-completed')
           navigate('./confirm-credit-product');

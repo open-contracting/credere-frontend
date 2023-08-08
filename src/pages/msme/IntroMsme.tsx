@@ -98,11 +98,6 @@ function IntroMsme() {
                 flexDirection: 'column',
               }}>
               <Checkbox
-                name="agree_topass_info_to_banking_partner"
-                defaultValue={false}
-                label={t('I agree for my details to be passed onto the banking partner.')}
-              />
-              <Checkbox
                 name="accept_terms_and_conditions"
                 defaultValue={false}
                 label={t('I have read the terms and conditions for the credit guarantee scheme.')}
