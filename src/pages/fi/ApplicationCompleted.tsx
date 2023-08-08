@@ -1,9 +1,11 @@
 import { useT } from '@transifex/react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'src/stories/button/Button';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
+import useDownloadApplication from '../../hooks/useDownloadApplication';
 import useApplicationContext from '../../hooks/useSecureApplicationContext';
 
 function ApplicationCompleted() {
@@ -11,15 +13,36 @@ function ApplicationCompleted() {
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;
+  const [idToDownload, setIdToDownload] = useState<number | undefined>();
+
+  const { downloadedApplication, isLoading } = useDownloadApplication(idToDownload);
 
   const onGoHomeHandler = () => {
     navigate('/');
   };
 
-  const onDownloadApplication = () => {
-    // eslint-disable-next-line no-console
-    console.log('download application');
+  const onDownloadApplication = async () => {
+    setIdToDownload(application?.id);
   };
+
+  useEffect(() => {
+    if (downloadedApplication) {
+      const href = window.URL.createObjectURL(downloadedApplication);
+
+      const anchorElement = document.createElement('a');
+
+      anchorElement.href = href;
+      const filename = `${t('application')}-${application?.borrower.legal_identifier}.zip`;
+      anchorElement.download = filename;
+
+      document.body.appendChild(anchorElement);
+      anchorElement.click();
+
+      document.body.removeChild(anchorElement);
+      window.URL.revokeObjectURL(href);
+      setIdToDownload(undefined);
+    }
+  }, [application?.borrower.legal_identifier, downloadedApplication, t]);
 
   return (
     <div className="xl:w-4/5">
@@ -33,7 +56,7 @@ function ApplicationCompleted() {
           <Button primary={false} className="md:mr-4" label={t('Back to home')} onClick={onGoHomeHandler} />
         </div>
         <div>
-          <Button disabled label={t('Download application')} onClick={onDownloadApplication} />
+          <Button label={t('Download application')} onClick={onDownloadApplication} disabled={isLoading} />
         </div>
       </div>
       <Text className="mb-10 text-sm font-light">

@@ -1,5 +1,5 @@
- 
 import { useT } from '@transifex/react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StepImage from 'src/assets/pages/stage-five.svg';
 import useApplicationContext from 'src/hooks/useSecureApplicationContext';
@@ -7,16 +7,39 @@ import Button from 'src/stories/button/Button';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
+import useDownloadApplication from '../../hooks/useDownloadApplication';
+
 export function StageFiveApproved() {
   const t = useT();
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;
+  const [idToDownload, setIdToDownload] = useState<number | undefined>();
 
-  const onDownloadApplication = () => {
-    // eslint-disable-next-line no-console
-    console.log('download application');
-  };
+  const { downloadedApplication, isLoading } = useDownloadApplication(idToDownload);
+
+  const onDownloadApplicationHandler = useCallback(() => {
+    setIdToDownload(application?.id);
+  }, [setIdToDownload, application?.id]);
+
+  useEffect(() => {
+    if (downloadedApplication) {
+      const href = window.URL.createObjectURL(downloadedApplication);
+
+      const anchorElement = document.createElement('a');
+
+      anchorElement.href = href;
+      const filename = `${t('application')}-${application?.borrower.legal_identifier}.zip`;
+      anchorElement.download = filename;
+
+      document.body.appendChild(anchorElement);
+      anchorElement.click();
+
+      document.body.removeChild(anchorElement);
+      window.URL.revokeObjectURL(href);
+      setIdToDownload(undefined);
+    }
+  }, [application?.borrower.legal_identifier, downloadedApplication, t]);
 
   const onGoHomeHandler = () => {
     navigate('/');
@@ -42,7 +65,7 @@ export function StageFiveApproved() {
           <Button primary={false} className="md:mr-4" label={t('Back to home')} onClick={onGoHomeHandler} />
         </div>
         <div>
-          <Button disabled label={t('Download application')} onClick={onDownloadApplication} />
+          <Button disabled={isLoading} label={t('Download application')} onClick={onDownloadApplicationHandler} />
         </div>
       </div>
     </>

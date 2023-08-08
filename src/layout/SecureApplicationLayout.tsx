@@ -1,4 +1,3 @@
- 
 import { useQuery } from '@tanstack/react-query';
 import { useT } from '@transifex/react';
 import axios from 'axios';
@@ -28,23 +27,7 @@ export default function SecureApplicationLayout() {
     }),
   );
 
-  useEffect(() => {
-    if (applicationContext.state.data) {
-      const application = applicationContext.state.data;
-      const { pathname } = location;
-      const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
-
-      if (lastSegment !== 'view') {
-        if (application.status === APPLICATION_STATUS.APPROVED) {
-          if (lastSegment !== 'stage-five-approved') navigate('./stage-five-approved');
-        } else if (application.status === APPLICATION_STATUS.REJECTED) {
-          if (lastSegment !== 'stage-five-rejected') navigate('./stage-five-rejected');
-        }
-      }
-    }
-  }, [applicationContext.state.data, navigate, location]);
-
-  const { isLoading } = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: [QUERY_KEYS.applications, `${id}`],
     queryFn: async (): Promise<IApplication | null> => {
       const application = await getApplicationFn(id);
@@ -61,6 +44,22 @@ export default function SecureApplicationLayout() {
       }
     },
   });
+
+  useEffect(() => {
+    if (data) {
+      const application = data;
+      const { pathname } = location;
+      const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
+
+      if (lastSegment !== 'view') {
+        if (application.status === APPLICATION_STATUS.APPROVED) {
+          if (lastSegment !== 'stage-five-approved') navigate('./stage-five-approved');
+        } else if (application.status === APPLICATION_STATUS.REJECTED) {
+          if (lastSegment !== 'stage-five-rejected') navigate('./stage-five-rejected');
+        }
+      }
+    }
+  }, [data, navigate, location]);
 
   return (
     <PageLayout>

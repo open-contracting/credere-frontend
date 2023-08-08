@@ -132,6 +132,14 @@ export const downloadDocumentFn = async (id: number) => {
   return response.data;
 };
 
+export const downloadApplicationFn = async (id: number, lang: string) => {
+  const response = await authApi.get(`applications/${id}/download-application/${lang}`, {
+    responseType: 'blob',
+  });
+
+  return response.data;
+};
+
 export const emailToSME = async (emailToSMEPayload: EmailToSMEInput) => {
   const { application_id, ...payload } = emailToSMEPayload;
   const response = await authApi.post<IApplication>(`applications/email-sme/${application_id}`, payload);

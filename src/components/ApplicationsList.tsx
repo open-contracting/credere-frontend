@@ -17,6 +17,7 @@ import {
   STARTED_STATUS,
   USER_TYPES,
 } from '../constants';
+import useDownloadApplication from '../hooks/useDownloadApplication';
 import useStartApplication from '../hooks/useStartApplication';
 import {
   EXTENDED_APPLICATION_FROM,
@@ -26,6 +27,7 @@ import {
   PaginationInput,
 } from '../schemas/application';
 import LinkButton from '../stories/link-button/LinkButton';
+import Loader from '../stories/loader/Loader';
 import { renderApplicationStatus } from '../util';
 import { DataTable, HeadCell, Order } from './DataTable';
 
@@ -74,12 +76,18 @@ const headCellsOCP: HeadCell<IApplication & IExtendedApplication>[] = [
 type ExtendendApplication = IApplication & IExtendedApplication;
 const ApplicationDataTable = DataTable<ExtendendApplication>;
 
-const actionsFIBase = (row: ExtendendApplication, onStartApplicationHandler: (id: number) => void) => (
+const actionsFIBase = (
+  row: ExtendendApplication,
+  isLoading: boolean,
+  onStartApplicationHandler: (id: number) => void,
+  onDownloadApplicationHandler: (id: number) => void,
+) => (
   <Box className="flex flex-row">
     {STARTED_STATUS.includes(row.status) && (
       <LinkButton
         className="p-1 justify-start"
         component={Link}
+        disabled={isLoading}
         to={`/applications/${row.id}/stage-one`}
         label={t('Continue')}
         size="small"
@@ -91,6 +99,7 @@ const actionsFIBase = (row: ExtendendApplication, onStartApplicationHandler: (id
         className="p-1 justify-start"
         onClick={() => onStartApplicationHandler(row.id)}
         label={t('Start')}
+        disabled={isLoading}
         size="small"
         noIcon
       />
@@ -101,6 +110,7 @@ const actionsFIBase = (row: ExtendendApplication, onStartApplicationHandler: (id
         component={Link}
         to={`/applications/${row.id}/complete-application`}
         label={t('Review')}
+        disabled={isLoading}
         size="small"
         noIcon
       />
@@ -111,15 +121,16 @@ const actionsFIBase = (row: ExtendendApplication, onStartApplicationHandler: (id
         component={Link}
         to={`/applications/${row.id}/view`}
         label={t('View')}
+        disabled={isLoading}
         size="small"
         noIcon
       />
     )}
     <LinkButton
       className="p-1 justify-start"
-      component={Link}
-      to={`/applications/${row.id}/download`}
+      onClick={() => onDownloadApplicationHandler(row.id)}
       label={t('Download')}
+      disabled={isLoading}
       size="small"
       noIcon
     />
@@ -156,6 +167,10 @@ interface ApplicationListProps {
 export function ApplicationList({ type }: ApplicationListProps) {
   const { enqueueSnackbar } = useSnackbar();
   const { startApplicationMutation } = useStartApplication();
+  const [idToDownload, setIdToDownload] = useState<number | undefined>();
+
+  const { downloadedApplication, isLoading } = useDownloadApplication(idToDownload);
+
   const [payload, setPayload] = useState<PaginationInput>({
     page: 0,
     page_size: PAGE_SIZES[0],
@@ -235,20 +250,59 @@ export function ApplicationList({ type }: ApplicationListProps) {
     [startApplicationMutation],
   );
 
-  const actionsFI = (row: ExtendendApplication) => actionsFIBase(row, onStartApplicationHandler);
+  useEffect(() => {
+    if (downloadedApplication) {
+      const href = window.URL.createObjectURL(downloadedApplication);
+
+      const anchorElement = document.createElement('a');
+
+      anchorElement.href = href;
+      const filename = `${t('application')}-${idToDownload}.zip`;
+      anchorElement.download = filename;
+
+      document.body.appendChild(anchorElement);
+      anchorElement.click();
+
+      document.body.removeChild(anchorElement);
+      window.URL.revokeObjectURL(href);
+      setIdToDownload(undefined);
+    }
+  }, [downloadedApplication, idToDownload]);
+
+  const onDownloadApplicationHandler = useCallback(
+    (id: number) => {
+      setIdToDownload(id);
+    },
+    [setIdToDownload],
+  );
+
+  // eslint-disable-next-line no-shadow
+  const actionsFI = (row: ExtendendApplication, isLoading?: boolean) =>
+    actionsFIBase(
+      row,
+      isLoading !== undefined ? isLoading : false,
+      onStartApplicationHandler,
+      onDownloadApplicationHandler,
+    );
 
   return (
-    <ApplicationDataTable
-      rows={rows}
-      useEmptyRows
-      handleRequestSort={handleRequestSort}
-      headCells={headCells}
-      pagination={{
-        totalCount,
-        handleChangePage,
-      }}
-      actions={type === USER_TYPES.OCP ? actionsOCP : actionsFI}
-    />
+    <>
+      {isLoading && <Loader />}
+      {!isLoading && (
+        <ApplicationDataTable
+          rows={rows}
+          useEmptyRows
+          handleRequestSort={handleRequestSort}
+          headCells={headCells}
+          pagination={{
+            totalCount,
+            handleChangePage,
+          }}
+          isLoading={isLoading}
+          actions={type === USER_TYPES.OCP ? actionsOCP : actionsFI}
+        />
+      )}
+    </>
   );
 }
 

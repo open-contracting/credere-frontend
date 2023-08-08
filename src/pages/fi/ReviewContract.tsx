@@ -4,7 +4,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Link as MUILink } from '@mui/material';
 import { useT } from '@transifex/react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Text from 'src/stories/text/Text';
@@ -12,6 +12,7 @@ import Title from 'src/stories/title/Title';
 
 import { DOCUMENTS_TYPE } from '../../constants';
 import useCompleteApplication from '../../hooks/useCompleteApplication';
+import useDownloadApplication from '../../hooks/useDownloadApplication';
 import useDownloadDocument from '../../hooks/useDownloadDocument';
 import useApplicationContext from '../../hooks/useSecureApplicationContext';
 import { FormCompleteApplicationInput, IBorrowerDocument, completeApplicationSchema } from '../../schemas/application';
@@ -24,13 +25,20 @@ function ReviewContract() {
   const navigate = useNavigate();
   const { isLoading, completeApplicationMutation } = useCompleteApplication();
   const applicationContext = useApplicationContext();
+  const application = applicationContext.state.data;
+  const [idToDownloadApplication, setIdToDownloadApplication] = useState<number | undefined>();
+
+  const { downloadedApplication, isLoading: isLoadingDownload } = useDownloadApplication(idToDownloadApplication);
+
+  const onDownloadApplicationHandler = useCallback(() => {
+    setIdToDownloadApplication(application?.id);
+  }, [setIdToDownloadApplication, application?.id]);
 
   const [idToDownload, setIdToDownload] = useState<number | undefined>();
   const [contract, setContract] = useState<IBorrowerDocument | undefined>();
 
   const { downloadedDocument, isLoading: isLoadingDocument } = useDownloadDocument(idToDownload);
 
-  const application = applicationContext.state.data;
   const borrower_documents = application?.borrower_documents;
 
   const onDownloadContract = () => {
@@ -64,13 +72,27 @@ function ReviewContract() {
     }
   }, [downloadedDocument, contract]);
 
+  useEffect(() => {
+    if (downloadedApplication) {
+      const href = window.URL.createObjectURL(downloadedApplication);
+
+      const anchorElement = document.createElement('a');
+
+      anchorElement.href = href;
+      const filename = `${t('application')}-${application?.borrower.legal_identifier}.zip`;
+      anchorElement.download = filename;
+
+      document.body.appendChild(anchorElement);
+      anchorElement.click();
+
+      document.body.removeChild(anchorElement);
+      window.URL.revokeObjectURL(href);
+      setIdToDownloadApplication(undefined);
+    }
+  }, [application?.borrower.legal_identifier, downloadedApplication, t]);
+
   const onGoHomeHandler = () => {
     navigate('/');
-  };
-
-  const onDownloadApplication = () => {
-    // eslint-disable-next-line no-console
-    console.log('download application');
   };
 
   const methods = useForm<FormCompleteApplicationInput>({
@@ -152,10 +174,19 @@ function ReviewContract() {
               <Button primary={false} className="md:mr-4" label={t('Back to home')} onClick={onGoHomeHandler} />
             </div>
             <div>
-              <Button className="md:mr-4" label={t('Credit ready')} type="submit" disabled={isLoading} />
+              <Button
+                className="md:mr-4"
+                label={t('Credit ready')}
+                type="submit"
+                disabled={isLoading || isLoadingDocument || isLoadingDownload}
+              />
             </div>
             <div>
-              <Button disabled label={t('Download application')} onClick={onDownloadApplication} />
+              <Button
+                disabled={isLoadingDownload}
+                label={t('Download application')}
+                onClick={onDownloadApplicationHandler}
+              />
             </div>
           </div>
           <Text className="mb-10 text-sm font-light">

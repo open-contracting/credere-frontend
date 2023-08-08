@@ -187,7 +187,8 @@ export interface DataTableProps<T> {
   useEmptyRows?: boolean;
   handleRequestSort?: (property: Extract<keyof T, string>, sortOrder: Order) => void;
   pagination?: HandlePagination;
-  actions?: (row: T) => JSX.Element;
+  actions?: (row: T, isLoading?: boolean) => JSX.Element;
+  isLoading?: boolean;
 }
 
 function renderValue<T>(row: T, headCell: HeadCell<T>) {
@@ -208,6 +209,7 @@ export function DataTable<T>({
   handleRequestSort,
   pagination,
   actions,
+  isLoading,
 }: DataTableProps<T>) {
   const t = useT();
   const { formatDateFromString } = useLocalizedDateFormatter();
@@ -278,7 +280,7 @@ export function DataTable<T>({
                       {headCell.type === 'date' && formatDateFromString(String(row[headCell.id]))}
                     </DataTableCell>
                   ))}
-                  {actions && <DataTableCell>{actions(row)}</DataTableCell>}
+                  {actions && <DataTableCell>{actions(row, isLoading)}</DataTableCell>}
                 </TableRow>
               ))}
 
@@ -326,6 +328,7 @@ DataTable.defaultProps = {
   pagination: undefined,
   useEmptyRows: true,
   actions: undefined,
+  isLoading: false,
 };
 
 export default DataTable;
