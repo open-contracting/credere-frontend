@@ -1,6 +1,9 @@
 services:
   frontend:
-    build: ./credere-frontend/
+    build:
+      context: ./credere-frontend/
+      args:
+        max_size_body: ${VITE_MAX_FILE_SIZE_MB}
     environment:
       - VITE_APP_VERSION=${VITE_APP_VERSION}
       - VITE_API_URL=${VITE_API_URL}
@@ -32,7 +35,7 @@ services:
       - HASH_KEY=${HASH_KEY}
       - TEST_MAIL_RECEIVER=${TEST_MAIL_RECEIVER}
       - IMAGES_BASE_URL=${IMAGES_BASE_URL}
-      - IMAGES_LANG_SUBPATH=${IMAGES_LANG_SUBPATH}
+      - EMAIL_TEMPLATE_LANG=${EMAIL_TEMPLATE_LANG}
       - FACEBOOK_LINK=${FACEBOOK_LINK}
       - TWITTER_LINK=${TWITTER_LINK}
       - LINK_LINK=${LINK_LINK}
