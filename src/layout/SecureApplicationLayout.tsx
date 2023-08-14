@@ -27,7 +27,7 @@ export default function SecureApplicationLayout() {
     }),
   );
 
-  const { isLoading, data } = useQuery({
+  const { isLoading, data, refetch } = useQuery({
     queryKey: [QUERY_KEYS.applications, `${id}`],
     queryFn: async (): Promise<IApplication | null> => {
       const application = await getApplicationFn(id);
@@ -61,9 +61,10 @@ export default function SecureApplicationLayout() {
         } else if (application.status === APPLICATION_STATUS.REJECTED) {
           if (lastSegment !== 'stage-five-rejected') navigate('./stage-five-rejected');
         }
+        if (lastSegment === 'stage-four') refetch();
       }
     }
-  }, [data, navigate, location]);
+  }, [data, navigate, location, refetch]);
 
   return (
     <PageLayout>

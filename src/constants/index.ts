@@ -152,6 +152,17 @@ export enum DOCUMENTS_TYPE {
 }
 
 // eslint-disable-next-line no-shadow
+export enum BORROWER_TYPE {
+  NATURAL_PERSON = 'NATURAL_PERSON',
+  LEGAL_PERSON = 'LEGAL_PERSON',
+}
+
+export const BORROWER_TYPES_NAMES: { [key: string]: string } = {
+  [BORROWER_TYPE.NATURAL_PERSON]: t('Natural Person'),
+  [BORROWER_TYPE.LEGAL_PERSON]: t('Legal Person'),
+};
+
+// eslint-disable-next-line no-shadow
 export enum MSME_TYPES {
   NOT_INFORMED = 'NOT_INFORMED',
   MICRO = 'MICRO',
