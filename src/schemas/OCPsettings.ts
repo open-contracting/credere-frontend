@@ -1,7 +1,7 @@
 import { t } from '@transifex/native';
 import { TypeOf, boolean, coerce, nativeEnum, object, preprocess, string } from 'zod';
 
-import { CREDIT_PRODUCT_TYPE, DOCUMENTS_TYPE, MSME_TYPES } from '../constants';
+import { BORROWER_TYPE, CREDIT_PRODUCT_TYPE, DOCUMENTS_TYPE, MSME_TYPES } from '../constants';
 
 const creditProviderNameSchema = string().min(1, t('Provider name is required'));
 const creditProviderTypeSchema = string().nonempty(t('Provider type is required'));
@@ -80,6 +80,13 @@ export const creditProductSchema = object({
       message: t('You need to check at least one option'),
     },
   ),
+  borrower_types: object({
+    [BORROWER_TYPE.NATURAL_PERSON]: boolean(),
+    [BORROWER_TYPE.LEGAL_PERSON]: boolean(),
+  }).refine((data) => data[BORROWER_TYPE.NATURAL_PERSON] || data[BORROWER_TYPE.LEGAL_PERSON], {
+    path: [''],
+    message: t('You need to check at least one option'),
+  }),
   other_fees_total_amount: preprocess(
     (args) => (args === '' ? undefined : args),
     coerce

@@ -1,7 +1,3 @@
- 
-
- 
-
 /* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box } from '@mui/material';
@@ -22,6 +18,8 @@ import { z } from 'zod';
 
 import { getCreditProductFn } from '../../api/private';
 import {
+  BORROWER_TYPE,
+  BORROWER_TYPES_NAMES,
   CREDIT_PRODUCT_OPTIONS,
   DOCUMENTS_TYPE,
   DOCUMENT_TYPES_NAMES,
@@ -126,6 +124,25 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
             options={CREDIT_PRODUCT_OPTIONS}
             placeholder={t('Type')}
           />
+
+          <Text className="mb-4">
+            {t('Select the legal type of MSMEs the credit provider is willing to offer credit to')}
+          </Text>
+          <Box className="mb-4">
+            <Box className="w-3/5 flex flex-col items-start justify-start gap-2">
+              <Checkbox
+                label={BORROWER_TYPES_NAMES[BORROWER_TYPE.NATURAL_PERSON]}
+                name={`borrower_types.${BORROWER_TYPE.NATURAL_PERSON}`}
+                className={errors.borrower_types ? 'text-red' : ''}
+              />
+              <Checkbox
+                label={BORROWER_TYPES_NAMES[BORROWER_TYPE.LEGAL_PERSON]}
+                name={`borrower_types.${BORROWER_TYPE.LEGAL_PERSON}`}
+                className={errors.borrower_types ? 'text-red' : ''}
+              />
+            </Box>
+            <FormInputError fieldError={errors.borrower_types} />
+          </Box>
 
           <Text className="mb-1">
             {t(
