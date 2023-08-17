@@ -35,7 +35,7 @@ const headCells: HeadCell<ExtendendUser>[] = [
     disablePadding: false,
     label: t('Type'),
     sortable: true,
-    render: (row: ExtendendUser) => <>{renderUserType(row.type)}</>,
+    render: (row: ExtendendUser) => renderUserType(row.type),
   },
   {
     id: 'lender_name',
