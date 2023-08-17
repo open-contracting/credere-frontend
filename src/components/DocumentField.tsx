@@ -31,6 +31,7 @@ export function DocumentField({ label, documentType, secure = false, className, 
   const { enqueueSnackbar } = useSnackbar();
   const [current, setCurrent] = useState<IBorrowerDocument | undefined>();
   const [showUploader, setShowUploader] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const applicationContext = useApplicationContext();
   const secureApplicationContext = useSecureApplicationContext();
@@ -68,6 +69,7 @@ export function DocumentField({ label, documentType, secure = false, className, 
       if (!application) return;
 
       try {
+        setLoading(true);
         if (documentType === DOCUMENTS_TYPE.COMPLIANCE_REPORT) {
           const payload: UploadComplianceInput = {
             file,
@@ -94,7 +96,7 @@ export function DocumentField({ label, documentType, secure = false, className, 
           const uploaded = await uploadFileFn(payload);
           setCurrent(uploaded);
         }
-
+        setLoading(false);
         setShowUploader(false);
         if (setUploadState) setUploadState((prev) => ({ ...prev, [documentType]: true }));
       } catch (error) {
@@ -139,7 +141,7 @@ export function DocumentField({ label, documentType, secure = false, className, 
           />
         </Box>
       )}
-      {showUploader && <FileUploader className={className} onAcceptedFile={onAcceptedFile} />}
+      {showUploader && <FileUploader loading={loading} className={className} onAcceptedFile={onAcceptedFile} />}
     </Box>
   );
 }

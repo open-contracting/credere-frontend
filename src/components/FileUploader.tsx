@@ -14,8 +14,11 @@ import Cloud from 'src/assets/icons/cloud.svg';
 import Button from 'src/stories/button/Button';
 import Text from 'src/stories/text/Text';
 
+import { Progress } from '../stories/loader/Loader';
+
 interface FileUploaderProps {
   className?: string;
+  loading: boolean;
   onAcceptedFile: (file: File) => void;
 }
 
@@ -27,7 +30,7 @@ const errorsMap = {
   [ErrorCode.FileTooLarge]: tNative('File is larger than {maxSizeMB} MB', { maxSizeMB }),
 };
 
-export function FileUploader({ className, onAcceptedFile }: FileUploaderProps) {
+export function FileUploader({ className, loading, onAcceptedFile }: FileUploaderProps) {
   const t = useT();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -67,29 +70,32 @@ export function FileUploader({ className, onAcceptedFile }: FileUploaderProps) {
       <div
         {...getRootProps({ className: `dropzone flex items-center justify-center ${className}` })}
         onClick={(e) => e.stopPropagation()}>
-        <label
-          htmlFor="dropzone-file"
-          onClick={(e) => e.stopPropagation()}
-          className="flex flex-col items-center justify-center w-full h-64 border-1 border-fieldBorder border-dashed rounded-lg cursor-pointer bg-white dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100">
-          <div className="flex flex-col items-center justify-center pt-5 pb-6">
-            <div className="flex flex-row items-center justify-center">
-              <img src={Cloud} alt="cloud-icon" />
-              <Text className="text-sm font-light mb-0 ml-2">
-                {!isDragActive && t('Drag and drop or click here')}
-                {isDragAccept && t('File will be accepted')}
-                {isDragReject && t('File will be rejected')}
-              </Text>
+        {!loading && (
+          <label
+            htmlFor="dropzone-file"
+            onClick={(e) => e.stopPropagation()}
+            className="flex flex-col items-center justify-center w-full h-64 border-1 border-fieldBorder border-dashed rounded-lg cursor-pointer bg-white dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100">
+            <div className="flex flex-col items-center justify-center pt-5 pb-6">
+              <div className="flex flex-row items-center justify-center">
+                <img src={Cloud} alt="cloud-icon" />
+                <Text className="text-sm font-light mb-0 ml-2">
+                  {!isDragActive && t('Drag and drop or click here')}
+                  {isDragAccept && t('File will be accepted')}
+                  {isDragReject && t('File will be rejected')}
+                </Text>
+              </div>
+              <Button
+                noIcon
+                primary={false}
+                className="mt-4 border border-solid border-fieldBorder"
+                label={t('Browse file')}
+                onClick={open}
+              />
             </div>
-            <Button
-              noIcon
-              primary={false}
-              className="mt-4 border border-solid border-fieldBorder"
-              label={t('Browse file')}
-              onClick={open}
-            />
-          </div>
-          <input id="dropzone-file" type="file" className="hidden" {...getInputProps({ multiple: true })} />
-        </label>
+            <input id="dropzone-file" type="file" className="hidden" {...getInputProps({ multiple: true })} />
+          </label>
+        )}
+        {loading && <Progress />}
       </div>
       <Text className="text-sm font-light mt-4">
         {t('Accepted formats are PDF, JPEG and PNG. The maximum file size permitted is {maxSizeMB}MB.', { maxSizeMB })}
