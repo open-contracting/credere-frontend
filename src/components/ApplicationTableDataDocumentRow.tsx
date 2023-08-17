@@ -1,4 +1,5 @@
 import { TableRow } from '@mui/material';
+import { useT } from '@transifex/react';
 import DocumentIcon from 'src/assets/icons/document.svg';
 
 import { DOCUMENT_TYPES_NAMES } from '../constants';
@@ -17,6 +18,7 @@ export function ApplicationTableDataDocumentRow({
   isLoading = false,
   readonly = false,
 }: ApplicationTableDocumentDataRowProps) {
+  const t = useT();
   const value = document.name;
   const missing = false;
 
@@ -29,7 +31,7 @@ export function ApplicationTableDataDocumentRow({
 
   return (
     <TableRow>
-      <DataTableCell>{DOCUMENT_TYPES_NAMES[document.type]}</DataTableCell>
+      <DataTableCell>{t(DOCUMENT_TYPES_NAMES[document.type])}</DataTableCell>
       <DataTableCell>
         <DataAvailability available={!missing} label={document.type} readonly={readonly} />
       </DataTableCell>
