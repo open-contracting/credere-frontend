@@ -30,7 +30,7 @@ export function ViewApplication() {
         <>
           <Box className="flex flex-row items-center mb-2">
             <Text className="text-lg mr-2">{t('Status:')}</Text>
-            <Text className="text-lg font-light">{renderApplicationStatus(application.status)}</Text>
+            <Text className="text-lg font-light">{t(renderApplicationStatus(application.status))}</Text>
           </Box>
 
           {application.status === APPLICATION_STATUS.APPROVED && (

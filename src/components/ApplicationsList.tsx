@@ -57,9 +57,8 @@ const headCellsBase: HeadCell<IApplication & IExtendedApplication>[] = [
     disablePadding: false,
     label: t('Stage'),
     sortable: true,
-    render: (row: IApplication & IExtendedApplication, headCell: HeadCell<IApplication & IExtendedApplication>) => (
-      <>{renderApplicationStatus(String(row[headCell.id]))}</>
-    ),
+    render: (row: IApplication & IExtendedApplication, headCell: HeadCell<IApplication & IExtendedApplication>) =>
+      renderApplicationStatus(String(row[headCell.id])),
   },
 ];
 

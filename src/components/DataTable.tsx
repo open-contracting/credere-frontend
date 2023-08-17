@@ -71,7 +71,7 @@ export interface HeadCell<T> {
   id: Extract<keyof T, string>;
   label: string;
   type?: DataCellType;
-  render?: (row: T, headCell: HeadCell<T>) => JSX.Element;
+  render?: (row: T, headCell: HeadCell<T>) => JSX.Element | string;
   sortable?: boolean;
   width?: number;
 }
@@ -156,7 +156,7 @@ function DataTableHead<T>({
                 className="flex flex-row justify-between text-moodyBlue text-sm font-normal"
                 IconComponent={orderBy === headCell.id ? SorterDirection : Sorter}
                 onClick={createSortHandler(headCell.id)}>
-                {headCell.label}
+                {t(headCell.label)}
               </TableSortLabel>
             )}
             {!headCell.sortable && <DataTableHeadLabel label={headCell.label} />}
@@ -276,7 +276,7 @@ export function DataTable<T>({
                 <TableRow tabIndex={-1} key={`${String(index)}`}>
                   {headCells.map((headCell) => (
                     <DataTableCell key={`${String(`${row[headCell.id]}-${index}-${headCell.id}`)}`}>
-                      {headCell.type !== 'date' && renderValue(row, headCell)}
+                      {headCell.type !== 'date' && t(renderValue(row, headCell))}
                       {headCell.type === 'date' && formatDateFromString(String(row[headCell.id]))}
                     </DataTableCell>
                   ))}
