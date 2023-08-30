@@ -1,5 +1,5 @@
 import { t } from '@transifex/native';
-import { TypeOf, boolean, coerce, nativeEnum, object, preprocess, string } from 'zod';
+import { boolean, coerce, nativeEnum, object, preprocess, string, TypeOf } from 'zod';
 
 import { BORROWER_TYPE, CREDIT_PRODUCT_TYPE, DOCUMENTS_TYPE, MSME_TYPES } from '../constants';
 
@@ -69,12 +69,18 @@ export const creditProductSchema = object({
     [DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT]: boolean(),
     [DOCUMENTS_TYPE.BANK_CERTIFICATION_DOCUMENT]: boolean(),
     [DOCUMENTS_TYPE.FINANCIAL_STATEMENT]: boolean(),
+    [DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION]: boolean(),
+    [DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE]: boolean(),
+    [DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT]: boolean(),
   }).refine(
     (data) =>
       data[DOCUMENTS_TYPE.INCORPORATION_DOCUMENT] ||
       data[DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT] ||
       data[DOCUMENTS_TYPE.BANK_CERTIFICATION_DOCUMENT] ||
-      data[DOCUMENTS_TYPE.FINANCIAL_STATEMENT],
+      data[DOCUMENTS_TYPE.FINANCIAL_STATEMENT] ||
+      data[DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION] ||
+      data[DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE] ||
+      data[DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT],
     {
       path: [''],
       message: t('You need to check at least one option'),

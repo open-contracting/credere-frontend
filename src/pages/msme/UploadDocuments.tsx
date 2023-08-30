@@ -17,7 +17,7 @@ import { APPLICATION_STATUS, DOCUMENTS_TYPE } from '../../constants';
 import useApplicationContext from '../../hooks/useApplicationContext';
 import useChangeEmail from '../../hooks/useChangeEmail';
 import useSubmitAdditionalData from '../../hooks/useSubmitAdditionalData';
-import { FormChangeEmailInput, changeEmailSchema } from '../../schemas/application';
+import { changeEmailSchema, FormChangeEmailInput } from '../../schemas/application';
 import Button from '../../stories/button/Button';
 import FormInput from '../../stories/form-input/FormInput';
 import LinkButton from '../../stories/link-button/LinkButton';
@@ -121,6 +121,30 @@ function UploadDocuments() {
               setUploadState={setUploadState}
               label={t('Please attach your supplier registration document for your company.')}
               documentType={DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT}
+            />
+          )}
+          {showUploaderFor[DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION] && (
+            <DocumentField
+              className="md:w-3/5"
+              setUploadState={setUploadState}
+              label={t('Please attach your shareholder composition document.')}
+              documentType={DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION}
+            />
+          )}
+          {showUploaderFor[DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE] && (
+            <DocumentField
+              className="md:w-3/5"
+              setUploadState={setUploadState}
+              label={t('Please attach your Certificado de inscripción del Registro Único de Proponentes (RUP).')}
+              documentType={DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE}
+            />
+          )}
+          {showUploaderFor[DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT] && (
+            <DocumentField
+              className="md:w-3/5"
+              setUploadState={setUploadState}
+              label={t('Please attach your last three bank statements.')}
+              documentType={DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT}
             />
           )}
 

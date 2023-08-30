@@ -149,6 +149,9 @@ export enum DOCUMENTS_TYPE {
   FINANCIAL_STATEMENT = 'FINANCIAL_STATEMENT',
   SIGNED_CONTRACT = 'SIGNED_CONTRACT',
   COMPLIANCE_REPORT = 'COMPLIANCE_REPORT',
+  SHAREHOLDER_COMPOSITION = 'SHAREHOLDER_COMPOSITION',
+  CHAMBER_OF_COMMERCE = 'CHAMBER_OF_COMMERCE',
+  THREE_LAST_BANK_STATEMENT = 'THREE_LAST_BANK_STATEMENT'
 }
 
 // eslint-disable-next-line no-shadow
@@ -198,6 +201,9 @@ export const DOCUMENT_TYPES_NAMES: { [key: string]: string } = {
   [DOCUMENTS_TYPE.FINANCIAL_STATEMENT]: t('Financial statement'),
   [DOCUMENTS_TYPE.SIGNED_CONTRACT]: t('Signed contract'),
   [DOCUMENTS_TYPE.COMPLIANCE_REPORT]: t('Compliance report'),
+  [DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION]: t('Shareholder composition'),
+  [DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE]: t('Chamber of Commerce'),
+  [DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT]: t('Three last bank statement'),
 };
 
 // https://clasificaciones.dane.gov.co/ciiu4-0/seccion_clasificacion
