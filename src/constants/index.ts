@@ -209,10 +209,6 @@ export const DOCUMENT_TYPES_NAMES: { [key: string]: string } = {
 // https://clasificaciones.dane.gov.co/ciiu4-0/seccion_clasificacion
 export const SECTOR_TYPES: FormSelectOption[] = [
   {
-    value: 'accommodation_and_food_services',
-    label: t('Accommodation and Food Services'),
-  },
-  {
     value: 'agricultura',
     label: t('Agricultura, ganadería, caza, silvicultura y pesca'),
   },
