@@ -6,10 +6,11 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
 import { getApplicationFn } from '../api/private';
-import { APPLICATION_STATUS, DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
+import { APPLICATION_STATUS, DISPATCH_ACTIONS, QUERY_KEYS, USER_TYPES } from '../constants';
 import { useParamsTypeSafe } from '../hooks/useParamsTypeSafe';
 import useApplicationContext from '../hooks/useSecureApplicationContext';
 import ApplicationErrorPage from '../pages/msme/ApplicationErrorPage';
+import ProtectedRoute from '../routes/ProtectedRoute';
 import { IApplication } from '../schemas/application';
 import Loader from '../stories/loader/Loader';
 import PageLayout from './PageLayout';
@@ -67,10 +68,12 @@ export default function SecureApplicationLayout() {
   }, [data, navigate, location, refetch]);
 
   return (
-    <PageLayout>
-      {isLoading && <Loader />}
-      {!isLoading && !queryError && <Outlet />}
-      {queryError && <ApplicationErrorPage message={queryError} />}
-    </PageLayout>
+    <ProtectedRoute requiredUserType={USER_TYPES.FI}>
+      <PageLayout>
+        {isLoading && <Loader />}
+        {!isLoading && !queryError && <Outlet />}
+        {queryError && <ApplicationErrorPage message={queryError} />}
+      </PageLayout>
+    </ProtectedRoute>
   );
 }
