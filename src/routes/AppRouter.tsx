@@ -31,6 +31,7 @@ import SecureApplicationContextProvider from 'src/providers/SecureApplicationCon
 import StateContextProvider from 'src/providers/StateContextProvider';
 import ProtectedRoute from 'src/routes/ProtectedRoute';
 
+import { USER_TYPES } from '../constants';
 import PageLayout from '../layout/PageLayout';
 import SecureApplicationLayout from '../layout/SecureApplicationLayout';
 import ApplicationCompleted from '../pages/fi/ApplicationCompleted';
@@ -78,7 +79,7 @@ const router = createBrowserRouter([
   {
     path: '/admin/applications',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <Applications />
         </PageLayout>
@@ -89,7 +90,7 @@ const router = createBrowserRouter([
   {
     path: '/admin/applications/:id/view',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <LoadApplication readonly />
         </PageLayout>
@@ -100,7 +101,7 @@ const router = createBrowserRouter([
   {
     path: '/admin/applications/:id/update',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <LoadApplication />
         </PageLayout>
@@ -111,7 +112,7 @@ const router = createBrowserRouter([
   {
     path: '/settings',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <Settings />
         </PageLayout>
@@ -122,7 +123,7 @@ const router = createBrowserRouter([
   {
     path: '/settings/lender/new',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <LenderForm />
         </PageLayout>
@@ -133,7 +134,7 @@ const router = createBrowserRouter([
   {
     path: '/settings/lender/:id/edit',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <LoadLender />
         </PageLayout>
@@ -144,7 +145,7 @@ const router = createBrowserRouter([
   {
     path: '/settings/user/new',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <UserForm />
         </PageLayout>
@@ -155,7 +156,7 @@ const router = createBrowserRouter([
   {
     path: '/settings/user/:id/edit',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <LoadUser />
         </PageLayout>
@@ -166,7 +167,7 @@ const router = createBrowserRouter([
   {
     path: '/settings/lender/:lenderId/credit-product/new',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <LoadCreditProduct />
         </PageLayout>
@@ -177,7 +178,7 @@ const router = createBrowserRouter([
   {
     path: '/settings/lender/:lenderId/credit-product/:id/edit',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <LoadCreditProduct />
         </PageLayout>
