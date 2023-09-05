@@ -1,4 +1,3 @@
- 
 import { t } from '@transifex/native';
 import { Link } from 'react-router-dom';
 
@@ -13,7 +12,7 @@ const headCells: HeadCell<ICreditProduct>[] = [
     disablePadding: false,
     label: t('Borrower size'),
     sortable: false,
-    render: (row: ICreditProduct) => <>{renderBorrowerSizeType(row.borrower_size)}</>,
+    render: (row: ICreditProduct) => renderBorrowerSizeType(row.borrower_size),
   },
   {
     id: 'lower_limit',
@@ -41,7 +40,7 @@ const headCells: HeadCell<ICreditProduct>[] = [
     disablePadding: false,
     label: t('Type'),
     sortable: false,
-    render: (row: ICreditProduct) => <>{renderCreditProductType(row.type)}</>,
+    render: (row: ICreditProduct) => renderCreditProductType(row.type),
   },
 ];
 

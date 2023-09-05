@@ -1,6 +1,3 @@
- 
-
- 
 import { useQuery } from '@tanstack/react-query';
 import { t } from '@transifex/native';
 import axios from 'axios';
@@ -34,7 +31,7 @@ const headCells: HeadCell<ILender>[] = [
     disablePadding: false,
     label: t('Type'),
     sortable: false,
-    render: (row: ILender) => <>{renderLenderType(row.type)}</>,
+    render: (row: ILender) => renderLenderType(row.type),
   },
 ];
 

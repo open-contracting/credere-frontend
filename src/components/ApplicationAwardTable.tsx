@@ -3,9 +3,10 @@ import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@m
 import { useT } from '@transifex/react';
 
 import useGetPreviousAwards from '../hooks/useGetPreviousAwards';
+import useLocalizedDateFormatter from '../hooks/useLocalizedDateFormatter';
 import useUpdateAward from '../hooks/useUpdateAward';
 import { IApplication, IUpdateAward } from '../schemas/application';
-import { formatCurrency, formatDateFromString, formatPaymentMethod } from '../util';
+import { formatCurrency, formatPaymentMethod } from '../util';
 import ApplicationTableDataAwardRow from './ApplicationTableDataAwardRow';
 import ApplicationTableDataPreviousAwardRow from './ApplicationTableDataPreviousAwardRow';
 import { DataTableHeadCell, DataTableHeadLabel } from './DataTable';
@@ -18,6 +19,7 @@ export interface ApplicationAwardTableProps {
 
 export function ApplicationAwardTable({ application, readonly = false, className }: ApplicationAwardTableProps) {
   const t = useT();
+  const { formatDateFromString } = useLocalizedDateFormatter();
   const { updateAwardMutation, isLoading } = useUpdateAward();
   const { data: previousAwards, isLoading: isLoadingPreviousAwards } = useGetPreviousAwards(application.id);
 
@@ -58,6 +60,7 @@ export function ApplicationAwardTable({ application, readonly = false, className
               name="title"
               label={t('Award Title')}
               award={award}
+              modifiedFields={application.modified_data_fields?.award_updates}
             />
             <ApplicationTableDataAwardRow
               isLoading={isLoading}
@@ -67,6 +70,7 @@ export function ApplicationAwardTable({ application, readonly = false, className
               name="contracting_process_id"
               label={t('Contracting Process ID')}
               award={award}
+              modifiedFields={application.modified_data_fields?.award_updates}
             />
             <ApplicationTableDataAwardRow
               isLoading={isLoading}
@@ -76,6 +80,7 @@ export function ApplicationAwardTable({ application, readonly = false, className
               name="description"
               label={t('Award Description')}
               award={award}
+              modifiedFields={application.modified_data_fields?.award_updates}
             />
             <ApplicationTableDataAwardRow
               type="date-field"
@@ -87,6 +92,7 @@ export function ApplicationAwardTable({ application, readonly = false, className
               label={t('Award Date')}
               award={award}
               formatter={formatDateFromString}
+              modifiedFields={application.modified_data_fields?.award_updates}
             />
             <ApplicationTableDataAwardRow
               type="currency"
@@ -99,6 +105,7 @@ export function ApplicationAwardTable({ application, readonly = false, className
               formLabel={t('Award Amount')}
               award={award}
               formatter={(value) => `${award.award_currency} ${formatCurrency(value, award.award_currency)}`}
+              modifiedFields={application.modified_data_fields?.award_updates}
             />
             <ApplicationTableDataAwardRow
               type="date-field"
@@ -110,6 +117,7 @@ export function ApplicationAwardTable({ application, readonly = false, className
               label={t('Contract Start Date')}
               award={award}
               formatter={formatDateFromString}
+              modifiedFields={application.modified_data_fields?.award_updates}
             />
             <ApplicationTableDataAwardRow
               type="date-field"
@@ -121,6 +129,7 @@ export function ApplicationAwardTable({ application, readonly = false, className
               label={t('Contract End Date')}
               award={award}
               formatter={formatDateFromString}
+              modifiedFields={application.modified_data_fields?.award_updates}
             />
             <ApplicationTableDataAwardRow
               preWhitespace
@@ -132,6 +141,7 @@ export function ApplicationAwardTable({ application, readonly = false, className
               label={t('Payment Method')}
               award={award}
               formatter={formatPaymentMethod}
+              modifiedFields={application.modified_data_fields?.award_updates}
             />
             <ApplicationTableDataAwardRow
               isLoading={isLoading}
@@ -141,6 +151,7 @@ export function ApplicationAwardTable({ application, readonly = false, className
               name="buyer_name"
               label={t('Buyer Name')}
               award={award}
+              modifiedFields={application.modified_data_fields?.award_updates}
             />
             <ApplicationTableDataAwardRow
               isLoading={isLoading}
@@ -150,6 +161,7 @@ export function ApplicationAwardTable({ application, readonly = false, className
               name="procurement_method"
               label={t('Procurement Method')}
               award={award}
+              modifiedFields={application.modified_data_fields?.award_updates}
             />
             <ApplicationTableDataAwardRow
               isLoading={isLoading}
@@ -159,6 +171,7 @@ export function ApplicationAwardTable({ application, readonly = false, className
               name="procurement_category"
               label={t('Contract Type')}
               award={award}
+              modifiedFields={application.modified_data_fields?.award_updates}
             />
             <ApplicationTableDataPreviousAwardRow
               label={t('Previous Public Sector Contracts')}

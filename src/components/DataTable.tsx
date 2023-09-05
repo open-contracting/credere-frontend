@@ -18,7 +18,8 @@ import SorterIcon from 'src/assets/icons/sorter.svg';
 import { twMerge } from 'tailwind-merge';
 
 import { PAGE_SIZES } from '../constants';
-import { formatCurrency, formatDateFromString } from '../util';
+import useLocalizedDateFormatter from '../hooks/useLocalizedDateFormatter';
+import { formatCurrency } from '../util';
 
 function Sorter() {
   return <img className="pl-2" src={SorterIcon} alt="sorter-icon" />;
@@ -70,7 +71,7 @@ export interface HeadCell<T> {
   id: Extract<keyof T, string>;
   label: string;
   type?: DataCellType;
-  render?: (row: T, headCell: HeadCell<T>) => JSX.Element;
+  render?: (row: T, headCell: HeadCell<T>) => JSX.Element | string;
   sortable?: boolean;
   width?: number;
 }
@@ -155,7 +156,7 @@ function DataTableHead<T>({
                 className="flex flex-row justify-between text-moodyBlue text-sm font-normal"
                 IconComponent={orderBy === headCell.id ? SorterDirection : Sorter}
                 onClick={createSortHandler(headCell.id)}>
-                {headCell.label}
+                {t(headCell.label)}
               </TableSortLabel>
             )}
             {!headCell.sortable && <DataTableHeadLabel label={headCell.label} />}
@@ -186,16 +187,13 @@ export interface DataTableProps<T> {
   useEmptyRows?: boolean;
   handleRequestSort?: (property: Extract<keyof T, string>, sortOrder: Order) => void;
   pagination?: HandlePagination;
-  actions?: (row: T) => JSX.Element;
+  actions?: (row: T, isLoading?: boolean) => JSX.Element;
+  isLoading?: boolean;
 }
 
 function renderValue<T>(row: T, headCell: HeadCell<T>) {
   if (headCell.render) {
     return headCell.render(row, headCell);
-  }
-
-  if (headCell.type === 'date') {
-    return formatDateFromString(String(row[headCell.id]));
   }
 
   if (headCell.type === 'currency') {
@@ -211,8 +209,10 @@ export function DataTable<T>({
   handleRequestSort,
   pagination,
   actions,
+  isLoading,
 }: DataTableProps<T>) {
   const t = useT();
+  const { formatDateFromString } = useLocalizedDateFormatter();
   const [visibleRows, setVisibleRows] = React.useState<T[]>(rows);
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<Extract<keyof T, string> | undefined>();
@@ -276,10 +276,11 @@ export function DataTable<T>({
                 <TableRow tabIndex={-1} key={`${String(index)}`}>
                   {headCells.map((headCell) => (
                     <DataTableCell key={`${String(`${row[headCell.id]}-${index}-${headCell.id}`)}`}>
-                      {renderValue(row, headCell)}
+                      {headCell.type !== 'date' && t(renderValue(row, headCell))}
+                      {headCell.type === 'date' && formatDateFromString(String(row[headCell.id]))}
                     </DataTableCell>
                   ))}
-                  {actions && <DataTableCell>{actions(row)}</DataTableCell>}
+                  {actions && <DataTableCell>{actions(row, isLoading)}</DataTableCell>}
                 </TableRow>
               ))}
 
@@ -327,6 +328,7 @@ DataTable.defaultProps = {
   pagination: undefined,
   useEmptyRows: true,
   actions: undefined,
+  isLoading: false,
 };
 
 export default DataTable;

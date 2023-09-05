@@ -4,6 +4,8 @@ import { useState } from 'react';
 
 import CheckGreen from '../assets/icons/check-green.svg';
 import WarnRed from '../assets/icons/warn-red.svg';
+import useLocalizedDateFormatter from '../hooks/useLocalizedDateFormatter';
+import { IModifiedDataFields } from '../schemas/application';
 import Text from '../stories/text/Text';
 
 const getIcon = (available: boolean, name: string) => {
@@ -18,22 +20,27 @@ const getIcon = (available: boolean, name: string) => {
 
 interface DataAvailabilityProps {
   available: boolean;
-  name: string;
+  name?: string;
+  label: string;
   readonly: boolean;
+  modifiedFields?: { [key: string]: IModifiedDataFields };
 }
 
-export function DataAvailability({ available, name, readonly }: DataAvailabilityProps) {
+export function DataAvailability({ available, name, label, readonly, modifiedFields }: DataAvailabilityProps) {
   const t = useT();
+  const { formatDateFromString } = useLocalizedDateFormatter();
   const [open, setOpen] = useState(false);
 
   const handleToggle = () => {
     setOpen(!open);
   };
 
+  const modified = modifiedFields && name ? modifiedFields[name] : undefined;
+
   if (available || readonly) {
     return (
       <Box className="py-2 flex flex-row">
-        {getIcon(available, name)}
+        {getIcon(available, label)}
 
         <Text fontVariant className="ml-3 mb-0 text-sm">
           {available ? t('Yes') : t('Data missing')}
@@ -49,7 +56,7 @@ export function DataAvailability({ available, name, readonly }: DataAvailability
           sx={{
             pt: '2px',
           }}>
-          {getIcon(available, name)}
+          {getIcon(available, label)}
         </Box>
         <Box className="flex flex-col">
           <Text fontVariant className="ml-3 mb-0 text-sm">
@@ -63,10 +70,20 @@ export function DataAvailability({ available, name, readonly }: DataAvailability
             </Text>
             <Collapse in={open}>
               <Text fontVariant className="ml-3 mt-4 text-sm">
-                {t(
-                  'Data for the {fieldName} for the SME is not available. Confirm manually through SECOP or alternative source.',
-                  { fieldName: name },
-                )}
+                {!modified
+                  ? t(
+                      'Data for the {fieldName} for the SME is not available. Confirm manually through SECOP or alternative source.',
+                      { fieldName: label },
+                    )
+                  : t(
+                      'Data for the {fieldName} was not available, but completed by {userType} user {userName} on {modifiedDate}.',
+                      {
+                        fieldName: label,
+                        userType: modified.user_type,
+                        userName: modified.user,
+                        modifiedDate: formatDateFromString(modified.modified_at),
+                      },
+                    )}
               </Text>
             </Collapse>
           </Box>
@@ -75,5 +92,10 @@ export function DataAvailability({ available, name, readonly }: DataAvailability
     </Box>
   );
 }
+
+DataAvailability.defaultProps = {
+  modifiedFields: undefined,
+  name: undefined,
+};
 
 export default DataAvailability;

@@ -2,9 +2,10 @@ import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@m
 import { useT } from '@transifex/react';
 
 import { CREDIT_PRODUCT_TYPE } from '../constants';
+import useLocalizedDateFormatter from '../hooks/useLocalizedDateFormatter';
 import { IApplication } from '../schemas/application';
 import Title from '../stories/title/Title';
-import { formatCurrency, formatDateFromString } from '../util';
+import { formatCurrency } from '../util';
 import { DataTableCell, DataTableHeadCell, DataTableHeadLabel } from './DataTable';
 
 export interface CreditProductReviewProps {
@@ -14,6 +15,8 @@ export interface CreditProductReviewProps {
 
 export function CreditProductReview({ application, className }: CreditProductReviewProps) {
   const t = useT();
+  const { formatDateFromString } = useLocalizedDateFormatter();
+
   const creditProduct = application.credit_product;
 
   if (!creditProduct) return null;

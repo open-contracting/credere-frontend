@@ -1,13 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
 import { useT } from '@transifex/react';
 import { useState } from 'react';
 import Minus from 'src/assets/icons/minus.svg';
 import Plus from 'src/assets/icons/plus.svg';
 
+import useLocalizedDateFormatter from '../hooks/useLocalizedDateFormatter';
 import { IAward } from '../schemas/application';
 import Loader from '../stories/loader/Loader';
-import { formatCurrency, formatDateFromString } from '../util';
+import { formatCurrency } from '../util';
 import { ApplicationTableAwardDataRowProps } from './ApplicationTableDataRow';
 import DataAvailability from './DataAvailability';
 import { DataTableCell, DataTableHeadCell, DataTableHeadLabel } from './DataTable';
@@ -36,6 +36,7 @@ export function ApplicationTableDataPreviousAwardRow({
   preWhitespace,
 }: ApplicationTableDataPreviousAwardRowProps) {
   const t = useT();
+  const { formatDateFromString } = useLocalizedDateFormatter();
 
   const [open, setOpen] = useState(false);
 
@@ -49,7 +50,7 @@ export function ApplicationTableDataPreviousAwardRow({
       <TableRow>
         <DataTableCell>{label}</DataTableCell>
         <DataTableCell>
-          <DataAvailability available={!missing} name={label} readonly />
+          <DataAvailability available={!missing} label={label} readonly />
         </DataTableCell>
         {!missing && (
           <DataTableCell className={preWhitespace ? 'whitespace-pre' : ''}>

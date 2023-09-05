@@ -2,20 +2,25 @@
 import { t } from '@transifex/native';
 import { TypeOf, boolean, coerce, nativeEnum, object, string } from 'zod';
 
-import { APPLICATION_STATUS, DOCUMENTS_TYPE, MSME_TYPES } from '../constants';
+import { APPLICATION_STATUS, DOCUMENTS_TYPE, MSME_TYPES, USER_TYPES } from '../constants';
 import { isDateAfterCurrentDate } from '../util';
 import { emailSchema } from './auth';
 
-const booleanRequiredSchema = boolean().refine((value) => value === true, {
-  message: t('You need to check this option to Access the Scheme'),
-});
-
 export const introSchema = object({
-  agree_topass_info_to_banking_partner: booleanRequiredSchema,
-  accept_terms_and_conditions: booleanRequiredSchema,
+  accept_terms_and_conditions: boolean().refine((value) => value === true, {
+    message: t('You need to check this option to Access the Scheme'),
+  }),
 });
 
 export type IntroInput = TypeOf<typeof introSchema>;
+
+export const submitSchema = object({
+  agree_topass_info_to_banking_partner: boolean().refine((value) => value === true, {
+    message: t('You need to check this option to submit the application'),
+  }),
+});
+
+export type SubmitInput = TypeOf<typeof submitSchema>;
 
 const UUIDType = string().optional();
 
@@ -215,6 +220,12 @@ export interface IBorrowerDocument {
   name: string;
 }
 
+export interface IModifiedDataFields {
+  modified_at: string;
+  user: string;
+  user_type: USER_TYPES;
+}
+
 export interface IApplication {
   id: number;
   borrower: IBorrower;
@@ -255,6 +266,10 @@ export interface IApplication {
   credit_product_id?: number;
   credit_product?: ICreditProduct;
   borrower_documents: IBorrowerDocument[];
+  modified_data_fields?: {
+    award_updates: { [key: string]: IModifiedDataFields };
+    borrower_updates: { [key: string]: IModifiedDataFields };
+  };
 }
 
 export interface IExtendedApplication {

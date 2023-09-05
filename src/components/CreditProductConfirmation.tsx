@@ -2,9 +2,10 @@ import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@m
 import { useT } from '@transifex/react';
 
 import { CREDIT_PRODUCT_TYPE } from '../constants';
+import useLocalizedDateFormatter from '../hooks/useLocalizedDateFormatter';
 import { IApplication, ICreditProduct } from '../schemas/application';
 import Title from '../stories/title/Title';
-import { formatCurrency, formatDateFromString } from '../util';
+import { formatCurrency } from '../util';
 import { DataTableCell, DataTableHeadCell, DataTableHeadLabel } from './DataTable';
 
 export interface CreditProductConfirmationProps {
@@ -14,6 +15,7 @@ export interface CreditProductConfirmationProps {
 
 export function CreditProductConfirmation({ creditProduct, application }: CreditProductConfirmationProps) {
   const t = useT();
+  const { formatDateFromString } = useLocalizedDateFormatter();
 
   const isLoan = creditProduct.type === CREDIT_PRODUCT_TYPE.LOAN;
 

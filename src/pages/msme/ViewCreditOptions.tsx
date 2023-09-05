@@ -14,6 +14,7 @@ import LoansTable from '../../components/LoansTable';
 import { MSME_TYPES, MSME_TYPES_OPTIONS, SECTOR_TYPES } from '../../constants';
 import useApplicationContext from '../../hooks/useApplicationContext';
 import useGetCreditProductsOptions from '../../hooks/useGetCreditProductsOptions';
+import useLocalizedDateFormatter from '../../hooks/useLocalizedDateFormatter';
 import useSelectCreditProduct from '../../hooks/useSelectCreditProduct';
 import {
   CreditOptionsInput,
@@ -27,11 +28,12 @@ import {
 import FormInput from '../../stories/form-input/FormInput';
 import FormSelect from '../../stories/form-select/FormSelect';
 import RadioGroup from '../../stories/radio-group/RadioGroup';
-import { addMonthsToDate, formatCurrency, formatDateFromString, isDateBeforeMonths } from '../../util';
+import { addMonthsToDate, formatCurrency, isDateBeforeMonths } from '../../util';
 
 const DEBOUNCE_TIME = 800;
 function ViewCreditOptions() {
   const t = useT();
+  const { formatDateFromString } = useLocalizedDateFormatter();
 
   const applicationContext = useApplicationContext();
   const { data, isLoading: isLoadingOptions, getCreditProductOptionsMutation } = useGetCreditProductsOptions();
@@ -180,7 +182,7 @@ function ViewCreditOptions() {
         : '',
       award_contract_startdate: `${formatDateFromString(applicationContext.state.data.award.contractperiod_startdate)}`,
     };
-  }, [applicationContext.state.data]);
+  }, [applicationContext.state.data, formatDateFromString]);
 
   return (
     <>

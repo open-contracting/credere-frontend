@@ -4,6 +4,7 @@ import { Box } from '@mui/material';
 import { useT } from '@transifex/react';
 import { useEffect, useMemo, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import ConfirmIcon from 'src/assets/icons/confirm.svg';
 import EditIcon from 'src/assets/icons/edit.svg';
 import Text from 'src/stories/text/Text';
@@ -16,7 +17,6 @@ import { APPLICATION_STATUS, DOCUMENTS_TYPE } from '../../constants';
 import useApplicationContext from '../../hooks/useApplicationContext';
 import useChangeEmail from '../../hooks/useChangeEmail';
 import useSubmitAdditionalData from '../../hooks/useSubmitAdditionalData';
-import useSubmitApplication from '../../hooks/useSubmitApplication';
 import { FormChangeEmailInput, changeEmailSchema } from '../../schemas/application';
 import Button from '../../stories/button/Button';
 import FormInput from '../../stories/form-input/FormInput';
@@ -24,9 +24,9 @@ import LinkButton from '../../stories/link-button/LinkButton';
 
 function UploadDocuments() {
   const t = useT();
+  const navigate = useNavigate();
   const [editEmail, setEditEmail] = useState<boolean>(false);
   const { isLoading: isLoadingChangeEmail, changeEmailMutation, data } = useChangeEmail();
-  const { isLoading, submitApplicationMutation } = useSubmitApplication();
   const { isLoading: isLoadingAdditionalData, submitAdditionalDataMutation } = useSubmitAdditionalData();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data?.application;
@@ -47,7 +47,7 @@ function UploadDocuments() {
     if (applicationContext.state.data?.application.status === APPLICATION_STATUS.INFORMATION_REQUESTED) {
       submitAdditionalDataMutation({ uuid: applicationContext.state.data?.application.uuid });
     } else {
-      submitApplicationMutation({ uuid: applicationContext.state.data?.application.uuid });
+      navigate('../confirm-submission');
     }
   };
 
@@ -176,9 +176,13 @@ function UploadDocuments() {
 
             <div>
               <Button
-                label={t('Submit Application')}
+                label={
+                  applicationContext.state.data?.application.status === APPLICATION_STATUS.INFORMATION_REQUESTED
+                    ? t('Submit Additional Data')
+                    : t('Continue')
+                }
                 onClick={submitApplicationHandler}
-                disabled={!allUploaded || isLoading || isLoadingAdditionalData}
+                disabled={!allUploaded || isLoadingAdditionalData}
               />
             </div>
           </div>

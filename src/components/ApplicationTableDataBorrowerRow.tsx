@@ -25,6 +25,7 @@ export function ApplicationTableDataBorrowerRow({
   withoutVerify,
   isLoading,
   readonly,
+  modifiedFields,
 }: ApplicationTableBorrowerDataRowProps) {
   const t = useT();
 
@@ -46,8 +47,10 @@ export function ApplicationTableDataBorrowerRow({
       <DataTableCell>
         <DataAvailability
           available={DATA_REQUESTED_FROM_MSME.includes(name) || !missing}
-          name={label}
+          name={name}
+          label={label}
           readonly={readonly}
+          modifiedFields={modifiedFields}
         />
       </DataTableCell>
       {(!missing || withoutVerify) && (
@@ -87,6 +90,7 @@ ApplicationTableDataBorrowerRow.defaultProps = {
   type: undefined,
   formLabel: undefined,
   withoutVerify: false,
+  modifiedFields: undefined,
 };
 
 export default ApplicationTableDataBorrowerRow;

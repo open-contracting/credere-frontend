@@ -31,6 +31,7 @@ import SecureApplicationContextProvider from 'src/providers/SecureApplicationCon
 import StateContextProvider from 'src/providers/StateContextProvider';
 import ProtectedRoute from 'src/routes/ProtectedRoute';
 
+import { USER_TYPES } from '../constants';
 import PageLayout from '../layout/PageLayout';
 import SecureApplicationLayout from '../layout/SecureApplicationLayout';
 import ApplicationCompleted from '../pages/fi/ApplicationCompleted';
@@ -38,9 +39,11 @@ import ReviewContract from '../pages/fi/ReviewContract';
 import StageFiveApproved from '../pages/fi/StageFiveApproved';
 import StageFiveRejected from '../pages/fi/StageFiveRejected';
 import ViewApplication from '../pages/fi/ViewApplication';
+import ApplicationMSMECompleted from '../pages/msme/ApplicationMSMECompleted';
 import ChangePrimaryEmail from '../pages/msme/ChangePrimaryEmail';
 import ConfirmCreditProduct from '../pages/msme/ConfirmCreditProduct';
 import ConfirmFindAlternativeCredit from '../pages/msme/ConfirmFindAlternativeCredit';
+import ConfirmSubmission from '../pages/msme/ConfirmSubmission';
 import Rejected from '../pages/msme/Rejected';
 import TermsAndConditions from '../pages/msme/TermsAndConditions';
 import UploadContract from '../pages/msme/UploadContract';
@@ -76,7 +79,7 @@ const router = createBrowserRouter([
   {
     path: '/admin/applications',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <Applications />
         </PageLayout>
@@ -87,7 +90,7 @@ const router = createBrowserRouter([
   {
     path: '/admin/applications/:id/view',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <LoadApplication readonly />
         </PageLayout>
@@ -98,7 +101,7 @@ const router = createBrowserRouter([
   {
     path: '/admin/applications/:id/update',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <LoadApplication />
         </PageLayout>
@@ -109,7 +112,7 @@ const router = createBrowserRouter([
   {
     path: '/settings',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <Settings />
         </PageLayout>
@@ -120,7 +123,7 @@ const router = createBrowserRouter([
   {
     path: '/settings/lender/new',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <LenderForm />
         </PageLayout>
@@ -131,7 +134,7 @@ const router = createBrowserRouter([
   {
     path: '/settings/lender/:id/edit',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <LoadLender />
         </PageLayout>
@@ -142,7 +145,7 @@ const router = createBrowserRouter([
   {
     path: '/settings/user/new',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <UserForm />
         </PageLayout>
@@ -153,7 +156,7 @@ const router = createBrowserRouter([
   {
     path: '/settings/user/:id/edit',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <LoadUser />
         </PageLayout>
@@ -164,7 +167,7 @@ const router = createBrowserRouter([
   {
     path: '/settings/lender/:lenderId/credit-product/new',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <LoadCreditProduct />
         </PageLayout>
@@ -175,7 +178,7 @@ const router = createBrowserRouter([
   {
     path: '/settings/lender/:lenderId/credit-product/:id/edit',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
           <LoadCreditProduct />
         </PageLayout>
@@ -282,6 +285,14 @@ const router = createBrowserRouter([
       {
         path: 'upload-contract-completed',
         element: <UploadContractCompleted />,
+      },
+      {
+        path: 'application-completed',
+        element: <ApplicationMSMECompleted />,
+      },
+      {
+        path: 'confirm-submission',
+        element: <ConfirmSubmission />,
       },
       {
         path: 'submission-completed',

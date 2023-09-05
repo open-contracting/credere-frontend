@@ -76,6 +76,7 @@ export function ApplicationBorrowerTable({
               name="legal_name"
               label={t('Legal Name')}
               borrower={borrower}
+              modifiedFields={application.modified_data_fields?.borrower_updates}
             />
             <ApplicationTableDataBorrowerRow
               preWhitespace
@@ -88,6 +89,7 @@ export function ApplicationBorrowerTable({
               name="address"
               label={t('Address')}
               borrower={borrower}
+              modifiedFields={application.modified_data_fields?.borrower_updates}
             />
             <ApplicationTableDataBorrowerRow
               isLoading={isLoading || isLoadingVerifyDataField}
@@ -99,6 +101,7 @@ export function ApplicationBorrowerTable({
               name="legal_identifier"
               label={t('National Tax ID')}
               borrower={borrower}
+              modifiedFields={application.modified_data_fields?.borrower_updates}
             />
             <ApplicationTableDataBorrowerRow
               isLoading={isLoading || isLoadingVerifyDataField}
@@ -110,6 +113,7 @@ export function ApplicationBorrowerTable({
               name="type"
               label={t('Registration Type')}
               borrower={borrower}
+              modifiedFields={application.modified_data_fields?.borrower_updates}
             />
             <ApplicationTableDataBorrowerRow
               isLoading={isLoading || isLoadingVerifyDataField}
@@ -121,6 +125,7 @@ export function ApplicationBorrowerTable({
               verifiedData={application.secop_data_verification}
               borrower={borrower}
               formatter={renderSize}
+              modifiedFields={application.modified_data_fields?.borrower_updates}
             />
             <ApplicationTableDataBorrowerRow
               isLoading={isLoading || isLoadingVerifyDataField}
@@ -132,6 +137,7 @@ export function ApplicationBorrowerTable({
               verifiedData={application.secop_data_verification}
               borrower={borrower}
               formatter={renderSector}
+              modifiedFields={application.modified_data_fields?.borrower_updates}
             />
             <ApplicationTableDataBorrowerRow
               isLoading={isLoading || isLoadingVerifyDataField}
@@ -143,6 +149,7 @@ export function ApplicationBorrowerTable({
               name="email"
               label={t('Business Email')}
               borrower={borrower}
+              modifiedFields={application.modified_data_fields?.borrower_updates}
             />
           </TableBody>
         </Table>

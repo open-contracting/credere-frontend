@@ -32,6 +32,7 @@ export enum QUERY_KEYS {
   users = 'users',
   credit_product = 'credit_product',
   downloadDocument = 'downloadDocument',
+  downloadApplication = 'downloadApplication',
   awards = 'awards',
   statistics_fi = 'statistics_fi',
   statistics_ocp = 'statistics_ocp',
@@ -118,6 +119,28 @@ export const CREDIT_PRODUCT_OPTIONS: FormSelectOption[] = [
 ];
 
 // eslint-disable-next-line no-shadow
+export enum STATISTICS_DATE_FILTER {
+  CUSTOM_RANGE = 'CUSTOM_RANGE',
+  LAST_WEEK = 'LAST_WEEK',
+  LAST_MONTH = 'LAST_MONTH',
+}
+
+export const STATISTICS_DATE_FILTER_OPTIONS: FormSelectOption[] = [
+  {
+    value: STATISTICS_DATE_FILTER.CUSTOM_RANGE,
+    label: t('Custom range'),
+  },
+  {
+    value: STATISTICS_DATE_FILTER.LAST_WEEK,
+    label: t('Last week'),
+  },
+  {
+    value: STATISTICS_DATE_FILTER.LAST_MONTH,
+    label: t('Last month'),
+  },
+];
+
+// eslint-disable-next-line no-shadow
 export enum DOCUMENTS_TYPE {
   INCORPORATION_DOCUMENT = 'INCORPORATION_DOCUMENT',
   SUPPLIER_REGISTRATION_DOCUMENT = 'SUPPLIER_REGISTRATION_DOCUMENT',
@@ -127,6 +150,17 @@ export enum DOCUMENTS_TYPE {
   SIGNED_CONTRACT = 'SIGNED_CONTRACT',
   COMPLIANCE_REPORT = 'COMPLIANCE_REPORT',
 }
+
+// eslint-disable-next-line no-shadow
+export enum BORROWER_TYPE {
+  NATURAL_PERSON = 'NATURAL_PERSON',
+  LEGAL_PERSON = 'LEGAL_PERSON',
+}
+
+export const BORROWER_TYPES_NAMES: { [key: string]: string } = {
+  [BORROWER_TYPE.NATURAL_PERSON]: t('Natural Person'),
+  [BORROWER_TYPE.LEGAL_PERSON]: t('Legal Person'),
+};
 
 // eslint-disable-next-line no-shadow
 export enum MSME_TYPES {

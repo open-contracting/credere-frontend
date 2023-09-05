@@ -12,7 +12,7 @@ interface FAQComponentProps {
 export function FAQComponent({ className }: FAQComponentProps) {
   const t = useT();
   return (
-    <FAQContainer className={className}>
+    <FAQContainer title={t('Frequently Asked Questions')} className={className}>
       <FAQSection title={t('What is the MSME credit scheme?')}>
         {t(
           'Guaranteed loans give high-risk borrowers a way to access financing, and provide protection for the lender.',

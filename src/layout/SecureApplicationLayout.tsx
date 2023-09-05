@@ -1,4 +1,3 @@
- 
 import { useQuery } from '@tanstack/react-query';
 import { useT } from '@transifex/react';
 import axios from 'axios';
@@ -7,10 +6,11 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
 import { getApplicationFn } from '../api/private';
-import { APPLICATION_STATUS, DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
+import { APPLICATION_STATUS, DISPATCH_ACTIONS, QUERY_KEYS, USER_TYPES } from '../constants';
 import { useParamsTypeSafe } from '../hooks/useParamsTypeSafe';
 import useApplicationContext from '../hooks/useSecureApplicationContext';
 import ApplicationErrorPage from '../pages/msme/ApplicationErrorPage';
+import ProtectedRoute from '../routes/ProtectedRoute';
 import { IApplication } from '../schemas/application';
 import Loader from '../stories/loader/Loader';
 import PageLayout from './PageLayout';
@@ -28,23 +28,7 @@ export default function SecureApplicationLayout() {
     }),
   );
 
-  useEffect(() => {
-    if (applicationContext.state.data) {
-      const application = applicationContext.state.data;
-      const { pathname } = location;
-      const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
-
-      if (lastSegment !== 'view') {
-        if (application.status === APPLICATION_STATUS.APPROVED) {
-          if (lastSegment !== 'stage-five-approved') navigate('./stage-five-approved');
-        } else if (application.status === APPLICATION_STATUS.REJECTED) {
-          if (lastSegment !== 'stage-five-rejected') navigate('./stage-five-rejected');
-        }
-      }
-    }
-  }, [applicationContext.state.data, navigate, location]);
-
-  const { isLoading } = useQuery({
+  const { isLoading, data, refetch } = useQuery({
     queryKey: [QUERY_KEYS.applications, `${id}`],
     queryFn: async (): Promise<IApplication | null> => {
       const application = await getApplicationFn(id);
@@ -62,11 +46,34 @@ export default function SecureApplicationLayout() {
     },
   });
 
+  useEffect(() => {
+    if (data) {
+      const application = data;
+      const { pathname } = location;
+      const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
+
+      if (lastSegment !== 'view') {
+        if (application.status === APPLICATION_STATUS.LAPSED) {
+          navigate('./view');
+        } else if (application.status === APPLICATION_STATUS.COMPLETED) {
+          if (lastSegment !== 'application-completed') navigate('./application-completed');
+        } else if (application.status === APPLICATION_STATUS.APPROVED) {
+          if (lastSegment !== 'stage-five-approved') navigate('./stage-five-approved');
+        } else if (application.status === APPLICATION_STATUS.REJECTED) {
+          if (lastSegment !== 'stage-five-rejected') navigate('./stage-five-rejected');
+        }
+        if (lastSegment === 'stage-four') refetch();
+      }
+    }
+  }, [data, navigate, location, refetch]);
+
   return (
-    <PageLayout>
-      {isLoading && <Loader />}
-      {!isLoading && !queryError && <Outlet />}
-      {queryError && <ApplicationErrorPage message={queryError} />}
-    </PageLayout>
+    <ProtectedRoute requiredUserType={USER_TYPES.FI}>
+      <PageLayout>
+        {isLoading && <Loader />}
+        {!isLoading && !queryError && <Outlet />}
+        {queryError && <ApplicationErrorPage message={queryError} />}
+      </PageLayout>
+    </ProtectedRoute>
   );
 }

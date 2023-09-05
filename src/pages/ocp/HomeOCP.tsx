@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Container, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { useT } from '@transifex/react';
 import dayjs, { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
@@ -8,6 +8,7 @@ import Title from 'src/stories/title/Title';
 
 import { ChartBar, ChartPie } from '../../components/Charts';
 import LendersButtonGroup from '../../components/LendersButtonGroup';
+import { STATISTICS_DATE_FILTER, STATISTICS_DATE_FILTER_OPTIONS } from '../../constants';
 import CURRENCY_FORMAT_OPTIONS from '../../constants/intl';
 import useGetStatisticsOCP from '../../hooks/useGetStatisticsOCP';
 import useGetStatisticsOCPoptIn from '../../hooks/useGetStatisticsOCPoptIn';
@@ -15,7 +16,7 @@ import { DECLINE_FEEDBACK_NAMES } from '../../schemas/application';
 import { ChartData } from '../../schemas/statitics';
 import DashboardChartContainer from '../../stories/dashboard/DashboardChartContainer';
 import DashboardItemContainer from '../../stories/dashboard/DashboardItemContainer';
-import { DatePicker } from '../../stories/form-input/FormInput';
+import { DatePicker, Input } from '../../stories/form-input/FormInput';
 import Loader from '../../stories/loader/Loader';
 import { formatCurrency, renderSector } from '../../util';
 
@@ -46,6 +47,7 @@ export function HomeOCP() {
   const [initialDate, setInitialDate] = useState<string | null>(null);
   const [finalDate, setFinalDate] = useState<string | null>(null);
   const [lenderId, setLenderId] = useState<number | null>(null);
+  const [dateFilterRange, setDataFilterRange] = useState<string>(STATISTICS_DATE_FILTER.CUSTOM_RANGE);
 
   const isBeforeInitialDate = (date: unknown) => {
     if (!initialDate) return false;
@@ -57,7 +59,16 @@ export function HomeOCP() {
     return dayjs(date as string).isAfter(dayjs(finalDate));
   };
 
-  const { data: dataKPI, isLoading: isLoadingKPI } = useGetStatisticsOCP(initialDate, finalDate, lenderId);
+  const handleChangeSelectDateFilter = (event: SelectChangeEvent) => {
+    setDataFilterRange(event.target.value as string);
+  };
+
+  const { data: dataKPI, isLoading: isLoadingKPI } = useGetStatisticsOCP(
+    dateFilterRange,
+    initialDate,
+    finalDate,
+    lenderId,
+  );
 
   return (
     <>
@@ -117,8 +128,23 @@ export function HomeOCP() {
       <Title type="subsection" label={t('Data Range')} className="mb-6 mt-10" />
       <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
         <div className="md:mr-4">
+          <Select
+            displayEmpty
+            disableUnderline
+            input={<Input />}
+            value={dateFilterRange}
+            onChange={handleChangeSelectDateFilter}>
+            {STATISTICS_DATE_FILTER_OPTIONS.map((option) => (
+              <MenuItem key={`key-${option.value}`} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </div>
+        <div className="md:mr-4">
           <DatePicker
             shouldDisableDate={isAfterFinalDate}
+            disabled={dateFilterRange !== STATISTICS_DATE_FILTER.CUSTOM_RANGE}
             onChange={(value: unknown) => {
               const date = value as Dayjs;
               if (date.isValid()) {
@@ -139,6 +165,7 @@ export function HomeOCP() {
         <div>
           <DatePicker
             shouldDisableDate={isBeforeInitialDate}
+            disabled={dateFilterRange !== STATISTICS_DATE_FILTER.CUSTOM_RANGE}
             onChange={(value: unknown) => {
               const date = value as Dayjs;
               if (date.isValid()) {
@@ -255,7 +282,7 @@ export function HomeOCP() {
         <div className="grid lg:gap-10 grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1">
           <div className="col-span-1">
             <DashboardChartContainer label={t('Breakdown of FIs chosen by MSME')}>
-              <ChartBar data={data.fis_choosen_by_msme} />
+              <ChartBar data={data.opt_in_stat.fis_choosen_by_msme} />
             </DashboardChartContainer>
           </div>
         </div>

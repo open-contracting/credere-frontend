@@ -42,7 +42,9 @@ module.exports = {
   plugins: ['react-refresh', '@typescript-eslint', 'react', 'prettier'],
   rules: {
     'react-refresh/only-export-components': 'warn',
+    'import/order': 'warn',
     'react/react-in-jsx-scope': 'off',
+    'react/jsx-curly-brace-presence': 'off',
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'import/extensions': [
       'error',

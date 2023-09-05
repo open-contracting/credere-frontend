@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IAward, IBorrower, IBorrowerDocument, IUpdateAward, IUpdateBorrower } from '../schemas/application';
+import {
+  IAward,
+  IBorrower,
+  IBorrowerDocument,
+  IModifiedDataFields,
+  IUpdateAward,
+  IUpdateBorrower,
+} from '../schemas/application';
 
 export interface ApplicationTableDataRowProps {
   label: string;
@@ -10,6 +17,7 @@ export interface ApplicationTableDataRowProps {
   formatter?: (value: any) => string;
   isLoading: boolean;
   readonly: boolean;
+  modifiedFields?: { [key: string]: IModifiedDataFields };
 }
 
 export interface ApplicationTableAwardDataRowProps extends ApplicationTableDataRowProps {
