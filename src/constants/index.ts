@@ -149,6 +149,9 @@ export enum DOCUMENTS_TYPE {
   FINANCIAL_STATEMENT = 'FINANCIAL_STATEMENT',
   SIGNED_CONTRACT = 'SIGNED_CONTRACT',
   COMPLIANCE_REPORT = 'COMPLIANCE_REPORT',
+  SHAREHOLDER_COMPOSITION = 'SHAREHOLDER_COMPOSITION',
+  CHAMBER_OF_COMMERCE = 'CHAMBER_OF_COMMERCE',
+  THREE_LAST_BANK_STATEMENT = 'THREE_LAST_BANK_STATEMENT'
 }
 
 // eslint-disable-next-line no-shadow
@@ -198,82 +201,94 @@ export const DOCUMENT_TYPES_NAMES: { [key: string]: string } = {
   [DOCUMENTS_TYPE.FINANCIAL_STATEMENT]: t('Financial statement'),
   [DOCUMENTS_TYPE.SIGNED_CONTRACT]: t('Signed contract'),
   [DOCUMENTS_TYPE.COMPLIANCE_REPORT]: t('Compliance report'),
+  [DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION]: t('Shareholder composition'),
+  [DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE]: t('Chamber of Commerce'),
+  [DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT]: t('Three last bank statement'),
 };
 
-// https://www.ibisworld.com/united-states/list-of-industries/
+// https://clasificaciones.dane.gov.co/ciiu4-0/seccion_clasificacion
 export const SECTOR_TYPES: FormSelectOption[] = [
   {
-    value: 'accommodation_and_food_services',
-    label: t('Accommodation and Food Services'),
+    value: 'agricultura',
+    label: t('Agricultura, ganadería, caza, silvicultura y pesca'),
   },
   {
-    value: 'administration',
-    label: t('Administration'),
+    value: 'minas',
+    label: t('Explotación de minas y canteras'),
   },
   {
-    value: 'agriculture_forestry_fishing_and_hunting',
-    label: t('Agriculture, Forestry, Fishing and Hunting'),
+    value: 'manufactura',
+    label: t('Industrias manufactureras'),
   },
   {
-    value: 'arts_entertainment_and_recreation',
-    label: t('Arts, Entertainment and Recreation'),
+    value: 'electricidad',
+    label: t('Suministro de electricidad, gas, vapor y aire acondicionado'),
   },
   {
-    value: 'construction',
-    label: t('Construction'),
+    value: 'agua',
+    label: t('Distribución de agua; evacuación y tratamiento de aguas residuales, gestión de desechos y actividades de saneamiento ambiental'),
   },
   {
-    value: 'educational_services',
-    label: t('Educational Services'),
+    value: 'construccion',
+    label: t('Construcción'),
   },
   {
-    value: 'finance_and_insurance',
-    label: t('Finance and Insurance'),
+    value: 'transporte',
+    label: t('Transporte y almacenamiento'),
   },
   {
-    value: 'healthcare_and_social_assistance',
-    label: t('Healthcare and Social Assistance'),
+    value: 'alojamiento',
+    label: t('Alojamiento y servicios de comida'),
   },
   {
-    value: 'information',
-    label: t('Information'),
+    value: 'comunicaciones',
+    label: t('Información y comunicaciones'),
   },
   {
-    value: 'manufacturing',
-    label: t('Manufacturing'),
+    value: 'actividades_financieras',
+    label: t('Actividades financieras y de seguros'),
   },
   {
-    value: 'mining',
-    label: t('Mining'),
+    value: 'actividades_inmobiliarias',
+    label: t('Actividades inmobiliarias'),
   },
   {
-    value: 'other_services',
-    label: t('Other Services'),
+    value: 'actividades_profesionales',
+    label: t('Actividades profesionales, científicas y técnicas'),
   },
   {
-    value: 'professional_scientific_and_technical_services',
-    label: t('Professional, Scientific and Technical Services'),
+    value: 'actividades_servicios_administrativos',
+    label: t('Actividades de servicios administrativos y de apoyo'),
   },
   {
-    value: 'real_estate_and_rental_and_leasing',
-    label: t('Real Estate and Rental and Leasing'),
+    value: 'administracion_publica',
+    label: t('Administración pública y defensa; planes de seguridad social de afiliación obligatoria'),
   },
   {
-    value: 'retail_trade',
-    label: t('Retail Trade'),
+    value: 'educacion',
+    label: t('Educación'),
   },
   {
-    value: 'transportation_and_warehousing',
-    label: t('Transportation and Warehousing'),
+    value: 'atencion_salud',
+    label: t('Actividades de atención de la salud humana y de asistencia social'),
   },
   {
-    value: 'utilities',
-    label: t('Utilities'),
+    value: 'actividades_artisticas',
+    label: t('Actividades artísticas, de entretenimiento y recreación'),
   },
   {
-    value: 'wholesale_trade',
-    label: t('Wholesale Trade'),
+    value: 'otras_actividades',
+    label: t('Otras actividades de servicios'),
   },
+  {
+    value: 'actividades_hogares',
+    label: t('Actividades de los hogares individuales en calidad de empleadores; actividades no diferenciadas de los hogares individuales como productores de bienes yservicios para uso propio'),
+  },
+  {
+    value: 'actividades_organizaciones_extraterritoriales',
+    label: t('Actividades de organizaciones y entidades extraterritoriales'),
+  },
+
 ];
 
 // eslint-disable-next-line no-shadow

@@ -24,7 +24,7 @@ import {
   DOCUMENTS_TYPE,
   DOCUMENT_TYPES_NAMES,
   MSME_TYPES_OPTIONS,
-  QUERY_KEYS,
+  QUERY_KEYS
 } from '../../constants';
 import { useParamsTypeSafe } from '../../hooks/useParamsTypeSafe';
 import useUpsertCreditProduct from '../../hooks/useUpsertCreditProduct';
@@ -186,6 +186,21 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
               <Checkbox
                 label={DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.FINANCIAL_STATEMENT]}
                 name={`required_document_types.${DOCUMENTS_TYPE.FINANCIAL_STATEMENT}`}
+                className={errors.required_document_types ? 'text-red' : ''}
+              />
+               <Checkbox
+                label={DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION]}
+                name={`required_document_types.${DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION}`}
+                className={errors.required_document_types ? 'text-red' : ''}
+              />
+              <Checkbox
+                label={DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE]}
+                name={`required_document_types.${DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE}`}
+                className={errors.required_document_types ? 'text-red' : ''}
+              />
+              <Checkbox
+                label={DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT]}
+                name={`required_document_types.${DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT}`}
                 className={errors.required_document_types ? 'text-red' : ''}
               />
             </Box>
