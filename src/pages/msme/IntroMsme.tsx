@@ -68,12 +68,6 @@ function IntroMsme() {
           </Text>
           <Text className="mb-8">
             {t(
-              'You can request up 90% of the value of the award in your credit application, which is currently {award_contract_value}.',
-              { award_contract_value: paramsForText.award_contract_value },
-            )}
-          </Text>
-          <Text className="mb-8">
-            {t(
               "If you would like to view the credit options available, then all you have to do is click 'Access the scheme' below. Once you have selected a credit option, the online application takes just a couple of minutes.",
             )}
           </Text>

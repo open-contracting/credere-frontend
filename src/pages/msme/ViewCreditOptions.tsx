@@ -20,10 +20,7 @@ import {
   CreditOptionsInput,
   GetCreditProductsOptionsInput,
   ICreditProduct,
-  RepaymentTermsInput,
-  SelectCreditProductInput,
-  creditOptionsSchema,
-  repaymentTermsSchema,
+  RepaymentTermsInput, repaymentTermsSchema, SelectCreditProductInput
 } from '../../schemas/application';
 import FormInput from '../../stories/form-input/FormInput';
 import FormSelect from '../../stories/form-select/FormSelect';
@@ -40,22 +37,6 @@ function ViewCreditOptions() {
   const { isLoading, selectCreditProductMutation } = useSelectCreditProduct();
 
   const methodsMainForm = useForm<CreditOptionsInput>({
-    resolver: zodResolver(
-      creditOptionsSchema.refine(
-        (formData) =>
-          !Number(applicationContext.state.data?.award.award_amount) ||
-          Number(formData.amount_requested) <= Number(applicationContext.state.data?.award.award_amount) * 0.9,
-        {
-          path: ['amount_requested'],
-          message: t('Value limit is {max_value}', {
-            max_value: `${applicationContext.state.data?.award.award_currency} ${formatCurrency(
-              Number(applicationContext.state.data?.award.award_amount) * 0.9,
-              applicationContext.state.data?.award.award_currency,
-            )}`,
-          }),
-        },
-      ),
-    ),
     defaultValues: {
       borrower_size: applicationContext.state.data?.application.calculator_data.borrower_size || undefined,
       sector: applicationContext.state.data?.borrower.sector || undefined,
@@ -251,9 +232,6 @@ function ViewCreditOptions() {
               />
               <FormInput
                 className="w-3/5"
-                helperText={t('The maximum amount is 90% of the awarded amount {award_contract_value}', {
-                  award_contract_value: paramsForText.award_contract_value,
-                })}
                 label={t('Amount to finance')}
                 name="amount_requested"
                 big={false}
