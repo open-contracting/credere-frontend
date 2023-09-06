@@ -78,6 +78,11 @@ function IntroMsme() {
           </Text>
           <Text className="mb-8">
             {t(
+              'The information about you and your company that appears in this message contains personal data of a public nature that has been found on the Colombian Open Data portal www.datos.gov.co. These data are used exclusively for the purpose of offering you access to credit. Any additional personal data will be collected with your prior consent.',
+            )}
+          </Text>
+          <Text className="mb-8">
+            {t(
               'You are under no obligation to accept the credit when it is offered to you. You do not have to be an existing customer with any of our partners to be able to access this offer.',
             )}
           </Text>
