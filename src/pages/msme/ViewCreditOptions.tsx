@@ -181,29 +181,16 @@ function ViewCreditOptions() {
             <li className="text-darkest">
               <Text className="mb-2">
                 {t(
-                  'In the loan the total amount agreed at the initial moment is delivered. On the other hand, in the credit line, only the necessary amount is available at any time.',
+                  'In a loan, the entire amount of money approved is transferred to the borrower upfront. Interest must be paid from the moment that the money is delivered. The loan must be repaid within an agreed time.',
                 )}
               </Text>
             </li>
             <li className="text-darkest">
               <Text className="mb-2">
                 {t(
-                  'In the loans, interest must be paid from the moment the capital is delivered, while in the credit lines interest will be paid when the necessary capital is available.',
+                  'In a line of credit, the borrower may choose how much of the approved amount to withdraw. Interest must be paid only on the withdrawn amount. The term of the line of credit can be extended. Interest rates on lines of credit may be higher.',
                 )}
               </Text>
-            </li>
-            <li className="text-darkest">
-              <Text className="mb-2">
-                {t(
-                  'The credit line can be renewed several times upon maturity, the loan must be repaid within the agreed term.',
-                )}
-              </Text>
-            </li>
-            <li className="text-darkest">
-              <Text className="mb-2">{t('The term of the credit line is less than that of the loan.')}</Text>
-            </li>
-            <li className="text-darkest">
-              <Text className="mb-2">{t('Interest rates are usually higher on credit lines than on loans.')}</Text>
             </li>
           </ul>
         </div>
