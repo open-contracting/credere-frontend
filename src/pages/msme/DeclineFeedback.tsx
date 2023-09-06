@@ -83,6 +83,11 @@ function DeclineFeedback() {
                 defaultValue={false}
                 label={t("I don't like the idea of accessing credit")}
               />
+              <Checkbox
+                name="suspicious_email"
+                defaultValue={false}
+                label={t("I perceive the email as suspicious or I do not trust that the credit proposal is true")}
+              />
               <Checkbox name="other" defaultValue={false} label={t('Other, please specify')} />
               <FormInput disabled={!watch('other')} multiline name="other_comments" label="" big={false} rows={4} />
               <div className="mt-5 grid grid-cols-1 gap-4 md:flex md:gap-0">
