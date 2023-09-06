@@ -17,7 +17,7 @@ services:
       - VITE_MAX_FILE_SIZE_MB=${VITE_MAX_FILE_SIZE_MB}
 
     ports:
-      - '8000:80'
+      - '8000:8080'
   backend:
     build: ./credere-backend/
     environment:
