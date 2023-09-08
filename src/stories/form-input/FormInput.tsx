@@ -2,6 +2,7 @@
 import { FormControl, FormHelperText, InputAdornment, InputProps, Input as _Input } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { DateField as MUIDateField, DatePicker as MUIDatePicker } from '@mui/x-date-pickers';
+import { useT } from '@transifex/react';
 import dayjs, { Dayjs } from 'dayjs';
 import React from 'react';
 import { Controller, FieldError, FieldErrorsImpl, Merge, useFormContext } from 'react-hook-form';
@@ -229,13 +230,14 @@ interface FormInputErrorProps {
 }
 
 export function FormInputError({ fieldError, className = '' }: FormInputErrorProps) {
+  const t = useT();
   if (!fieldError) {
     return null;
   }
 
   return (
     <FormHelperText className={`text-red text-base mx-0 ${className}`} error={!!fieldError}>{`${
-      fieldError ? fieldError?.message : ''
+      fieldError ? t(fieldError?.message) : ''
     }`}</FormHelperText>
   );
 }
@@ -265,6 +267,7 @@ export function FormInput({
     control,
     formState: { errors },
   } = useFormContext();
+  const t = useT();
 
   const fieldError: FieldErrorType = getProperty(errors, name);
   return (
@@ -337,6 +340,9 @@ export function FormInput({
           {inputCell && type === 'date-picker' && (
             <DatePickerCell
               autoFocus
+              localeText={{
+                fieldYearPlaceholder: () => t('YYYY'),
+              }}
               className={className}
               onChange={(value: unknown) => {
                 const date = value as Dayjs;
@@ -350,7 +356,6 @@ export function FormInput({
                   value: dayjs(field.value),
                   onBlur: field.onBlur,
                   fullWidth,
-                  placeholder,
                   error: !!fieldError,
                 },
               }}
@@ -366,6 +371,9 @@ export function FormInput({
           {!inputCell && type === 'date-picker' && (
             <DatePicker
               autoFocus
+              localeText={{
+                fieldYearPlaceholder: () => t('YYYY'),
+              }}
               className={className}
               onChange={(value: unknown) => {
                 const date = value as Dayjs;
@@ -379,7 +387,6 @@ export function FormInput({
                   value: dayjs(field.value),
                   onBlur: field.onBlur,
                   fullWidth,
-                  placeholder,
                   error: !!fieldError,
                 },
               }}
@@ -407,7 +414,6 @@ export function FormInput({
                   value: dayjs(field.value),
                   onBlur: field.onBlur,
                   fullWidth,
-                  placeholder,
                   error: !!fieldError,
                 },
               }}

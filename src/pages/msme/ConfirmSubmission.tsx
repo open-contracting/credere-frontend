@@ -76,7 +76,7 @@ function ConfirmSubmission() {
                 )
                 .map((documentTypeKey: string) => (
                   <li key={documentTypeKey} className="text-darkest">
-                    <Text className="mb-2">{DOCUMENT_TYPES_NAMES[documentTypeKey]}</Text>
+                    <Text className="mb-2">{t(DOCUMENT_TYPES_NAMES[documentTypeKey])}</Text>
                   </li>
                 ))}
           </ul>

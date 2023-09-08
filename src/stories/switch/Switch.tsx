@@ -1,6 +1,6 @@
- 
 import { FormControl, FormControlLabel, FormHelperText, Switch as MUISwitch, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { useT } from '@transifex/react';
 import { ChangeEvent } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
@@ -96,6 +96,8 @@ export function Switch({
   value,
   className,
 }: SwitchProps) {
+  const t = useT();
+
   return (
     <FormControl fullWidth className={`${fieldClassName}`}>
       <FormControlLabel
@@ -103,7 +105,21 @@ export function Switch({
         control={
           <LabeledSwitch
             id={name}
-            sx={{ px: '10px', py: '2px', ':hover': { backgroundColor: 'transparent' } }}
+            sx={{
+              px: '10px',
+              py: '2px',
+              ':hover': { backgroundColor: 'transparent' },
+              '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                '&:before': {
+                  content: `'${t('Yes')}'`,
+                },
+              },
+              '& .MuiSwitch-track': {
+                '&:after': {
+                  content: `'${t('No')}'`,
+                },
+              },
+            }}
             icon={<img className="" src={ToggleSwitch} alt="check-icon-empty" />}
             checkedIcon={<img className="" src={ToggleSwitch} alt="check-icon-checked" />}
             onChange={onChange}

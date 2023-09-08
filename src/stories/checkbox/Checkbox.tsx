@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { FormControl, FormControlLabel, FormHelperText, Checkbox as MUICheckbox, Typography } from '@mui/material';
+import { useT } from '@transifex/react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 
@@ -21,6 +22,7 @@ export function Checkbox({ name, label, fieldClassName, defaultValue = false, cl
     control,
     formState: { errors, defaultValues },
   } = useFormContext();
+  const t = useT();
 
   const fieldError: FieldErrorType = getProperty(errors, name);
   const defultValueForm = getProperty(defaultValues, name) || defaultValue;
@@ -51,7 +53,7 @@ export function Checkbox({ name, label, fieldClassName, defaultValue = false, cl
             }
           />
           <FormHelperText className="text-red text-base mx-0" error={!!fieldError}>{`${
-            fieldError ? fieldError?.message : ''
+            fieldError ? t(fieldError?.message) : ''
           }`}</FormHelperText>
         </FormControl>
       )}

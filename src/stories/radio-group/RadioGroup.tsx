@@ -7,6 +7,7 @@ import {
   Radio,
   Typography,
 } from '@mui/material';
+import { useT } from '@transifex/react';
 import { useMemo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
@@ -44,6 +45,7 @@ export function RadioGroup({
     control,
     formState: { errors, defaultValues },
   } = useFormContext();
+  const t = useT();
 
   const optionsChecked: FormSelectOption[] = useMemo(() => {
     if (isStringArray(options)) {
@@ -84,7 +86,7 @@ export function RadioGroup({
                   <Typography
                     variant="body1"
                     className={twMerge(`ml-2 text-darkest text-lg ${fieldError ? 'text-red' : ''} ${labelClassName}`)}>
-                    {renderOption(option)}
+                    {t(renderOption(option))}
                   </Typography>
                 }
               />

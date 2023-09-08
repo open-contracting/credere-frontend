@@ -24,7 +24,7 @@ interface FileUploaderProps {
 
 const maxSizeMB = import.meta.env.VITE_MAX_FILE_SIZE_MB;
 
-const errorsMap = {
+const fileUploadErrorsMap = {
   [ErrorCode.TooManyFiles]: tNative('Only one file can be uploaded'),
   [ErrorCode.FileInvalidType]: tNative('File type is not supported'),
   [ErrorCode.FileTooLarge]: tNative('File is larger than {maxSizeMB} MB', { maxSizeMB }),
@@ -56,8 +56,13 @@ export function FileUploader({ className, loading, onAcceptedFile }: FileUploade
       file.errors.forEach((error) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        if (errorsMap[error.code]) errorMessage += errorsMap[error.code];
-        else errorMessage += error.message;
+        if (fileUploadErrorsMap[error.code]) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          errorMessage += `${t(fileUploadErrorsMap[error.code])}.\n`;
+        } else {
+          errorMessage += `${error.message}.\n`;
+        }
       });
       enqueueSnackbar(t('File not uploaded: {errorMessage}', { errorMessage }), {
         variant: 'error',

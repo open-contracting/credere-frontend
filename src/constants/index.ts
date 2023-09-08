@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+/* tslint:disable:no-unused-variable */
 import { t } from '@transifex/native';
 
 import { FormSelectOption } from '../stories/form-select/FormSelect';
@@ -169,6 +172,12 @@ export enum MSME_TYPES {
   SMALL = 'SMALL',
   MEDIUM = 'MEDIUM',
 }
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const EXTRA_KEYS = {
+  other_reason: t('Other reason'),
+};
 
 export const MSME_TYPES_NAMES: { [key: string]: string } = {
   [MSME_TYPES.MICRO]: t('0 to 10'),

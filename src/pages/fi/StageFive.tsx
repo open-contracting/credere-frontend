@@ -5,7 +5,8 @@ import { useT } from '@transifex/react';
 import { useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import StepImage from 'src/assets/pages/stage-five.svg';
+import StepImageEN from 'src/assets/pages/en/stage-five.svg';
+import StepImageES from 'src/assets/pages/es/stage-five.svg';
 import useApplicationContext from 'src/hooks/useSecureApplicationContext';
 import Button from 'src/stories/button/Button';
 import Checkbox from 'src/stories/checkbox/Checkbox';
@@ -17,6 +18,7 @@ import CreditProductReview from '../../components/CreditProductReview';
 import DocumentField from '../../components/DocumentField';
 import { DOCUMENTS_TYPE } from '../../constants';
 import useApproveApplication from '../../hooks/useApproveApplication';
+import useLangContext from '../../hooks/useLangContext';
 import { ApproveApplicationInput, FormApprovedInput, approveSchema } from '../../schemas/application';
 import RejectApplicationDialog from './RejectApplicationDialog';
 
@@ -26,6 +28,9 @@ export function StageFive() {
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;
   const [openDialog, setOpenDialog] = useState<boolean>(false);
+
+  const langContext = useLangContext();
+  const StepImage = langContext.state.selected.startsWith('en') ? StepImageEN : StepImageES;
 
   const { approveApplicationMutation, isLoading } = useApproveApplication();
 

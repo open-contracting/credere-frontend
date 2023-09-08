@@ -21,7 +21,11 @@ const preferencesSchema = object({
 export const lenderSchema = object({
   name: creditProviderNameSchema,
   type: creditProviderTypeSchema,
-  sla_days: coerce.number().int().positive().min(1, t('SLA days must be greater than 0')),
+  sla_days: coerce
+    .number()
+    .int()
+    .positive(t('SLA days must be greater than 0'))
+    .min(1, t('SLA days must be greater than 0')),
   email_group: string().email(t('Email Address is invalid')),
 });
 
