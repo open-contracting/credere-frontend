@@ -30,6 +30,7 @@ export interface ApplicationTableBorrowerDataRowProps extends ApplicationTableDa
   name: keyof IBorrower;
   borrower: IBorrower;
   withoutVerify?: boolean;
+  useTranslation?: boolean;
   verifiedData: { [key: string]: boolean };
   updateValue?: (value: any, name: keyof IUpdateBorrower) => void;
   verifyData?: (value: boolean, name: keyof IUpdateBorrower) => void;

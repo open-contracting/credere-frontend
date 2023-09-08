@@ -13,6 +13,7 @@ const DATA_REQUESTED_FROM_MSME = ['size', 'sector'];
 export function ApplicationTableDataBorrowerRow({
   label,
   name,
+  useTranslation,
   borrower,
   formLabel,
   missingData,
@@ -34,7 +35,11 @@ export function ApplicationTableDataBorrowerRow({
 
   const verified = (verifiedData && verifiedData[name]) || false;
 
-  const formattedValue = formatter ? formatter(value) : value;
+  let formattedValue = formatter ? formatter(value) : value;
+  if (useTranslation) {
+    formattedValue = t(formattedValue);
+  }
+
   const verifyDataValue = (verify: boolean) => {
     if (verifyData) {
       verifyData(verify, name as keyof IUpdateBorrower);
@@ -91,6 +96,7 @@ ApplicationTableDataBorrowerRow.defaultProps = {
   formLabel: undefined,
   withoutVerify: false,
   modifiedFields: undefined,
+  useTranslation: false,
 };
 
 export default ApplicationTableDataBorrowerRow;

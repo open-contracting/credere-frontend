@@ -1,17 +1,22 @@
- 
 import { useT } from '@transifex/react';
 import { useNavigate } from 'react-router-dom';
-import StepImage from 'src/assets/pages/stage-five.svg';
+import StepImageEN from 'src/assets/pages/en/stage-five.svg';
+import StepImageES from 'src/assets/pages/es/stage-five.svg';
 import useApplicationContext from 'src/hooks/useSecureApplicationContext';
 import Button from 'src/stories/button/Button';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
+
+import useLangContext from '../../hooks/useLangContext';
 
 export function StageFiveApproved() {
   const t = useT();
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;
+
+  const langContext = useLangContext();
+  const StepImage = langContext.state.selected.startsWith('en') ? StepImageEN : StepImageES;
 
   const onGoHomeHandler = () => {
     navigate('/');

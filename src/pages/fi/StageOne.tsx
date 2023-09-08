@@ -1,20 +1,25 @@
 import { Link as MUILink } from '@mui/material';
 import { useT } from '@transifex/react';
 import { useNavigate } from 'react-router-dom';
-import StepImage from 'src/assets/pages/stage-one.svg';
+import StepImageEN from 'src/assets/pages/en/stage-one.svg';
+import StepImageES from 'src/assets/pages/es/stage-one.svg';
 import useApplicationContext from 'src/hooks/useSecureApplicationContext';
 import Button from 'src/stories/button/Button';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
 import ApplicationBorrowerTable from '../../components/ApplicationBorrowerTable';
+import useLangContext from '../../hooks/useLangContext';
 import LinkButton from '../../stories/link-button/LinkButton';
 
 export function StageOne() {
   const t = useT();
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
+  const langContext = useLangContext();
   const application = applicationContext.state.data;
+
+  const StepImage = langContext.state.selected.startsWith('en') ? StepImageEN : StepImageES;
 
   const onBackHandler = () => {
     navigate('/');

@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import EmailIcon from 'src/assets/icons/email.svg';
-import StepImage from 'src/assets/pages/stage-two.svg';
+import StepImageEN from 'src/assets/pages/en/stage-two.svg';
+import StepImageES from 'src/assets/pages/es/stage-two.svg';
 import useApplicationContext from 'src/hooks/useSecureApplicationContext';
 import Button from 'src/stories/button/Button';
 import Text from 'src/stories/text/Text';
@@ -15,6 +16,7 @@ import Title from 'src/stories/title/Title';
 import ApplicationDocumentsTable from '../../components/ApplicationDocumentsTable';
 import { APPLICATION_STATUS } from '../../constants';
 import useEmailToSME from '../../hooks/useEmailToSME';
+import useLangContext from '../../hooks/useLangContext';
 import { FormEmailInput, formEmailSchema } from '../../schemas/application';
 import FormInput from '../../stories/form-input/FormInput';
 import LinkButton from '../../stories/link-button/LinkButton';
@@ -27,6 +29,10 @@ export function StageTwo() {
   const application = applicationContext.state.data;
   const { isLoading, isError, emailToSMEMutation } = useEmailToSME();
   const [emailSent, setEmailSent] = useState(false);
+
+  const langContext = useLangContext();
+  const StepImage = langContext.state.selected.startsWith('en') ? StepImageEN : StepImageES;
+
   const onBackHandler = () => {
     navigate('../stage-one');
   };

@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { FormControl, FormHelperText, MenuItem, Select } from '@mui/material';
+import { useT } from '@transifex/react';
 import { useMemo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
@@ -34,6 +35,7 @@ export function FormSelect({
   renderOption = defaultRenderOption,
   options,
 }: FormSelectProps) {
+  const t = useT();
   const {
     control,
     formState: { errors },
@@ -75,13 +77,13 @@ export function FormSelect({
             )}
             {optionsChecked.map((option) => (
               <MenuItem key={`key-${option.value}`} value={option.value}>
-                {renderOption(option)}
+                {t(renderOption(option))}
               </MenuItem>
             ))}
           </Select>
 
           <FormHelperText className="text-red text-base mx-0" error={!!fieldError}>{`${
-            fieldError ? fieldError?.message : ''
+            fieldError ? t(fieldError?.message) : ''
           }`}</FormHelperText>
         </FormControl>
       )}

@@ -119,6 +119,7 @@ export function ApplicationBorrowerTable({
               isLoading={isLoading || isLoadingVerifyDataField}
               readonly
               withoutVerify
+              useTranslation
               name="size"
               label={t('Size')}
               missingData={borrower.missing_data}
@@ -131,6 +132,7 @@ export function ApplicationBorrowerTable({
               isLoading={isLoading || isLoadingVerifyDataField}
               readonly
               withoutVerify
+              useTranslation
               name="sector"
               label={t('Sector')}
               missingData={borrower.missing_data}
