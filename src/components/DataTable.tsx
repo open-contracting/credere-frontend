@@ -159,7 +159,7 @@ function DataTableHead<T>({
                 {t(headCell.label)}
               </TableSortLabel>
             )}
-            {!headCell.sortable && <DataTableHeadLabel label={headCell.label} />}
+            {!headCell.sortable && <DataTableHeadLabel label={t(headCell.label)} />}
           </DataTableHeadCell>
         ))}
         {hasActions && (

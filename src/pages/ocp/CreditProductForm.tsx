@@ -169,22 +169,22 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
           <Box className="mb-4">
             <Box className="w-3/5 flex flex-col items-start justify-start gap-2">
               <Checkbox
-                label={DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.INCORPORATION_DOCUMENT]}
+                label={t(DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.INCORPORATION_DOCUMENT])}
                 name={`required_document_types.${DOCUMENTS_TYPE.INCORPORATION_DOCUMENT}`}
                 className={errors.required_document_types ? 'text-red' : ''}
               />
               <Checkbox
-                label={DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT]}
+                label={t(DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT])}
                 name={`required_document_types.${DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT}`}
                 className={errors.required_document_types ? 'text-red' : ''}
               />
               <Checkbox
-                label={DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.BANK_CERTIFICATION_DOCUMENT]}
+                label={t(DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.BANK_CERTIFICATION_DOCUMENT])}
                 name={`required_document_types.${DOCUMENTS_TYPE.BANK_CERTIFICATION_DOCUMENT}`}
                 className={errors.required_document_types ? 'text-red' : ''}
               />
               <Checkbox
-                label={DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.FINANCIAL_STATEMENT]}
+                label={t(DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.FINANCIAL_STATEMENT])}
                 name={`required_document_types.${DOCUMENTS_TYPE.FINANCIAL_STATEMENT}`}
                 className={errors.required_document_types ? 'text-red' : ''}
               />

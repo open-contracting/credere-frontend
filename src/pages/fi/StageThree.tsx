@@ -1,7 +1,8 @@
 import { Link as MUILink } from '@mui/material';
 import { useT } from '@transifex/react';
 import { useNavigate } from 'react-router-dom';
-import StepImage from 'src/assets/pages/stage-three.svg';
+import StepImageEN from 'src/assets/pages/en/stage-three.svg';
+import StepImageES from 'src/assets/pages/es/stage-three.svg';
 import useApplicationContext from 'src/hooks/useSecureApplicationContext';
 import Button from 'src/stories/button/Button';
 import LinkButton from 'src/stories/link-button/LinkButton';
@@ -9,12 +10,16 @@ import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
 import ApplicationAwardTable from '../../components/ApplicationAwardTable';
+import useLangContext from '../../hooks/useLangContext';
 
 export function StageThree() {
   const t = useT();
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;
+
+  const langContext = useLangContext();
+  const StepImage = langContext.state.selected.startsWith('en') ? StepImageEN : StepImageES;
 
   const onBackHandler = () => {
     navigate('../stage-two');

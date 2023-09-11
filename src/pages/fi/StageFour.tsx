@@ -1,6 +1,7 @@
 import { useT } from '@transifex/react';
 import { Link, useNavigate } from 'react-router-dom';
-import StepImage from 'src/assets/pages/stage-four.svg';
+import StepImageEN from 'src/assets/pages/en/stage-four.svg';
+import StepImageES from 'src/assets/pages/es/stage-four.svg';
 import useApplicationContext from 'src/hooks/useSecureApplicationContext';
 import Button from 'src/stories/button/Button';
 import Text from 'src/stories/text/Text';
@@ -9,6 +10,7 @@ import Title from 'src/stories/title/Title';
 import ApplicationAwardTable from '../../components/ApplicationAwardTable';
 import ApplicationBorrowerTable from '../../components/ApplicationBorrowerTable';
 import ApplicationDocumentsTable from '../../components/ApplicationDocumentsTable';
+import useLangContext from '../../hooks/useLangContext';
 import LinkButton from '../../stories/link-button/LinkButton';
 
 export function StageFour() {
@@ -16,6 +18,9 @@ export function StageFour() {
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;
+
+  const langContext = useLangContext();
+  const StepImage = langContext.state.selected.startsWith('en') ? StepImageEN : StepImageES;
 
   const onGoHomeHandler = () => {
     navigate('/');
