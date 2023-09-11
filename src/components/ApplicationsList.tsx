@@ -27,7 +27,6 @@ import {
   PaginationInput,
 } from '../schemas/application';
 import LinkButton from '../stories/link-button/LinkButton';
-import Loader from '../stories/loader/Loader';
 import { renderApplicationStatus } from '../util';
 import { DataTable, HeadCell, Order } from './DataTable';
 
@@ -285,23 +284,18 @@ export function ApplicationList({ type }: ApplicationListProps) {
     );
 
   return (
-    <>
-      {isLoading && <Loader />}
-      {!isLoading && (
-        <ApplicationDataTable
-          rows={rows}
-          useEmptyRows
-          handleRequestSort={handleRequestSort}
-          headCells={headCells}
-          pagination={{
-            totalCount,
-            handleChangePage,
-          }}
-          isLoading={isLoading}
-          actions={type === USER_TYPES.OCP ? actionsOCP : actionsFI}
-        />
-      )}
-    </>
+    <ApplicationDataTable
+      rows={rows}
+      useEmptyRows
+      handleRequestSort={handleRequestSort}
+      headCells={headCells}
+      pagination={{
+        totalCount,
+        handleChangePage,
+      }}
+      isLoading={isLoading}
+      actions={type === USER_TYPES.OCP ? actionsOCP : actionsFI}
+    />
   );
 }
 
