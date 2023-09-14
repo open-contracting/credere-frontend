@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { t } from '@transifex/native';
-import { TypeOf, boolean, coerce, nativeEnum, object, string } from 'zod';
+import { boolean, coerce, nativeEnum, object, string, TypeOf } from 'zod';
 
 import { APPLICATION_STATUS, DOCUMENTS_TYPE, MSME_TYPES, USER_TYPES } from '../constants';
 import { isDateAfterCurrentDate } from '../util';
@@ -47,6 +47,7 @@ export enum DECLINE_FEEDBACK {
   already_have_acredit = 'already_have_acredit',
   preffer_to_go_to_bank = 'preffer_to_go_to_bank',
   dont_want_access_credit = 'dont_want_access_credit',
+  suspicious_email = 'suspicious_email',
   other = 'other',
 }
 
@@ -55,6 +56,7 @@ export const DECLINE_FEEDBACK_NAMES: { [key: string]: string } = {
   [DECLINE_FEEDBACK.already_have_acredit]: t('Already have acredit'),
   [DECLINE_FEEDBACK.preffer_to_go_to_bank]: t('Preffer to go to bank'),
   [DECLINE_FEEDBACK.dont_want_access_credit]: t("Don't want access credit"),
+  [DECLINE_FEEDBACK.suspicious_email]: t("I perceive the email as suspicious or I do not trust that the credit proposal is true"),
   [DECLINE_FEEDBACK.other]: t('Other'),
 };
 
@@ -63,6 +65,7 @@ export const declineFeedbackSchema = object({
   [DECLINE_FEEDBACK.already_have_acredit]: boolean(),
   [DECLINE_FEEDBACK.preffer_to_go_to_bank]: boolean(),
   [DECLINE_FEEDBACK.dont_want_access_credit]: boolean(),
+  [DECLINE_FEEDBACK.suspicious_email]: boolean(),
   [DECLINE_FEEDBACK.other]: boolean(),
   other_comments: string().optional(),
   uuid: UUIDType,
