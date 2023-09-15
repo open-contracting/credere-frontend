@@ -11,7 +11,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { ProviderInput, lenderSchema } from 'src/schemas/OCPsettings';
+import { lenderSchema, ProviderInput } from 'src/schemas/OCPsettings';
 import Button from 'src/stories/button/Button';
 import FormInput from 'src/stories/form-input/FormInput';
 import FormSelect from 'src/stories/form-select/FormSelect';
@@ -118,7 +118,13 @@ export function LenderForm({ lender }: LenderFormProps) {
             big={false}
             placeholder={t('Email group list')}
           />
-
+          <FormInput
+            className="w-3/5"
+            label={t('Credit provider logo (as you want it to appear in the Credere UI)')}
+            name="logo_filename"
+            big={false}
+            placeholder={t('Credit provider logo')}
+          />
           <FormInput
             className="w-3/5"
             label={t(

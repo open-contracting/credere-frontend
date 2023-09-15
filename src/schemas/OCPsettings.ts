@@ -27,6 +27,7 @@ export const lenderSchema = object({
     .positive(t('SLA days must be greater than 0'))
     .min(1, t('SLA days must be greater than 0')),
   email_group: string().email(t('Email Address is invalid')),
+  logo_filename: string(),
 });
 
 export type ProviderInput = TypeOf<typeof lenderSchema>;

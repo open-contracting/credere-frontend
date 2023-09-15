@@ -27,7 +27,7 @@ import FormSelect from '../../stories/form-select/FormSelect';
 import RadioGroup from '../../stories/radio-group/RadioGroup';
 import { addMonthsToDate, formatCurrency, isDateBeforeMonths } from '../../util';
 
-const DEBOUNCE_TIME = 800;
+const DEBOUNCE_TIME = 1;
 function ViewCreditOptions() {
   const t = useT();
   const { formatDateFromString } = useLocalizedDateFormatter();

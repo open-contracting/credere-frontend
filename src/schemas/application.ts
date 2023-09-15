@@ -181,6 +181,7 @@ export interface ILenderBase {
   email_group: string;
   type: string;
   sla_days: number;
+  logo_filename: string;
 }
 
 export interface ILenderUpdate extends ILenderBase {
