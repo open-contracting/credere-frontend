@@ -5,7 +5,7 @@ import Text from 'src/stories/text/Text';
 import { ICreditProduct } from '../schemas/application';
 import Button from '../stories/button/Button';
 import { formatCurrency } from '../util';
-import { DataTableCell, DataTableHeadCell, TransparentDataTableCell } from './DataTable';
+import { DataTableCell, DataTableHeadCell, DataTableHeadLabel, TransparentDataTableCell } from './DataTable';
 import DataWithDetail from './DataWithDetail';
 
 export interface LoansTableProps {
@@ -35,7 +35,11 @@ export function LoansTable({ rows, amountRequested, currency, isLoading, selectO
                 </DataTableHeadCell>
                 {rows.map((row) => (
                   <DataTableHeadCell key={`header-${row.id}`}>
-                    <img src={`/images/lenders/${row.lender.logo_filename}`} alt="lender-logo" style={{ width: '8rem'}}/>
+                    
+                    {row.lender.logo_filename 
+                    ? <img src={`/images/lenders/${row.lender.logo_filename}`} alt="lender-logo" style={{ width: '8rem'}}/>
+                    : <DataTableHeadLabel label={row.lender.name} />
+                    }
                   </DataTableHeadCell>
                 ))}
               </TableRow>
