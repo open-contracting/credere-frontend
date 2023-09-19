@@ -22,7 +22,7 @@ const headCells: HeadCell<ExtendendUser>[] = [
     id: 'name',
     disablePadding: false,
     label: t('Full Name'),
-    sortable: true,
+    sortable: false,
   },
   {
     id: 'email',
@@ -34,21 +34,21 @@ const headCells: HeadCell<ExtendendUser>[] = [
     id: 'type',
     disablePadding: false,
     label: t('Type'),
-    sortable: true,
+    sortable: false,
     render: (row: ExtendendUser) => renderUserType(row.type),
   },
   {
     id: 'lender_name',
     disablePadding: false,
     label: t('Lender'),
-    sortable: true,
+    sortable: false,
   },
   {
     id: 'created_at',
     type: 'date',
     disablePadding: false,
     label: t('Created At'),
-    sortable: true,
+    sortable: false,
   },
 ];
 
