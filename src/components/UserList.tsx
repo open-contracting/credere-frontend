@@ -19,7 +19,7 @@ const UserDataTable = DataTable<ExtendendUser>;
 
 const headCells: HeadCell<ExtendendUser>[] = [
   {
-    id: 'user_name',
+    id: 'name',
     disablePadding: false,
     label: t('Full Name'),
     sortable: true,

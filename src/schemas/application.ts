@@ -306,12 +306,12 @@ export const EXTENDED_APPLICATION_FROM: IExtendedApplication = {
 
 export interface IExtendedUser {
   lender_name: string;
-  user_name: string;
+  name: string;
 }
 
 export const EXTENDED_USER_FROM: IExtendedUser = {
   lender_name: 'lender.name',
-  user_name: 'user_name',
+  name: 'name',
 };
 
 export interface IApplicationResponse {
