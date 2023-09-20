@@ -22,14 +22,6 @@ export function NeedHelpComponent() {
             </a>
           </Text>
         </Box>
-        <Box>
-          <Text className="inline-block mb-0">{t('Phone: ')}</Text>
-          <Text className="inline-block underline ml-1 mb-0">
-            <a className="text-darkest" href={`callto:${import.meta.env.VITE_CREDERE_PHONE_NUMBER}`}>
-              {import.meta.env.VITE_CREDERE_PHONE_NUMBER}
-            </a>
-          </Text>
-        </Box>
       </Box>
     </FAQContainer>
   );
