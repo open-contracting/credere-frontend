@@ -24,7 +24,7 @@ import {
   DOCUMENTS_TYPE,
   DOCUMENT_TYPES_NAMES,
   MSME_TYPES_OPTIONS,
-  QUERY_KEYS
+  QUERY_KEYS,
 } from '../../constants';
 import { useParamsTypeSafe } from '../../hooks/useParamsTypeSafe';
 import useUpsertCreditProduct from '../../hooks/useUpsertCreditProduct';
@@ -158,7 +158,8 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
             className="w-3/5"
             label={t('Interest rate of the credit product')}
             name="interest_rate"
-            type="number"
+            multiline
+            rows={4}
             big={false}
             placeholder={t('Interes rate')}
           />
@@ -188,7 +189,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
                 name={`required_document_types.${DOCUMENTS_TYPE.FINANCIAL_STATEMENT}`}
                 className={errors.required_document_types ? 'text-red' : ''}
               />
-               <Checkbox
+              <Checkbox
                 label={DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION]}
                 name={`required_document_types.${DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION}`}
                 className={errors.required_document_types ? 'text-red' : ''}
@@ -224,6 +225,16 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
             rows={4}
             big={false}
             placeholder={t('Other fees description')}
+          />
+
+          <FormInput
+            className="w-3/5"
+            label={t('Enter any additional information for tne MSME about the credit product')}
+            name="additional_information"
+            multiline
+            rows={4}
+            big={false}
+            placeholder={t('Additional information')}
           />
 
           <FormInput

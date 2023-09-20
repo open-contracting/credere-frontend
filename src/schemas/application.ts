@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { t } from '@transifex/native';
-import { boolean, coerce, nativeEnum, object, string, TypeOf } from 'zod';
+import { TypeOf, boolean, coerce, nativeEnum, object, string } from 'zod';
 
 import { APPLICATION_STATUS, DOCUMENTS_TYPE, MSME_TYPES, USER_TYPES } from '../constants';
 import { isDateAfterCurrentDate } from '../util';
@@ -56,7 +56,9 @@ export const DECLINE_FEEDBACK_NAMES: { [key: string]: string } = {
   [DECLINE_FEEDBACK.already_have_acredit]: t('Already have acredit'),
   [DECLINE_FEEDBACK.preffer_to_go_to_bank]: t('Preffer to go to bank'),
   [DECLINE_FEEDBACK.dont_want_access_credit]: t("Don't want access credit"),
-  [DECLINE_FEEDBACK.suspicious_email]: t("I perceive the email as suspicious or I do not trust that the credit proposal is true"),
+  [DECLINE_FEEDBACK.suspicious_email]: t(
+    'I perceive the email as suspicious or I do not trust that the credit proposal is true',
+  ),
   [DECLINE_FEEDBACK.other]: t('Other'),
 };
 
@@ -192,11 +194,12 @@ export interface ICreditProductBase {
   borrower_size: MSME_TYPES;
   lower_limit: number;
   upper_limit: number;
-  interest_rate: number;
+  interest_rate: string;
   type: string;
   required_document_types: { [key: string]: boolean };
   other_fees_total_amount: number;
   other_fees_description: string;
+  additional_information: string;
   more_info_url: string;
   lender_id: number;
 }

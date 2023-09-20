@@ -1,5 +1,5 @@
 import { t } from '@transifex/native';
-import { boolean, coerce, nativeEnum, object, preprocess, string, TypeOf } from 'zod';
+import { TypeOf, boolean, coerce, nativeEnum, object, preprocess, string } from 'zod';
 
 import { BORROWER_TYPE, CREDIT_PRODUCT_TYPE, DOCUMENTS_TYPE, MSME_TYPES } from '../constants';
 
@@ -48,16 +48,7 @@ export const creditProductSchema = object({
   }),
   lower_limit: coerce.number().min(1, t('Lower limit must be greater than 0')),
   upper_limit: coerce.number().min(1, t('Upper limit must be greater than 0')),
-  interest_rate: preprocess(
-    (args) => (args === '' ? undefined : args),
-    coerce
-      .number({
-        required_error: t('Interest rate is required'),
-        invalid_type_error: t('Interest rate must be a number'),
-      })
-      .gte(0, t('Interest rate must be greater or equal than 0'))
-      .lte(100, t('Interest rate must be less or equal than 100')),
-  ),
+  interest_rate: string().min(1, t('Interest rate description is required')),
   type: nativeEnum(CREDIT_PRODUCT_TYPE, {
     errorMap: (issue) => {
       switch (issue.code) {
@@ -108,6 +99,7 @@ export const creditProductSchema = object({
       .gte(0, t('Other fees total amount must be greater or equal than 0')),
   ),
   other_fees_description: string().min(1, t('Other fees description is required')),
+  additional_information: string(),
   more_info_url: string().url(t('URL is invalid (Hint: include http:// or https://)')),
 })
   .refine((data) => data.lower_limit < data.upper_limit, {

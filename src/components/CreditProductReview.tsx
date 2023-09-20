@@ -1,5 +1,6 @@
 import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
 import { useT } from '@transifex/react';
+import ReactMarkdown from 'react-markdown';
 
 import { CREDIT_PRODUCT_TYPE } from '../constants';
 import useLocalizedDateFormatter from '../hooks/useLocalizedDateFormatter';
@@ -78,12 +79,9 @@ export function CreditProductReview({ application, className }: CreditProductRev
                   </DataTableCell>
                 )}
                 {isLoan && <DataTableCell>{formatDateFromString(application.payment_start_date)}</DataTableCell>}
-                <DataTableCell>{`${creditProduct.interest_rate}%`}</DataTableCell>
+                <DataTableCell>{`${creditProduct.interest_rate}`}</DataTableCell>
                 <DataTableCell>
-                  {`${application.currency} ${formatCurrency(
-                    creditProduct.other_fees_total_amount,
-                    application.currency,
-                  )}`}
+                  <ReactMarkdown>{`${creditProduct.other_fees_description}`}</ReactMarkdown>
                 </DataTableCell>
               </TableRow>
             </TableBody>

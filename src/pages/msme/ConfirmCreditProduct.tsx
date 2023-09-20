@@ -1,4 +1,3 @@
- 
 import { useQuery } from '@tanstack/react-query';
 import { useT } from '@transifex/react';
 import axios from 'axios';
