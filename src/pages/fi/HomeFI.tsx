@@ -1,5 +1,7 @@
-import { Container } from '@mui/material';
+import { Box, CircularProgress, Container } from '@mui/material';
 import { useT } from '@transifex/react';
+import useDownloadApplicants from 'src/hooks/useDownloadApplicants';
+import Button from 'src/stories/button/Button';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
@@ -14,6 +16,7 @@ import { formatCurrency } from '../../util';
 export function HomeFI() {
   const t = useT();
   const { data, isLoading } = useGetStatisticsFI();
+  const { downloadDocument, isDownloading } = useDownloadApplicants();
 
   return (
     <>
@@ -138,6 +141,18 @@ export function HomeFI() {
         )}
       </Text>
       <ApplicationsList type={USER_TYPES.FI} />
+      <Box className="flex flex-row gap-x-4 items-center justify-end">
+        {isDownloading && <CircularProgress className="text-grass" />}
+
+        <Button
+          className="p-3 mb-3 mt-3 justify-start"
+          onClick={downloadDocument}
+          label={t('Download all applications')}
+          size="small"
+          noIcon
+          disabled={isDownloading}
+        />
+      </Box>
     </>
   );
 }

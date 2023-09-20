@@ -135,3 +135,16 @@ export const isDateAfterCurrentDate = (date: string) => {
   const currentDate = dayjs();
   return dayjs(date).isAfter(currentDate, 'day');
 };
+
+export const downloadBlob = (blob: Blob, filename: string) => {
+  if (blob) {
+    const href = window.URL.createObjectURL(blob);
+    const anchorElement = document.createElement('a');
+    anchorElement.href = href;
+    anchorElement.download = filename;
+    document.body.appendChild(anchorElement);
+    anchorElement.click();
+    document.body.removeChild(anchorElement);
+    window.URL.revokeObjectURL(href);
+  }
+};

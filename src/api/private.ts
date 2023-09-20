@@ -132,6 +132,14 @@ export const downloadDocumentFn = async (id: number) => {
   return response.data;
 };
 
+export const downloadApplicants = async (lang: string) => {
+  const response = await authApi.get(`applications/export/${lang}`, {
+    responseType: 'blob',
+  });
+
+  return response.data;
+};
+
 export const downloadApplicationFn = async (id: number, lang: string) => {
   const response = await authApi.get(`applications/${id}/download-application/${lang}`, {
     responseType: 'blob',
