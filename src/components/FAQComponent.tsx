@@ -1,8 +1,10 @@
 import { useT } from '@transifex/react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import FAQ_QUESTIONS from 'src/constants/faq-questions';
+import FAQPageSection from 'src/stories/faq/FAQPageSection';
 
 import FAQContainer from '../stories/faq/FAQContainer';
-import FAQSection from '../stories/faq/FAQSection';
 import LinkButton from '../stories/link-button/LinkButton';
 
 interface FAQComponentProps {
@@ -11,23 +13,23 @@ interface FAQComponentProps {
 
 export function FAQComponent({ className }: FAQComponentProps) {
   const t = useT();
+  const [open, setOpen] = useState<Record<string, boolean>>({});
+  const handleToggle = (key: string) => {
+    setOpen((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
   return (
     <FAQContainer title={t('Frequently Asked Questions')} className={className}>
-      <FAQSection title={t('What is the MSME credit scheme?')}>
-        {t(
-          'Guaranteed loans give high-risk borrowers a way to access financing, and provide protection for the lender.',
-        )}
-      </FAQSection>
-      <FAQSection title={t('Why am I being offered credit?')}>
-        {t(
-          'The City of Bogota is trying to encourage more SME participation in public sector contracts. Your businesses was identified as an SME.',
-        )}
-      </FAQSection>
-      <FAQSection className="border-b-0 pb-1" title={t('Who is involved in this scheme?')}>
-        {t(
-          'This project is being run by the Open Contracting Partnership in conjunction with Mastercard. We have partnered with Colombian banks such as Bancolombia who are providing the credit offer.',
-        )}
-      </FAQSection>
+      {Object.keys(FAQ_QUESTIONS)
+        .slice(0, 3)
+        .map((key: string) => (
+          <FAQPageSection
+            key={key}
+            open={open[key]}
+            handleToggle={() => handleToggle(key)}
+            title={t(FAQ_QUESTIONS[key].question)}>
+            {t(FAQ_QUESTIONS[key].answer)}
+          </FAQPageSection>
+        ))}
       <LinkButton className="ml-1 mb-2" label={t('View all FAQs')} component={Link} to="/frequently-asked-questions" />
     </FAQContainer>
   );
