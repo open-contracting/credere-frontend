@@ -15,8 +15,6 @@ import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
 import CreditProductReview from '../../components/CreditProductReview';
-import DocumentField from '../../components/DocumentField';
-import { DOCUMENTS_TYPE } from '../../constants';
 import useApproveApplication from '../../hooks/useApproveApplication';
 import useLangContext from '../../hooks/useLangContext';
 import { ApproveApplicationInput, FormApprovedInput, approveSchema } from '../../schemas/application';
@@ -113,12 +111,6 @@ export function StageFive() {
             name="compliant_checks_passed"
             defaultValue={false}
             label={t('{legal_name} has passed compliance checks', { legal_name: application?.borrower.legal_name })}
-          />
-          <DocumentField
-            secure
-            className="md:w-2/5"
-            label={t('Attach the compliance report here (optional)')}
-            documentType={DOCUMENTS_TYPE.COMPLIANCE_REPORT}
           />
           <FormInput
             multiline
