@@ -76,16 +76,6 @@ export function StageFive() {
       <img className="mb-14 ml-8" src={StepImage} alt="step" />
       <Title type="section" label={t('Stage 5: Approve')} className="mb-8" />
 
-      <Text className="mb-4">
-        {t('Decision:')}{' '}
-        <strong>
-          {t('Credit approved')}
-          {!compliantChecksCompletedWatch || !compliantChecksPassWatch
-            ? ` ${t('pending compliance checks to be completed.')}`
-            : '.'}
-        </strong>
-      </Text>
-
       {application && <CreditProductReview className="md:w-3/5" application={application} />}
 
       <FormProvider {...methods}>
