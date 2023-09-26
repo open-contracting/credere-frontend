@@ -37,7 +37,11 @@ export function CreditProductReview({ application, className }: CreditProductRev
                 </DataTableHeadCell>
 
                 <DataTableHeadCell>
-                  <DataTableHeadLabel label={isLoan ? t('Amount') : t('Max amount')} />
+                  <DataTableHeadLabel label={t('Requested amount')} />
+                </DataTableHeadCell>
+
+                <DataTableHeadCell>
+                  <DataTableHeadLabel label={t('Award amount')} />
                 </DataTableHeadCell>
 
                 {isLoan && (
@@ -65,9 +69,10 @@ export function CreditProductReview({ application, className }: CreditProductRev
               <TableRow>
                 <DataTableCell>{application.lender?.name}</DataTableCell>
                 <DataTableCell>
-                  {isLoan
-                    ? `${application.currency} ${formatCurrency(application.amount_requested, application.currency)}`
-                    : `${application.currency} ${formatCurrency(creditProduct.upper_limit, application.currency)}`}
+                  `${application.currency} ${formatCurrency(application.amount_requested, application.currency)}`
+                </DataTableCell>
+                <DataTableCell>
+                  `${application.currency} ${formatCurrency(application.award.award_amount, application.currency)}`
                 </DataTableCell>
 
                 {isLoan && (
