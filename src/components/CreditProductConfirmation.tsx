@@ -51,7 +51,8 @@ export function CreditProductConfirmation({ creditProduct, application }: Credit
               <TableRow>
                 <DataTableCell>{creditProduct.lender.name}</DataTableCell>
                 <DataTableCell>
-                  `${application.currency} ${formatCurrency(application.amount_requested, application.currency)}`
+                  {application.currency}{' '}
+                  {formatCurrency(application.calculator_data.amount_requested, application.currency)}
                 </DataTableCell>
 
                 {isLoan && (
