@@ -37,10 +37,6 @@ export function CreditProductConfirmation({ creditProduct, application }: Credit
                   <DataTableHeadLabel label={t('Requested amount')} />
                 </DataTableHeadCell>
 
-                <DataTableHeadCell>
-                  <DataTableHeadLabel label={t('Award amount')} />
-                </DataTableHeadCell>
-
                 {isLoan && (
                   <DataTableHeadCell>
                     <DataTableHeadLabel label={t('Repayment')} />
@@ -56,9 +52,6 @@ export function CreditProductConfirmation({ creditProduct, application }: Credit
                 <DataTableCell>{creditProduct.lender.name}</DataTableCell>
                 <DataTableCell>
                   `${application.currency} ${formatCurrency(application.amount_requested, application.currency)}`
-                </DataTableCell>
-                <DataTableCell>
-                  `${application.currency} ${formatCurrency(application.award.award_amount, application.currency)}`
                 </DataTableCell>
 
                 {isLoan && (

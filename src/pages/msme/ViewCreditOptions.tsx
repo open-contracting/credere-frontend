@@ -20,7 +20,9 @@ import {
   CreditOptionsInput,
   GetCreditProductsOptionsInput,
   ICreditProduct,
-  RepaymentTermsInput, repaymentTermsSchema, SelectCreditProductInput
+  RepaymentTermsInput,
+  SelectCreditProductInput,
+  repaymentTermsSchema,
 } from '../../schemas/application';
 import FormInput from '../../stories/form-input/FormInput';
 import FormSelect from '../../stories/form-select/FormSelect';
@@ -223,7 +225,14 @@ function ViewCreditOptions() {
                 name="amount_requested"
                 big={false}
                 type="currency"
-                placeholder={t('Amount requested')}
+                placeholder={`${
+                  t('Award amount') || ' ' || applicationContext.state.data?.award.award_currency
+                } ${formatCurrency(
+                  applicationContext.state.data?.award.award_amount
+                    ? applicationContext.state.data?.award.award_amount
+                    : 0,
+                  applicationContext.state.data?.award.award_currency,
+                )}`}
               />
             </Box>
           </FormProvider>
