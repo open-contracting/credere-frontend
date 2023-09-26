@@ -44,12 +44,7 @@ export function StageFive() {
     resolver: zodResolver(approveSchema),
   });
 
-  const { handleSubmit, watch } = methods;
-
-  const [compliantChecksCompletedWatch, compliantChecksPassWatch] = watch([
-    'compliant_checks_completed',
-    'compliant_checks_passed',
-  ]);
+  const { handleSubmit } = methods;
 
   const onSubmitHandler: SubmitHandler<FormApprovedInput> = (values) => {
     if (applicationContext.state.data?.id) {
