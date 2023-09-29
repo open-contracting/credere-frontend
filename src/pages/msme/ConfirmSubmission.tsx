@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Box } from '@mui/material';
 import { useT } from '@transifex/react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
@@ -94,12 +94,24 @@ function ConfirmSubmission() {
                 name="agree_topass_info_to_banking_partner"
                 defaultValue={false}
                 label={t(
-                  'I agree for these documents, the information entered in my application and the information about my award to be passed to {fi_name}.',
+                  'I agree for these documents, the information entered in my application and the information about my award to be passed to {fi_name}, so that they can offer me credit alternatives in accordance with the OCP Data Processing Policy. Once my information is shared, it will be treated in accordance with the data processing policy of each financial institution.',
                   {
                     fi_name: applicationContext.state.data?.lender.name,
                   },
                 )}
               />
+              <Box>
+                <Text className="inline-block">{t('You can read')} </Text>
+
+                <Link
+                  className="text-darkest"
+                  to="https://www.open-contracting.org/es/about/our-privacy-policy/"
+                  target="_blank">
+                  <Text className="inline-block underline ml-1 mb-X">
+                    {t('the OCP Data Processing Policy in this link')}
+                  </Text>
+                </Link>
+              </Box>
 
               <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
                 <div>
