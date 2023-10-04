@@ -104,6 +104,26 @@ function About() {
         </div>
         <div className="home-feature-list">
           <a
+            href="https://www.open-contracting.org/es/2023/10/04/credere-llega-a-colombia-para-ayudarle-a-las-pymes-a-contratar-con-el-estado/"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="home-link1">
+            <div className="feature-feature home-component01">
+              <img alt="ocp-tech" src="/OCP-Credere-invitacion-header.avif" className="feature-image" />
+              <div className="feature-content">
+                <a
+                  href="https://www.open-contracting.org/es/2023/10/04/credere-llega-a-colombia-para-ayudarle-a-las-pymes-a-contratar-con-el-estado/"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="feature-title">
+                  CREDERE llega a Colombia para ayudarle a las Pymes a contratar con el Estado
+                </a>
+                <span className="feature-description">4 de Octubre 2023</span>
+                <span className="feature-description1">Open Contracting Partnership</span>
+              </div>
+            </div>
+          </a>
+          <a
             href="https://www.open-contracting.org/2023/06/06/building-financial-solutions-for-small-businesses-in-public-procurement-lessons-from-bogota/"
             target="_blank"
             rel="noreferrer noopener"
