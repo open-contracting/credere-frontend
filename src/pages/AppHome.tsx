@@ -2,6 +2,8 @@ import useUser from 'src/hooks/useUser';
 import HomeFI from 'src/pages/fi/HomeFI';
 import HomeOCP from 'src/pages/ocp/HomeOCP';
 
+import AboutPage from './AboutPage';
+
 function AppHome() {
   const user = useUser();
 
@@ -9,6 +11,7 @@ function AppHome() {
     <>
       {user?.type === 'OCP' && <HomeOCP />}
       {user?.type === 'FI' && <HomeFI />}
+      {!user && <AboutPage />}
     </>
   );
 }

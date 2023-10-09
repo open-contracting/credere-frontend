@@ -4,7 +4,7 @@ import BaseLayout from 'src/layout/BaseLayout';
 import PublicApplicationLayout from 'src/layout/PublicApplicationLayout';
 import PublicPageLayout from 'src/layout/PublicPageLayout';
 import MuiTheme from 'src/mui-theme';
-import AboutPage from 'src/pages/AboutPage';
+import AppHome from 'src/pages/AppHome';
 import RouterErrorPage from 'src/pages/RouterErrorPage';
 import SelectLanguage from 'src/pages/SelectLanguage';
 import CreatePasswordPage from 'src/pages/auth/CreatePasswordPage';
@@ -69,8 +69,19 @@ const router = createBrowserRouter([
     path: '/',
     element: (
       <PublicPageLayout>
-        <AboutPage />
+        <AppHome />
       </PublicPageLayout>
+    ),
+    errorElement: <RouterErrorPage />,
+  },
+  {
+    path: '/home',
+    element: (
+      <ProtectedRoute>
+        <PageLayout>
+          <AppHome />
+        </PageLayout>
+      </ProtectedRoute>
     ),
     errorElement: <RouterErrorPage />,
   },
