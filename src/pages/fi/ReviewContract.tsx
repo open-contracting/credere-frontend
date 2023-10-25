@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
+import WarnRed from '../../assets/icons/warn-red.svg';
 import { DOCUMENTS_TYPE } from '../../constants';
 import useCompleteApplication from '../../hooks/useCompleteApplication';
 import useDownloadApplication from '../../hooks/useDownloadApplication';
@@ -19,6 +20,7 @@ import { FormCompleteApplicationInput, IBorrowerDocument, completeApplicationSch
 import Button from '../../stories/button/Button';
 import FormInput from '../../stories/form-input/FormInput';
 import LinkButton from '../../stories/link-button/LinkButton';
+import RejectApplicationDialog from './RejectApplicationDialog';
 
 function ReviewContract() {
   const t = useT();
@@ -27,6 +29,7 @@ function ReviewContract() {
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;
   const [idToDownloadApplication, setIdToDownloadApplication] = useState<number | undefined>();
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   const { downloadedApplication, isLoading: isLoadingDownload } = useDownloadApplication(idToDownloadApplication);
 
@@ -43,6 +46,13 @@ function ReviewContract() {
 
   const onDownloadContract = () => {
     setIdToDownload(contract?.id);
+  };
+
+  const onRejectApplication = () => {
+    setOpenDialog(true);
+  };
+  const handleClose = () => {
+    setOpenDialog(false);
   };
 
   useEffect(() => {
@@ -162,14 +172,13 @@ function ReviewContract() {
             type="currency"
             placeholder={t('Credit amount')}
           />
-
           <Text className="mb-4 mt-4">
             {t(
               "Once the contract has been reviewed, mark the application as 'Credit ready' to complete the process in Credere.",
             )}
           </Text>
 
-          <div className="mt-4 md:mb-4 grid grid-cols-1 gap-4 md:flex md:gap-0">
+          <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
             <div>
               <Button primary={false} className="md:mr-4" label={t('Back to home')} onClick={onGoHomeHandler} />
             </div>
@@ -178,6 +187,15 @@ function ReviewContract() {
                 className="md:mr-4"
                 label={t('Credit ready')}
                 type="submit"
+                disabled={isLoading || isLoadingDocument || isLoadingDownload}
+              />
+            </div>
+            <div>
+              <Button
+                className="md:mr-4"
+                label={t('Reject')}
+                icon={WarnRed}
+                onClick={onRejectApplication}
                 disabled={isLoading || isLoadingDocument || isLoadingDownload}
               />
             </div>
@@ -194,6 +212,7 @@ function ReviewContract() {
           </Text>
         </Box>
       </FormProvider>
+      <RejectApplicationDialog open={openDialog} handleClose={handleClose} />
     </div>
   );
 }

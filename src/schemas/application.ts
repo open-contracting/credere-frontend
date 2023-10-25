@@ -382,7 +382,7 @@ export type FormRejectInput = TypeOf<typeof rejectSchema>;
 
 export type RejectApplicationInput = FormRejectInput & PrivateApplicationInput;
 
-const amountSchema = coerce.number().min(1, t('Amount must be greater than 0'));
+const amountSchema = coerce.number();
 export const uploadContractSchema = object({
   contract_amount_submitted: amountSchema,
 });
