@@ -5,12 +5,11 @@ import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 import Text from 'src/stories/text/Text';
 
-import { uploadComplianceFn } from '../api/private';
 import { uploadContractFn, uploadFileFn } from '../api/public';
 import { DOCUMENTS_TYPE } from '../constants';
 import useApplicationContext from '../hooks/useApplicationContext';
 import useSecureApplicationContext from '../hooks/useSecureApplicationContext';
-import { IBorrowerDocument, UploadComplianceInput, UploadContractInput, UploadFileInput } from '../schemas/application';
+import { IBorrowerDocument, UploadContractInput, UploadFileInput } from '../schemas/application';
 import LinkButton from '../stories/link-button/LinkButton';
 import FileUploader from './FileUploader';
 
@@ -70,15 +69,7 @@ export function DocumentField({ label, documentType, secure = false, className, 
 
       try {
         setLoading(true);
-        if (documentType === DOCUMENTS_TYPE.COMPLIANCE_REPORT) {
-          const payload: UploadComplianceInput = {
-            file,
-            id: application?.id,
-          };
-
-          const uploaded = await uploadComplianceFn(payload);
-          setCurrent(uploaded);
-        } else if (documentType === DOCUMENTS_TYPE.SIGNED_CONTRACT) {
+        if (documentType === DOCUMENTS_TYPE.SIGNED_CONTRACT) {
           const payload: UploadContractInput = {
             file,
             uuid: application?.uuid,

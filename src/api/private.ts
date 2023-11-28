@@ -6,7 +6,6 @@ import {
   IApplication,
   IApplicationsListResponse,
   IAward,
-  IBorrowerDocument,
   ICreditProduct,
   ICreditProductBase,
   ICreditProductUpdate,
@@ -18,8 +17,7 @@ import {
   IUpdateBorrower,
   IVerifyDocument,
   PaginationInput,
-  RejectApplicationInput,
-  UploadComplianceInput,
+  RejectApplicationInput
 } from '../schemas/application';
 import { CreateUserInput, IUser, IUsersListResponse, UpdateUserInput } from '../schemas/auth';
 import { StatisticsFI, StatisticsOCPoptIn, StatisticsParmsInput } from '../schemas/statitics';
@@ -157,11 +155,6 @@ export const emailToSME = async (emailToSMEPayload: EmailToSMEInput) => {
 export const approveApplicationFn = async (approvePayload: ApproveApplicationInput) => {
   const { application_id, ...payload } = approvePayload;
   const response = await authApi.post<IApplication>(`applications/${application_id}/approve-application`, payload);
-  return response.data;
-};
-
-export const uploadComplianceFn = async (payload: UploadComplianceInput) => {
-  const response = await authApi.postForm<IBorrowerDocument>(`applications/${payload.id}/upload-compliance`, payload);
   return response.data;
 };
 

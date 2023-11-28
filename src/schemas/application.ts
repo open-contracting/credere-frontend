@@ -291,11 +291,6 @@ export interface UploadFileInput {
   uuid: string;
 }
 
-export interface UploadComplianceInput {
-  id: number;
-  file: File;
-}
-
 export interface UploadContractInput {
   file: File;
   uuid: string;
