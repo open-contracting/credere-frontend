@@ -16,13 +16,8 @@ export const signUpUserFn = async (payload: RegisterInput) => {
   return response.data;
 };
 
-export const loginUserFn = async (payload: LoginInput) => {
-  const response = await authApi.post<ILoginResponse>('users/login', payload);
-  return response.data;
-};
-
 export const loginMFAUserFn = async (payload: LoginInput) => {
-  const response = await authApi.post<ILoginResponse>('users/login-mfa', payload);
+  const response = await authApi.post<ILoginResponse>('users/login', payload);
   return response.data;
 };
 

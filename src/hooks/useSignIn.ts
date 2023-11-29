@@ -42,6 +42,10 @@ export default function useSignIn(): IUseSignIn {
               variant: 'error',
             });
           }
+        } else if (axios.isAxiosError(error) && error.response && error.response.status === 404) {
+          enqueueSnackbar(t('The user does not exist'), {
+            variant: 'error',
+          });
         } else {
           enqueueSnackbar(t('Error on sign in. {error}', { error }), {
             variant: 'error',
