@@ -17,7 +17,7 @@ import {
   IUpdateBorrower,
   IVerifyDocument,
   PaginationInput,
-  RejectApplicationInput
+  RejectApplicationInput,
 } from '../schemas/application';
 import { CreateUserInput, IUser, IUsersListResponse, UpdateUserInput } from '../schemas/auth';
 import { StatisticsFI, StatisticsOCPoptIn, StatisticsParmsInput } from '../schemas/statitics';

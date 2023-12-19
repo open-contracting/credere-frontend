@@ -62,7 +62,7 @@ export default function SecureApplicationLayout() {
         } else if (application.status === APPLICATION_STATUS.REJECTED) {
           if (lastSegment !== 'stage-five-rejected') navigate('./stage-five-rejected');
         }
-        if (lastSegment === 'stage-four') refetch();
+        refetch();
       }
     }
   }, [data, navigate, location, refetch]);
