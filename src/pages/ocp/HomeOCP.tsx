@@ -6,19 +6,19 @@ import { Link } from 'react-router-dom';
 import Button from 'src/stories/button/Button';
 import Title from 'src/stories/title/Title';
 
-import { ChartBar, ChartPie } from '../../components/Charts';
+import { ChartBar, ChartMultipleBar, ChartPie } from '../../components/Charts';
 import LendersButtonGroup from '../../components/LendersButtonGroup';
-import { STATISTICS_DATE_FILTER, STATISTICS_DATE_FILTER_OPTIONS } from '../../constants';
+import { MSME_TYPES, STATISTICS_DATE_FILTER, STATISTICS_DATE_FILTER_OPTIONS } from '../../constants';
 import CURRENCY_FORMAT_OPTIONS from '../../constants/intl';
 import useGetStatisticsOCP from '../../hooks/useGetStatisticsOCP';
 import useGetStatisticsOCPoptIn from '../../hooks/useGetStatisticsOCPoptIn';
 import { DECLINE_FEEDBACK_NAMES } from '../../schemas/application';
-import { ChartData } from '../../schemas/statitics';
+import { ChartData, GENEDER_NAMES, STATUS_GROUPS } from '../../schemas/statitics';
 import DashboardChartContainer from '../../stories/dashboard/DashboardChartContainer';
 import DashboardItemContainer from '../../stories/dashboard/DashboardItemContainer';
 import { DatePicker, Input } from '../../stories/form-input/FormInput';
 import Loader from '../../stories/loader/Loader';
-import { formatCurrency, renderSector } from '../../util';
+import { formatCurrency, renderSector, renderSize } from '../../util';
 
 export function HomeOCP() {
   const t = useT();
@@ -103,16 +103,111 @@ export function HomeOCP() {
                 value={data.opt_in_stat.opt_in_percentage}
               />
             </div>
+
+            <div className="col-span-2 flex flex-row">
+              <DashboardItemContainer
+                description={t('Unique MSMEs opted into the scheme')}
+                value={data.opt_in_stat.received_count_distinct}
+              />
+              <DashboardItemContainer
+                description={t('Unique MSMEs with submitted applications')}
+                value={data.opt_in_stat.submitted_count_distinct}
+              />
+            </div>
           </div>
-          <div className="grid lg:gap-10 grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1">
-            <div className="col-span-1">
+
+          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+            <div className="col-span-2 flex flex-row">
+              <DashboardItemContainer
+                description={t('Unique MSMEs with approved applications')}
+                value={data.opt_in_stat.approved_count_distinct}
+              />
+
+              <DashboardItemContainer
+                valueClassName="text-[20px]"
+                description={t('Averate amount of credit disbursed')}
+                value={`${CURRENCY_FORMAT_OPTIONS.default.options.currency} ${formatCurrency(
+                  data.opt_in_stat.average_credit_disbursed,
+                  CURRENCY_FORMAT_OPTIONS.default.options.currency,
+                )}`}
+              />
+            </div>
+
+            <div className="col-span-2 flex flex-row">
+              <DashboardItemContainer
+                description={t('Average applications per day')}
+                value={data.opt_in_stat.average_applications_per_day}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+            <div className="col-span-2">
               <DashboardChartContainer label={t('Proportion of MSMEs opting into the scheme by sector')}>
                 <ChartPie data={sectorData} />
               </DashboardChartContainer>
             </div>
-            <div className="col-span-1">
+            <div className="col-span-2">
               <DashboardChartContainer label={t('Breakdown of reasons why MSMEs opted out of the scheme')}>
                 <ChartBar data={rejectedReasonsData} />
+              </DashboardChartContainer>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+            <div className="col-span-2">
+              <DashboardChartContainer label={t('Number of applications by gender')}>
+                <ChartMultipleBar
+                  series={[
+                    data.opt_in_stat.received_count_by_gender,
+                    data.opt_in_stat.submitted_count_by_gender,
+                    data.opt_in_stat.approved_count_by_gender,
+                  ]}
+                  dataKeys={Object.keys(GENEDER_NAMES)}
+                  seriesNames={Object.keys(STATUS_GROUPS)}
+                />
+              </DashboardChartContainer>
+            </div>
+            <div className="col-span-2">
+              <DashboardChartContainer label={t('Unique MSMEs count by gender')}>
+                <ChartMultipleBar
+                  series={[
+                    data.opt_in_stat.received_count_distinct_by_gender,
+                    data.opt_in_stat.submitted_count_distinct_by_gender,
+                    data.opt_in_stat.approved_count_distinct_by_gender,
+                  ]}
+                  dataKeys={Object.keys(GENEDER_NAMES)}
+                  seriesNames={Object.keys(STATUS_GROUPS)}
+                />
+              </DashboardChartContainer>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+            <div className="col-span-2">
+              <DashboardChartContainer label={t('Number of applications by size')}>
+                <ChartMultipleBar
+                  series={[
+                    data.opt_in_stat.received_count_by_size,
+                    data.opt_in_stat.submitted_count_by_size,
+                    data.opt_in_stat.approved_count_by_size,
+                  ]}
+                  dataKeys={Object.keys(MSME_TYPES)}
+                  seriesNames={Object.keys(STATUS_GROUPS)}
+                  labelMapper={renderSize}
+                />
+              </DashboardChartContainer>
+            </div>
+            <div className="col-span-2">
+              <DashboardChartContainer label={t('Unique MSMEs count by size')}>
+                <ChartMultipleBar
+                  series={[
+                    data.opt_in_stat.received_count_distinct_by_size,
+                    data.opt_in_stat.submitted_count_distinct_by_size,
+                    data.opt_in_stat.approved_count_distinct_by_size,
+                  ]}
+                  dataKeys={Object.keys(MSME_TYPES)}
+                  seriesNames={Object.keys(STATUS_GROUPS)}
+                  labelMapper={renderSize}
+                />
               </DashboardChartContainer>
             </div>
           </div>
