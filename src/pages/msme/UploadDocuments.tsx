@@ -16,8 +16,9 @@ import NeedHelpComponent from '../../components/NeedHelpComponent';
 import { APPLICATION_STATUS, DOCUMENTS_TYPE } from '../../constants';
 import useApplicationContext from '../../hooks/useApplicationContext';
 import useChangeEmail from '../../hooks/useChangeEmail';
+import useSelectCreditProduct from '../../hooks/useSelectCreditProduct';
 import useSubmitAdditionalData from '../../hooks/useSubmitAdditionalData';
-import { changeEmailSchema, FormChangeEmailInput } from '../../schemas/application';
+import { FormChangeEmailInput, changeEmailSchema } from '../../schemas/application';
 import Button from '../../stories/button/Button';
 import FormInput from '../../stories/form-input/FormInput';
 import LinkButton from '../../stories/link-button/LinkButton';
@@ -28,6 +29,8 @@ function UploadDocuments() {
   const [editEmail, setEditEmail] = useState<boolean>(false);
   const { isLoading: isLoadingChangeEmail, changeEmailMutation, data } = useChangeEmail();
   const { isLoading: isLoadingAdditionalData, submitAdditionalDataMutation } = useSubmitAdditionalData();
+  const { rollbackConfirmCreditProductMutation, isLoading: isLoadingRollback } = useSelectCreditProduct();
+
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data?.application;
   const [uploadState, setUploadState] = useState<{ [key: string]: boolean }>({});
@@ -36,6 +39,10 @@ function UploadDocuments() {
     () => applicationContext.state.data?.creditProduct.required_document_types || {},
     [applicationContext.state.data?.creditProduct.required_document_types],
   );
+
+  const onBackHandler = () => {
+    rollbackConfirmCreditProductMutation({ uuid: applicationContext.state.data?.application.uuid });
+  };
 
   const allUploaded = useMemo(
     () =>
@@ -194,9 +201,11 @@ function UploadDocuments() {
             </Box>
           </FormProvider>
           <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
-            <div>
-              <Button className="md:mr-4" label={t('Back')} />
-            </div>
+            {applicationContext.state.data?.application.status !== APPLICATION_STATUS.INFORMATION_REQUESTED && (
+              <div>
+                <Button className="md:mr-4" label={t('Back')} onClick={onBackHandler} disabled={isLoadingRollback} />
+              </div>
+            )}
 
             <div>
               <Button
