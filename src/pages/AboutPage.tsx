@@ -265,7 +265,7 @@ function About() {
                 </div>
                 <span className="footer-header">Contacto</span>
               </div>
-              <p className="footer-text">engage@open-contracting.org</p>
+              <p className="footer-text">credere@open-contracting.org</p>
               <p className="footer-text1">Open Contracting Partnership</p>
               <p className="footer-text2">1100 13th Street NW, Suite 800</p>
               <p className="footer-text3">20005, Washington, D.C., USA</p>
