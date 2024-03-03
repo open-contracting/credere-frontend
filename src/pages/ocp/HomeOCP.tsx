@@ -1,6 +1,7 @@
 import { Container, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { useT } from '@transifex/react';
 import dayjs, { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'src/stories/button/Button';
@@ -8,7 +9,7 @@ import Title from 'src/stories/title/Title';
 
 import { ChartBar, ChartMultipleBar, ChartPie } from '../../components/Charts';
 import LendersButtonGroup from '../../components/LendersButtonGroup';
-import { MSME_TYPES, STATISTICS_DATE_FILTER, STATISTICS_DATE_FILTER_OPTIONS } from '../../constants';
+import { MSME_TYPES, MSME_TYPES_NAMES, STATISTICS_DATE_FILTER, STATISTICS_DATE_FILTER_OPTIONS } from '../../constants';
 import CURRENCY_FORMAT_OPTIONS from '../../constants/intl';
 import useGetStatisticsOCP from '../../hooks/useGetStatisticsOCP';
 import useGetStatisticsOCPoptIn from '../../hooks/useGetStatisticsOCPoptIn';
@@ -18,7 +19,7 @@ import DashboardChartContainer from '../../stories/dashboard/DashboardChartConta
 import DashboardItemContainer from '../../stories/dashboard/DashboardItemContainer';
 import { DatePicker, Input } from '../../stories/form-input/FormInput';
 import Loader from '../../stories/loader/Loader';
-import { formatCurrency, renderSector, renderSize } from '../../util';
+import { formatCurrency, formatDateForFileName, renderSector, renderSize } from '../../util';
 
 export function HomeOCP() {
   const t = useT();
@@ -26,6 +27,10 @@ export function HomeOCP() {
 
   const [sectorData, setSectorData] = useState<ChartData[]>([]);
   const [rejectedReasonsData, setRejectedReasonsData] = useState<ChartData[]>([]);
+
+  const [donwloadingCSV, setDownloadingCSV] = useState<boolean>(false);
+
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     const sectorDataArray: ChartData[] = [];
@@ -69,6 +74,71 @@ export function HomeOCP() {
     finalDate,
     lenderId,
   );
+
+  const downloadCSV = () => {
+    setDownloadingCSV(true);
+    if (data) {
+      const csvData = [
+        [t('Metric'), t('Value')],
+        [t('MSMEs opted into the scheme'), data.opt_in_stat.opt_in_query_count],
+        [t('MSMEs contacted opted into the scheme'), `${data.opt_in_stat.opt_in_percentage}%`],
+        [t('Unique MSMEs opted into the scheme'), data.opt_in_stat.received_count_distinct],
+        [t('Unique MSMEs with submitted applications'), data.opt_in_stat.submitted_count_distinct],
+        [t('Unique MSMEs with approved applications'), data.opt_in_stat.approved_count_distinct],
+        [
+          t('Averate amount of credit disbursed'),
+          `"${CURRENCY_FORMAT_OPTIONS.default.options.currency} ${formatCurrency(
+            data.opt_in_stat.average_credit_disbursed,
+            CURRENCY_FORMAT_OPTIONS.default.options.currency,
+          )}"`,
+        ],
+        [t('Average applications per day'), data.opt_in_stat.average_applications_per_day],
+        [t('Proportion of MSMEs opting into the scheme by sector'), ''],
+        ...sectorData.map((row) => [t(row.name), row.value]),
+        [t('Breakdown of reasons why MSMEs opted out of the scheme'), ''],
+        ...rejectedReasonsData.map((row) => [t(row.name), row.value]),
+        [t('Number of applications recieved by gender'), ''],
+        ...data.opt_in_stat.received_count_by_gender.map((row) => [t(row.name), row.value]),
+        [t('Number of applications submitted by gender'), ''],
+        ...data.opt_in_stat.submitted_count_by_gender.map((row) => [t(row.name), row.value]),
+        [t('Number of applications approved by gender'), ''],
+        ...data.opt_in_stat.approved_count_by_gender.map((row) => [t(row.name), row.value]),
+        [t('Unique MSMEs count from recieved applications by gender'), ''],
+        ...data.opt_in_stat.received_count_distinct_by_gender.map((row) => [t(row.name), row.value]),
+        [t('Unique MSMEs count from submitted applications by gender'), ''],
+        ...data.opt_in_stat.submitted_count_distinct_by_gender.map((row) => [t(row.name), row.value]),
+        [t('Unique MSMEs count from approved applications by gender'), ''],
+        ...data.opt_in_stat.approved_count_distinct_by_gender.map((row) => [t(row.name), row.value]),
+        [t('Number of applications recieved by size'), ''],
+        ...data.opt_in_stat.received_count_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
+        [t('Number of applications submitted by size'), ''],
+        ...data.opt_in_stat.submitted_count_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
+        [t('Number of applications approved by size'), ''],
+        ...data.opt_in_stat.approved_count_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
+        [t('Unique MSMEs count from recieved applications by size'), ''],
+        ...data.opt_in_stat.received_count_distinct_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
+        [t('Unique MSMEs count from submitted applications by size'), ''],
+        ...data.opt_in_stat.submitted_count_distinct_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
+        [t('Unique MSMEs count from approved applications by size'), ''],
+        ...data.opt_in_stat.approved_count_distinct_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
+      ];
+
+      const csv = csvData.map((row) => row.join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+
+      const fileName = `statistics_ocp-${formatDateForFileName(new Date())}.csv`;
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+    } else {
+      enqueueSnackbar(t('Error downloading CSV data'), {
+        variant: 'error',
+      });
+    }
+    setDownloadingCSV(false);
+  };
 
   return (
     <>
@@ -209,6 +279,11 @@ export function HomeOCP() {
                   labelMapper={renderSize}
                 />
               </DashboardChartContainer>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+            <div className="col-span-2">
+              <Button label={t('Download CSV')} onClick={downloadCSV} disabled={isLoading || donwloadingCSV} />
             </div>
           </div>
         </Container>
