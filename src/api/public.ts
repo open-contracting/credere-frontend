@@ -66,6 +66,11 @@ export const confirmCreditProductFn = async (payload: ApplicationBaseInput) => {
   return response.data;
 };
 
+export const rollbackConfirmCreditProductFn = async (payload: ApplicationBaseInput) => {
+  const response = await publicApi.post<IApplicationResponse>('applications/rollback-confirm-credit-product', payload);
+  return response.data;
+};
+
 export const uploadFileFn = async (payload: UploadFileInput) => {
   const response = await publicApi.postForm<IBorrowerDocument>('applications/upload-document', payload);
   return response.data;
