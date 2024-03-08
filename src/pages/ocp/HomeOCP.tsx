@@ -1,24 +1,25 @@
 import { Container, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { useT } from '@transifex/react';
 import dayjs, { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'src/stories/button/Button';
 import Title from 'src/stories/title/Title';
 
-import { ChartBar, ChartPie } from '../../components/Charts';
+import { ChartBar, ChartMultipleBar, ChartPie } from '../../components/Charts';
 import LendersButtonGroup from '../../components/LendersButtonGroup';
-import { STATISTICS_DATE_FILTER, STATISTICS_DATE_FILTER_OPTIONS } from '../../constants';
+import { MSME_TYPES, MSME_TYPES_NAMES, STATISTICS_DATE_FILTER, STATISTICS_DATE_FILTER_OPTIONS } from '../../constants';
 import CURRENCY_FORMAT_OPTIONS from '../../constants/intl';
 import useGetStatisticsOCP from '../../hooks/useGetStatisticsOCP';
 import useGetStatisticsOCPoptIn from '../../hooks/useGetStatisticsOCPoptIn';
 import { DECLINE_FEEDBACK_NAMES } from '../../schemas/application';
-import { ChartData } from '../../schemas/statitics';
+import { ChartData, GENEDER_NAMES, STATUS_GROUPS } from '../../schemas/statitics';
 import DashboardChartContainer from '../../stories/dashboard/DashboardChartContainer';
 import DashboardItemContainer from '../../stories/dashboard/DashboardItemContainer';
 import { DatePicker, Input } from '../../stories/form-input/FormInput';
 import Loader from '../../stories/loader/Loader';
-import { formatCurrency, renderSector } from '../../util';
+import { formatCurrency, formatDateForFileName, renderSector, renderSize } from '../../util';
 
 export function HomeOCP() {
   const t = useT();
@@ -26,6 +27,10 @@ export function HomeOCP() {
 
   const [sectorData, setSectorData] = useState<ChartData[]>([]);
   const [rejectedReasonsData, setRejectedReasonsData] = useState<ChartData[]>([]);
+
+  const [donwloadingCSV, setDownloadingCSV] = useState<boolean>(false);
+
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     const sectorDataArray: ChartData[] = [];
@@ -70,6 +75,71 @@ export function HomeOCP() {
     lenderId,
   );
 
+  const downloadCSV = () => {
+    setDownloadingCSV(true);
+    if (data) {
+      const csvData = [
+        [t('Metric'), t('Value')],
+        [t('MSMEs opted into the scheme'), data.opt_in_stat.opt_in_query_count],
+        [t('MSMEs contacted opted into the scheme'), `${data.opt_in_stat.opt_in_percentage}%`],
+        [t('Unique MSMEs opted into the scheme'), data.opt_in_stat.received_count_distinct],
+        [t('Unique MSMEs with submitted applications'), data.opt_in_stat.submitted_count_distinct],
+        [t('Unique MSMEs with approved applications'), data.opt_in_stat.approved_count_distinct],
+        [
+          t('Averate amount of credit disbursed'),
+          `"${CURRENCY_FORMAT_OPTIONS.default.options.currency} ${formatCurrency(
+            data.opt_in_stat.average_credit_disbursed,
+            CURRENCY_FORMAT_OPTIONS.default.options.currency,
+          )}"`,
+        ],
+        [t('Average applications per day'), data.opt_in_stat.average_applications_per_day],
+        [t('Proportion of MSMEs opting into the scheme by sector'), ''],
+        ...sectorData.map((row) => [t(row.name), row.value]),
+        [t('Breakdown of reasons why MSMEs opted out of the scheme'), ''],
+        ...rejectedReasonsData.map((row) => [t(row.name), row.value]),
+        [t('Number of applications recieved by gender'), ''],
+        ...data.opt_in_stat.received_count_by_gender.map((row) => [t(row.name), row.value]),
+        [t('Number of applications submitted by gender'), ''],
+        ...data.opt_in_stat.submitted_count_by_gender.map((row) => [t(row.name), row.value]),
+        [t('Number of applications approved by gender'), ''],
+        ...data.opt_in_stat.approved_count_by_gender.map((row) => [t(row.name), row.value]),
+        [t('Unique MSMEs count from recieved applications by gender'), ''],
+        ...data.opt_in_stat.received_count_distinct_by_gender.map((row) => [t(row.name), row.value]),
+        [t('Unique MSMEs count from submitted applications by gender'), ''],
+        ...data.opt_in_stat.submitted_count_distinct_by_gender.map((row) => [t(row.name), row.value]),
+        [t('Unique MSMEs count from approved applications by gender'), ''],
+        ...data.opt_in_stat.approved_count_distinct_by_gender.map((row) => [t(row.name), row.value]),
+        [t('Number of applications recieved by size'), ''],
+        ...data.opt_in_stat.received_count_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
+        [t('Number of applications submitted by size'), ''],
+        ...data.opt_in_stat.submitted_count_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
+        [t('Number of applications approved by size'), ''],
+        ...data.opt_in_stat.approved_count_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
+        [t('Unique MSMEs count from recieved applications by size'), ''],
+        ...data.opt_in_stat.received_count_distinct_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
+        [t('Unique MSMEs count from submitted applications by size'), ''],
+        ...data.opt_in_stat.submitted_count_distinct_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
+        [t('Unique MSMEs count from approved applications by size'), ''],
+        ...data.opt_in_stat.approved_count_distinct_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
+      ];
+
+      const csv = csvData.map((row) => row.join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+
+      const fileName = `statistics_ocp-${formatDateForFileName(new Date())}.csv`;
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+    } else {
+      enqueueSnackbar(t('Error downloading CSV data'), {
+        variant: 'error',
+      });
+    }
+    setDownloadingCSV(false);
+  };
+
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-3 lg:mb-8 md:mb-8 mb-4 md:grid-cols-2 gap-4 ">
@@ -103,17 +173,117 @@ export function HomeOCP() {
                 value={data.opt_in_stat.opt_in_percentage}
               />
             </div>
+
+            <div className="col-span-2 flex flex-row">
+              <DashboardItemContainer
+                description={t('Unique MSMEs opted into the scheme')}
+                value={data.opt_in_stat.received_count_distinct}
+              />
+              <DashboardItemContainer
+                description={t('Unique MSMEs with submitted applications')}
+                value={data.opt_in_stat.submitted_count_distinct}
+              />
+            </div>
           </div>
-          <div className="grid lg:gap-10 grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1">
-            <div className="col-span-1">
+
+          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+            <div className="col-span-2 flex flex-row">
+              <DashboardItemContainer
+                description={t('Unique MSMEs with approved applications')}
+                value={data.opt_in_stat.approved_count_distinct}
+              />
+
+              <DashboardItemContainer
+                valueClassName="text-[20px]"
+                description={t('Averate amount of credit disbursed')}
+                value={`${CURRENCY_FORMAT_OPTIONS.default.options.currency} ${formatCurrency(
+                  data.opt_in_stat.average_credit_disbursed,
+                  CURRENCY_FORMAT_OPTIONS.default.options.currency,
+                )}`}
+              />
+            </div>
+
+            <div className="col-span-2 flex flex-row">
+              <DashboardItemContainer
+                description={t('Average applications per day')}
+                value={data.opt_in_stat.average_applications_per_day}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+            <div className="col-span-2">
               <DashboardChartContainer label={t('Proportion of MSMEs opting into the scheme by sector')}>
                 <ChartPie data={sectorData} />
               </DashboardChartContainer>
             </div>
-            <div className="col-span-1">
+            <div className="col-span-2">
               <DashboardChartContainer label={t('Breakdown of reasons why MSMEs opted out of the scheme')}>
                 <ChartBar data={rejectedReasonsData} />
               </DashboardChartContainer>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+            <div className="col-span-2">
+              <DashboardChartContainer label={t('Number of applications by gender')}>
+                <ChartMultipleBar
+                  series={[
+                    data.opt_in_stat.received_count_by_gender,
+                    data.opt_in_stat.submitted_count_by_gender,
+                    data.opt_in_stat.approved_count_by_gender,
+                  ]}
+                  dataKeys={Object.keys(GENEDER_NAMES)}
+                  seriesNames={Object.keys(STATUS_GROUPS)}
+                />
+              </DashboardChartContainer>
+            </div>
+            <div className="col-span-2">
+              <DashboardChartContainer label={t('Unique MSMEs count by gender')}>
+                <ChartMultipleBar
+                  series={[
+                    data.opt_in_stat.received_count_distinct_by_gender,
+                    data.opt_in_stat.submitted_count_distinct_by_gender,
+                    data.opt_in_stat.approved_count_distinct_by_gender,
+                  ]}
+                  dataKeys={Object.keys(GENEDER_NAMES)}
+                  seriesNames={Object.keys(STATUS_GROUPS)}
+                />
+              </DashboardChartContainer>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+            <div className="col-span-2">
+              <DashboardChartContainer label={t('Number of applications by size')}>
+                <ChartMultipleBar
+                  series={[
+                    data.opt_in_stat.received_count_by_size,
+                    data.opt_in_stat.submitted_count_by_size,
+                    data.opt_in_stat.approved_count_by_size,
+                  ]}
+                  dataKeys={Object.keys(MSME_TYPES)}
+                  seriesNames={Object.keys(STATUS_GROUPS)}
+                  labelMapper={renderSize}
+                />
+              </DashboardChartContainer>
+            </div>
+            <div className="col-span-2">
+              <DashboardChartContainer label={t('Unique MSMEs count by size')}>
+                <ChartMultipleBar
+                  series={[
+                    data.opt_in_stat.received_count_distinct_by_size,
+                    data.opt_in_stat.submitted_count_distinct_by_size,
+                    data.opt_in_stat.approved_count_distinct_by_size,
+                  ]}
+                  dataKeys={Object.keys(MSME_TYPES)}
+                  seriesNames={Object.keys(STATUS_GROUPS)}
+                  labelMapper={renderSize}
+                />
+              </DashboardChartContainer>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+            <div className="col-span-2">
+              <Button label={t('Download CSV')} onClick={downloadCSV} disabled={isLoading || donwloadingCSV} />
             </div>
           </div>
         </Container>

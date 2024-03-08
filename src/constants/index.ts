@@ -153,7 +153,7 @@ export enum DOCUMENTS_TYPE {
   SIGNED_CONTRACT = 'SIGNED_CONTRACT',
   SHAREHOLDER_COMPOSITION = 'SHAREHOLDER_COMPOSITION',
   CHAMBER_OF_COMMERCE = 'CHAMBER_OF_COMMERCE',
-  THREE_LAST_BANK_STATEMENT = 'THREE_LAST_BANK_STATEMENT'
+  THREE_LAST_BANK_STATEMENT = 'THREE_LAST_BANK_STATEMENT',
 }
 
 // eslint-disable-next-line no-shadow
@@ -185,6 +185,7 @@ export const MSME_TYPES_NAMES: { [key: string]: string } = {
   [MSME_TYPES.MICRO]: t('0 to 10'),
   [MSME_TYPES.SMALL]: t('11 to 50'),
   [MSME_TYPES.MEDIUM]: t('51 to 200'),
+  [MSME_TYPES.NOT_INFORMED]: t('Not informed'),
 };
 
 export const MSME_TYPES_OPTIONS: FormSelectOption[] = [
@@ -233,7 +234,9 @@ export const SECTOR_TYPES: FormSelectOption[] = [
   },
   {
     value: 'agua',
-    label: t('Distribución de agua; evacuación y tratamiento de aguas residuales, gestión de desechos y actividades de saneamiento ambiental'),
+    label: t(
+      'Distribución de agua; evacuación y tratamiento de aguas residuales, gestión de desechos y actividades de saneamiento ambiental',
+    ),
   },
   {
     value: 'construccion',
@@ -289,13 +292,14 @@ export const SECTOR_TYPES: FormSelectOption[] = [
   },
   {
     value: 'actividades_hogares',
-    label: t('Actividades de los hogares individuales en calidad de empleadores; actividades no diferenciadas de los hogares individuales como productores de bienes yservicios para uso propio'),
+    label: t(
+      'Actividades de los hogares individuales en calidad de empleadores; actividades no diferenciadas de los hogares individuales como productores de bienes yservicios para uso propio',
+    ),
   },
   {
     value: 'actividades_organizaciones_extraterritoriales',
     label: t('Actividades de organizaciones y entidades extraterritoriales'),
   },
-
 ];
 
 // eslint-disable-next-line no-shadow

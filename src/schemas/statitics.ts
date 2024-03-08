@@ -1,3 +1,5 @@
+import { t } from '@transifex/native';
+
 export type ChartData = {
   name: string;
   value: number;
@@ -24,6 +26,23 @@ export interface OptInStat {
   sector_statistics: ChartData[];
   rejected_reasons_count_by_reason: ChartData[];
   fis_choosen_by_msme: ChartData[];
+  received_count_by_gender: ChartData[];
+  submitted_count_by_gender: ChartData[];
+  approved_count_by_gender: ChartData[];
+  received_count_by_size: ChartData[];
+  submitted_count_by_size: ChartData[];
+  approved_count_by_size: ChartData[];
+  received_count_distinct_by_gender: ChartData[];
+  submitted_count_distinct_by_gender: ChartData[];
+  approved_count_distinct_by_gender: ChartData[];
+  received_count_distinct_by_size: ChartData[];
+  submitted_count_distinct_by_size: ChartData[];
+  approved_count_distinct_by_size: ChartData[];
+  average_credit_disbursed: number;
+  received_count_distinct: number;
+  submitted_count_distinct: number;
+  approved_count_distinct: number;
+  average_applications_per_day: number;
 }
 
 export interface StatisticsFI {
@@ -39,4 +58,26 @@ export interface StatisticsParmsInput {
   initial_date?: string;
   final_date?: string;
   lender_id?: number;
+}
+
+// eslint-disable-next-line no-shadow
+export enum GENDERS {
+  Hombre = 'Hombre',
+  Mujer = 'Mujer',
+  'No definido' = 'No definido',
+  Otro = 'Otro',
+}
+
+export const GENEDER_NAMES: { [key: string]: string } = {
+  [GENDERS.Hombre]: t('Hombre'),
+  [GENDERS.Mujer]: t('Mujer'),
+  [GENDERS['No definido']]: t('No definido'),
+  [GENDERS.Otro]: t('Otro'),
+};
+
+// eslint-disable-next-line no-shadow
+export enum STATUS_GROUPS {
+  Accepted = 'Accepted',
+  Submitted = 'Submitted',
+  Approved = 'Approved',
 }

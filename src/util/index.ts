@@ -22,6 +22,14 @@ const dateFormatOptions: Intl.DateTimeFormatOptions = {
   year: 'numeric', // Display full year
 };
 
+const dateFileNameFormatOptions: Intl.DateTimeFormatOptions = {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  timeZone: 'UTC',
+};
+
+export const formatDateForFileName = (date: Date) => date.toLocaleDateString('en-US', dateFileNameFormatOptions);
 export const formatLocalizedDate = (locale: string, date: Date) => date.toLocaleDateString(locale, dateFormatOptions);
 
 export const formatLocalizedDateFromString = (locale: string, date: string | null | undefined) => {

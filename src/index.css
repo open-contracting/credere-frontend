@@ -67,3 +67,11 @@ body * {
 body {
   background-color: 'bg-background';
 }
+
+.recharts-legend-item-text {
+  color: theme('colors.darkest') !important;
+}
+
+.recharts-default-legend {
+  padding-top: 10px !important;
+}
