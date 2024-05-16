@@ -12,7 +12,7 @@ A tool that facilitates the participation of Micro, Small, and Medium businesses
 To download the repo dependencies run
 
 ```
-yarn install
+npm install
 ```
 
 ## ENV Variables
@@ -26,16 +26,16 @@ For VS Code Intellisense to recognize the new variables declare them in the file
 
 These are the commands available in _package.json_
 
-| Commnad                | Description                                                                                                   |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `yarn dev`             | Runs dev server with the HMR locally on port `3000`                                                           |
-| `yarn lint`            | Runs eslint to find errors                                                                                    |
-| `yarn lint-fix`        | Runs eslint to find errors and auto-fix the ones it can                                                       |
-| `yarn build`           | Builds optimized app package in the dist directory                                                            |
-| `yarn preview`         | Runs server using the dist folder from a build                                                                |
-| `yarn test`            | Runs tests                                                                                                    |
-| `yarn storybook`       | Runs a Storybook locally on port `6006`                                                                       |
-| `yarn build-storybook` | Builds static app with [a Storybook's content](https://storybook.js.org/docs/react/sharing/publish-storybook) |
+| Commnad                   | Description                                                                                                   |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `npm run dev`             | Runs dev server with the HMR locally on port `3000`                                                           |
+| `npm run lint`            | Runs eslint to find errors                                                                                    |
+| `npm run lint-fix`        | Runs eslint to find errors and auto-fix the ones it can                                                       |
+| `npm run build`           | Builds optimized app package in the dist directory                                                            |
+| `npm run preview`         | Runs server using the dist folder from a build                                                                |
+| `npm run test`            | Runs tests                                                                                                    |
+| `npm run storybook`       | Runs a Storybook locally on port `6006`                                                                       |
+| `npm run build-storybook` | Builds static app with [a Storybook's content](https://storybook.js.org/docs/react/sharing/publish-storybook) |
 
 ## Integrating with VSCode
 

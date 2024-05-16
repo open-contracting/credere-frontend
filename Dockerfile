@@ -2,12 +2,12 @@ FROM node:20.6 as build-stage
 
 WORKDIR /workdir
 
-COPY package.json yarn.lock ./
-RUN yarn install
+COPY package*.json ./
+RUN npm install
 
 COPY . .
 
-RUN yarn build
+RUN npm run build
 
 FROM nginxinc/nginx-unprivileged:latest as production-stage
 USER root
