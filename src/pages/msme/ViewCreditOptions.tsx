@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { zodResolver } from '@hookform/resolvers/zod';
 import { Box } from '@mui/material';
 import { useT } from '@transifex/react';
 import { debounce } from 'lodash';
@@ -22,12 +21,11 @@ import {
   ICreditProduct,
   RepaymentTermsInput,
   SelectCreditProductInput,
-  repaymentTermsSchema,
 } from '../../schemas/application';
 import FormInput from '../../stories/form-input/FormInput';
 import FormSelect from '../../stories/form-select/FormSelect';
 import RadioGroup from '../../stories/radio-group/RadioGroup';
-import { addMonthsToDate, formatCurrency, isDateBeforeMonths } from '../../util';
+import { formatCurrency } from '../../util';
 
 const DEBOUNCE_TIME = 1;
 function ViewCreditOptions() {
@@ -53,26 +51,9 @@ function ViewCreditOptions() {
   } = methodsMainForm;
 
   const methodsLoanForm = useForm<RepaymentTermsInput>({
-    resolver: zodResolver(
-      repaymentTermsSchema.refine(
-        (formData) =>
-          !applicationContext.state.data?.award.contractperiod_startdate ||
-          isDateBeforeMonths(
-            formData.payment_start_date,
-            applicationContext.state.data?.award.contractperiod_startdate,
-            3,
-          ),
-        {
-          path: ['payment_start_date'],
-          message: t('Start date should be before {max_date}', {
-            max_date: addMonthsToDate(applicationContext.state.data?.award.contractperiod_startdate, 3),
-          }),
-        },
-      ),
-    ),
     defaultValues: {
-      repayment_years: applicationContext.state.data?.application.calculator_data.repayment_years || undefined,
-      repayment_months: applicationContext.state.data?.application.calculator_data.repayment_months || undefined,
+      repayment_years: applicationContext.state.data?.application.calculator_data.repayment_years || 0,
+      repayment_months: applicationContext.state.data?.application.calculator_data.repayment_months || 0,
       payment_start_date: applicationContext.state.data?.application.calculator_data.payment_start_date || undefined,
     },
   });
@@ -141,8 +122,8 @@ function ViewCreditOptions() {
           borrower_size: partialFormInput.borrower_size,
           sector: partialFormInput.sector,
           amount_requested: partialFormInput.amount_requested,
-          repayment_years: values.repayment_years,
-          repayment_months: values.repayment_months,
+          repayment_years: values.repayment_years || 0,
+          repayment_months: values.repayment_months || 0,
           payment_start_date: values.payment_start_date,
           uuid: applicationContext.state.data?.application.uuid,
         };
