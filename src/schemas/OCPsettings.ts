@@ -8,11 +8,13 @@ const creditProviderTypeSchema = string().nonempty(t('Provider type is required'
 const microSchema = boolean();
 const smallSchema = boolean();
 const mediumSchema = boolean();
+const bigSchema = boolean();
 
 const preferencesSchema = object({
   MICRO: microSchema,
   SMALL: smallSchema,
   MEDIUM: mediumSchema,
+  BIG: bigSchema,
 }).refine((data) => data.MICRO || data.SMALL || data.MEDIUM, {
   path: [''],
   message: t('You need to check at least one option'),
