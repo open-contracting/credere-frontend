@@ -14,19 +14,19 @@ function TermsAndConditions() {
   return (
     <>
       <Title type="page" label={t('Terms and Conditions')} className="mb-4" />
-      <Text className="text-sm mb-12">{t('Version 1: 26 septiembre de 2023')}</Text>
+      <Text className="text-sm mb-12">{t('Version 2: Julio de 2024')}</Text>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 md:col-span-2 md:mr-10">
           <Title type="subsection" label={t('1. ¿QUÉ ES CREDERE?')} className="mb-4" />
           <Text className="mb-8">
             {t(
-              'Credere es un proyecto desarrollado por Open Contracting Partnership (“OCP”) para facilitar el acceso a crédito a las micro, pequeñas y medianas empresas que que resultan adjudicatarias de contratos con el Estado colombiano (el “Proyecto”). A través del Proyecto, OCP busca ofrecer a las MIPYMES opciones de crédito de varias entidades financieras (las “Entidades Financieras”). Las aplicaciones de crédito serán gestionadas a través de la presente plataforma tecnológica (en adelante “Credere” o la “Herramienta”).',
+              'Credere es un proyecto desarrollado por Open Contracting Partnership (“OCP”) para facilitar el acceso a crédito a las micro, pequeñas y medianas empresas ("MIPYMES"), así como a otras empresas de mayor tamaño, que que resultan adjudicatarias de contratos con el Estado colombiano (el “Proyecto”). A través del Proyecto, OCP busca ofrecer a las empresas opciones de crédito de varias entidades financieras (las “Entidades Financieras”). Las aplicaciones de crédito serán gestionadas a través de la presente plataforma tecnológica (en adelante “Credere” o la “Herramienta”).',
             )}
           </Text>
           <Text className="mb-8">
             {t(
-              'La herramienta cuenta con un sistema automatizado que utiliza datos abiertos para contactar a las MIPYMES adjudicatarias de un contrato público para ofrecer alternativas de productos crediticios. Credere brinda una interfaz que permite a las MIPYMES elegir entre esas alternativas y allegar documentos relevantes para aplicar al producto crediticio de su interés. Una vez las MIPYMES han enviado sus aplicaciones de crédito, la plataforma permite a las Entidades Financieras participantes hacer la revisión documental para surtir el proceso de revisión y aprobación o rechazo del crédito.',
+              'La herramienta cuenta con un sistema automatizado que utiliza datos abiertos para contactar a las empresas adjudicatarias de un contrato público para ofrecer alternativas de productos crediticios. Credere brinda una interfaz que permite a las empresas elegir entre esas alternativas y allegar documentos relevantes para aplicar al producto crediticio de su interés. Una vez las empresas han enviado sus aplicaciones de crédito, la plataforma permite a las Entidades Financieras participantes hacer la revisión documental para surtir el proceso de revisión y aprobación o rechazo del crédito.',
             )}
           </Text>
 
@@ -72,7 +72,7 @@ function TermsAndConditions() {
           <Title type="subsection" label={t('Solicitud de crédito y cargue de documentos: ')} className="mb-8" />
           <Text className="mb-8">
             {t(
-              'La solicitud de crédito iniciará cuando la MIPYME que sea contactada, demuestre interés en conocer más sobre Credere y decida con cuál Entidad Financiera desea aplicar. En ese momento, el Solicitante recibirá un requerimiento para subir algunos documentos indispensables para el estudio de crédito por parte de la Entidad Financiera.',
+              'La solicitud de crédito iniciará cuando la empresa que sea contactada, demuestre interés en conocer más sobre Credere y decida con cuál Entidad Financiera desea aplicar. En ese momento, el Solicitante recibirá un requerimiento para subir algunos documentos indispensables para el estudio de crédito por parte de la Entidad Financiera.',
             )}
           </Text>
           <Title type="subsection" label={t('Estudio de los documentos:')} className="mb-8" />
