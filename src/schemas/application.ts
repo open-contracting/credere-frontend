@@ -195,6 +195,7 @@ export interface ICreditProductBase {
   lower_limit: number;
   upper_limit: number;
   interest_rate: string;
+  procurement_category_to_exclude: string;
   type: string;
   required_document_types: { [key: string]: boolean };
   other_fees_total_amount: number;
