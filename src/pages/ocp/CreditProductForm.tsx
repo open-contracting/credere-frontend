@@ -16,7 +16,7 @@ import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 import { z } from 'zod';
 
-import { getCreditProductFn } from '../../api/private';
+import { getCreditProductFn, getProcurementCategoriesFn } from '../../api/private';
 import {
   BORROWER_TYPE,
   BORROWER_TYPES_NAMES,
@@ -46,6 +46,11 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
     defaultValues: creditProduct || {
       required_document_types: {},
     },
+  });
+
+  const { data: procurementCategories } = useQuery({
+    queryKey: [QUERY_KEYS.procurement_categories],
+    queryFn: async (): Promise<Array<string> | []> => getProcurementCategoriesFn(),
   });
 
   const {
@@ -115,6 +120,13 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
             name="borrower_size"
             options={MSME_TYPES_OPTIONS}
             placeholder={t('Borrower size')}
+          />
+          <FormSelect
+            className="w-3/5"
+            label={t('Select type of procurement category to exclude (if any)')}
+            name="procurement_category_to_exclude"
+            options={procurementCategories || []}
+            placeholder={t('Procurement category to exclude')}
           />
 
           <FormSelect

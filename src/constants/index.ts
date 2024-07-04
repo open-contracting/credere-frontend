@@ -34,6 +34,7 @@ export enum QUERY_KEYS {
   lenders = 'lenders',
   users = 'users',
   credit_product = 'credit_product',
+  procurement_categories = 'procurement_categories',
   downloadDocument = 'downloadDocument',
   downloadApplication = 'downloadApplication',
   awards = 'awards',

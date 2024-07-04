@@ -62,6 +62,7 @@ export const creditProductSchema = object({
       }
     },
   }),
+  procurement_category_to_exclude: string(),
   required_document_types: object({
     [DOCUMENTS_TYPE.INCORPORATION_DOCUMENT]: boolean(),
     [DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT]: boolean(),
