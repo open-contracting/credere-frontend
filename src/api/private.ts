@@ -75,6 +75,11 @@ export const getCreditProductFn = async (id: string) => {
   return response.data;
 };
 
+export const getProcurementCategoriesFn = async () => {
+  const response = await authApi.get<Array<string>>(`procurement-categories`);
+  return response.data;
+};
+
 export const createCreditProductFn = async (payload: ICreditProductBase) => {
   const response = await authApi.post<ICreditProduct>(`lenders/${payload.lender_id}/credit-products`, payload);
   return response.data;
