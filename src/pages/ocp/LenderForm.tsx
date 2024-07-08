@@ -1,7 +1,3 @@
- 
-
- 
-
 /* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box } from '@mui/material';
@@ -11,7 +7,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { lenderSchema, ProviderInput } from 'src/schemas/OCPsettings';
+import { ProviderInput, lenderSchema } from 'src/schemas/OCPsettings';
 import Button from 'src/stories/button/Button';
 import FormInput from 'src/stories/form-input/FormInput';
 import FormSelect from 'src/stories/form-select/FormSelect';
@@ -124,6 +120,15 @@ export function LenderForm({ lender }: LenderFormProps) {
             name="logo_filename"
             big={false}
             placeholder={t('Credit provider logo')}
+          />
+          <FormInput
+            className="w-3/5"
+            label={t(
+              'A default pre-approval message in html format (with a link to their onboarding platform, for example), to be sent in the pre-approved email to the supplier',
+            )}
+            name="default_pre_approval_message"
+            big={false}
+            placeholder={t('Credit provider default pre-approval message')}
           />
           <FormInput
             className="w-3/5"
