@@ -21,20 +21,24 @@ export interface StatisticsKpis {
 }
 
 export interface OptInStat {
+  unique_businesses_contacted_by_credere: number;
   unique_smes_contacted_by_credere: number;
   applications_created: number;
-  accepted_count: number;
+  accepted_count_unique: number;
   accepted_percentage: number;
-  accepted_count_woman: number;
-  approved_count_woman: number;
-  total_credit_disbursed: number;
+  msme_accepted_count_woman: number;
+  msme_approved_count_woman: number;
   approved_count_distinct_micro: number;
+  accepted_count: number;
   approved_count: number;
+  msme_approved_count: number;
   approved_count_distinct_micro_woman: number;
+  msme_submitted_count_woman: number;
   total_credit_disbursed_micro: number;
+  msme_total_credit_disbursed: number;
   sector_statistics: ChartData[];
   rejected_reasons_count_by_reason: ChartData[];
-  fis_chosen_by_msme: ChartData[];
+  fis_chosen_by_supplier: ChartData[];
   accepted_count_by_gender: ChartData[];
   submitted_count_by_gender: ChartData[];
   approved_count_by_gender: ChartData[];
@@ -48,10 +52,11 @@ export interface OptInStat {
   submitted_count_distinct_by_size: ChartData[];
   approved_count_distinct_by_size: ChartData[];
   average_credit_disbursed: number;
-  accepted_count_distinct: number;
-  submitted_count_distinct: number;
-  approved_count_distinct: number;
+  msme_accepted_count_distinct: number;
+  msme_submitted_count_distinct: number;
+  msme_approved_count_distinct: number;
   average_applications_per_day: number;
+  total_credit_disbursed: number;
 }
 
 export interface StatisticsFI {

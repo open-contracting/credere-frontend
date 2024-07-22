@@ -63,7 +63,7 @@ function IntroMsme() {
           </Text>
           <Text className="mb-8">
             {t(
-              'As a micro, small or medium sized business (MSME) that has been awarded a public sector contract, you are eligible to apply for credit using this scheme. ',
+              'As a business that has been awarded a public sector contract, you are eligible to apply for credit using this scheme. ',
             )}
           </Text>
           <Text className="mb-8">

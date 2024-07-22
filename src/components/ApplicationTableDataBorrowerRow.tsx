@@ -77,7 +77,7 @@ export function ApplicationTableDataBorrowerRow({
       <DataTableCell>
         <DataVerificationForm
           name={name}
-          customLabel={withoutVerify ? t('Completed by MSME') : undefined}
+          customLabel={withoutVerify ? t('Completed by business') : undefined}
           value={verified || Boolean(withoutVerify)}
           readonly={readonly || !verifyData}
           verifyData={verifyDataValue}

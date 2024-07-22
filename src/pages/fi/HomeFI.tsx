@@ -20,15 +20,15 @@ export function HomeFI() {
 
   return (
     <>
-      <Title type="page" label={t('Home - Dashboard & MSME Applications')} className="mb-8" />
+      <Title type="page" label={t('Home - Dashboard & business applications')} className="mb-8" />
       <Text className="mb-8">
         {t(
-          'The purpose of Credere is to provide micro, small and medium sized businesses (MSMEs) in Colombia that have been awarded a public sector contract access to credit.',
+          'The purpose of Credere is to provide business in Colombia that have been awarded a public sector contract access to credit.',
         )}
       </Text>
       <Text className="mb-8">
         {t(
-          'Credere has been developed help you review the data from the open contracting process in conjunction with the MSME applications for credit.',
+          'Credere has been developed help you review the data from the open contracting process in conjunction with the business applications for credit.',
         )}
       </Text>
       <Title type="section" label={t('Dashboard')} className="mb-6" />
@@ -122,7 +122,7 @@ export function HomeFI() {
             <div className="col-span-1">
               <DashboardItemContainer
                 color="red"
-                description={t('Application(s) waiting on MSME for information')}
+                description={t('Application(s) waiting on business for information')}
                 value={data.statistics_kpis.applications_waiting_for_information_count}
               />
             </div>
@@ -134,7 +134,7 @@ export function HomeFI() {
           <Loader />
         </Container>
       )}
-      <Title type="section" label={t('MSME applications')} className="mb-6 mt-4" />
+      <Title type="section" label={t('Applications')} className="mb-6 mt-4" />
       <Text className="mb-8">
         {t(
           'Approve applications by selecting the start or continue options. Completed applications are only stored for one week after approval.',

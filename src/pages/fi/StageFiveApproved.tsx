@@ -58,11 +58,11 @@ export function StageFiveApproved() {
       <Title type="section" label={t('Stage 5: Approve')} className="mb-8" />
 
       <Text className="mb-4">
-        {t('The credit application has been approved. The SME will be notified by email shortly.')}
+        {t('The credit application has been approved. The business will be notified by email shortly.')}
       </Text>
       <Text className="mb-8">
         {t(
-          "Once the contract between the MSME and the buyer has been signed the funds can be arranged to be transferred to the MSME's business bank account.",
+          "Once the contract between the business and the buyer has been signed the funds can be arranged to be transferred to the business's business bank account.",
         )}
       </Text>
       <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">

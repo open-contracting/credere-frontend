@@ -80,11 +80,11 @@ export function StageTwo() {
       <Title type="page" label={t('Application Approval Process')} className="mb-4" />
       <Text className="text-lg mb-12">{application?.borrower.legal_name}</Text>
       <img className="mb-14 ml-8" src={StepImage} alt="step" />
-      <Title type="section" label={t('Stage 2: MSME Documents')} className="mb-8" />
-      <Text className="mb-4">{t('Review and verify the data for the MSME.')}</Text>
+      <Title type="section" label={t('Stage 2: Business Documents')} className="mb-8" />
+      <Text className="mb-4">{t('Review and verify the data for the business.')}</Text>
       <Text className="mb-4">
         {t(
-          'If a document looks incorrect or is not clearly visible, contact the MSME and ask them to provide the document again.',
+          'If a document looks incorrect or is not clearly visible, contact the business and ask them to provide the document again.',
         )}
       </Text>
       <LinkButton
@@ -114,7 +114,7 @@ export function StageTwo() {
             onSubmit={handleSubmit(onSubmitHandler)}
             noValidate
             autoComplete="off">
-            <Title type="section" label={emailSent ? t('Email sent') : t('Send email to MSME')} className="mb-1" />
+            <Title type="section" label={emailSent ? t('Email sent') : t('Send email to business')} className="mb-1" />
 
             {!emailSent && (
               <FormInput rows={10} multiline formControlClasses="mb-0" big={false} noIcon name="message" label="" />

@@ -30,7 +30,7 @@ export function StageFiveApproved() {
       <Title type="section" label={t('Stage 5: Approve')} className="mb-8" />
 
       <Text className="mb-8">
-        {t('The credit application has been rejected. The SME will be notified by email shortly.')}
+        {t('The credit application has been rejected. The business will be notified by email shortly.')}
       </Text>
 
       <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">

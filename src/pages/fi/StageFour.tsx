@@ -40,14 +40,14 @@ export function StageFour() {
       {application && <ApplicationBorrowerTable readonly className="xl:w-4/5" application={application} />}
       <LinkButton
         className="mb-8 mt-4 px-1"
-        label={t('Go back to MSME Information')}
+        label={t('Go back to business Information')}
         component={Link}
         to="../stage-one"
       />
       {application && <ApplicationDocumentsTable readonly className="xl:w-4/5" application={application} />}
       <LinkButton
         className="mb-2 mt-4 px-1"
-        label={t('Go back to MSME Documents')}
+        label={t('Go back to business Documents')}
         component={Link}
         to="../stage-two"
       />

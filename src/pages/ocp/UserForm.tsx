@@ -92,7 +92,7 @@ export function UserForm({ user }: UserFormProps) {
             </div>
 
             <div>
-              <Button label={t('MSME Applications')} component={Link} to="/admin/applications" />
+              <Button label={t('Applications')} component={Link} to="/admin/applications" />
             </div>
           </div>
         </div>

@@ -83,9 +83,9 @@ export function HomeOCP() {
         [t('Number of unique SMEs contacted by Credere'), data.opt_in_stat.unique_smes_contacted_by_credere],
         [t('MSMEs opted into the scheme'), data.opt_in_stat.accepted_count],
         [t('MSMEs contacted opted into the scheme'), `${data.opt_in_stat.accepted_percentage}%`],
-        [t('Unique MSMEs opted into the scheme'), data.opt_in_stat.accepted_count_distinct],
-        [t('Unique MSMEs with submitted applications'), data.opt_in_stat.submitted_count_distinct],
-        [t('Unique MSMEs with approved applications'), data.opt_in_stat.approved_count_distinct],
+        [t('Unique MSMEs opted into the scheme'), data.opt_in_stat.msme_accepted_count_distinct],
+        [t('Unique MSMEs with submitted applications'), data.opt_in_stat.msme_submitted_count_distinct],
+        [t('Unique MSMEs with approved applications'), data.opt_in_stat.msme_approved_count_distinct],
         [
           t('Averate amount of credit disbursed'),
           `"${CURRENCY_FORMAT_OPTIONS.default.options.currency} ${formatCurrency(
@@ -150,7 +150,7 @@ export function HomeOCP() {
         <div className="flex justify-start items-start my-4 col-span-1 md:justify-end md:my-0 md:ml-10 lg:justify-end lg:col-span-2">
           <div className="grid grid-cols-1 gap-4 md:flex md:gap-0">
             <div>
-              <Button className="md:mr-4" label={t('MSME Applications')} component={Link} to="/admin/applications" />
+              <Button className="md:mr-4" label={t('Applications')} component={Link} to="/admin/applications" />
             </div>
 
             <div>
@@ -159,7 +159,7 @@ export function HomeOCP() {
           </div>
         </div>
       </div>
-      <Title type="section" label={t('MSME opt-in statistics')} className="mb-6" />
+      <Title type="section" label={t('General statistics')} className="mb-6" />
       {data && !isLoading && (
         <Container className="p-0 lg:pr-20 ml-0">
           <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
@@ -171,10 +171,46 @@ export function HomeOCP() {
               <DashboardItemContainer description={t('Invitations accepted')} value={data.opt_in_stat.accepted_count} />
               <DashboardItemContainer
                 suffix="%"
-                description={t('MSMEs contacted opted into the scheme')}
+                description={t('businesses contacted opted into the scheme')}
                 value={data.opt_in_stat.accepted_percentage}
               />
             </div>
+            <div className="col-span-3 flex flex-row">
+              <DashboardItemContainer
+                description={t('Unique businesses contacted by Credere')}
+                value={data.opt_in_stat.unique_businesses_contacted_by_credere}
+              />
+              <DashboardItemContainer
+                description={t('Unique businesses opted into the scheme')}
+                value={data.opt_in_stat.accepted_count_unique}
+              />
+              <DashboardItemContainer
+                description={t('Number of credit applications approved')}
+                value={data.opt_in_stat.approved_count}
+              />
+            </div>
+            <div className="col-span-3 flex flex-row">
+              <DashboardItemContainer
+                valueClassName="text-[20px]"
+                description={t('Total amount of credit disbursed')}
+                value={`${CURRENCY_FORMAT_OPTIONS.default.options.currency} ${formatCurrency(
+                  data.opt_in_stat.total_credit_disbursed,
+                  CURRENCY_FORMAT_OPTIONS.default.options.currency,
+                )}`}
+              />
+            </div>
+          </div>
+        </Container>
+      )}
+      {!data && isLoading && (
+        <Container className="p-0 lg:pr-20 ml-0">
+          <Loader />
+        </Container>
+      )}
+      <Title type="section" label={t('MSME statistics - Mastercard MEL')} className="mb-6" />
+      {data && !isLoading && (
+        <Container className="p-0 lg:pr-20 ml-0">
+          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
             <div className="col-span-3 flex flex-row">
               <DashboardItemContainer
                 description={t('Unique SMEs contacted by Credere')}
@@ -182,41 +218,51 @@ export function HomeOCP() {
               />
               <DashboardItemContainer
                 description={t('Unique MSMEs opted into the scheme')}
-                value={data.opt_in_stat.accepted_count_distinct}
+                value={data.opt_in_stat.msme_accepted_count_distinct}
               />
               <DashboardItemContainer
                 description={t('Unique women-led SMEs that use Credere to access credit options')}
-                value={data.opt_in_stat.accepted_count_woman}
+                value={data.opt_in_stat.msme_accepted_count_woman}
               />
             </div>
 
             <div className="col-span-3 flex flex-row">
               <DashboardItemContainer
-                description={t('Number of SMEs credit applications approved')}
-                value={data.opt_in_stat.approved_count}
+                description={t('Number of SMEs that submit a credit application through Credere')}
+                value={data.opt_in_stat.msme_submitted_count_distinct}
               />
               <DashboardItemContainer
+                description={t('Number of women-led SMEs that submit a credit application through Credere')}
+                value={data.opt_in_stat.msme_submitted_count_woman}
+              />
+              <DashboardItemContainer
+                description={t('Number of SMEs applications approved')}
+                value={data.opt_in_stat.msme_approved_count}
+              />
+            </div>
+            <div className="col-span-3 flex flex-row">
+              <DashboardItemContainer
                 description={t('Number of women-led SMEs credit applications approved')}
-                value={data.opt_in_stat.approved_count_woman}
+                value={data.opt_in_stat.msme_approved_count_woman}
               />
               <DashboardItemContainer
                 description={t('Number of SMEs with 10 or fewer employees credit applications approved')}
                 value={data.opt_in_stat.approved_count_distinct_micro}
               />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
-            <div className="col-span-3 flex flex-row">
               <DashboardItemContainer
                 description={t('Number of women-led SMEs with 10 or fewer employees credit applications approved')}
                 value={data.opt_in_stat.approved_count_distinct_micro_woman}
               />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+            <div className="col-span-2 flex flex-row">
               <DashboardItemContainer
                 valueClassName="text-[20px]"
-                description={t('Total amount of credit disbursed')}
+                description={t('Total amount of credit disbursed for SMEs')}
                 value={`${CURRENCY_FORMAT_OPTIONS.default.options.currency} ${formatCurrency(
-                  data.opt_in_stat.total_credit_disbursed,
+                  data.opt_in_stat.msme_total_credit_disbursed,
                   CURRENCY_FORMAT_OPTIONS.default.options.currency,
                 )}`}
               />
@@ -326,7 +372,7 @@ export function HomeOCP() {
 
               <DashboardItemContainer
                 suffix="%"
-                description={t('Applications received from MSMEs that opted in')}
+                description={t('Applications submitted')}
                 value={dataKPI.statistics_kpis.proportion_of_submitted_out_of_opt_in}
               />
             </div>
@@ -339,7 +385,7 @@ export function HomeOCP() {
 
               <DashboardItemContainer
                 color="red"
-                description={t('Applications waiting on MSME for information')}
+                description={t('Applications waiting on businesses for information')}
                 value={dataKPI.statistics_kpis.applications_waiting_for_information_count}
               />
             </div>
@@ -413,8 +459,8 @@ export function HomeOCP() {
       {data && !isLoading && (
         <div className="grid lg:gap-10 grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1">
           <div className="col-span-1">
-            <DashboardChartContainer label={t('Breakdown of FIs chosen by MSME')}>
-              <ChartBar data={data.opt_in_stat.fis_chosen_by_msme} />
+            <DashboardChartContainer label={t('Breakdown of FIs chosen')}>
+              <ChartBar data={data.opt_in_stat.fis_chosen_by_supplier} />
             </DashboardChartContainer>
           </div>
         </div>

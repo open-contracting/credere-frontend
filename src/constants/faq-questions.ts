@@ -1,11 +1,11 @@
 export const FAQ_QUESTIONS: Record<string, { question: string; answer: string }> = {
   1: {
     question: 'What offers of credit can I find on Credere?',
-    answer: `Credere is an initiative to facilitate access to finance for small businesses that are awarded public contracts. Various financial institutions have been invited to display a variety of credit options to potential borrowers. You can view the options and the explanations of their terms by visiting your application page.`,
+    answer: `Credere is an initiative to facilitate access to businesses that are awarded public contracts. Various financial institutions have been invited to display a variety of credit options to potential borrowers. You can view the options and the explanations of their terms by visiting your application page.`,
   },
   2: {
     question: 'Why am I being offered credit?',
-    answer: `In the interest of the Open Contracting Partnership to achieve better opportunities for micro, small and medium-sized businesses (MSMEs), we have created an alliance with recognized financial institutions to facilitate access to credits associated with the execution of contracts with the State.
+    answer: `In the interest of the Open Contracting Partnership to achieve better opportunities for businesses, we have created an alliance with recognized financial institutions to facilitate access to credits associated with the execution of contracts with the State.
 
     Credere works by alerting small businesses who have recently been awarded public contracts that they may apply for access to finance through this solution. You received an email because you were identified as a small business who has recently been awarded a public contract.`,
   },

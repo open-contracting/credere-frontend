@@ -35,7 +35,7 @@ export function StageThree() {
       <Text className="text-lg mb-12">{application?.borrower.legal_name}</Text>
       <img className="mb-14 ml-8" src={StepImage} alt="step" />
       <Title type="section" label={t('Stage 3: Award Data')} className="mb-8" />
-      <Text className="mb-4">{t('Review the data for the SME.')}</Text>
+      <Text className="mb-4">{t('Review the data for the business.')}</Text>
       <Text className="mb-4">
         {t(
           'You can search for any missing information by reviewing data and documents for the contracting process in SECOP II.',
