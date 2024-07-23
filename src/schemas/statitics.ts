@@ -45,9 +45,9 @@ export interface OptInStat {
   accepted_count_by_size: ChartData[];
   submitted_count_by_size: ChartData[];
   approved_count_by_size: ChartData[];
-  accepted_count_distinct_by_gender: ChartData[];
-  submitted_count_distinct_by_gender: ChartData[];
-  approved_count_distinct_by_gender: ChartData[];
+  msme_accepted_count_distinct_by_gender: ChartData[];
+  msme_submitted_count_distinct_by_gender: ChartData[];
+  msme_approved_count_distinct_by_gender: ChartData[];
   accepted_count_distinct_by_size: ChartData[];
   submitted_count_distinct_by_size: ChartData[];
   approved_count_distinct_by_size: ChartData[];
