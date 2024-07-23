@@ -87,7 +87,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
             </div>
 
             <div>
-              <Button label={t('MSME Applications')} component={Link} to="/admin/applications" />
+              <Button label={t('Applications')} component={Link} to="/admin/applications" />
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
           }}>
           <FormSelect
             className="w-3/5"
-            label={t('Select type of MSMEs the credit provider is willing to offer credit to')}
+            label={t('Select type of business the credit provider is willing to offer credit to')}
             name="borrower_size"
             options={MSME_TYPES_OPTIONS}
             placeholder={t('Borrower size')}
@@ -138,7 +138,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
           />
 
           <Text className="mb-4">
-            {t('Select the legal type of MSMEs the credit provider is willing to offer credit to')}
+            {t('Select the legal type of business the credit provider is willing to offer credit to')}
           </Text>
           <Box className="mb-4">
             <Box className="w-3/5 flex flex-col items-start justify-start gap-2">
@@ -177,7 +177,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
           />
 
           <Text className="mb-4">
-            {t('Select all the documents that the credit provider will require from the MSME')}
+            {t('Select all the documents that the credit provider will require from the business')}
           </Text>
           <Box className="mb-4">
             <Box className="w-3/5 flex flex-col items-start justify-start gap-2">
@@ -222,7 +222,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
 
           <FormInput
             className="w-3/5"
-            label={t('Enter the total amount of other fees that the credit provider will charge the MSME')}
+            label={t('Enter the total amount of other fees that the credit provider will charge the business')}
             name="other_fees_total_amount"
             big={false}
             type="currency"
@@ -231,7 +231,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
 
           <FormInput
             className="w-3/5"
-            label={t('Enter de details of the other fees that the credit provider will charge the MSME')}
+            label={t('Enter de details of the other fees that the credit provider will charge the business')}
             name="other_fees_description"
             multiline
             rows={4}
@@ -241,7 +241,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
 
           <FormInput
             className="w-3/5"
-            label={t('Enter any additional information for tne MSME about the credit product')}
+            label={t('Enter any additional information for tne business about the credit product')}
             name="additional_information"
             multiline
             rows={4}
@@ -251,7 +251,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
 
           <FormInput
             className="w-3/5"
-            label={t('Enter the URL where the MSME can find more information about the credit product')}
+            label={t('Enter the URL where the business can find more information about the credit product')}
             name="more_info_url"
             big={false}
             placeholder={t('More info URL')}

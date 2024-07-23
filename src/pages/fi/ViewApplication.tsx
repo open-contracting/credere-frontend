@@ -44,10 +44,10 @@ export function ViewApplication() {
           {application.archived_at && <Text className="text-lg">{t('This applicatio is archived')}</Text>}
           {!application.archived_at && (
             <>
-              <Title type="section" className="mb-4" label={t('MSME Data')} />
+              <Title type="section" className="mb-4" label={t('Business Data')} />
               <ApplicationBorrowerTable readonly className="xl:w-4/5" application={application} />
 
-              <Title type="section" className="mt-10 mb-4" label={t('MSME Documents')} />
+              <Title type="section" className="mt-10 mb-4" label={t('Business Documents')} />
               <ApplicationDocumentsTable readonly className="xl:w-4/5" application={application} />
 
               <Title type="section" className="mt-10 mb-4" label={t('Award Data')} />

@@ -119,7 +119,7 @@ function ReviewContract() {
 
   return (
     <div className="xl:w-4/5">
-      <Title type="page" label={t('Review MSME Contract')} className="mb-4" />
+      <Title type="page" label={t('Review business Contract')} className="mb-4" />
       <Text className="text-lg mb-10">{application?.borrower.legal_name}</Text>
 
       <Text className="mb-8">

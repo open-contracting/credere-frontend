@@ -174,6 +174,7 @@ export enum MSME_TYPES {
   MICRO = 'MICRO',
   SMALL = 'SMALL',
   MEDIUM = 'MEDIUM',
+  BIG = 'BIG',
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -186,6 +187,7 @@ export const MSME_TYPES_NAMES: { [key: string]: string } = {
   [MSME_TYPES.MICRO]: t('0 to 10'),
   [MSME_TYPES.SMALL]: t('11 to 50'),
   [MSME_TYPES.MEDIUM]: t('51 to 200'),
+  [MSME_TYPES.BIG]: t('+ 200'),
   [MSME_TYPES.NOT_INFORMED]: t('Not informed'),
 };
 
@@ -201,6 +203,10 @@ export const MSME_TYPES_OPTIONS: FormSelectOption[] = [
   {
     value: MSME_TYPES.MEDIUM,
     label: MSME_TYPES_NAMES.MEDIUM,
+  },
+  {
+    value: MSME_TYPES.BIG,
+    label: MSME_TYPES_NAMES.BIG,
   },
 ];
 

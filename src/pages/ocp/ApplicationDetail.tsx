@@ -69,9 +69,9 @@ export function ApplicationDetail({ application, readonly }: ApplicationDetailPr
         href={`${application.award.source_url}`}
       />
       <ApplicationAwardTable application={application} readonly={readonly} />
-      <Title type="section" className="mt-10 mb-4" label={t('MSME Data')} />
+      <Title type="section" className="mt-10 mb-4" label={t('Business Data')} />
       <ApplicationBorrowerTable application={application} readonly={readonly} allowDataVerification={false} />
-      <Title type="section" className="mt-10 mb-4" label={t('MSME Documents')} />
+      <Title type="section" className="mt-10 mb-4" label={t('Business Documents')} />
       <ApplicationDocumentsTable readonly application={application} />
       <Button className="my-8" primary={false} label={t('Go back')} component={Link} to="/admin/applications" />
     </>

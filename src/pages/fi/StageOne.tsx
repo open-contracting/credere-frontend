@@ -34,9 +34,9 @@ export function StageOne() {
       <Title type="page" label={t('Application Approval Process')} className="mb-4" />
       <Text className="text-lg mb-12">{application?.borrower.legal_name}</Text>
       <img className="mb-14 ml-8" src={StepImage} alt="step" />
-      <Title type="section" label={t('Stage 1: MSME Information')} className="mb-8" />
+      <Title type="section" label={t('Stage 1: Business Information')} className="mb-8" />
       <Text className="mb-4">
-        {t('Review and verify the data for the MSME. Where information is missing it can be edited manually.')}
+        {t('Review and verify the data for the business. Where information is missing it can be edited manually.')}
       </Text>
       <Text className="mb-4">
         {t(

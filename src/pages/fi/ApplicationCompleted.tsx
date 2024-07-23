@@ -60,7 +60,7 @@ function ApplicationCompleted() {
         </div>
       </div>
       <Text className="mb-10 text-sm font-light">
-        {t('Data for the MSME application will only be stored for one week after the process has been completed. ')}
+        {t('Data for the application will only be stored for one week after the process has been completed. ')}
       </Text>
     </div>
   );

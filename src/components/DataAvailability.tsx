@@ -72,7 +72,7 @@ export function DataAvailability({ available, name, label, readonly, modifiedFie
               <Text fontVariant className="ml-3 mt-4 text-sm">
                 {!modified
                   ? t(
-                      'Data for the {fieldName} for the SME is not available. Confirm manually through SECOP or alternative source.',
+                      'Data for the {fieldName} for the business is not available. Confirm manually through SECOP or alternative source.',
                       { fieldName: label },
                     )
                   : t(
