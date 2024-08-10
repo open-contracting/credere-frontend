@@ -172,7 +172,7 @@ export function ApplicationList({ type }: ApplicationListProps) {
   const [payload, setPayload] = useState<PaginationInput>({
     page: 0,
     page_size: PAGE_SIZES[0],
-    sort_field: 'application.created_at',
+    sort_field: 'application.borrower_submitted_at',
     sort_order: 'desc',
   });
 
