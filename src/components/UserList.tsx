@@ -68,7 +68,7 @@ export function UserList() {
   const [payload, setPayload] = useState<PaginationInput>({
     page: 0,
     page_size: PAGE_SIZES[0],
-    sort_field: 'credere_user_created_at',
+    sort_field: 'created_at',
     sort_order: 'desc',
   });
 
