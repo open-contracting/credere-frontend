@@ -9,7 +9,7 @@ import Title from 'src/stories/title/Title';
 
 import { ChartBar, ChartPie } from '../../components/Charts';
 import LendersButtonGroup from '../../components/LendersButtonGroup';
-import { MSME_TYPES_NAMES, STATISTICS_DATE_FILTER, STATISTICS_DATE_FILTER_OPTIONS } from '../../constants';
+import { STATISTICS_DATE_FILTER, STATISTICS_DATE_FILTER_OPTIONS } from '../../constants';
 import CURRENCY_FORMAT_OPTIONS from '../../constants/intl';
 import useGetStatisticsOCP from '../../hooks/useGetStatisticsOCP';
 import useGetStatisticsOCPoptIn from '../../hooks/useGetStatisticsOCPoptIn';
@@ -98,30 +98,6 @@ export function HomeOCP() {
         ...sectorData.map((row) => [t(row.name), row.value]),
         [t('Breakdown of reasons why MSMEs opted out of the scheme'), ''],
         ...rejectedReasonsData.map((row) => [t(row.name), row.value]),
-        [t('Number of applications recieved by gender'), ''],
-        ...data.opt_in_stat.accepted_count_by_gender.map((row) => [t(row.name), row.value]),
-        [t('Number of applications submitted by gender'), ''],
-        ...data.opt_in_stat.submitted_count_by_gender.map((row) => [t(row.name), row.value]),
-        [t('Number of applications approved by gender'), ''],
-        ...data.opt_in_stat.approved_count_by_gender.map((row) => [t(row.name), row.value]),
-        [t('Unique MSMEs count from recieved applications by gender'), ''],
-        ...data.opt_in_stat.msme_accepted_count_distinct_by_gender.map((row) => [t(row.name), row.value]),
-        [t('Unique MSMEs count from submitted applications by gender'), ''],
-        ...data.opt_in_stat.msme_submitted_count_distinct_by_gender.map((row) => [t(row.name), row.value]),
-        [t('Unique MSMEs count from approved applications by gender'), ''],
-        ...data.opt_in_stat.msme_approved_count_distinct_by_gender.map((row) => [t(row.name), row.value]),
-        [t('Number of applications recieved by size'), ''],
-        ...data.opt_in_stat.accepted_count_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
-        [t('Number of applications submitted by size'), ''],
-        ...data.opt_in_stat.submitted_count_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
-        [t('Number of applications approved by size'), ''],
-        ...data.opt_in_stat.approved_count_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
-        [t('Unique MSMEs count from recieved applications by size'), ''],
-        ...data.opt_in_stat.accepted_count_distinct_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
-        [t('Unique MSMEs count from submitted applications by size'), ''],
-        ...data.opt_in_stat.submitted_count_distinct_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
-        [t('Unique MSMEs count from approved applications by size'), ''],
-        ...data.opt_in_stat.approved_count_distinct_by_size.map((row) => [t(MSME_TYPES_NAMES[row.name]), row.value]),
       ];
 
       const csv = csvData.map((row) => row.join(',')).join('\n');
