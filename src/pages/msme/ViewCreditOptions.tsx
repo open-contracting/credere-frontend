@@ -210,7 +210,7 @@ function ViewCreditOptions() {
                 name="annual_revenue"
                 big={false}
                 type="currency"
-                placeholder={`${applicationContext.state.data?.borrower.currency}`}
+                placeholder={applicationContext.state.data?.borrower.currency}
               />
               <FormInput
                 className="w-3/5"
