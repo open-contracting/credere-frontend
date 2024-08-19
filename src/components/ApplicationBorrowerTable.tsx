@@ -142,7 +142,7 @@ export function ApplicationBorrowerTable({
               modifiedFields={application.modified_data_fields?.borrower_updates}
             />
             <ApplicationTableDataBorrowerRow
-              isLoading={isLoading}
+              isLoading={isLoading || isLoadingVerifyDataField}
               readonly
               withoutVerify
               useTranslation

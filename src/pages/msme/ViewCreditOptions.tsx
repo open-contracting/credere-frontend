@@ -114,8 +114,8 @@ function ViewCreditOptions() {
     const onSubmitHandlerMainForm: SubmitHandler<CreditOptionsInput> = (values) => {
       partialFormInput.borrower_size = values.borrower_size;
       partialFormInput.sector = values.sector;
-      partialFormInput.amount_requested = values.amount_requested;
       partialFormInput.annual_revenue = values.annual_revenue || 0;
+      partialFormInput.amount_requested = values.amount_requested;
     };
 
     const onSubmitHandlerLoanForm: SubmitHandler<RepaymentTermsInput> = (values) => {
@@ -210,16 +210,7 @@ function ViewCreditOptions() {
                 name="annual_revenue"
                 big={false}
                 type="currency"
-                placeholder={`${
-                  applicationContext.state.data?.borrower.currency ||
-                  ' ' ||
-                  applicationContext.state.data?.borrower.annual_revenue
-                } ${formatCurrency(
-                  applicationContext.state.data?.borrower.annual_revenue
-                    ? applicationContext.state.data?.borrower.annual_revenue
-                    : 0,
-                  applicationContext.state.data?.borrower.currency,
-                )}`}
+                placeholder={`${applicationContext.state.data?.borrower.currency}`}
               />
               <FormInput
                 className="w-3/5"
