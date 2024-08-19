@@ -9,7 +9,7 @@ import DataAvailabilityForm from './DataAvailabilityForm';
 import { DataTableCell } from './DataTable';
 import DataVerificationForm from './DataVerificationForm';
 
-const DATA_REQUESTED_FROM_MSME = ['size', 'sector'];
+const DATA_REQUESTED_FROM_MSME = ['size', 'sector', 'annual_revenue'];
 export function ApplicationTableDataBorrowerRow({
   label,
   name,

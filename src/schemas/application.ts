@@ -88,6 +88,7 @@ export const creditOptionsSchema = object({
     },
   }),
   sector: string().nonempty(t('Sector is required')),
+  annual_revenue: coerce.number().optional().nullable(),
   amount_requested: coerce.number().min(1, t('Amount requested must be greater than 0')),
   uuid: UUIDType,
 });
@@ -111,7 +112,7 @@ export const repaymentTermsSchema = object({
 
 export type RepaymentTermsInput = TypeOf<typeof repaymentTermsSchema>;
 
-export type GetCreditProductsOptionsInput = Omit<CreditOptionsInput, 'sector'>;
+export type GetCreditProductsOptionsInput = Omit<CreditOptionsInput, 'sector' | 'annual_revenue'>;
 
 export type SelectCreditProductInput = CreditOptionsInput &
   Partial<RepaymentTermsInput> & { credit_product_id: number };
@@ -159,6 +160,8 @@ export interface IBorrower {
   type: string;
   sector: string;
   size: MSME_TYPES;
+  annual_revenue?: number;
+  currency: string;
   status: string;
   missing_data: { [key: string]: boolean };
   created_at: string;

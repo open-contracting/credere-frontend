@@ -40,6 +40,7 @@ function ViewCreditOptions() {
     defaultValues: {
       borrower_size: applicationContext.state.data?.application.calculator_data.borrower_size || undefined,
       sector: applicationContext.state.data?.borrower.sector || undefined,
+      annual_revenue: applicationContext.state.data?.borrower.annual_revenue || undefined,
       amount_requested: applicationContext.state.data?.application.calculator_data.amount_requested || undefined,
     },
   });
@@ -96,6 +97,7 @@ function ViewCreditOptions() {
         credit_product_id: option.id,
         borrower_size: values.borrower_size,
         sector: values.sector,
+        annual_revenue: values.annual_revenue || null,
         amount_requested: values.amount_requested,
         uuid: applicationContext.state.data?.application.uuid,
       };
@@ -113,6 +115,7 @@ function ViewCreditOptions() {
       partialFormInput.borrower_size = values.borrower_size;
       partialFormInput.sector = values.sector;
       partialFormInput.amount_requested = values.amount_requested;
+      partialFormInput.annual_revenue = values.annual_revenue || 0;
     };
 
     const onSubmitHandlerLoanForm: SubmitHandler<RepaymentTermsInput> = (values) => {
@@ -121,6 +124,7 @@ function ViewCreditOptions() {
           credit_product_id: option.id,
           borrower_size: partialFormInput.borrower_size,
           sector: partialFormInput.sector,
+          annual_revenue: partialFormInput.annual_revenue || 0,
           amount_requested: partialFormInput.amount_requested,
           repayment_years: values.repayment_years || 0,
           repayment_months: values.repayment_months || 0,
@@ -199,6 +203,23 @@ function ViewCreditOptions() {
                 name="sector"
                 options={SECTOR_TYPES}
                 placeholder={t('Sector')}
+              />
+              <FormInput
+                className="w-3/5"
+                label={t('Annual Revenue')}
+                name="annual_revenue"
+                big={false}
+                type="currency"
+                placeholder={`${
+                  applicationContext.state.data?.borrower.currency ||
+                  ' ' ||
+                  applicationContext.state.data?.borrower.annual_revenue
+                } ${formatCurrency(
+                  applicationContext.state.data?.borrower.annual_revenue
+                    ? applicationContext.state.data?.borrower.annual_revenue
+                    : 0,
+                  applicationContext.state.data?.borrower.currency,
+                )}`}
               />
               <FormInput
                 className="w-3/5"
