@@ -4,7 +4,7 @@ import { useT } from '@transifex/react';
 import useUpdateBorrower from '../hooks/useUpdateBorrower';
 import useVerifyDataField from '../hooks/useVerifyDataField';
 import { IApplication, IUpdateBorrower } from '../schemas/application';
-import { renderSector, renderSize } from '../util';
+import { formatCurrency, renderSector, renderSize } from '../util';
 import ApplicationTableDataBorrowerRow from './ApplicationTableDataBorrowerRow';
 import { DataTableHeadCell, DataTableHeadLabel } from './DataTable';
 
@@ -139,6 +139,19 @@ export function ApplicationBorrowerTable({
               verifiedData={application.secop_data_verification}
               borrower={borrower}
               formatter={renderSector}
+              modifiedFields={application.modified_data_fields?.borrower_updates}
+            />
+            <ApplicationTableDataBorrowerRow
+              isLoading={isLoading || isLoadingVerifyDataField}
+              readonly
+              withoutVerify
+              useTranslation
+              name="annual_revenue"
+              label={t('Annual Revenue')}
+              missingData={borrower.missing_data}
+              verifiedData={application.secop_data_verification}
+              borrower={borrower}
+              formatter={(value) => `${borrower.currency} ${formatCurrency(value, borrower.currency)}`}
               modifiedFields={application.modified_data_fields?.borrower_updates}
             />
             <ApplicationTableDataBorrowerRow
