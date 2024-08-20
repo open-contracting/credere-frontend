@@ -284,12 +284,6 @@ export interface IApplication {
   };
 }
 
-export interface IExtendedApplication {
-  buyer_name: string;
-  borrower_name: string;
-  lender_name: string;
-}
-
 export interface UploadFileInput {
   type: DOCUMENTS_TYPE;
   file: File;
@@ -299,6 +293,12 @@ export interface UploadFileInput {
 export interface UploadContractInput {
   file: File;
   uuid: string;
+}
+
+export interface IExtendedApplication {
+  buyer_name: string;
+  borrower_name: string;
+  lender_name: string;
 }
 
 export const EXTENDED_APPLICATION_FROM: IExtendedApplication = {
