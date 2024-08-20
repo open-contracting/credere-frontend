@@ -151,7 +151,9 @@ export function ApplicationBorrowerTable({
               missingData={borrower.missing_data}
               verifiedData={application.secop_data_verification}
               borrower={borrower}
-              formatter={(value) => `${borrower.currency} ${formatCurrency(value, borrower.currency)}`}
+              formatter={(value) =>
+                value ? `${borrower.currency} ${formatCurrency(value, borrower.currency)}` : t('Not informed')
+              }
               modifiedFields={application.modified_data_fields?.borrower_updates}
             />
             <ApplicationTableDataBorrowerRow
