@@ -53,8 +53,8 @@ function ViewCreditOptions() {
 
   const methodsLoanForm = useForm<RepaymentTermsInput>({
     defaultValues: {
-      repayment_years: applicationContext.state.data?.application.calculator_data.repayment_years || 0,
-      repayment_months: applicationContext.state.data?.application.calculator_data.repayment_months || 0,
+      repayment_years: applicationContext.state.data?.application.calculator_data.repayment_years || undefined,
+      repayment_months: applicationContext.state.data?.application.calculator_data.repayment_months || undefined,
       payment_start_date: applicationContext.state.data?.application.calculator_data.payment_start_date || undefined,
     },
   });
