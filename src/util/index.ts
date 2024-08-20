@@ -13,7 +13,6 @@ import {
   USER_TYPE_OPTIONS,
 } from '../constants';
 import CURRENCY_FORMAT_OPTIONS from '../constants/intl';
-import { PreferencesType } from '../schemas/OCPsettings';
 import { FormSelectOption } from '../stories/form-select/FormSelect';
 
 const dateFormatOptions: Intl.DateTimeFormatOptions = {
@@ -84,23 +83,6 @@ export const renderSize = (type: string) => {
     return t('Not informed');
   }
   return findLabelByValue(type, MSME_TYPES_OPTIONS);
-};
-export const renderLenderPreferences = (preferences: PreferencesType) => {
-  let preferencesString = '';
-  if (preferences.MICRO) {
-    preferencesString += MSME_TYPES_NAMES[MSME_TYPES.MICRO];
-  }
-  if (preferences.SMALL) {
-    preferencesString += preferencesString
-      ? `, ${MSME_TYPES_NAMES[MSME_TYPES.SMALL]}`
-      : MSME_TYPES_NAMES[MSME_TYPES.SMALL];
-  }
-  if (preferences.MEDIUM) {
-    preferencesString += preferencesString
-      ? `, ${MSME_TYPES_NAMES[MSME_TYPES.MEDIUM]}`
-      : MSME_TYPES_NAMES[MSME_TYPES.MEDIUM];
-  }
-  return preferencesString;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

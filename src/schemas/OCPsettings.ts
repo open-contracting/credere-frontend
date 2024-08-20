@@ -10,16 +10,6 @@ const smallSchema = boolean();
 const mediumSchema = boolean();
 const bigSchema = boolean();
 
-const preferencesSchema = object({
-  MICRO: microSchema,
-  SMALL: smallSchema,
-  MEDIUM: mediumSchema,
-  BIG: bigSchema,
-}).refine((data) => data.MICRO || data.SMALL || data.MEDIUM, {
-  path: [''],
-  message: t('You need to check at least one option'),
-});
-
 export const lenderSchema = object({
   name: creditProviderNameSchema,
   type: creditProviderTypeSchema,
@@ -34,8 +24,6 @@ export const lenderSchema = object({
 });
 
 export type ProviderInput = TypeOf<typeof lenderSchema>;
-
-export type PreferencesType = TypeOf<typeof preferencesSchema>;
 
 export const creditProductSchema = object({
   borrower_size: nativeEnum(MSME_TYPES, {
