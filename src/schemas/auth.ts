@@ -82,7 +82,7 @@ export const resetPasswordSchema = object({
 export type ResetPasswordInput = TypeOf<typeof resetPasswordSchema>;
 
 export interface IResponse {
-  message: string;
+  detail: string;
 }
 
 export interface IUpdatePasswordResponse extends IResponse {
