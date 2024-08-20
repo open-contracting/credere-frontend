@@ -134,8 +134,6 @@ export interface IAward {
   source_url: string;
   entity_code: string;
   contract_status: string;
-  source_last_updated_at: string;
-  previous: boolean;
   procurement_method: string;
   contracting_process_id: string;
   procurement_category: string;
