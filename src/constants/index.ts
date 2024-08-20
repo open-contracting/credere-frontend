@@ -177,12 +177,6 @@ export enum MSME_TYPES {
   BIG = 'BIG',
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const EXTRA_KEYS = {
-  other_reason: t('Other reason'),
-};
-
 export const MSME_TYPES_NAMES: { [key: string]: string } = {
   [MSME_TYPES.MICRO]: t('0 to 10'),
   [MSME_TYPES.SMALL]: t('11 to 50'),
