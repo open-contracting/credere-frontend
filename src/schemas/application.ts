@@ -94,6 +94,8 @@ export const creditOptionsSchema = object({
 
 export type CreditOptionsInput = TypeOf<typeof creditOptionsSchema>;
 
+export type GetCreditProductsOptionsInput = Omit<CreditOptionsInput, 'sector'>;
+
 export const repaymentTermsSchema = object({
   repayment_years: coerce
     .number({
@@ -110,8 +112,6 @@ export const repaymentTermsSchema = object({
 });
 
 export type RepaymentTermsInput = TypeOf<typeof repaymentTermsSchema>;
-
-export type GetCreditProductsOptionsInput = Omit<CreditOptionsInput, 'sector'>;
 
 export type SelectCreditProductInput = CreditOptionsInput &
   Partial<RepaymentTermsInput> & { credit_product_id: number };
