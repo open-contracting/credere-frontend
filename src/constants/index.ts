@@ -157,6 +157,17 @@ export enum DOCUMENTS_TYPE {
   THREE_LAST_BANK_STATEMENT = 'THREE_LAST_BANK_STATEMENT',
 }
 
+export const DOCUMENT_TYPES_NAMES: { [key: string]: string } = {
+  [DOCUMENTS_TYPE.INCORPORATION_DOCUMENT]: t('Incorporation document'),
+  [DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT]: t('Supplier registration document'),
+  [DOCUMENTS_TYPE.BANK_CERTIFICATION_DOCUMENT]: t('Bank certification document'),
+  [DOCUMENTS_TYPE.FINANCIAL_STATEMENT]: t('Financial statement'),
+  [DOCUMENTS_TYPE.SIGNED_CONTRACT]: t('Signed contract'),
+  [DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION]: t('Shareholder composition'),
+  [DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE]: t('Chamber of Commerce'),
+  [DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT]: t('Three last bank statement'),
+};
+
 // eslint-disable-next-line no-shadow
 export enum BORROWER_TYPE {
   NATURAL_PERSON = 'NATURAL_PERSON',
@@ -176,12 +187,6 @@ export enum MSME_TYPES {
   MEDIUM = 'MEDIUM',
   BIG = 'BIG',
 }
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const EXTRA_KEYS = {
-  other_reason: t('Other reason'),
-};
 
 export const MSME_TYPES_NAMES: { [key: string]: string } = {
   [MSME_TYPES.MICRO]: t('0 to 10'),
@@ -209,17 +214,6 @@ export const MSME_TYPES_OPTIONS: FormSelectOption[] = [
     label: MSME_TYPES_NAMES.BIG,
   },
 ];
-
-export const DOCUMENT_TYPES_NAMES: { [key: string]: string } = {
-  [DOCUMENTS_TYPE.INCORPORATION_DOCUMENT]: t('Incorporation document'),
-  [DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT]: t('Supplier registration document'),
-  [DOCUMENTS_TYPE.BANK_CERTIFICATION_DOCUMENT]: t('Bank certification document'),
-  [DOCUMENTS_TYPE.FINANCIAL_STATEMENT]: t('Financial statement'),
-  [DOCUMENTS_TYPE.SIGNED_CONTRACT]: t('Signed contract'),
-  [DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION]: t('Shareholder composition'),
-  [DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE]: t('Chamber of Commerce'),
-  [DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT]: t('Three last bank statement'),
-};
 
 // https://clasificaciones.dane.gov.co/ciiu4-0/seccion_clasificacion
 export const SECTOR_TYPES: FormSelectOption[] = [

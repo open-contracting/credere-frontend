@@ -4,17 +4,11 @@ import {
   IUpdatePasswordResponse,
   IUserResponse,
   LoginInput,
-  RegisterInput,
   ResetPasswordInput,
   SetupMFAInput,
   UpdatePasswordPayload,
 } from '../schemas/auth';
 import { authApi } from './axios';
-
-export const signUpUserFn = async (payload: RegisterInput) => {
-  const response = await authApi.post<IResponse>('users/register', payload);
-  return response.data;
-};
 
 export const loginMFAUserFn = async (payload: LoginInput) => {
   const response = await authApi.post<ILoginResponse>('users/login', payload);

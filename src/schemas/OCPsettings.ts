@@ -4,21 +4,7 @@ import { TypeOf, boolean, coerce, nativeEnum, object, preprocess, string } from 
 import { BORROWER_TYPE, CREDIT_PRODUCT_TYPE, DOCUMENTS_TYPE, MSME_TYPES } from '../constants';
 
 const creditProviderNameSchema = string().min(1, t('Provider name is required'));
-const creditProviderTypeSchema = string().nonempty(t('Provider type is required'));
-const microSchema = boolean();
-const smallSchema = boolean();
-const mediumSchema = boolean();
-const bigSchema = boolean();
-
-const preferencesSchema = object({
-  MICRO: microSchema,
-  SMALL: smallSchema,
-  MEDIUM: mediumSchema,
-  BIG: bigSchema,
-}).refine((data) => data.MICRO || data.SMALL || data.MEDIUM, {
-  path: [''],
-  message: t('You need to check at least one option'),
-});
+const creditProviderTypeSchema = string().min(1, t('Provider type is required'));
 
 export const lenderSchema = object({
   name: creditProviderNameSchema,
@@ -34,8 +20,6 @@ export const lenderSchema = object({
 });
 
 export type ProviderInput = TypeOf<typeof lenderSchema>;
-
-export type PreferencesType = TypeOf<typeof preferencesSchema>;
 
 export const creditProductSchema = object({
   borrower_size: nativeEnum(MSME_TYPES, {

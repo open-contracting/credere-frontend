@@ -32,13 +32,6 @@ export interface SetupMFAInput {
 
 const nameSchema = string().nonempty(t('Full name is required'));
 
-const registerSchema = object({
-  name: nameSchema,
-  email: emailSchema,
-});
-
-export type RegisterInput = TypeOf<typeof registerSchema>;
-
 export const createUserSchema = object({
   name: nameSchema,
   email: emailSchema,

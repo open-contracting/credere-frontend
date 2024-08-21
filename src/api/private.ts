@@ -175,8 +175,8 @@ export const completeApplicationFn = async (completePayload: CompleteApplication
   return response.data;
 };
 
-export const getPreviousAwardsFn = async (application_id: number) => {
-  const response = await authApi.get<IAward[]>(`applications/${application_id}/previous-awards`);
+export const getPreviousAwardsFn = async (id: number) => {
+  const response = await authApi.get<IAward[]>(`applications/${id}/previous-awards`);
   return response.data;
 };
 

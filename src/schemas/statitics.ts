@@ -59,10 +59,3 @@ export interface StatisticsParmsInput {
   final_date?: string;
   lender_id?: number;
 }
-
-// eslint-disable-next-line no-shadow
-export enum STATUS_GROUPS {
-  Accepted = 'Accepted',
-  Submitted = 'Submitted',
-  Approved = 'Approved',
-}
