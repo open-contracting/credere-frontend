@@ -5,10 +5,6 @@ import { BORROWER_TYPE, CREDIT_PRODUCT_TYPE, DOCUMENTS_TYPE, MSME_TYPES } from '
 
 const creditProviderNameSchema = string().min(1, t('Provider name is required'));
 const creditProviderTypeSchema = string().nonempty(t('Provider type is required'));
-const microSchema = boolean();
-const smallSchema = boolean();
-const mediumSchema = boolean();
-const bigSchema = boolean();
 
 export const lenderSchema = object({
   name: creditProviderNameSchema,
