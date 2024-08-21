@@ -87,13 +87,15 @@ export const creditOptionsSchema = object({
       }
     },
   }),
-  sector: string().nonempty(t('Sector is required')),
+  sector: string().min(1, t('Sector is required')),
   annual_revenue: coerce.number().optional().nullable(),
   amount_requested: coerce.number().min(1, t('Amount requested must be greater than 0')),
   uuid: UUIDType,
 });
 
 export type CreditOptionsInput = TypeOf<typeof creditOptionsSchema>;
+
+export type GetCreditProductsOptionsInput = Omit<CreditOptionsInput, 'sector' | 'annual_revenue'>;
 
 export const repaymentTermsSchema = object({
   repayment_years: coerce
@@ -111,8 +113,6 @@ export const repaymentTermsSchema = object({
 });
 
 export type RepaymentTermsInput = TypeOf<typeof repaymentTermsSchema>;
-
-export type GetCreditProductsOptionsInput = Omit<CreditOptionsInput, 'sector' | 'annual_revenue'>;
 
 export type SelectCreditProductInput = CreditOptionsInput &
   Partial<RepaymentTermsInput> & { credit_product_id: number };
@@ -282,12 +282,6 @@ export interface IApplication {
   };
 }
 
-export interface IExtendedApplication {
-  buyer_name: string;
-  borrower_name: string;
-  lender_name: string;
-}
-
 export interface UploadFileInput {
   type: DOCUMENTS_TYPE;
   file: File;
@@ -297,6 +291,12 @@ export interface UploadFileInput {
 export interface UploadContractInput {
   file: File;
   uuid: string;
+}
+
+export interface IExtendedApplication {
+  buyer_name: string;
+  borrower_name: string;
+  lender_name: string;
 }
 
 export const EXTENDED_APPLICATION_FROM: IExtendedApplication = {
