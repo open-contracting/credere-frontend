@@ -5,7 +5,7 @@ import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 
 import { rejectApplicationFn } from '../api/private';
-import { DISPATCH_ACTIONS, ERRORS_MESSAGES, QUERY_KEYS } from '../constants';
+import { DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
 import { IApplication, RejectApplicationInput } from '../schemas/application';
 import useApplicationContext from './useSecureApplicationContext';
 
@@ -35,15 +35,9 @@ export default function useRejectApplication(): IUseRejectApplication {
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data && error.response.data.detail) {
-          if (ERRORS_MESSAGES[error.response.data.detail]) {
-            enqueueSnackbar(t(ERRORS_MESSAGES[error.response.data.detail]), {
-              variant: 'error',
-            });
-          } else {
-            enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-              variant: 'error',
-            });
-          }
+          enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
+            variant: 'error',
+          });
         }
       } else {
         enqueueSnackbar(t('Error rejecting the application. {error}', { error }), {
