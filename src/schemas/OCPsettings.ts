@@ -4,7 +4,7 @@ import { TypeOf, boolean, coerce, nativeEnum, object, preprocess, string } from 
 import { BORROWER_TYPE, CREDIT_PRODUCT_TYPE, DOCUMENTS_TYPE, MSME_TYPES } from '../constants';
 
 const creditProviderNameSchema = string().min(1, t('Provider name is required'));
-const creditProviderTypeSchema = string().nonempty(t('Provider type is required'));
+const creditProviderTypeSchema = string().min(1, t('Provider type is required'));
 
 export const lenderSchema = object({
   name: creditProviderNameSchema,

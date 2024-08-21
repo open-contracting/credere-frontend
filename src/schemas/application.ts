@@ -87,7 +87,7 @@ export const creditOptionsSchema = object({
       }
     },
   }),
-  sector: string().nonempty(t('Sector is required')),
+  sector: string().min(1, t('Sector is required')),
   annual_revenue: coerce.number().optional().nullable(),
   amount_requested: coerce.number().min(1, t('Amount requested must be greater than 0')),
   uuid: UUIDType,
@@ -106,7 +106,7 @@ export const repaymentTermsSchema = object({
     .gte(0, t('Years must be greater or equal than ')),
   repayment_months: coerce.number().min(1, t('Months must be greater or equal than 1')),
   payment_start_date: string()
-    .nonempty(t('Payment start date is required'))
+    .min(1, t('Payment start date is required'))
     .refine((value) => isDateAfterCurrentDate(value), {
       message: t('Payment start date must be after current date'),
     }),
