@@ -19,7 +19,7 @@ import DashboardChartContainer from '../../stories/dashboard/DashboardChartConta
 import DashboardItemContainer from '../../stories/dashboard/DashboardItemContainer';
 import { DatePicker, Input } from '../../stories/form-input/FormInput';
 import Loader from '../../stories/loader/Loader';
-import { formatCurrency, formatDateForFileName, renderSector } from '../../util';
+import { RenderSector, formatCurrency, formatDateForFileName } from '../../util';
 
 export function HomeOCP() {
   const t = useT();
@@ -36,7 +36,7 @@ export function HomeOCP() {
     const sectorDataArray: ChartData[] = [];
     if (data?.opt_in_stat.sector_statistics) {
       data.opt_in_stat.sector_statistics.forEach((element) => {
-        sectorDataArray.push({ name: renderSector(element.name), value: element.value });
+        sectorDataArray.push({ name: RenderSector(element.name), value: element.value });
       });
       setSectorData(sectorDataArray);
     }

@@ -5,12 +5,13 @@ import { debounce } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import NeedHelpComponent from 'src/components/NeedHelpComponent';
+import useConstants from 'src/hooks/useConstants';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
 import CreditLinesTable from '../../components/CreditLinesTable';
 import LoansTable from '../../components/LoansTable';
-import { MSME_TYPES, MSME_TYPES_OPTIONS, SECTOR_TYPES } from '../../constants';
+import { DEFAULT_BORROWER_SIZE } from '../../constants';
 import useApplicationContext from '../../hooks/useApplicationContext';
 import useGetCreditProductsOptions from '../../hooks/useGetCreditProductsOptions';
 import useLocalizedDateFormatter from '../../hooks/useLocalizedDateFormatter';
@@ -30,6 +31,7 @@ import { formatCurrency } from '../../util';
 const DEBOUNCE_TIME = 1;
 function ViewCreditOptions() {
   const t = useT();
+  const constants = useConstants();
   const { formatDateFromString } = useLocalizedDateFormatter();
 
   const applicationContext = useApplicationContext();
@@ -73,7 +75,7 @@ function ViewCreditOptions() {
   ]);
 
   useEffect(() => {
-    if (!borrowerSizeValue || borrowerSizeValue === MSME_TYPES.NOT_INFORMED || !amountRequestedValue) {
+    if (!borrowerSizeValue || borrowerSizeValue === DEFAULT_BORROWER_SIZE || !amountRequestedValue) {
       return;
     }
 
@@ -196,12 +198,16 @@ function ViewCreditOptions() {
                 display: 'flex',
                 flexDirection: 'column',
               }}>
-              <RadioGroup label={t('Number of employees')} name="borrower_size" options={MSME_TYPES_OPTIONS} />
+              <RadioGroup
+                label={t('Number of employees')}
+                name="borrower_size"
+                options={(constants?.BorrowerSize || []).filter((o) => o.value !== DEFAULT_BORROWER_SIZE)}
+              />
               <FormSelect
                 className="w-3/5"
                 label={t('Sector')}
                 name="sector"
-                options={SECTOR_TYPES}
+                options={constants?.BorrowerSector || []}
                 placeholder={t('Sector')}
               />
               <FormInput
@@ -241,7 +247,7 @@ function ViewCreditOptions() {
               isLoading={isLoading || isLoadingOptions}
             />
           )}
-          {(!borrowerSizeValue || borrowerSizeValue === MSME_TYPES.NOT_INFORMED) && (
+          {(!borrowerSizeValue || borrowerSizeValue === DEFAULT_BORROWER_SIZE) && (
             <Text className="mb-0 text-sm">{t('Select a number of employees to evaluate available options')}</Text>
           )}
           {!amountRequestedValue && (
@@ -304,7 +310,7 @@ function ViewCreditOptions() {
               isLoading={isLoading || isLoadingOptions}
             />
           )}
-          {(!borrowerSizeValue || borrowerSizeValue === MSME_TYPES.NOT_INFORMED) && (
+          {(!borrowerSizeValue || borrowerSizeValue === DEFAULT_BORROWER_SIZE) && (
             <Text className="mb-0 text-sm">{t('Select a number of employees to evaluate available options')}</Text>
           )}
           {!amountRequestedValue && (

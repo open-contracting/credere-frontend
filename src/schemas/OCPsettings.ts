@@ -1,7 +1,7 @@
 import { t } from '@transifex/native';
 import { TypeOf, boolean, coerce, nativeEnum, object, preprocess, string } from 'zod';
 
-import { BORROWER_TYPE, CREDIT_PRODUCT_TYPE, DOCUMENTS_TYPE, MSME_TYPES } from '../constants';
+import { BORROWER_TYPE, CREDIT_PRODUCT_TYPE, DOCUMENTS_TYPE } from '../constants';
 
 const creditProviderNameSchema = string().min(1, t('Provider name is required'));
 const creditProviderTypeSchema = string().min(1, t('Provider type is required'));
@@ -22,17 +22,7 @@ export const lenderSchema = object({
 export type ProviderInput = TypeOf<typeof lenderSchema>;
 
 export const creditProductSchema = object({
-  borrower_size: nativeEnum(MSME_TYPES, {
-    errorMap: (issue) => {
-      switch (issue.code) {
-        case 'invalid_type':
-        case 'invalid_enum_value':
-          return { message: t('Borrower size is required') };
-        default:
-          return { message: t('Select an option') };
-      }
-    },
-  }),
+  borrower_size: string().min(1, t('Borrower size is required')),
   lower_limit: coerce.number().min(1, t('Lower limit must be greater than 0')),
   upper_limit: coerce.number().min(1, t('Upper limit must be greater than 0')),
   interest_rate: string().min(1, t('Interest rate description is required')),

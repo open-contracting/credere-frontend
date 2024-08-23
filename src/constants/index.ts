@@ -25,6 +25,7 @@ export const COLORS: { [key: string]: string } = {
 export const USER_LOCAL_STORAGE_KEY = 'CREDERE_USER';
 export const ACCESS_TOKEN_LOCAL_STORAGE_KEY = 'CREDERE_USER_ACCESS_TOKEN';
 export const LANG_STORAGE_KEY = 'CREDERE_LANG';
+export const CONSTANTS_STORAGE_KEY = 'CONSTANTS_STORAGE_KEY';
 
 // eslint-disable-next-line no-shadow
 export enum QUERY_KEYS {
@@ -111,17 +112,6 @@ export const CREDIT_PRODUCT_TYPE = {
   CREDIT_LINE: 'CREDIT_LINE',
 };
 
-export const CREDIT_PRODUCT_OPTIONS: FormSelectOption[] = [
-  {
-    value: CREDIT_PRODUCT_TYPE.LOAN,
-    label: t('Loan'),
-  },
-  {
-    value: CREDIT_PRODUCT_TYPE.CREDIT_LINE,
-    label: t('Credit line'),
-  },
-];
-
 // eslint-disable-next-line no-shadow
 export enum STATISTICS_DATE_FILTER {
   CUSTOM_RANGE = 'CUSTOM_RANGE',
@@ -179,129 +169,7 @@ export const BORROWER_TYPES_NAMES: { [key: string]: string } = {
   [BORROWER_TYPE.LEGAL_PERSON]: t('Legal Person'),
 };
 
-// eslint-disable-next-line no-shadow
-export enum MSME_TYPES {
-  NOT_INFORMED = 'NOT_INFORMED',
-  MICRO = 'MICRO',
-  SMALL = 'SMALL',
-  MEDIUM = 'MEDIUM',
-  BIG = 'BIG',
-}
-
-export const MSME_TYPES_NAMES: { [key: string]: string } = {
-  [MSME_TYPES.MICRO]: t('0 to 10'),
-  [MSME_TYPES.SMALL]: t('11 to 50'),
-  [MSME_TYPES.MEDIUM]: t('51 to 200'),
-  [MSME_TYPES.BIG]: t('+ 200'),
-  [MSME_TYPES.NOT_INFORMED]: t('Not informed'),
-};
-
-export const MSME_TYPES_OPTIONS: FormSelectOption[] = [
-  {
-    value: MSME_TYPES.MICRO,
-    label: MSME_TYPES_NAMES.MICRO,
-  },
-  {
-    value: MSME_TYPES.SMALL,
-    label: MSME_TYPES_NAMES.SMALL,
-  },
-  {
-    value: MSME_TYPES.MEDIUM,
-    label: MSME_TYPES_NAMES.MEDIUM,
-  },
-  {
-    value: MSME_TYPES.BIG,
-    label: MSME_TYPES_NAMES.BIG,
-  },
-];
-
-// https://clasificaciones.dane.gov.co/ciiu4-0/seccion_clasificacion
-export const SECTOR_TYPES: FormSelectOption[] = [
-  {
-    value: 'agricultura',
-    label: t('Agricultura, ganadería, caza, silvicultura y pesca'),
-  },
-  {
-    value: 'minas',
-    label: t('Explotación de minas y canteras'),
-  },
-  {
-    value: 'manufactura',
-    label: t('Industrias manufactureras'),
-  },
-  {
-    value: 'electricidad',
-    label: t('Suministro de electricidad, gas, vapor y aire acondicionado'),
-  },
-  {
-    value: 'agua',
-    label: t(
-      'Distribución de agua; evacuación y tratamiento de aguas residuales, gestión de desechos y actividades de saneamiento ambiental',
-    ),
-  },
-  {
-    value: 'construccion',
-    label: t('Construcción'),
-  },
-  {
-    value: 'transporte',
-    label: t('Transporte y almacenamiento'),
-  },
-  {
-    value: 'alojamiento',
-    label: t('Alojamiento y servicios de comida'),
-  },
-  {
-    value: 'comunicaciones',
-    label: t('Información y comunicaciones'),
-  },
-  {
-    value: 'actividades_financieras',
-    label: t('Actividades financieras y de seguros'),
-  },
-  {
-    value: 'actividades_inmobiliarias',
-    label: t('Actividades inmobiliarias'),
-  },
-  {
-    value: 'actividades_profesionales',
-    label: t('Actividades profesionales, científicas y técnicas'),
-  },
-  {
-    value: 'actividades_servicios_administrativos',
-    label: t('Actividades de servicios administrativos y de apoyo'),
-  },
-  {
-    value: 'administracion_publica',
-    label: t('Administración pública y defensa; planes de seguridad social de afiliación obligatoria'),
-  },
-  {
-    value: 'educacion',
-    label: t('Educación'),
-  },
-  {
-    value: 'atencion_salud',
-    label: t('Actividades de atención de la salud humana y de asistencia social'),
-  },
-  {
-    value: 'actividades_artisticas',
-    label: t('Actividades artísticas, de entretenimiento y recreación'),
-  },
-  {
-    value: 'otras_actividades',
-    label: t('Otras actividades de servicios'),
-  },
-  {
-    value: 'actividades_hogares',
-    label: t(
-      'Actividades de los hogares individuales en calidad de empleadores; actividades no diferenciadas de los hogares individuales como productores de bienes yservicios para uso propio',
-    ),
-  },
-  {
-    value: 'actividades_organizaciones_extraterritoriales',
-    label: t('Actividades de organizaciones y entidades extraterritoriales'),
-  },
-];
+export const DEFAULT_BORROWER_SIZE = 'NOT_INFORMED';
 
 // eslint-disable-next-line no-shadow
 export enum USER_TYPES {

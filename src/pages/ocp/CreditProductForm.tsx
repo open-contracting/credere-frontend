@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import useConstants from 'src/hooks/useConstants';
 import { CreditProductInput, creditProductSchema } from 'src/schemas/OCPsettings';
 import Button from 'src/stories/button/Button';
 import Checkbox from 'src/stories/checkbox/Checkbox';
@@ -20,10 +21,9 @@ import { getCreditProductFn, getProcurementCategoriesFn } from '../../api/privat
 import {
   BORROWER_TYPE,
   BORROWER_TYPES_NAMES,
-  CREDIT_PRODUCT_OPTIONS,
+  DEFAULT_BORROWER_SIZE,
   DOCUMENTS_TYPE,
   DOCUMENT_TYPES_NAMES,
-  MSME_TYPES_OPTIONS,
   QUERY_KEYS,
 } from '../../constants';
 import { useParamsTypeSafe } from '../../hooks/useParamsTypeSafe';
@@ -39,6 +39,7 @@ export interface CreditProductFormProps {
 
 export function CreditProductForm({ creditProduct, lenderId }: CreditProductFormProps) {
   const t = useT();
+  const constants = useConstants();
   const { createCreditProductMutation, updateCreditProductMutation, isLoading, isError } = useUpsertCreditProduct();
 
   const methods = useForm<CreditProductInput>({
@@ -118,7 +119,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
             className="w-3/5"
             label={t('Select type of business the credit provider is willing to offer credit to')}
             name="borrower_size"
-            options={MSME_TYPES_OPTIONS}
+            options={(constants?.BorrowerSize || []).filter((o) => o.value !== DEFAULT_BORROWER_SIZE)}
             placeholder={t('Borrower size')}
           />
           <FormSelect
@@ -133,7 +134,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
             className="w-3/5"
             label={t('Select the type of credit product')}
             name="type"
-            options={CREDIT_PRODUCT_OPTIONS}
+            options={constants?.CreditType || []}
             placeholder={t('Type')}
           />
 

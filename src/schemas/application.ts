@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { t } from '@transifex/native';
-import { TypeOf, boolean, coerce, nativeEnum, object, string } from 'zod';
+import { TypeOf, boolean, coerce, object, string } from 'zod';
 
-import { APPLICATION_STATUS, DOCUMENTS_TYPE, MSME_TYPES, USER_TYPES } from '../constants';
+import { APPLICATION_STATUS, DOCUMENTS_TYPE, USER_TYPES } from '../constants';
 import { isDateAfterCurrentDate } from '../util';
 import { emailSchema } from './auth';
 
@@ -76,17 +76,7 @@ export const declineFeedbackSchema = object({
 export type DeclineFeedbackInput = TypeOf<typeof declineFeedbackSchema>;
 
 export const creditOptionsSchema = object({
-  borrower_size: nativeEnum(MSME_TYPES, {
-    errorMap: (issue) => {
-      switch (issue.code) {
-        case 'invalid_type':
-        case 'invalid_enum_value':
-          return { message: t('Borrower size is required') };
-        default:
-          return { message: t('Select an option') };
-      }
-    },
-  }),
+  borrower_size: string().min(1, t('Borrower size is required')),
   sector: string().min(1, t('Sector is required')),
   annual_revenue: coerce.number().optional().nullable(),
   amount_requested: coerce.number().min(1, t('Amount requested must be greater than 0')),
@@ -157,7 +147,7 @@ export interface IBorrower {
   legal_identifier: string;
   type: string;
   sector: string;
-  size: MSME_TYPES;
+  size: string;
   annual_revenue?: number;
   currency: string;
   status: string;
@@ -193,7 +183,7 @@ export interface ILenderUpdate extends ILenderBase {
 }
 
 export interface ICreditProductBase {
-  borrower_size: MSME_TYPES;
+  borrower_size: string;
   lower_limit: number;
   upper_limit: number;
   interest_rate: string;
