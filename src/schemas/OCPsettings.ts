@@ -1,7 +1,7 @@
 import { t } from '@transifex/native';
-import { TypeOf, boolean, coerce, nativeEnum, object, preprocess, string } from 'zod';
+import { TypeOf, boolean, coerce, nativeEnum, object, preprocess, record, string } from 'zod';
 
-import { BORROWER_TYPE, CREDIT_PRODUCT_TYPE, DOCUMENTS_TYPE } from '../constants';
+import { CREDIT_PRODUCT_TYPE } from '../constants';
 
 const creditProviderNameSchema = string().min(1, t('Provider name is required'));
 const creditProviderTypeSchema = string().min(1, t('Provider type is required'));
@@ -38,35 +38,8 @@ export const creditProductSchema = object({
     },
   }),
   procurement_category_to_exclude: string(),
-  required_document_types: object({
-    [DOCUMENTS_TYPE.INCORPORATION_DOCUMENT]: boolean(),
-    [DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT]: boolean(),
-    [DOCUMENTS_TYPE.BANK_CERTIFICATION_DOCUMENT]: boolean(),
-    [DOCUMENTS_TYPE.FINANCIAL_STATEMENT]: boolean(),
-    [DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION]: boolean(),
-    [DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE]: boolean(),
-    [DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT]: boolean(),
-  }).refine(
-    (data) =>
-      data[DOCUMENTS_TYPE.INCORPORATION_DOCUMENT] ||
-      data[DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT] ||
-      data[DOCUMENTS_TYPE.BANK_CERTIFICATION_DOCUMENT] ||
-      data[DOCUMENTS_TYPE.FINANCIAL_STATEMENT] ||
-      data[DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION] ||
-      data[DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE] ||
-      data[DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT],
-    {
-      path: [''],
-      message: t('You need to check at least one option'),
-    },
-  ),
-  borrower_types: object({
-    [BORROWER_TYPE.NATURAL_PERSON]: boolean(),
-    [BORROWER_TYPE.LEGAL_PERSON]: boolean(),
-  }).refine((data) => data[BORROWER_TYPE.NATURAL_PERSON] || data[BORROWER_TYPE.LEGAL_PERSON], {
-    path: [''],
-    message: t('You need to check at least one option'),
-  }),
+  required_document_types: record(string().min(1), boolean()),
+  borrower_types: record(string().min(1), boolean()),
   other_fees_total_amount: preprocess(
     (args) => (args === '' ? undefined : args),
     coerce

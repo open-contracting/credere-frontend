@@ -7,13 +7,14 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import ConfirmIcon from 'src/assets/icons/confirm.svg';
 import EditIcon from 'src/assets/icons/edit.svg';
+import useConstants from 'src/hooks/useConstants';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
 import DocumentField from '../../components/DocumentField';
 import FAQComponent from '../../components/FAQComponent';
 import NeedHelpComponent from '../../components/NeedHelpComponent';
-import { APPLICATION_STATUS, DOCUMENTS_TYPE } from '../../constants';
+import { APPLICATION_STATUS } from '../../constants';
 import useApplicationContext from '../../hooks/useApplicationContext';
 import useChangeEmail from '../../hooks/useChangeEmail';
 import useSelectCreditProduct from '../../hooks/useSelectCreditProduct';
@@ -25,6 +26,7 @@ import LinkButton from '../../stories/link-button/LinkButton';
 
 function UploadDocuments() {
   const t = useT();
+  const constants = useConstants();
   const navigate = useNavigate();
   const [editEmail, setEditEmail] = useState<boolean>(false);
   const { isLoading: isLoadingChangeEmail, changeEmailMutation, data } = useChangeEmail();
@@ -98,62 +100,23 @@ function UploadDocuments() {
               'For your application to be processed, we need a few additional pieces of information. Please attach the required documents. This should take no more than a few minutes of your time.',
             )}
           </Text>
-          {showUploaderFor[DOCUMENTS_TYPE.BANK_CERTIFICATION_DOCUMENT] && (
-            <DocumentField
-              className="md:w-3/5"
-              setUploadState={setUploadState}
-              label={t('Please attach the bank certification document for your company.')}
-              documentType={DOCUMENTS_TYPE.BANK_CERTIFICATION_DOCUMENT}
-            />
-          )}
-          {showUploaderFor[DOCUMENTS_TYPE.FINANCIAL_STATEMENT] && (
-            <DocumentField
-              className="md:w-3/5"
-              setUploadState={setUploadState}
-              label={t('Please attach the financial statement for your business for the last accounting period.')}
-              documentType={DOCUMENTS_TYPE.FINANCIAL_STATEMENT}
-            />
-          )}
-          {showUploaderFor[DOCUMENTS_TYPE.INCORPORATION_DOCUMENT] && (
-            <DocumentField
-              className="md:w-3/5"
-              setUploadState={setUploadState}
-              label={t('Please attach your incorporation certificate for your company.')}
-              documentType={DOCUMENTS_TYPE.INCORPORATION_DOCUMENT}
-            />
-          )}
-          {showUploaderFor[DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT] && (
-            <DocumentField
-              className="md:w-3/5"
-              setUploadState={setUploadState}
-              label={t('Please attach your supplier registration document for your company.')}
-              documentType={DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT}
-            />
-          )}
-          {showUploaderFor[DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION] && (
-            <DocumentField
-              className="md:w-3/5"
-              setUploadState={setUploadState}
-              label={t('Please attach your shareholder composition document.')}
-              documentType={DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION}
-            />
-          )}
-          {showUploaderFor[DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE] && (
-            <DocumentField
-              className="md:w-3/5"
-              setUploadState={setUploadState}
-              label={t('Please attach your Certificado de inscripción del Registro Único de Proponentes (RUP).')}
-              documentType={DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE}
-            />
-          )}
-          {showUploaderFor[DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT] && (
-            <DocumentField
-              className="md:w-3/5"
-              setUploadState={setUploadState}
-              label={t('Please attach your last three bank statements.')}
-              documentType={DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT}
-            />
-          )}
+          {applicationContext.state.data?.creditProduct.required_document_types &&
+            Object.keys(applicationContext.state.data?.creditProduct.required_document_types)
+              .filter(
+                (documentTypeKey: string) =>
+                  applicationContext.state.data?.creditProduct.required_document_types[documentTypeKey],
+              )
+              .map((documentTypeKey: string) => (
+                <DocumentField
+                  key={documentTypeKey}
+                  className="md:w-3/5"
+                  setUploadState={setUploadState}
+                  label={
+                    (constants?.BorrowerDocumentType || []).filter((d) => d.value === documentTypeKey)[0]?.label || ''
+                  }
+                  documentType={documentTypeKey}
+                />
+              ))}
 
           <FormProvider {...methods}>
             <Box

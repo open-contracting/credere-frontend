@@ -2,7 +2,7 @@
 import { t } from '@transifex/native';
 import { TypeOf, boolean, coerce, object, string } from 'zod';
 
-import { APPLICATION_STATUS, DOCUMENTS_TYPE, USER_TYPES } from '../constants';
+import { APPLICATION_STATUS, USER_TYPES } from '../constants';
 import { isDateAfterCurrentDate } from '../util';
 import { emailSchema } from './auth';
 
@@ -215,7 +215,7 @@ export interface ILender extends ILenderUpdate {
 
 export interface IBorrowerDocument {
   id: number;
-  type: DOCUMENTS_TYPE;
+  type: string;
   verified: boolean;
   name: string;
 }
@@ -273,7 +273,7 @@ export interface IApplication {
 }
 
 export interface UploadFileInput {
-  type: DOCUMENTS_TYPE;
+  type: string;
   file: File;
   uuid: string;
 }

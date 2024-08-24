@@ -1,8 +1,7 @@
 import { TableRow } from '@mui/material';
-import { useT } from '@transifex/react';
 import DocumentIcon from 'src/assets/icons/document.svg';
+import useConstants from 'src/hooks/useConstants';
 
-import { DOCUMENT_TYPES_NAMES } from '../constants';
 import LinkButton from '../stories/link-button/LinkButton';
 import { ApplicationTableDocumentDataRowProps } from './ApplicationTableDataRow';
 import DataAvailability from './DataAvailability';
@@ -18,7 +17,7 @@ export function ApplicationTableDataDocumentRow({
   isLoading = false,
   readonly = false,
 }: ApplicationTableDocumentDataRowProps) {
-  const t = useT();
+  const constants = useConstants();
   const value = document.name;
   const missing = false;
 
@@ -31,7 +30,9 @@ export function ApplicationTableDataDocumentRow({
 
   return (
     <TableRow>
-      <DataTableCell>{t(DOCUMENT_TYPES_NAMES[document.type])}</DataTableCell>
+      <DataTableCell>
+        {(constants?.BorrowerDocumentType || []).filter((d) => d.value === document.type)[0]?.label || ''}
+      </DataTableCell>
       <DataTableCell>
         <DataAvailability available={!missing} label={document.type} readonly={readonly} />
       </DataTableCell>

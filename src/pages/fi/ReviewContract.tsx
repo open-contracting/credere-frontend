@@ -7,11 +7,11 @@ import { useT } from '@transifex/react';
 import { useCallback, useEffect, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { SIGNED_CONTRACT_DOCUMENT_TYPE } from 'src/constants';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
 import WarnRed from '../../assets/icons/warn-red.svg';
-import { DOCUMENTS_TYPE } from '../../constants';
 import useCompleteApplication from '../../hooks/useCompleteApplication';
 import useDownloadApplication from '../../hooks/useDownloadApplication';
 import useDownloadDocument from '../../hooks/useDownloadDocument';
@@ -57,9 +57,7 @@ function ReviewContract() {
 
   useEffect(() => {
     if (borrower_documents) {
-      const document = borrower_documents?.find(
-        (doc: IBorrowerDocument) => doc.type === DOCUMENTS_TYPE.SIGNED_CONTRACT,
-      );
+      const document = borrower_documents?.find((doc: IBorrowerDocument) => doc.type === SIGNED_CONTRACT_DOCUMENT_TYPE);
       setContract(document);
     }
   }, [borrower_documents]);

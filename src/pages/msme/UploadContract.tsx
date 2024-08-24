@@ -4,13 +4,13 @@ import { Box } from '@mui/material';
 import { useT } from '@transifex/react';
 import { useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { SIGNED_CONTRACT_DOCUMENT_TYPE } from 'src/constants';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
 import DocumentField from '../../components/DocumentField';
 import FAQComponent from '../../components/FAQComponent';
 import NeedHelpComponent from '../../components/NeedHelpComponent';
-import { DOCUMENTS_TYPE } from '../../constants';
 import useApplicationContext from '../../hooks/useApplicationContext';
 import useConfirmContractAmount from '../../hooks/useConfirmContractAmount';
 import { FormContractAmountInput, uploadContractSchema } from '../../schemas/application';
@@ -55,7 +55,7 @@ function UploadContract() {
             className="md:w-3/5"
             setUploadState={setUploadState}
             label={t('Please attach the signed contract.')}
-            documentType={DOCUMENTS_TYPE.SIGNED_CONTRACT}
+            documentType={SIGNED_CONTRACT_DOCUMENT_TYPE}
           />
 
           <FormProvider {...methods}>
@@ -79,7 +79,7 @@ function UploadContract() {
                   <Button
                     label={t('Submit')}
                     type="submit"
-                    disabled={!uploadState[DOCUMENTS_TYPE.SIGNED_CONTRACT] || isLoading}
+                    disabled={!uploadState[SIGNED_CONTRACT_DOCUMENT_TYPE] || isLoading}
                   />
                 </div>
               </div>
