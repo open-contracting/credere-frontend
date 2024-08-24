@@ -78,7 +78,8 @@ function ConfirmSubmission() {
                 .map((documentTypeKey: string) => (
                   <li key={documentTypeKey} className="text-darkest">
                     <Text className="mb-2">
-                      {(constants?.BorrowerDocumentType || []).filter((d) => d.value === documentTypeKey)[0].label}
+                      {(constants?.BorrowerDocumentType || []).filter((d) => d.value === documentTypeKey)[0]?.label ||
+                        ''}
                     </Text>
                   </li>
                 ))}

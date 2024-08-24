@@ -25,7 +25,6 @@ export const COLORS: { [key: string]: string } = {
 export const USER_LOCAL_STORAGE_KEY = 'CREDERE_USER';
 export const ACCESS_TOKEN_LOCAL_STORAGE_KEY = 'CREDERE_USER_ACCESS_TOKEN';
 export const LANG_STORAGE_KEY = 'CREDERE_LANG';
-export const CONSTANTS_STORAGE_KEY = 'CONSTANTS_STORAGE_KEY';
 
 // eslint-disable-next-line no-shadow
 export enum QUERY_KEYS {
@@ -111,6 +110,17 @@ export const CREDIT_PRODUCT_TYPE = {
   LOAN: 'LOAN',
   CREDIT_LINE: 'CREDIT_LINE',
 };
+
+export const CREDIT_PRODUCT_OPTIONS: FormSelectOption[] = [
+  {
+    value: CREDIT_PRODUCT_TYPE.LOAN,
+    label: t('Loan'),
+  },
+  {
+    value: CREDIT_PRODUCT_TYPE.CREDIT_LINE,
+    label: t('Credit line'),
+  },
+];
 
 // eslint-disable-next-line no-shadow
 export enum STATISTICS_DATE_FILTER {

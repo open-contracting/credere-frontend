@@ -7,7 +7,6 @@ export interface IConstant {
   BorrowerSector: Array<FormSelectOption>;
   BorrowerSize: Array<FormSelectOption>;
   BorrowerType: Array<FormSelectOption>;
-  CreditType: Array<FormSelectOption>;
 }
 
 export default function useConstants(): IConstant | null {

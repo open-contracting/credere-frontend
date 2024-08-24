@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import lodash from 'lodash';
 import useConstants from 'src/hooks/useConstants';
 
-import { APPLICATION_STATUS_NAMES, LENDER_TYPES, USER_TYPE_OPTIONS } from '../constants';
+import { APPLICATION_STATUS_NAMES, CREDIT_PRODUCT_OPTIONS, LENDER_TYPES, USER_TYPE_OPTIONS } from '../constants';
 import CURRENCY_FORMAT_OPTIONS from '../constants/intl';
 import { FormSelectOption } from '../stories/form-select/FormSelect';
 
@@ -66,11 +66,7 @@ function findLabelByValue(value: string, options: FormSelectOption[]): string {
 
 export const renderLenderType = (type: string) => findLabelByValue(type, LENDER_TYPES);
 export const renderUserType = (type: string) => findLabelByValue(type, USER_TYPE_OPTIONS);
-
-export const RenderCreditProductType = (type: string) => {
-  const constants = useConstants();
-  return findLabelByValue(type, constants?.CreditType || []);
-};
+export const renderCreditProductType = (type: string) => findLabelByValue(type, CREDIT_PRODUCT_OPTIONS);
 
 export const RenderSector = (type: string) => {
   const constants = useConstants();

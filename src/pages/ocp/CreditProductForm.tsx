@@ -18,7 +18,12 @@ import Title from 'src/stories/title/Title';
 import { z } from 'zod';
 
 import { getCreditProductFn, getProcurementCategoriesFn } from '../../api/private';
-import { DEFAULT_BORROWER_SIZE, QUERY_KEYS, SIGNED_CONTRACT_DOCUMENT_TYPE } from '../../constants';
+import {
+  CREDIT_PRODUCT_OPTIONS,
+  DEFAULT_BORROWER_SIZE,
+  QUERY_KEYS,
+  SIGNED_CONTRACT_DOCUMENT_TYPE,
+} from '../../constants';
 import { useParamsTypeSafe } from '../../hooks/useParamsTypeSafe';
 import useUpsertCreditProduct from '../../hooks/useUpsertCreditProduct';
 import { ICreditProduct } from '../../schemas/application';
@@ -127,7 +132,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
             className="w-3/5"
             label={t('Select the type of credit product')}
             name="type"
-            options={constants?.CreditType || []}
+            options={CREDIT_PRODUCT_OPTIONS}
             placeholder={t('Type')}
           />
 

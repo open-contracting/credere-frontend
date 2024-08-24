@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { ICreditProduct } from '../schemas/application';
 import LinkButton from '../stories/link-button/LinkButton';
-import { RenderCreditProductType, RenderSize } from '../util';
+import { RenderSize, renderCreditProductType } from '../util';
 import { DataTable, HeadCell } from './DataTable';
 
 const headCells: HeadCell<ICreditProduct>[] = [
@@ -40,7 +40,7 @@ const headCells: HeadCell<ICreditProduct>[] = [
     disablePadding: false,
     label: t('Type'),
     sortable: false,
-    render: (row: ICreditProduct) => RenderCreditProductType(row.type),
+    render: (row: ICreditProduct) => renderCreditProductType(row.type),
   },
 ];
 
