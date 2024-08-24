@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import useConstants from 'src/hooks/useConstants';
 import { CreditProductInput, creditProductSchema } from 'src/schemas/OCPsettings';
 import Button from 'src/stories/button/Button';
 import Checkbox from 'src/stories/checkbox/Checkbox';
@@ -18,13 +19,10 @@ import { z } from 'zod';
 
 import { getCreditProductFn, getProcurementCategoriesFn } from '../../api/private';
 import {
-  BORROWER_TYPE,
-  BORROWER_TYPES_NAMES,
   CREDIT_PRODUCT_OPTIONS,
-  DOCUMENTS_TYPE,
-  DOCUMENT_TYPES_NAMES,
-  MSME_TYPES_OPTIONS,
+  DEFAULT_BORROWER_SIZE,
   QUERY_KEYS,
+  SIGNED_CONTRACT_DOCUMENT_TYPE,
 } from '../../constants';
 import { useParamsTypeSafe } from '../../hooks/useParamsTypeSafe';
 import useUpsertCreditProduct from '../../hooks/useUpsertCreditProduct';
@@ -39,6 +37,7 @@ export interface CreditProductFormProps {
 
 export function CreditProductForm({ creditProduct, lenderId }: CreditProductFormProps) {
   const t = useT();
+  const constants = useConstants();
   const { createCreditProductMutation, updateCreditProductMutation, isLoading, isError } = useUpsertCreditProduct();
 
   const methods = useForm<CreditProductInput>({
@@ -118,7 +117,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
             className="w-3/5"
             label={t('Select type of business the credit provider is willing to offer credit to')}
             name="borrower_size"
-            options={MSME_TYPES_OPTIONS}
+            options={(constants?.BorrowerSize || []).filter((o) => o.value !== DEFAULT_BORROWER_SIZE)}
             placeholder={t('Borrower size')}
           />
           <FormSelect
@@ -142,16 +141,14 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
           </Text>
           <Box className="mb-4">
             <Box className="w-3/5 flex flex-col items-start justify-start gap-2">
-              <Checkbox
-                label={BORROWER_TYPES_NAMES[BORROWER_TYPE.NATURAL_PERSON]}
-                name={`borrower_types.${BORROWER_TYPE.NATURAL_PERSON}`}
-                className={errors.borrower_types ? 'text-red' : ''}
-              />
-              <Checkbox
-                label={BORROWER_TYPES_NAMES[BORROWER_TYPE.LEGAL_PERSON]}
-                name={`borrower_types.${BORROWER_TYPE.LEGAL_PERSON}`}
-                className={errors.borrower_types ? 'text-red' : ''}
-              />
+              {(constants?.BorrowerType || []).map((type) => (
+                <Checkbox
+                  key={type.value}
+                  label={type.label}
+                  name={`borrower_types.${type.value}`}
+                  className={errors.borrower_types ? 'text-red' : ''}
+                />
+              ))}
             </Box>
             <FormInputError fieldError={errors.borrower_types} />
           </Box>
@@ -181,41 +178,16 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
           </Text>
           <Box className="mb-4">
             <Box className="w-3/5 flex flex-col items-start justify-start gap-2">
-              <Checkbox
-                label={t(DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.INCORPORATION_DOCUMENT])}
-                name={`required_document_types.${DOCUMENTS_TYPE.INCORPORATION_DOCUMENT}`}
-                className={errors.required_document_types ? 'text-red' : ''}
-              />
-              <Checkbox
-                label={t(DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT])}
-                name={`required_document_types.${DOCUMENTS_TYPE.SUPPLIER_REGISTRATION_DOCUMENT}`}
-                className={errors.required_document_types ? 'text-red' : ''}
-              />
-              <Checkbox
-                label={t(DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.BANK_CERTIFICATION_DOCUMENT])}
-                name={`required_document_types.${DOCUMENTS_TYPE.BANK_CERTIFICATION_DOCUMENT}`}
-                className={errors.required_document_types ? 'text-red' : ''}
-              />
-              <Checkbox
-                label={t(DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.FINANCIAL_STATEMENT])}
-                name={`required_document_types.${DOCUMENTS_TYPE.FINANCIAL_STATEMENT}`}
-                className={errors.required_document_types ? 'text-red' : ''}
-              />
-              <Checkbox
-                label={DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION]}
-                name={`required_document_types.${DOCUMENTS_TYPE.SHAREHOLDER_COMPOSITION}`}
-                className={errors.required_document_types ? 'text-red' : ''}
-              />
-              <Checkbox
-                label={DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE]}
-                name={`required_document_types.${DOCUMENTS_TYPE.CHAMBER_OF_COMMERCE}`}
-                className={errors.required_document_types ? 'text-red' : ''}
-              />
-              <Checkbox
-                label={DOCUMENT_TYPES_NAMES[DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT]}
-                name={`required_document_types.${DOCUMENTS_TYPE.THREE_LAST_BANK_STATEMENT}`}
-                className={errors.required_document_types ? 'text-red' : ''}
-              />
+              {(constants?.BorrowerDocumentType || [])
+                .filter((d) => d.value !== SIGNED_CONTRACT_DOCUMENT_TYPE)
+                .map((type) => (
+                  <Checkbox
+                    key={type.value}
+                    label={type.label}
+                    name={`required_document_types.${type.value}`}
+                    className={errors.required_document_types ? 'text-red' : ''}
+                  />
+                ))}
             </Box>
             <FormInputError fieldError={errors.required_document_types} />
           </Box>

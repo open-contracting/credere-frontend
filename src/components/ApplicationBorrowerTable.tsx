@@ -4,7 +4,7 @@ import { useT } from '@transifex/react';
 import useUpdateBorrower from '../hooks/useUpdateBorrower';
 import useVerifyDataField from '../hooks/useVerifyDataField';
 import { IApplication, IUpdateBorrower } from '../schemas/application';
-import { formatCurrency, renderSector, renderSize } from '../util';
+import { RenderSector, RenderSize, formatCurrency } from '../util';
 import ApplicationTableDataBorrowerRow from './ApplicationTableDataBorrowerRow';
 import { DataTableHeadCell, DataTableHeadLabel } from './DataTable';
 
@@ -125,7 +125,7 @@ export function ApplicationBorrowerTable({
               missingData={borrower.missing_data}
               verifiedData={application.secop_data_verification}
               borrower={borrower}
-              formatter={renderSize}
+              formatter={RenderSize}
               modifiedFields={application.modified_data_fields?.borrower_updates}
             />
             <ApplicationTableDataBorrowerRow
@@ -138,7 +138,7 @@ export function ApplicationBorrowerTable({
               missingData={borrower.missing_data}
               verifiedData={application.secop_data_verification}
               borrower={borrower}
-              formatter={renderSector}
+              formatter={RenderSector}
               modifiedFields={application.modified_data_fields?.borrower_updates}
             />
             <ApplicationTableDataBorrowerRow

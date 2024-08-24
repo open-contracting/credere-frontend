@@ -1,17 +1,9 @@
 import { t } from '@transifex/native';
 import dayjs from 'dayjs';
 import lodash from 'lodash';
+import useConstants from 'src/hooks/useConstants';
 
-import {
-  APPLICATION_STATUS_NAMES,
-  CREDIT_PRODUCT_OPTIONS,
-  LENDER_TYPES,
-  MSME_TYPES,
-  MSME_TYPES_NAMES,
-  MSME_TYPES_OPTIONS,
-  SECTOR_TYPES,
-  USER_TYPE_OPTIONS,
-} from '../constants';
+import { APPLICATION_STATUS_NAMES, CREDIT_PRODUCT_OPTIONS, LENDER_TYPES, USER_TYPE_OPTIONS } from '../constants';
 import CURRENCY_FORMAT_OPTIONS from '../constants/intl';
 import { FormSelectOption } from '../stories/form-select/FormSelect';
 
@@ -75,14 +67,15 @@ function findLabelByValue(value: string, options: FormSelectOption[]): string {
 export const renderLenderType = (type: string) => findLabelByValue(type, LENDER_TYPES);
 export const renderUserType = (type: string) => findLabelByValue(type, USER_TYPE_OPTIONS);
 export const renderCreditProductType = (type: string) => findLabelByValue(type, CREDIT_PRODUCT_OPTIONS);
-export const renderBorrowerSizeType = (type: string) => MSME_TYPES_NAMES[type as MSME_TYPES];
 
-export const renderSector = (type: string) => findLabelByValue(type, SECTOR_TYPES);
-export const renderSize = (type: string) => {
-  if (type === 'NOT_INFORMED') {
-    return t('Not informed');
-  }
-  return findLabelByValue(type, MSME_TYPES_OPTIONS);
+export const RenderSector = (type: string) => {
+  const constants = useConstants();
+  return findLabelByValue(type, constants?.BorrowerSector || []);
+};
+
+export const RenderSize = (type: string) => {
+  const constants = useConstants();
+  return findLabelByValue(type, constants?.BorrowerSize || []);
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

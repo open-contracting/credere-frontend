@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { ICreditProduct } from '../schemas/application';
 import LinkButton from '../stories/link-button/LinkButton';
-import { renderBorrowerSizeType, renderCreditProductType } from '../util';
+import { RenderSize, renderCreditProductType } from '../util';
 import { DataTable, HeadCell } from './DataTable';
 
 const headCells: HeadCell<ICreditProduct>[] = [
@@ -12,7 +12,7 @@ const headCells: HeadCell<ICreditProduct>[] = [
     disablePadding: false,
     label: t('Borrower size'),
     sortable: false,
-    render: (row: ICreditProduct) => renderBorrowerSizeType(row.borrower_size),
+    render: (row: ICreditProduct) => RenderSize(row.borrower_size),
   },
   {
     id: 'lower_limit',

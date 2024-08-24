@@ -3,10 +3,10 @@ import { useT } from '@transifex/react';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
+import { SIGNED_CONTRACT_DOCUMENT_TYPE } from 'src/constants';
 import Text from 'src/stories/text/Text';
 
 import { uploadContractFn, uploadFileFn } from '../api/public';
-import { DOCUMENTS_TYPE } from '../constants';
 import useApplicationContext from '../hooks/useApplicationContext';
 import useSecureApplicationContext from '../hooks/useSecureApplicationContext';
 import { IBorrowerDocument, UploadContractInput, UploadFileInput } from '../schemas/application';
@@ -17,7 +17,7 @@ interface DocumentFieldProps {
   className?: string;
   label: string;
   secure?: boolean;
-  documentType: DOCUMENTS_TYPE;
+  documentType: string;
   setUploadState?: React.Dispatch<
     React.SetStateAction<{
       [key: string]: boolean;
@@ -69,7 +69,7 @@ export function DocumentField({ label, documentType, secure = false, className, 
 
       try {
         setLoading(true);
-        if (documentType === DOCUMENTS_TYPE.SIGNED_CONTRACT) {
+        if (documentType === SIGNED_CONTRACT_DOCUMENT_TYPE) {
           const payload: UploadContractInput = {
             file,
             uuid: application?.uuid,

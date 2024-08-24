@@ -110,3 +110,8 @@ export const findAlternativeCreditOptionFn = async (payload: ApplicationBaseInpu
   const response = await publicApi.post<IApplicationResponse>('applications/find-alternative-credit-option', payload);
   return response.data;
 };
+
+export const getConstants = async () => {
+  const response = await publicApi.get('meta');
+  return response.data;
+};

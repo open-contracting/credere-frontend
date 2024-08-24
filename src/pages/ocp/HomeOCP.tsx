@@ -4,6 +4,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useConstants from 'src/hooks/useConstants';
 import Button from 'src/stories/button/Button';
 import Title from 'src/stories/title/Title';
 
@@ -19,10 +20,11 @@ import DashboardChartContainer from '../../stories/dashboard/DashboardChartConta
 import DashboardItemContainer from '../../stories/dashboard/DashboardItemContainer';
 import { DatePicker, Input } from '../../stories/form-input/FormInput';
 import Loader from '../../stories/loader/Loader';
-import { formatCurrency, formatDateForFileName, renderSector } from '../../util';
+import { formatCurrency, formatDateForFileName } from '../../util';
 
 export function HomeOCP() {
   const t = useT();
+  const constants = useConstants();
   const { data, isLoading } = useGetStatisticsOCPoptIn();
 
   const [sectorData, setSectorData] = useState<ChartData[]>([]);
@@ -36,7 +38,10 @@ export function HomeOCP() {
     const sectorDataArray: ChartData[] = [];
     if (data?.opt_in_stat.sector_statistics) {
       data.opt_in_stat.sector_statistics.forEach((element) => {
-        sectorDataArray.push({ name: renderSector(element.name), value: element.value });
+        sectorDataArray.push({
+          name: constants?.BorrowerSector.find((s) => s.value === element.name)?.label || '',
+          value: element.value,
+        });
       });
       setSectorData(sectorDataArray);
     }
@@ -47,7 +52,7 @@ export function HomeOCP() {
       });
       setRejectedReasonsData(rejectedReasonsDataArray);
     }
-  }, [data]);
+  }, [constants?.BorrowerSector, data]);
 
   const [initialDate, setInitialDate] = useState<string | null>(null);
   const [finalDate, setFinalDate] = useState<string | null>(null);

@@ -4,13 +4,13 @@ import { Box } from '@mui/material';
 import { useT } from '@transifex/react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import useConstants from 'src/hooks/useConstants';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
 import CreditProductConfirmation from '../../components/CreditProductConfirmation';
 import FAQComponent from '../../components/FAQComponent';
 import NeedHelpComponent from '../../components/NeedHelpComponent';
-import { DOCUMENT_TYPES_NAMES } from '../../constants';
 import useApplicationContext from '../../hooks/useApplicationContext';
 import useSubmitApplication from '../../hooks/useSubmitApplication';
 import { SubmitInput, submitSchema } from '../../schemas/application';
@@ -19,6 +19,7 @@ import Checkbox from '../../stories/checkbox/Checkbox';
 
 function ConfirmSubmission() {
   const t = useT();
+  const constants = useConstants();
   const navigate = useNavigate();
   const { isLoading, submitApplicationMutation } = useSubmitApplication();
   const applicationContext = useApplicationContext();
@@ -76,7 +77,10 @@ function ConfirmSubmission() {
                 )
                 .map((documentTypeKey: string) => (
                   <li key={documentTypeKey} className="text-darkest">
-                    <Text className="mb-2">{t(DOCUMENT_TYPES_NAMES[documentTypeKey])}</Text>
+                    <Text className="mb-2">
+                      {(constants?.BorrowerDocumentType || []).filter((d) => d.value === documentTypeKey)[0]?.label ||
+                        ''}
+                    </Text>
                   </li>
                 ))}
           </ul>
