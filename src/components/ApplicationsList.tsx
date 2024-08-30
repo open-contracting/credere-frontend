@@ -44,6 +44,20 @@ const headCellsBase: HeadCell<IApplication & IExtendedApplication>[] = [
     sortable: true,
   },
   {
+    id: 'award_amount',
+    disablePadding: false,
+    label: t('Award amount'),
+    sortable: true,
+    type: 'currency',
+  },
+  {
+    id: 'amount_requested',
+    disablePadding: false,
+    label: t('Amount requested'),
+    sortable: true,
+    type: 'currency',
+  },
+  {
     id: 'borrower_submitted_at',
     type: 'date',
     disablePadding: false,
@@ -230,6 +244,7 @@ export function ApplicationList({ type }: ApplicationListProps) {
         borrower_name: item.borrower.legal_name,
         buyer_name: item.award.buyer_name,
         lender_name: item.lender?.name || t('Not Assigned'),
+        award_amount: item.award.award_amount,
       }));
       setRows(newRows);
       setTotalCount(data.count);

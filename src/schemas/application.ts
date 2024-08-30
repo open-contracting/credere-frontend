@@ -287,12 +287,14 @@ export interface IExtendedApplication {
   buyer_name: string;
   borrower_name: string;
   lender_name: string;
+  award_amount: number;
 }
 
-export const EXTENDED_APPLICATION_FROM: IExtendedApplication = {
+export const EXTENDED_APPLICATION_FROM = {
   buyer_name: 'award.buyer_name',
   borrower_name: 'borrower.legal_name',
   lender_name: 'lender.name',
+  award_amount: 'award.award_amount',
 };
 
 export interface IExtendedUser {
