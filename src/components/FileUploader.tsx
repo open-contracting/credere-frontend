@@ -38,7 +38,8 @@ export function FileUploader({ className, loading, onAcceptedFile }: FileUploade
     useDropzone({
       accept: {
         'image/*': ['.jpeg', '.png'],
-        'application/pdf ': ['.pdf'],
+        'application/pdf': ['.pdf'],
+        'application/octet-stream': ['.zip'],
       },
       maxFiles: 1,
       maxSize: maxSizeMB * 1024 * 1024,
@@ -103,7 +104,10 @@ export function FileUploader({ className, loading, onAcceptedFile }: FileUploade
         {loading && <Progress />}
       </div>
       <Text className="text-sm font-light mt-4">
-        {t('Accepted formats are PDF, JPEG and PNG. The maximum file size permitted is {maxSizeMB}MB.', { maxSizeMB })}
+        {t(
+          'Accepted formats are PDF, JPEG, PNG and ZIP (if you have more than one document). The maximum file size permitted is {maxSizeMB}MB.',
+          { maxSizeMB },
+        )}
       </Text>
     </>
   );
