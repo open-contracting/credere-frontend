@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { Grid, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -186,6 +187,7 @@ export interface DataTableProps<T> {
   headCells: HeadCell<T>[];
   useEmptyRows?: boolean;
   handleRequestSort?: (property: Extract<keyof T, string>, sortOrder: Order) => void;
+  handleSearch?: (searchValue: string) => void;
   pagination?: HandlePagination;
   actions?: (row: T, isLoading?: boolean) => JSX.Element;
   isLoading?: boolean;
@@ -207,6 +209,7 @@ export function DataTable<T>({
   headCells,
   useEmptyRows = true,
   handleRequestSort,
+  handleSearch,
   pagination,
   actions,
   isLoading,
@@ -218,6 +221,7 @@ export function DataTable<T>({
   const [orderBy, setOrderBy] = React.useState<Extract<keyof T, string> | undefined>();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(PAGE_SIZES[0]);
+  const [searchValue, setSearchQuery] = React.useState('');
 
   useEffect(() => {
     if (!handleRequestSort && orderBy) {
@@ -229,7 +233,7 @@ export function DataTable<T>({
     } else {
       setVisibleRows(rows);
     }
-  }, [order, orderBy, handleRequestSort, rows]);
+  }, [order, orderBy, handleRequestSort, handleSearch, rows]);
 
   const onRequestSort = (_event: React.MouseEvent<unknown>, property: Extract<keyof T, string>) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -252,6 +256,12 @@ export function DataTable<T>({
     setPage(0);
     pagination?.handleChangePage(0, newRowsPerPage);
   };
+  const onChangeSearchValue = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setSearchQuery(event.target.value);
+    if (handleSearch) {
+      handleSearch(event.target.value);
+    }
+  };
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows = useMemo(
@@ -261,6 +271,17 @@ export function DataTable<T>({
 
   return (
     <Box>
+      <Grid container className="pb-5 w-full" alignItems="center">
+        <Grid item className="w-full">
+          <TextField
+            className="w-full bg-background bg-white"
+            label={t('Search by business: name, email or identifier, or buyer name')}
+            onChange={onChangeSearchValue}
+            value={searchValue}
+          />
+        </Grid>
+      </Grid>
+
       <Paper elevation={0} square className="bg-background">
         <TableContainer>
           <Table aria-labelledby="data-table" size="medium">
@@ -325,6 +346,7 @@ export function DataTable<T>({
 
 DataTable.defaultProps = {
   handleRequestSort: undefined,
+  handleSearch: undefined,
   pagination: undefined,
   useEmptyRows: true,
   actions: undefined,

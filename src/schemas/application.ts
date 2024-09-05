@@ -321,6 +321,7 @@ export interface PaginationInput {
   page_size: number;
   sort_field: string;
   sort_order: 'asc' | 'desc';
+  search_value?: string;
 }
 
 export interface IApplicationsListResponse {
