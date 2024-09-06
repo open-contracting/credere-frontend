@@ -188,6 +188,7 @@ export function ApplicationList({ type }: ApplicationListProps) {
     page_size: PAGE_SIZES[0],
     sort_field: 'application.borrower_submitted_at',
     sort_order: 'desc',
+    search_value: '',
   });
 
   const [rows, setRows] = useState<ExtendendApplication[]>([]);
@@ -210,6 +211,13 @@ export function ApplicationList({ type }: ApplicationListProps) {
       ...prev,
       sort_field,
       sort_order: sortOrder,
+    }));
+  };
+
+  const handleSearch = (search_value: string) => {
+    setPayload((prev) => ({
+      ...prev,
+      search_value,
     }));
   };
 
@@ -303,6 +311,7 @@ export function ApplicationList({ type }: ApplicationListProps) {
       rows={rows}
       useEmptyRows
       handleRequestSort={handleRequestSort}
+      handleSearch={handleSearch}
       headCells={headCells}
       pagination={{
         totalCount,
