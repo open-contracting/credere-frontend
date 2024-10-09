@@ -30,6 +30,10 @@ export function StageFour() {
     navigate('../stage-five');
   };
 
+  const onGoBackHandler = () => {
+    navigate('../stage-three');
+  };
+
   return (
     <>
       <Title type="page" label={t('Application Approval Process')} className="mb-4" />
@@ -52,10 +56,13 @@ export function StageFour() {
         to="../stage-two"
       />
       {application && <ApplicationAwardTable readonly className="xl:w-4/5" application={application} />}
-      <LinkButton className="mb-8 mt-4 px-1" label={t('Go back to Award Data')} component={Link} to="../stage-three" />
       <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
         <div>
           <Button className="md:mr-4" label={t('Go Home')} onClick={onGoHomeHandler} />
+        </div>
+
+        <div>
+          <Button className="md:mr-4" label={t('Go Back')} onClick={onGoBackHandler} />
         </div>
 
         <div>

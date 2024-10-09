@@ -60,11 +60,6 @@ export function StageFiveApproved() {
       <Text className="mb-4">
         {t('The credit application has been approved. The business will be notified by email shortly.')}
       </Text>
-      <Text className="mb-8">
-        {t(
-          "Once the contract between the business and the buyer has been signed the funds can be arranged to be transferred to the business's business bank account.",
-        )}
-      </Text>
       <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
         <div>
           <Button primary={false} className="md:mr-4" label={t('Back to home')} onClick={onGoHomeHandler} />

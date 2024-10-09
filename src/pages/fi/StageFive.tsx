@@ -14,6 +14,8 @@ import FormInput from 'src/stories/form-input/FormInput';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
 
+import CheckChecked from '../../assets/icons/check-checked.svg';
+import WarnRed from '../../assets/icons/warn-red.svg';
 import CreditProductReview from '../../components/CreditProductReview';
 import useApproveApplication from '../../hooks/useApproveApplication';
 import useLangContext from '../../hooks/useLangContext';
@@ -98,6 +100,17 @@ export function StageFive() {
             label={t('{legal_name} has passed compliance checks', { legal_name: application?.borrower.legal_name })}
           />
           <FormInput
+            className="md:w-2/5"
+            label={t('Enter the credit final amount (if approving the application)')}
+            helperText={t(
+              'The final credit amount can be different if the contract value is significantly different to the award value.',
+            )}
+            name="disbursed_final_amount"
+            big={false}
+            type="currency"
+            placeholder={t('Credit amount')}
+          />
+          <FormInput
             multiline
             rows={4}
             className="w-3/5"
@@ -115,13 +128,16 @@ export function StageFive() {
             </div>
 
             <div>
-              <Button className="md:mr-4" label={t('Approve')} type="submit" disabled={isLoading} />
+              <Button className="md:mr-4" icon={CheckChecked} label={t('Approve')} type="submit" disabled={isLoading} />
             </div>
 
             <div>
-              <Button label={t('Reject')} onClick={onRejectApplication} disabled={isLoading} />
+              <Button label={t('Reject')} icon={WarnRed} onClick={onRejectApplication} disabled={isLoading} />
             </div>
           </div>
+          <Text className="mb-10 text-m font-light">
+            {t('Data for the MSME application will only be stored for one week after the process has been completed. ')}
+          </Text>
         </Box>
       </FormProvider>
       <RejectApplicationDialog open={openDialog} handleClose={handleClose} />

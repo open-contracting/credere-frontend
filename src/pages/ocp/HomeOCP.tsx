@@ -374,8 +374,8 @@ export function HomeOCP() {
           <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
             <div className="col-span-2 flex flex-row">
               <DashboardItemContainer
-                description={t('Total applications approved')}
-                value={dataKPI.statistics_kpis.applications_approved_count}
+                description={t('Total applications with credit disbursed')}
+                value={dataKPI.statistics_kpis.applications_with_credit_disbursed_count}
               />
 
               <DashboardItemContainer
@@ -383,20 +383,6 @@ export function HomeOCP() {
                 value={dataKPI.statistics_kpis.applications_rejected_count}
               />
             </div>
-            <div className="col-span-2 flex flex-row">
-              <DashboardItemContainer
-                description={t('Total applications with credit disbursed')}
-                value={dataKPI.statistics_kpis.applications_with_credit_disbursed_count}
-              />
-
-              <DashboardItemContainer
-                suffix="%"
-                description={t('Approved applications with credit disbursed')}
-                value={dataKPI.statistics_kpis.proportion_of_disbursed}
-              />
-            </div>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
             <div className="col-span-2 flex flex-row">
               <DashboardItemContainer
                 color="red"
@@ -412,6 +398,8 @@ export function HomeOCP() {
                 value={dataKPI.statistics_kpis.average_processing_time}
               />
             </div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
             <div className="col-span-2 flex flex-row">
               <DashboardItemContainer
                 valueClassName="text-[20px]"

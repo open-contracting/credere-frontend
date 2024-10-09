@@ -1,6 +1,6 @@
 import { Link as MUILink } from '@mui/material';
 import { useT } from '@transifex/react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import StepImageEN from 'src/assets/pages/en/stage-one.svg';
 import StepImageES from 'src/assets/pages/es/stage-one.svg';
 import useApplicationContext from 'src/hooks/useSecureApplicationContext';
@@ -33,6 +33,7 @@ export function StageOne() {
     <>
       <Title type="page" label={t('Application Approval Process')} className="mb-4" />
       <Text className="text-lg mb-12">{application?.borrower.legal_name}</Text>
+      <Link to="../stage-one">.</Link>
       <img className="mb-14 ml-8" src={StepImage} alt="step" />
       <Title type="section" label={t('Stage 1: Business Information')} className="mb-8" />
       <Text className="mb-4">
@@ -55,7 +56,7 @@ export function StageOne() {
 
       <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
         <div>
-          <Button className="md:mr-4" label={t('Go Back')} onClick={onBackHandler} />
+          <Button className="md:mr-4" label={t('Go Home')} onClick={onBackHandler} />
         </div>
 
         <div>

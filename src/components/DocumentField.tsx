@@ -3,13 +3,12 @@ import { useT } from '@transifex/react';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
-import { SIGNED_CONTRACT_DOCUMENT_TYPE } from 'src/constants';
+import { uploadFileFn } from 'src/api/public';
 import Text from 'src/stories/text/Text';
 
-import { uploadContractFn, uploadFileFn } from '../api/public';
 import useApplicationContext from '../hooks/useApplicationContext';
 import useSecureApplicationContext from '../hooks/useSecureApplicationContext';
-import { IBorrowerDocument, UploadContractInput, UploadFileInput } from '../schemas/application';
+import { IBorrowerDocument, UploadFileInput } from '../schemas/application';
 import LinkButton from '../stories/link-button/LinkButton';
 import FileUploader from './FileUploader';
 
@@ -69,24 +68,16 @@ export function DocumentField({ label, documentType, secure = false, className, 
 
       try {
         setLoading(true);
-        if (documentType === SIGNED_CONTRACT_DOCUMENT_TYPE) {
-          const payload: UploadContractInput = {
-            file,
-            uuid: application?.uuid,
-          };
 
-          const uploaded = await uploadContractFn(payload);
-          setCurrent(uploaded);
-        } else {
-          const payload: UploadFileInput = {
-            file,
-            type: documentType,
-            uuid: application?.uuid,
-          };
+        const payload: UploadFileInput = {
+          file,
+          type: documentType,
+          uuid: application?.uuid,
+        };
 
-          const uploaded = await uploadFileFn(payload);
-          setCurrent(uploaded);
-        }
+        const uploaded = await uploadFileFn(payload);
+        setCurrent(uploaded);
+
         setLoading(false);
         setShowUploader(false);
         if (setUploadState) setUploadState((prev) => ({ ...prev, [documentType]: true }));

@@ -21,6 +21,10 @@ export function StageThree() {
   const langContext = useLangContext();
   const StepImage = langContext.state.selected.startsWith('en') ? StepImageEN : StepImageES;
 
+  const onGoHomeHandler = () => {
+    navigate('/');
+  };
+
   const onBackHandler = () => {
     navigate('../stage-two');
   };
@@ -52,9 +56,11 @@ export function StageThree() {
       {application && <ApplicationAwardTable className="xl:w-4/5" application={application} />}
       <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
         <div>
+          <Button className="md:mr-4" label={t('Go Home')} onClick={onGoHomeHandler} />
+        </div>
+        <div>
           <Button className="md:mr-4" label={t('Go Back')} onClick={onBackHandler} />
         </div>
-
         <div>
           <Button label={t('Next')} onClick={onNextHandler} />
         </div>

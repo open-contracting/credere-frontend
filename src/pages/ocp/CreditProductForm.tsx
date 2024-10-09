@@ -18,12 +18,7 @@ import Title from 'src/stories/title/Title';
 import { z } from 'zod';
 
 import { getCreditProductFn, getProcurementCategoriesFn } from '../../api/private';
-import {
-  CREDIT_PRODUCT_OPTIONS,
-  DEFAULT_BORROWER_SIZE,
-  QUERY_KEYS,
-  SIGNED_CONTRACT_DOCUMENT_TYPE,
-} from '../../constants';
+import { CREDIT_PRODUCT_OPTIONS, DEFAULT_BORROWER_SIZE, QUERY_KEYS } from '../../constants';
 import { useParamsTypeSafe } from '../../hooks/useParamsTypeSafe';
 import useUpsertCreditProduct from '../../hooks/useUpsertCreditProduct';
 import { ICreditProduct } from '../../schemas/application';
@@ -178,16 +173,14 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
           </Text>
           <Box className="mb-4">
             <Box className="w-3/5 flex flex-col items-start justify-start gap-2">
-              {(constants?.BorrowerDocumentType || [])
-                .filter((d) => d.value !== SIGNED_CONTRACT_DOCUMENT_TYPE)
-                .map((type) => (
-                  <Checkbox
-                    key={type.value}
-                    label={type.label}
-                    name={`required_document_types.${type.value}`}
-                    className={errors.required_document_types ? 'text-red' : ''}
-                  />
-                ))}
+              {(constants?.BorrowerDocumentType || []).map((type) => (
+                <Checkbox
+                  key={type.value}
+                  label={type.label}
+                  name={`required_document_types.${type.value}`}
+                  className={errors.required_document_types ? 'text-red' : ''}
+                />
+              ))}
             </Box>
             <FormInputError fieldError={errors.required_document_types} />
           </Box>
