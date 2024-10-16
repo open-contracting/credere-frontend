@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Box } from '@mui/material';
 import { useT } from '@transifex/react';
 import { debounce } from 'lodash';
@@ -22,6 +23,7 @@ import {
   ICreditProduct,
   RepaymentTermsInput,
   SelectCreditProductInput,
+  repaymentTermsSchema,
 } from '../../schemas/application';
 import FormInput from '../../stories/form-input/FormInput';
 import FormSelect from '../../stories/form-select/FormSelect';
@@ -59,6 +61,7 @@ function ViewCreditOptions() {
       repayment_months: applicationContext.state.data?.application.calculator_data.repayment_months || undefined,
       payment_start_date: applicationContext.state.data?.application.calculator_data.payment_start_date || undefined,
     },
+    resolver: zodResolver(repaymentTermsSchema),
   });
 
   const [borrowerSizeValue, amountRequestedValue] = watchMainForm(['borrower_size', 'amount_requested']);
