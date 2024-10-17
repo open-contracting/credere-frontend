@@ -55,10 +55,8 @@ export default function SecureApplicationLayout() {
       if (lastSegment !== 'view') {
         if (application.status === APPLICATION_STATUS.LAPSED) {
           navigate('./view');
-        } else if (application.status === APPLICATION_STATUS.COMPLETED) {
-          if (lastSegment !== 'application-completed') navigate('./application-completed');
         } else if (application.status === APPLICATION_STATUS.APPROVED) {
-          if (lastSegment !== 'stage-five-approved') navigate('./stage-five-approved');
+          if (lastSegment !== 'application-completed') navigate('./application-completed');
         } else if (application.status === APPLICATION_STATUS.REJECTED) {
           if (lastSegment !== 'stage-five-rejected') navigate('./stage-five-rejected');
         }

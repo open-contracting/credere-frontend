@@ -278,11 +278,6 @@ export interface UploadFileInput {
   uuid: string;
 }
 
-export interface UploadContractInput {
-  file: File;
-  uuid: string;
-}
-
 export interface IExtendedApplication {
   buyer_name: string;
   borrower_name: string;
@@ -355,6 +350,7 @@ export const approveSchema = object({
   compliant_checks_completed: boolean(),
   compliant_checks_passed: boolean(),
   additional_comments: string(),
+  disbursed_final_amount: coerce.number(),
 });
 
 export type FormApprovedInput = TypeOf<typeof approveSchema>;
@@ -372,23 +368,6 @@ export const rejectSchema = object({
 export type FormRejectInput = TypeOf<typeof rejectSchema>;
 
 export type RejectApplicationInput = FormRejectInput & PrivateApplicationInput;
-
-const amountSchema = coerce.number();
-export const uploadContractSchema = object({
-  contract_amount_submitted: amountSchema,
-});
-
-export type FormContractAmountInput = TypeOf<typeof uploadContractSchema>;
-
-export type ContractAmountInput = FormContractAmountInput & ApplicationBaseInput;
-
-export const completeApplicationSchema = object({
-  disbursed_final_amount: amountSchema,
-});
-
-export type FormCompleteApplicationInput = TypeOf<typeof completeApplicationSchema>;
-
-export type CompleteApplicationInput = FormCompleteApplicationInput & PrivateApplicationInput;
 
 export const changeEmailSchema = object({
   new_email: emailSchema,

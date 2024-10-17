@@ -14,7 +14,7 @@ function TermsAndConditions() {
   return (
     <>
       <Title type="page" label={t('Terms and Conditions')} className="mb-4" />
-      <Text className="text-sm mb-12">{t('Version 2: Julio de 2024')}</Text>
+      <Text className="text-sm mb-12">{t('Version 3: Octubre de 2024')}</Text>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 md:col-span-2 md:mr-10">
@@ -95,8 +95,6 @@ function TermsAndConditions() {
             <ListItem>{t('- Enviada')}</ListItem>
             <ListItem>{t('- Iniciada')}</ListItem>
             <ListItem>{t('- Aprobada')}</ListItem>
-            <ListItem>{t('- Contrato subido')}</ListItem>
-            <ListItem>{t('- Completada')}</ListItem>
             <ListItem>{t('- Rechazada')}</ListItem>
             <ListItem>{t('- Información solicitada')}</ListItem>
           </List>

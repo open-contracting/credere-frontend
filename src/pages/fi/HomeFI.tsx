@@ -49,12 +49,6 @@ export function HomeFI() {
             </div>
             <div className="col-span-1">
               <DashboardItemContainer
-                description={t('Application(s) approved')}
-                value={data.statistics_kpis.applications_approved_count}
-              />
-            </div>
-            <div className="col-span-1">
-              <DashboardItemContainer
                 color="red"
                 description={t('Application(s) rejected')}
                 value={data.statistics_kpis.applications_rejected_count}
@@ -66,13 +60,6 @@ export function HomeFI() {
               <DashboardItemContainer
                 description={t('Application(s) with credit disbursed')}
                 value={data.statistics_kpis.applications_with_credit_disbursed_count}
-              />
-            </div>
-            <div className="col-span-1">
-              <DashboardItemContainer
-                suffix="%"
-                description={t('Approved application(s) with credit disbursed')}
-                value={data.statistics_kpis.proportion_of_disbursed}
               />
             </div>
             <div className="col-span-1">

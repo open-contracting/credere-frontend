@@ -35,7 +35,6 @@ import { USER_TYPES } from '../constants';
 import PageLayout from '../layout/PageLayout';
 import SecureApplicationLayout from '../layout/SecureApplicationLayout';
 import ApplicationCompleted from '../pages/fi/ApplicationCompleted';
-import ReviewContract from '../pages/fi/ReviewContract';
 import StageFiveApproved from '../pages/fi/StageFiveApproved';
 import StageFiveRejected from '../pages/fi/StageFiveRejected';
 import ViewApplication from '../pages/fi/ViewApplication';
@@ -46,8 +45,6 @@ import ConfirmFindAlternativeCredit from '../pages/msme/ConfirmFindAlternativeCr
 import ConfirmSubmission from '../pages/msme/ConfirmSubmission';
 import Rejected from '../pages/msme/Rejected';
 import TermsAndConditions from '../pages/msme/TermsAndConditions';
-import UploadContract from '../pages/msme/UploadContract';
-import UploadContractCompleted from '../pages/msme/UploadContractCompleted';
 import UploadDocuments from '../pages/msme/UploadDocuments';
 import { LoadApplication } from '../pages/ocp/ApplicationDetail';
 import Applications from '../pages/ocp/Applications';
@@ -288,14 +285,6 @@ const router = createBrowserRouter([
         element: <UploadDocuments />,
       },
       {
-        path: 'upload-contract',
-        element: <UploadContract />,
-      },
-      {
-        path: 'upload-contract-completed',
-        element: <UploadContractCompleted />,
-      },
-      {
         path: 'application-completed',
         element: <ApplicationMSMECompleted />,
       },
@@ -369,10 +358,6 @@ const router = createBrowserRouter([
       {
         path: 'stage-five-rejected',
         element: <StageFiveRejected />,
-      },
-      {
-        path: 'complete-application',
-        element: <ReviewContract />,
       },
       {
         path: 'application-completed',

@@ -8,15 +8,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getApplicationsFI, getApplicationsOCP } from '../api/private';
-import {
-  APPLICATION_STATUS,
-  COMPLETED_STATUS,
-  NOT_STARTED_STATUS,
-  PAGE_SIZES,
-  QUERY_KEYS,
-  STARTED_STATUS,
-  USER_TYPES,
-} from '../constants';
+import { COMPLETED_STATUS, NOT_STARTED_STATUS, PAGE_SIZES, QUERY_KEYS, STARTED_STATUS, USER_TYPES } from '../constants';
 import useDownloadApplication from '../hooks/useDownloadApplication';
 import useStartApplication from '../hooks/useStartApplication';
 import {
@@ -101,7 +93,18 @@ const actionsFIBase = (
         component={Link}
         disabled={isLoading}
         to={`/applications/${row.id}/stage-one`}
-        label={t('Continue')}
+        label={t('Review')}
+        size="small"
+        noIcon
+      />
+    )}
+    {STARTED_STATUS.includes(row.status) && (
+      <LinkButton
+        className="p-1 justify-start"
+        component={Link}
+        disabled={isLoading}
+        to={`/applications/${row.id}/stage-five`}
+        label={t('Decide')}
         size="small"
         noIcon
       />
@@ -111,17 +114,6 @@ const actionsFIBase = (
         className="p-1 justify-start"
         onClick={() => onStartApplicationHandler(row.id)}
         label={t('Start')}
-        disabled={isLoading}
-        size="small"
-        noIcon
-      />
-    )}
-    {APPLICATION_STATUS.CONTRACT_UPLOADED === row.status && (
-      <LinkButton
-        className="p-1 justify-start"
-        component={Link}
-        to={`/applications/${row.id}/complete-application`}
-        label={t('Review')}
         disabled={isLoading}
         size="small"
         noIcon
