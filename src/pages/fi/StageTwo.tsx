@@ -86,21 +86,27 @@ export function StageTwo() {
       <Link to="../stage-two" />
       <img className="mb-14 ml-8" src={StepImage} alt="step" />
       <Title type="section" label={t('Stage 2: Business Documents')} className="mb-8" />
-      <Text className="mb-4">{t('Review and verify the data for the business.')}</Text>
-      <Text className="mb-4">
-        {t(
-          'If a document looks incorrect or is not clearly visible, contact the business and ask them to provide the document again.',
-        )}
-      </Text>
-      <LinkButton
-        className="mb-2 px-1"
-        icon={EmailIcon}
-        disabled={application?.status === APPLICATION_STATUS.INFORMATION_REQUESTED}
-        label={t('Email SME for documents')}
-        onClick={onComposeEmailHandler}
-      />
-      {application && (
-        <ApplicationDocumentsTable allowDataVerification className="xl:w-4/5" application={application} />
+      {application?.lender?.external_onboarding_url ? (
+        <Text className="mb-4">{t('No documents subbmited as part of this application')}</Text>
+      ) : (
+        <div>
+          <Text className="mb-4">{t('Review and verify the data for the business.')}</Text>
+          <Text className="mb-4">
+            {t(
+              'If a document looks incorrect or is not clearly visible, contact the business and ask them to provide the document again.',
+            )}
+          </Text>
+          <LinkButton
+            className="mb-2 px-1"
+            icon={EmailIcon}
+            disabled={application?.status === APPLICATION_STATUS.INFORMATION_REQUESTED}
+            label={t('Email SME for documents')}
+            onClick={onComposeEmailHandler}
+          />
+          {application && (
+            <ApplicationDocumentsTable allowDataVerification className="xl:w-4/5" application={application} />
+          )}
+        </div>
       )}
       <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
         <div>

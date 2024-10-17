@@ -175,7 +175,7 @@ export interface ILenderBase {
   type: string;
   sla_days: number;
   logo_filename: string;
-  default_pre_approval_message: string;
+  external_onboarding_url: string;
 }
 
 export interface ILenderUpdate extends ILenderBase {
