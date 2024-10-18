@@ -349,7 +349,6 @@ export type EmailToSMEInput = FormEmailInput & PrivateApplicationInput;
 export const approveSchema = object({
   compliant_checks_completed: boolean(),
   compliant_checks_passed: boolean(),
-  additional_comments: string(),
   disbursed_final_amount: coerce.number(),
 });
 
