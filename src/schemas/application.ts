@@ -349,7 +349,12 @@ export type EmailToSMEInput = FormEmailInput & PrivateApplicationInput;
 export const approveSchema = object({
   compliant_checks_completed: boolean(),
   compliant_checks_passed: boolean(),
-  disbursed_final_amount: coerce.number(),
+  disbursed_final_amount: coerce
+    .number({
+      required_error: t('Disbursed final amount is required'),
+      invalid_type_error: t('Disbursed final amount must be a number'),
+    })
+    .gt(0, t('Disbursed final amount must be greater than 0')),
 });
 
 export type FormApprovedInput = TypeOf<typeof approveSchema>;
