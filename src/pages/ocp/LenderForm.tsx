@@ -124,11 +124,11 @@ export function LenderForm({ lender }: LenderFormProps) {
           <FormInput
             className="w-3/5"
             label={t(
-              'A default pre-approval message in html format (with a link to their onboarding platform, for example), to be sent in the pre-approved email to the supplier',
+              'A URL to the lender onboarding system, if any, to indicate to the borrower where to continue the application process',
             )}
-            name="default_pre_approval_message"
+            name="external_onboarding_url"
             big={false}
-            placeholder={t('Credit provider default pre-approval message')}
+            placeholder={t('URL to the lender onboarding system')}
           />
           <FormInput
             className="w-3/5"

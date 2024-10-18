@@ -48,13 +48,18 @@ export function StageFour() {
         component={Link}
         to="../stage-one"
       />
-      {application && <ApplicationDocumentsTable readonly className="xl:w-4/5" application={application} />}
-      <LinkButton
-        className="mb-2 mt-4 px-1"
-        label={t('Go back to business Documents')}
-        component={Link}
-        to="../stage-two"
-      />
+      {application && !application.lender?.external_onboarding_url && (
+        <div>
+          <ApplicationDocumentsTable readonly className="xl:w-4/5" application={application} />
+
+          <LinkButton
+            className="mb-2 mt-4 px-1"
+            label={t('Go back to business Documents')}
+            component={Link}
+            to="../stage-two"
+          />
+        </div>
+      )}
       {application && <ApplicationAwardTable readonly className="xl:w-4/5" application={application} />}
       <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
         <div>

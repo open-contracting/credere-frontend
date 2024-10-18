@@ -110,14 +110,6 @@ export function StageFive() {
             type="currency"
             placeholder={t('Credit amount')}
           />
-          <FormInput
-            multiline
-            rows={4}
-            className="w-3/5"
-            name="additional_comments"
-            label={t('Add any additional comments here (optional)')}
-            big={false}
-          />
           <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
             <div>
               <Button primary={false} className="md:mr-4" label={t('Go Home')} onClick={onGoHomeHandler} />
