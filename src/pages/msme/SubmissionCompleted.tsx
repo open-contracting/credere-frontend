@@ -23,34 +23,44 @@ function SubmissionCompleted() {
               },
             )}
           </Text>
-          <Text className="mb-8">
-            {t(
-              'Pending some checks by {fi_name}, we will be in touch via email to let you know if the application has been approved and tell you the next steps for funds to be disbursed to you.',
-              {
-                fi_name: applicationContext.state.data?.lender.name,
-              },
-            )}
-          </Text>
-          <Text className="mb-8">
-            {t(
-              'In the meantime if you have any questions, you can reach out to member of the Open Contracting Partnership team at: credere@open-contracting.org.',
-            )}
-          </Text>
-
-          <div className="mt-5 mb-10 grid grid-cols-1 gap-4 md:flex md:gap-0">
-            <div>
+          {applicationContext.state.data?.lender.external_onboarding_url ? (
+            <div className="mb-8">
+              <Text className="mb-8">
+                {t(
+                  'The financial institution you chose requires an onboarding process in its systems, please complete the last step by completing the formalization process with {fi_name} by clicking on the following button.',
+                  {
+                    fi_name: applicationContext.state.data?.lender.name,
+                  },
+                )}
+              </Text>
               <Button
-                className="md:mr-4"
-                label={t('Learn more about OCP')}
+                label={t('Complete the onboarding process')}
                 target="_blank"
                 rel="noreferrer"
                 component={MUILink}
-                href={`${import.meta.env.VITE_MORE_INFO_OCP_URL || 'https://www.open-contracting.org/es/'}`}
+                href={`${applicationContext.state.data?.lender.external_onboarding_url}`}
               />
             </div>
+          ) : (
+            <div>
+              <Text className="mb-8">
+                {t(
+                  'Pending some checks by {fi_name}, we will be in touch via email to let you know if the application has been approved and tell you the next steps for funds to be disbursed to you.',
+                  {
+                    fi_name: applicationContext.state.data?.lender.name,
+                  },
+                )}
+              </Text>
+            </div>
+          )}
+          <div>
+            <Text className="mb-8">
+              {t(
+                'In the meantime if you have any questions, you can reach out to member of the Open Contracting Partnership team at: credere@open-contracting.org.',
+              )}
+            </Text>
           </div>
         </div>
-        <div className="my-6 md:my-0 md:ml-10" />
       </div>
     </>
   );

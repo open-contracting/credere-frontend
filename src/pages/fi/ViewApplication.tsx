@@ -47,9 +47,12 @@ export function ViewApplication() {
               <Title type="section" className="mb-4" label={t('Business Data')} />
               <ApplicationBorrowerTable readonly className="xl:w-4/5" application={application} />
 
-              <Title type="section" className="mt-10 mb-4" label={t('Business Documents')} />
-              <ApplicationDocumentsTable readonly className="xl:w-4/5" application={application} />
-
+              {!application.lender?.external_onboarding_url && (
+                <>
+                  <Title type="section" className="mt-10 mb-4" label={t('Business Documents')} />
+                  <ApplicationDocumentsTable readonly className="xl:w-4/5" application={application} />
+                </>
+              )}
               <Title type="section" className="mt-10 mb-4" label={t('Award Data')} />
               <ApplicationAwardTable readonly className="xl:w-4/5" application={application} />
             </>
