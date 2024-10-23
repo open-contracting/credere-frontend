@@ -1,5 +1,6 @@
 import { Link as MUILink } from '@mui/material';
 import { useT } from '@transifex/react';
+import { globalConfig } from 'src/api/axios';
 import { Button } from 'src/stories/button/Button';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
@@ -9,6 +10,9 @@ import useApplicationContext from '../../hooks/useApplicationContext';
 function SubmissionCompleted() {
   const t = useT();
   const applicationContext = useApplicationContext();
+
+  const uuid = applicationContext.state.data?.application.uuid;
+  const externalOnboardingUrl = `${globalConfig.baseURL}/applications/uuid/${uuid}/access-external-onboarding`;
 
   return (
     <>
@@ -33,13 +37,7 @@ function SubmissionCompleted() {
                   },
                 )}
               </Text>
-              <Button
-                label={t('Complete the onboarding process')}
-                target="_blank"
-                rel="noreferrer"
-                component={MUILink}
-                href={`${applicationContext.state.data?.lender.external_onboarding_url}`}
-              />
+              <Button label={t('Complete the onboarding process')} component={MUILink} href={externalOnboardingUrl} />
             </div>
           ) : (
             <div>
