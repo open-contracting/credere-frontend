@@ -82,30 +82,40 @@ function UploadDocuments() {
     }
   };
 
+  const documents = applicationContext.state.data?.creditProduct.required_document_types;
+
+  const documentsRequired =
+    documents &&
+    Object.keys(documents).filter(
+      (documentTypeKey: string) =>
+        applicationContext.state.data?.creditProduct.required_document_types[documentTypeKey],
+    ).length > 0;
+
+  function getTitle() {
+    if (application?.status === APPLICATION_STATUS.INFORMATION_REQUESTED) {
+      return t('Submit Additional Data');
+    }
+    if (documentsRequired) {
+      return t('Credit Application');
+    }
+    return t('Confirm contact email');
+  }
+
   return (
     <>
-      <Title
-        type="page"
-        label={
-          applicationContext.state.data?.application.status === APPLICATION_STATUS.INFORMATION_REQUESTED
-            ? t('Submit Additional Data')
-            : t('Credit Application')
-        }
-        className="mb-10"
-      />
+      <Title type="page" label={getTitle()} className="mb-10" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 md:col-span-2 md:mr-10">
-          <Text className="mb-8">
-            {t(
-              'For your application to be processed, we need a few additional pieces of information. Please attach the required documents. This should take no more than a few minutes of your time.',
-            )}
-          </Text>
-          {applicationContext.state.data?.creditProduct.required_document_types &&
-            Object.keys(applicationContext.state.data?.creditProduct.required_document_types)
-              .filter(
-                (documentTypeKey: string) =>
-                  applicationContext.state.data?.creditProduct.required_document_types[documentTypeKey],
-              )
+          {documentsRequired && (
+            <Text className="mb-8">
+              {t(
+                'For your application to be processed, we need a few additional pieces of information. Please attach the required documents. This should take no more than a few minutes of your time.',
+              )}
+            </Text>
+          )}
+          {documents &&
+            Object.keys(documents)
+              .filter((documentTypeKey: string) => documents[documentTypeKey])
               .map((documentTypeKey: string) => (
                 <DocumentField
                   key={documentTypeKey}
