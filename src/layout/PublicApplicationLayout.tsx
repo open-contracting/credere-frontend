@@ -41,7 +41,8 @@ export default function PublicApplicationLayout() {
         application.status === APPLICATION_STATUS.SUBMITTED ||
         application.status === APPLICATION_STATUS.STARTED
       ) {
-        if (lastSegment !== 'submission-completed') navigate('./submission-completed');
+        if (lastSegment === 'external-onboarding-completed') navigate('./external-onboarding-completed');
+        else if (lastSegment !== 'submission-completed') navigate('./submission-completed');
       } else if (application.pending_documents || application.status === APPLICATION_STATUS.INFORMATION_REQUESTED) {
         if (lastSegment !== 'documents' && lastSegment !== 'confirm-submission') navigate('./documents');
       } else if (application.credit_product_id && !application.lender_id) {
