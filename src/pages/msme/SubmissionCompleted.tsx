@@ -1,5 +1,6 @@
 import { Link as MUILink } from '@mui/material';
 import { useT } from '@transifex/react';
+import { globalConfig } from 'src/api/axios';
 import { Button } from 'src/stories/button/Button';
 import Text from 'src/stories/text/Text';
 import Title from 'src/stories/title/Title';
@@ -9,6 +10,9 @@ import useApplicationContext from '../../hooks/useApplicationContext';
 function SubmissionCompleted() {
   const t = useT();
   const applicationContext = useApplicationContext();
+
+  const uuid = applicationContext.state.data?.application.uuid;
+  const externalOnboardingUrl = `${globalConfig.baseURL}/applications/uuid/${uuid}/access-external-onboarding`;
 
   return (
     <>
@@ -28,18 +32,18 @@ function SubmissionCompleted() {
             <div className="mb-8">
               <Text className="mb-8">
                 {t(
-                  'The financial institution you chose requires an onboarding process in its systems, please complete the last step by completing the formalization process with {fi_name} by clicking on the following button.',
+                  'However, {fi_name} requires an onboarding process in its systems, please complete the last step by completing the formalization process with {fi_name} by clicking on the following button.',
                   {
                     fi_name: applicationContext.state.data?.lender.name,
                   },
                 )}
               </Text>
               <Button
-                label={t('Complete the onboarding process')}
-                target="_blank"
-                rel="noreferrer"
+                label={t('Complete the onboarding process with {fi_name}', {
+                  fi_name: applicationContext.state.data?.lender.name,
+                })}
                 component={MUILink}
-                href={`${applicationContext.state.data?.lender.external_onboarding_url}`}
+                href={externalOnboardingUrl}
               />
             </div>
           ) : (
@@ -60,6 +64,8 @@ function SubmissionCompleted() {
                 'In the meantime if you have any questions, you can reach out to member of the Open Contracting Partnership team at: credere@open-contracting.org.',
               )}
             </Text>
+            <Text className="mb-8">{t('Thank you for counting with us')}</Text>
+            <Text className="mb-8">{t('Credere team')}</Text>
           </div>
         </div>
       </div>
