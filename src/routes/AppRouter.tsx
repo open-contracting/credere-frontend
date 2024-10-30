@@ -20,6 +20,7 @@ import StageTwo from 'src/pages/fi/StageTwo';
 import Decline from 'src/pages/msme/Decline';
 import DeclineCompleted from 'src/pages/msme/DeclineCompleted';
 import DeclineFeedback from 'src/pages/msme/DeclineFeedback';
+import ExternalOnboardingCompleted from 'src/pages/msme/ExternalOnboardingCompleted';
 import FrequentlyAskedQuestionsPage from 'src/pages/msme/FrequentlyAskedQuestionsPage';
 import IntroMsme from 'src/pages/msme/IntroMsme';
 import SubmissionCompleted from 'src/pages/msme/SubmissionCompleted';
@@ -295,6 +296,10 @@ const router = createBrowserRouter([
       {
         path: 'submission-completed',
         element: <SubmissionCompleted />,
+      },
+      {
+        path: 'external-onboarding-completed',
+        element: <ExternalOnboardingCompleted />,
       },
       {
         path: 'decline',

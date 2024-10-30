@@ -27,7 +27,8 @@ function SubmissionCompleted() {
               },
             )}
           </Text>
-          {applicationContext.state.data?.lender.external_onboarding_url ? (
+          {applicationContext.state.data?.lender.external_onboarding_url &&
+          !applicationContext.state.data?.application.borrower_accessed_external_onboarding_at ? (
             <div className="mb-8">
               <Text className="mb-8">
                 {t(
@@ -63,7 +64,7 @@ function SubmissionCompleted() {
                 'In the meantime if you have any questions, you can reach out to member of the Open Contracting Partnership team at: credere@open-contracting.org.',
               )}
             </Text>
-            <Text className="mb-8">{t('Thank you for counting with us')}</Text>
+            <Text className="mb-8">{t('Thank you for choosing us')}</Text>
             <Text className="mb-8">{t('Credere team')}</Text>
           </div>
         </div>

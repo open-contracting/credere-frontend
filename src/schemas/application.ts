@@ -238,7 +238,6 @@ export interface IApplication {
   award_borrowed_identifier: string;
   borrower_id: number;
   lender_id?: number;
-  contract_amount_submitted?: any;
   amount_requested?: any;
   currency: string;
   repayment_months?: number;
@@ -257,7 +256,7 @@ export interface IApplication {
   lender_approved_at?: any;
   lender_approved_data: any;
   lender_rejected_data: any;
-  borrower_uploaded_contracted_at?: any;
+  borrower_accessed_external_onboarding_at?: any;
   completed_in_days?: any;
   created_at: string;
   updated_at: string;

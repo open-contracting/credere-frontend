@@ -41,6 +41,7 @@ export default function PublicApplicationLayout() {
         application.status === APPLICATION_STATUS.SUBMITTED ||
         application.status === APPLICATION_STATUS.STARTED
       ) {
+        if (lastSegment === 'external-onboarding-completed') return;
         if (lastSegment !== 'submission-completed') navigate('./submission-completed');
       } else if (application.pending_documents || application.status === APPLICATION_STATUS.INFORMATION_REQUESTED) {
         if (lastSegment !== 'documents' && lastSegment !== 'confirm-submission') navigate('./documents');
