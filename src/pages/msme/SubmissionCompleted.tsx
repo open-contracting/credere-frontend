@@ -64,7 +64,7 @@ function SubmissionCompleted() {
                 'In the meantime if you have any questions, you can reach out to member of the Open Contracting Partnership team at: credere@open-contracting.org.',
               )}
             </Text>
-            <Text className="mb-8">{t('Thank you for counting with us')}</Text>
+            <Text className="mb-8">{t('Thank you for choosing us')}</Text>
             <Text className="mb-8">{t('Credere team')}</Text>
           </div>
         </div>
