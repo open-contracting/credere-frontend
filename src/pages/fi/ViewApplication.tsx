@@ -11,7 +11,7 @@ import ApplicationBorrowerTable from '../../components/ApplicationBorrowerTable'
 import ApplicationDocumentsTable from '../../components/ApplicationDocumentsTable';
 import DataDisplay from '../../components/DataDisplay';
 import { APPLICATION_STATUS } from '../../constants';
-import { renderApplicationStatus } from '../../util';
+import { RenderStatusString } from '../../util';
 
 export function ViewApplication() {
   const t = useT();
@@ -30,7 +30,7 @@ export function ViewApplication() {
         <>
           <Box className="flex flex-row items-center mb-2">
             <Text className="text-lg mr-2">{t('Status:')}</Text>
-            <Text className="text-lg font-light">{t(renderApplicationStatus(application.status))}</Text>
+            <Text className="text-lg font-light">{RenderStatusString(application.status)}</Text>
           </Box>
 
           {application.status === APPLICATION_STATUS.APPROVED && (

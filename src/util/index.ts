@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import lodash from 'lodash';
 import useConstants from 'src/hooks/useConstants';
 
-import { APPLICATION_STATUS_NAMES, CREDIT_PRODUCT_OPTIONS, LENDER_TYPES, USER_TYPE_OPTIONS } from '../constants';
+import { CREDIT_PRODUCT_OPTIONS, LENDER_TYPES, USER_TYPE_OPTIONS } from '../constants';
 import CURRENCY_FORMAT_OPTIONS from '../constants/intl';
 import { FormSelectOption } from '../stories/form-select/FormSelect';
 
@@ -57,8 +57,6 @@ export const formatPaymentMethod = (value: { [key: string]: string }) => {
   return paymentMethodString;
 };
 
-export const renderApplicationStatus = (status: string) => APPLICATION_STATUS_NAMES[status] || t('INVALID_STATUS');
-
 function findLabelByValue(value: string, options: FormSelectOption[]): string {
   const foundType = options.find((option) => option.value === value);
   return foundType?.label || value;
@@ -76,6 +74,16 @@ export const RenderSector = (type: string) => {
 export const RenderSize = (type: string) => {
   const constants = useConstants();
   return findLabelByValue(type, constants?.BorrowerSize || []);
+};
+
+export const RenderStatusString = (status: string) => {
+  const constants = useConstants();
+  return findLabelByValue(status, constants?.ApplicationStatus || []);
+};
+
+export const RenderStatus = ({ status }: { status: string }) => {
+  const constants = useConstants();
+  return findLabelByValue(status, constants?.ApplicationStatus || []);
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -70,18 +70,6 @@ export const NOT_STARTED_STATUS = [APPLICATION_STATUS.SUBMITTED];
 
 export const STARTED_STATUS = [APPLICATION_STATUS.STARTED, APPLICATION_STATUS.INFORMATION_REQUESTED];
 
-export const APPLICATION_STATUS_NAMES: { [key: string]: string } = {
-  [APPLICATION_STATUS.PENDING]: t('Pending'),
-  [APPLICATION_STATUS.ACCEPTED]: t('Accepted'),
-  [APPLICATION_STATUS.LAPSED]: t('Lapsed'),
-  [APPLICATION_STATUS.DECLINED]: t('Declined'),
-  [APPLICATION_STATUS.SUBMITTED]: t('Submitted'),
-  [APPLICATION_STATUS.STARTED]: t('Started'),
-  [APPLICATION_STATUS.APPROVED]: t('Approved'),
-  [APPLICATION_STATUS.REJECTED]: t('Rejected'),
-  [APPLICATION_STATUS.INFORMATION_REQUESTED]: t('Information requested'),
-};
-
 export const LENDER_TYPES: FormSelectOption[] = [
   {
     value: 'commercial_bank',

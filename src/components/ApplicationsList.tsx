@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { RenderStatus } from 'src/util';
 
 import { getApplicationsFI, getApplicationsOCP } from '../api/private';
 import { COMPLETED_STATUS, NOT_STARTED_STATUS, PAGE_SIZES, QUERY_KEYS, STARTED_STATUS, USER_TYPES } from '../constants';
@@ -19,7 +20,6 @@ import {
   PaginationInput,
 } from '../schemas/application';
 import LinkButton from '../stories/link-button/LinkButton';
-import { renderApplicationStatus } from '../util';
 import { DataTable, HeadCell, Order } from './DataTable';
 
 const headCellsBase: HeadCell<IApplication & IExtendedApplication>[] = [
@@ -59,11 +59,11 @@ const headCellsBase: HeadCell<IApplication & IExtendedApplication>[] = [
   },
   {
     id: 'status',
+    type: 'label',
     disablePadding: false,
     label: t('Stage'),
     sortable: true,
-    render: (row: IApplication & IExtendedApplication, headCell: HeadCell<IApplication & IExtendedApplication>) =>
-      renderApplicationStatus(String(row[headCell.id])),
+    render: (row: IApplication) => <RenderStatus status={row.status} />,
   },
 ];
 

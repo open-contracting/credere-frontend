@@ -65,7 +65,7 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
   return stabilizedThis.map((el) => el[0]);
 }
 
-export type DataCellType = 'date' | 'currency' | undefined;
+export type DataCellType = 'date' | 'currency' | 'label' | undefined;
 
 export interface HeadCell<T> {
   disablePadding: boolean;
@@ -299,7 +299,8 @@ export function DataTable<T>({
                 <TableRow tabIndex={-1} key={`${String(index)}`}>
                   {headCells.map((headCell) => (
                     <DataTableCell key={`${String(`${row[headCell.id]}-${index}-${headCell.id}`)}`}>
-                      {headCell.type !== 'date' && t(renderValue(row, headCell))}
+                      {headCell.type === 'label' && renderValue(row, headCell)}
+                      {headCell.type !== 'date' && headCell.type !== 'label' && t(renderValue(row, headCell))}
                       {headCell.type === 'date' && formatDateFromString(String(row[headCell.id]))}
                     </DataTableCell>
                   ))}

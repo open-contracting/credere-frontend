@@ -19,7 +19,7 @@ import { useParamsTypeSafe } from '../../hooks/useParamsTypeSafe';
 import { IApplication } from '../../schemas/application';
 import LinkButton from '../../stories/link-button/LinkButton';
 import { Loader } from '../../stories/loader/Loader';
-import { renderApplicationStatus } from '../../util';
+import { RenderStatusString } from '../../util';
 import ApplicationErrorPage from '../msme/ApplicationErrorPage';
 
 export interface ApplicationDetailProps {
@@ -50,7 +50,7 @@ export function ApplicationDetail({ application, readonly }: ApplicationDetailPr
       </div>
       <Box className="flex flex-row items-center mb-2">
         <Text className="text-lg mr-2">{t('Status:')}</Text>
-        <Text className="text-lg font-light">{t(renderApplicationStatus(application.status))}</Text>
+        <Text className="text-lg font-light">{RenderStatusString(application.status)}</Text>
       </Box>
 
       {application.status === APPLICATION_STATUS.APPROVED && <DataDisplay data={application.lender_approved_data} />}

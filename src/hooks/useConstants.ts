@@ -3,6 +3,7 @@ import { getConstants } from 'src/api/public';
 import { FormSelectOption } from 'src/stories/form-select/FormSelect';
 
 export interface IConstant {
+  ApplicationStatus: Array<FormSelectOption>;
   BorrowerDocumentType: Array<FormSelectOption>;
   BorrowerSector: Array<FormSelectOption>;
   BorrowerSize: Array<FormSelectOption>;
