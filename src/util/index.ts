@@ -1,6 +1,7 @@
 import { t } from '@transifex/native';
 import dayjs from 'dayjs';
 import lodash from 'lodash';
+import { createElement } from 'react';
 import useConstants from 'src/hooks/useConstants';
 
 import { CREDIT_PRODUCT_OPTIONS, LENDER_TYPES, USER_TYPE_OPTIONS } from '../constants';
@@ -81,10 +82,10 @@ export const RenderStatusString = (status: string) => {
   return findLabelByValue(status, constants?.ApplicationStatus || []);
 };
 
-export const RenderStatus = ({ status }: { status: string }) => {
+export function RenderStatus({ status }: { status: string }) {
   const constants = useConstants();
-  return findLabelByValue(status, constants?.ApplicationStatus || []);
-};
+  return createElement('div', {}, findLabelByValue(status, constants?.ApplicationStatus || []));
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getProperty(obj: any, propertyString: string): any {
