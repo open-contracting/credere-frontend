@@ -1,4 +1,4 @@
-FROM node:20.6 as build-stage
+FROM node:20.6 AS build-stage
 
 WORKDIR /workdir
 
@@ -9,7 +9,7 @@ COPY . .
 
 RUN npm run build
 
-FROM nginxinc/nginx-unprivileged:latest as production-stage
+FROM nginxinc/nginx-unprivileged:latest AS production-stage
 USER root
 ARG client_max_body_size
 COPY --from=build-stage --chown=nginx:root /workdir/dist /usr/share/nginx/html
