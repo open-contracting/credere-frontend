@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
-import { getConstants } from 'src/api/public';
-import { FormSelectOption } from 'src/stories/form-select/FormSelect';
+import { useQuery } from "@tanstack/react-query";
+import { getConstants } from "src/api/public";
+import type { FormSelectOption } from "src/stories/form-select/FormSelect";
 
 export interface IConstant {
   ApplicationStatus: Array<FormSelectOption>;
@@ -12,7 +12,7 @@ export interface IConstant {
 
 export default function useConstants(): IConstant | null {
   const { data: constants } = useQuery({
-    queryKey: ['constants'],
+    queryKey: ["constants"],
     queryFn: async () => getConstants(),
     staleTime: 120000,
   });

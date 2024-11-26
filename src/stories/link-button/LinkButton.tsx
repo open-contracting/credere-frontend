@@ -1,9 +1,9 @@
-import { Box, Button as MUIButton, ButtonProps as MUIButtonProps } from '@mui/material';
-import { twMerge } from 'tailwind-merge';
+import { Box, Button as MUIButton, type ButtonProps as MUIButtonProps } from "@mui/material";
+import { twMerge } from "tailwind-merge";
 
-import ArrowInCircleIcon from '../../assets/icons/arrow-in-circle.svg';
+import ArrowInCircleIcon from "../../assets/icons/arrow-in-circle.svg";
 
-type SizeType = 'large' | 'small';
+type SizeType = "large" | "small";
 
 export interface LinkButtonProps {
   label: string;
@@ -32,18 +32,20 @@ export function LinkButton<C extends React.ElementType>({
       startIcon={!noIcon ? <img className={iconClassName} src={icon} alt="button-icon" /> : undefined}
       className={twMerge(
         [
-          'text-darkest font-normal disabled:opacity-50',
-          size === 'large' ? 'px-6 py-4 text-lg' : 'px-4 py-2 text-sm',
+          "text-darkest font-normal disabled:opacity-50",
+          size === "large" ? "px-6 py-4 text-lg" : "px-4 py-2 text-sm",
           `bg-transparent hover:bg-transparent normal-case ${className}`,
-        ].join(' '),
+        ].join(" "),
       )}
       // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}>
+      {...props}
+    >
       <Box
         className={`border-grass border-b-2 ${labelClassName}`}
         sx={{
-          borderBottomStyle: 'solid',
-        }}>
+          borderBottomStyle: "solid",
+        }}
+      >
         {label}
       </Box>
     </MUIButton>
@@ -51,7 +53,7 @@ export function LinkButton<C extends React.ElementType>({
 }
 
 LinkButton.defaultProps = {
-  size: 'large' as SizeType,
+  size: "large" as SizeType,
   noIcon: false,
   icon: ArrowInCircleIcon,
   iconClassName: undefined,

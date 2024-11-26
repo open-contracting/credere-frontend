@@ -6,16 +6,16 @@ import {
   RadioGroup as MUIRadioGroup,
   Radio,
   Typography,
-} from '@mui/material';
-import { useT } from '@transifex/react';
-import { useMemo } from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
-import { twMerge } from 'tailwind-merge';
+} from "@mui/material";
+import { useT } from "@transifex/react";
+import { useMemo } from "react";
+import { Controller, useFormContext } from "react-hook-form";
+import { twMerge } from "tailwind-merge";
 
-import { getProperty } from '../../util';
-import { FieldErrorType } from '../form-input/FormInput';
-import { FormSelectOption } from '../form-select/FormSelect';
-import { Text } from '../text/Text';
+import { getProperty } from "../../util";
+import type { FieldErrorType } from "../form-input/FormInput";
+import type { FormSelectOption } from "../form-select/FormSelect";
+import { Text } from "../text/Text";
 
 export type RadioGroupProps = {
   name: string;
@@ -30,7 +30,7 @@ export type RadioGroupProps = {
 const defaultRenderOption = (option: FormSelectOption) => option.label;
 
 const isStringArray = (obj: unknown): obj is string[] =>
-  Array.isArray(obj) && obj.every((item) => typeof item === 'string');
+  Array.isArray(obj) && obj.every((item) => typeof item === "string");
 
 export function RadioGroup({
   name,
@@ -58,7 +58,7 @@ export function RadioGroup({
   }, [options]);
 
   const fieldError: FieldErrorType = getProperty(errors, name);
-  const defultValueForm = getProperty(defaultValues, name) || defaultValue || '';
+  const defultValueForm = getProperty(defaultValues, name) || defaultValue || "";
 
   return (
     <Controller
@@ -71,13 +71,13 @@ export function RadioGroup({
           <MUIRadioGroup {...field}>
             {optionsChecked.map((option) => (
               <FormControlLabel
-                sx={{ paddingLeft: '4px' }}
+                sx={{ paddingLeft: "4px" }}
                 key={`key-${option.value}`}
                 value={option.value}
                 control={
                   <Radio
                     sx={{
-                      padding: '4px',
+                      padding: "4px",
                     }}
                     color="default"
                   />
@@ -85,7 +85,8 @@ export function RadioGroup({
                 label={
                   <Typography
                     variant="body1"
-                    className={twMerge(`ml-2 text-darkest text-lg ${fieldError ? 'text-red' : ''} ${labelClassName}`)}>
+                    className={twMerge(`ml-2 text-darkest text-lg ${fieldError ? "text-red" : ""} ${labelClassName}`)}
+                  >
                     {t(renderOption(option))}
                   </Typography>
                 }
@@ -94,7 +95,7 @@ export function RadioGroup({
           </MUIRadioGroup>
 
           <FormHelperText className="text-red text-base mx-0" error={!!fieldError}>{`${
-            fieldError ? fieldError?.message : ''
+            fieldError ? fieldError?.message : ""
           }`}</FormHelperText>
         </FormControl>
       )}
@@ -103,9 +104,9 @@ export function RadioGroup({
 }
 
 RadioGroup.defaultProps = {
-  className: '',
+  className: "",
   defaultValue: undefined,
-  labelClassName: '',
+  labelClassName: "",
   renderOption: defaultRenderOption,
 };
 

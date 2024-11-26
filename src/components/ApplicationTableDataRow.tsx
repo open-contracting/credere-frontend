@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
+import type {
   IAward,
   IBorrower,
   IBorrowerDocument,
   IModifiedDataFields,
   IUpdateAward,
   IUpdateBorrower,
-} from '../schemas/application';
+} from "../schemas/application";
 
 export interface ApplicationTableDataRowProps {
   label: string;
   formLabel?: string;
   missingData: { [key: string]: boolean };
-  type?: 'currency' | 'date-picker' | 'date-field';
+  type?: "currency" | "date-picker" | "date-field";
   preWhitespace?: boolean;
   formatter?: (value: any) => string;
   isLoading: boolean;

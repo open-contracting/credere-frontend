@@ -1,12 +1,12 @@
-import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import axios from 'axios';
-import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { type UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import axios from "axios";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
-import { createCreditProductFn, updateCreditProductFn } from '../api/private';
-import { QUERY_KEYS } from '../constants';
-import { ICreditProduct, ICreditProductBase, ICreditProductUpdate } from '../schemas/application';
+import { createCreditProductFn, updateCreditProductFn } from "../api/private";
+import { QUERY_KEYS } from "../constants";
+import type { ICreditProduct, ICreditProductBase, ICreditProductUpdate } from "../schemas/application";
 
 type IUseUpsertCreditProduct = {
   createCreditProductMutation: UseMutateFunction<ICreditProduct, unknown, ICreditProductBase, unknown>;
@@ -34,13 +34,13 @@ export default function useUpsertCreditProduct(): IUseUpsertCreditProduct {
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data && error.response.data.detail) {
-          enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-            variant: 'error',
+          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t('Error creating credit product. {error}', { error }), {
-          variant: 'error',
+        enqueueSnackbar(t("Error creating credit product. {error}", { error }), {
+          variant: "error",
         });
       }
     },
@@ -50,27 +50,30 @@ export default function useUpsertCreditProduct(): IUseUpsertCreditProduct {
     mutate: updateCreditProductMutation,
     isLoading: isLoadingUpdate,
     isError: isErrorUpdate,
-  } = useMutation<ICreditProduct, unknown, ICreditProductUpdate, unknown>((payload) => updateCreditProductFn(payload), {
-    onSuccess: (data) => {
-      queryClient.invalidateQueries([QUERY_KEYS.lenders, `${data.lender_id}`]);
-      queryClient.invalidateQueries([QUERY_KEYS.credit_product, `${data.id}`]);
-      navigate(`/settings/lender/${data.lender_id}/edit`);
-      return data;
-    },
-    onError: (error) => {
-      if (axios.isAxiosError(error) && error.response) {
-        if (error.response.data && error.response.data.detail) {
-          enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-            variant: 'error',
+  } = useMutation<ICreditProduct, unknown, ICreditProductUpdate, unknown>(
+    (payload) => updateCreditProductFn(payload),
+    {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries([QUERY_KEYS.lenders, `${data.lender_id}`]);
+        queryClient.invalidateQueries([QUERY_KEYS.credit_product, `${data.id}`]);
+        navigate(`/settings/lender/${data.lender_id}/edit`);
+        return data;
+      },
+      onError: (error) => {
+        if (axios.isAxiosError(error) && error.response) {
+          if (error.response.data && error.response.data.detail) {
+            enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+              variant: "error",
+            });
+          }
+        } else {
+          enqueueSnackbar(t("Error updating credit product. {error}", { error }), {
+            variant: "error",
           });
         }
-      } else {
-        enqueueSnackbar(t('Error updating credit product. {error}', { error }), {
-          variant: 'error',
-        });
-      }
+      },
     },
-  });
+  );
 
   return {
     createCreditProductMutation,

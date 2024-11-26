@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { TableRow } from '@mui/material';
+import { TableRow } from "@mui/material";
 
-import { IUpdateAward } from '../schemas/application';
-import { ApplicationTableAwardDataRowProps } from './ApplicationTableDataRow';
-import DataAvailability from './DataAvailability';
-import DataAvailabilityForm from './DataAvailabilityForm';
-import { DataTableCell } from './DataTable';
+import type { IUpdateAward } from "../schemas/application";
+import type { ApplicationTableAwardDataRowProps } from "./ApplicationTableDataRow";
+import DataAvailability from "./DataAvailability";
+import DataAvailabilityForm from "./DataAvailabilityForm";
+import { DataTableCell } from "./DataTable";
 
 export function ApplicationTableDataAwardRow({
   label,
@@ -37,7 +37,7 @@ export function ApplicationTableDataAwardRow({
           modifiedFields={modifiedFields}
         />
       </DataTableCell>
-      {!missing && <DataTableCell className={preWhitespace ? 'whitespace-pre' : ''}>{formattedValue}</DataTableCell>}
+      {!missing && <DataTableCell className={preWhitespace ? "whitespace-pre" : ""}>{formattedValue}</DataTableCell>}
       {missing && updateValue && (
         <DataTableCell>
           <DataAvailabilityForm

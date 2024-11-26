@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Container } from '@mui/material';
-import { useT } from '@transifex/react';
-import { useEffect } from 'react';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import useResetPassword from 'src/hooks/useResetPassword';
-import { ResetPasswordInput, resetPasswordSchema } from 'src/schemas/auth';
-import { Button } from 'src/stories/button/Button';
-import FormInput from 'src/stories/form-input/FormInput';
-import Text from 'src/stories/text/Text';
-import Title from 'src/stories/title/Title';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box, Container } from "@mui/material";
+import { useT } from "@transifex/react";
+import { useEffect } from "react";
+import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import useResetPassword from "src/hooks/useResetPassword";
+import { type ResetPasswordInput, resetPasswordSchema } from "src/schemas/auth";
+import { Button } from "src/stories/button/Button";
+import FormInput from "src/stories/form-input/FormInput";
+import Text from "src/stories/text/Text";
+import Title from "src/stories/title/Title";
 
 export function ResetPasswordPage() {
   const t = useT();
@@ -42,23 +42,25 @@ export function ResetPasswordPage() {
       <Title
         type="page"
         className="lg:pt-16 lg:pl-20 md:pt-10 md:pl-12 sm:pt-9 sm:pl-10 pt-8 pl-6 lg:mb-16 mb-10"
-        label={t('Forgot Password')}
+        label={t("Forgot Password")}
       />
       <Container
         maxWidth={false}
         className="bg-background"
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-          }}>
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
           <FormProvider {...methods}>
             <Box
               component="form"
@@ -66,19 +68,25 @@ export function ResetPasswordPage() {
               noValidate
               autoComplete="off"
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                backgroundColor: '#ffffff',
-                p: { xs: '1rem', sm: '2rem' },
-                width: { sm: '580px' },
+                display: "flex",
+                flexDirection: "column",
+                backgroundColor: "#ffffff",
+                p: { xs: "1rem", sm: "2rem" },
+                width: { sm: "580px" },
                 borderRadius: 0,
-              }}>
-              <Title type="section" className="self-center mb-8" label={t('Enter your email to reset password')} />
-              <FormInput name="username" label={t('Email Address')} type="email" placeholder={t('example@email.com')} />
+              }}
+            >
+              <Title type="section" className="self-center mb-8" label={t("Enter your email to reset password")} />
+              <FormInput
+                name="username"
+                label={t("Email Address")}
+                type="email"
+                placeholder={t("example@email.com")}
+              />
 
-              <Button className="mb-10" label={t('Submit')} type="submit" disabled={isLoading} />
+              <Button className="mb-10" label={t("Submit")} type="submit" disabled={isLoading} />
               <Box>
-                <Text className="inline-block">{t('Need help? Email')} </Text>
+                <Text className="inline-block">{t("Need help? Email")} </Text>
                 <Text className="inline-block underline ml-1">
                   <a className="text-darkest" href="mailto:credere@open-contracting.org">
                     credere@open-contracting.org

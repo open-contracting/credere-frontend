@@ -1,25 +1,25 @@
-import { useQuery } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { z } from 'zod';
+import { useQuery } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { z } from "zod";
 
-import { getApplicationFn } from '../api/private';
-import { APPLICATION_STATUS, DISPATCH_ACTIONS, QUERY_KEYS, USER_TYPES } from '../constants';
-import { useParamsTypeSafe } from '../hooks/useParamsTypeSafe';
-import useApplicationContext from '../hooks/useSecureApplicationContext';
-import ApplicationErrorPage from '../pages/msme/ApplicationErrorPage';
-import ProtectedRoute from '../routes/ProtectedRoute';
-import { IApplication } from '../schemas/application';
-import Loader from '../stories/loader/Loader';
-import PageLayout from './PageLayout';
+import { getApplicationFn } from "../api/private";
+import { APPLICATION_STATUS, DISPATCH_ACTIONS, QUERY_KEYS, USER_TYPES } from "../constants";
+import { useParamsTypeSafe } from "../hooks/useParamsTypeSafe";
+import useApplicationContext from "../hooks/useSecureApplicationContext";
+import ApplicationErrorPage from "../pages/msme/ApplicationErrorPage";
+import ProtectedRoute from "../routes/ProtectedRoute";
+import type { IApplication } from "../schemas/application";
+import Loader from "../stories/loader/Loader";
+import PageLayout from "./PageLayout";
 
 export default function SecureApplicationLayout() {
   const t = useT();
   const navigate = useNavigate();
   const location = useLocation();
-  const [queryError, setQueryError] = useState<string>('');
+  const [queryError, setQueryError] = useState<string>("");
   const applicationContext = useApplicationContext();
 
   const { id } = useParamsTypeSafe(
@@ -41,7 +41,7 @@ export default function SecureApplicationLayout() {
       if (axios.isAxiosError(error) && error.response && error.response.data && error.response.data.detail) {
         setQueryError(error.response.data.detail);
       } else {
-        setQueryError(t('Error loading application'));
+        setQueryError(t("Error loading application"));
       }
     },
   });
@@ -50,15 +50,15 @@ export default function SecureApplicationLayout() {
     if (data) {
       const application = data;
       const { pathname } = location;
-      const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
+      const lastSegment = pathname.substring(pathname.lastIndexOf("/") + 1);
 
-      if (lastSegment !== 'view') {
+      if (lastSegment !== "view") {
         if (application.status === APPLICATION_STATUS.LAPSED) {
-          navigate('./view');
+          navigate("./view");
         } else if (application.status === APPLICATION_STATUS.APPROVED) {
-          if (lastSegment !== 'application-completed') navigate('./application-completed');
+          if (lastSegment !== "application-completed") navigate("./application-completed");
         } else if (application.status === APPLICATION_STATUS.REJECTED) {
-          if (lastSegment !== 'stage-five-rejected') navigate('./stage-five-rejected');
+          if (lastSegment !== "stage-five-rejected") navigate("./stage-five-rejected");
         }
         refetch();
       }

@@ -1,44 +1,44 @@
-import { t } from '@transifex/native';
-import { Link } from 'react-router-dom';
+import { t } from "@transifex/native";
+import { Link } from "react-router-dom";
 
-import { ICreditProduct } from '../schemas/application';
-import LinkButton from '../stories/link-button/LinkButton';
-import { RenderSize, renderCreditProductType } from '../util';
-import { DataTable, HeadCell } from './DataTable';
+import type { ICreditProduct } from "../schemas/application";
+import LinkButton from "../stories/link-button/LinkButton";
+import { RenderSize, renderCreditProductType } from "../util";
+import { DataTable, type HeadCell } from "./DataTable";
 
 const headCells: HeadCell<ICreditProduct>[] = [
   {
-    id: 'borrower_size',
+    id: "borrower_size",
     disablePadding: false,
-    label: t('Borrower size'),
+    label: t("Borrower size"),
     sortable: false,
     render: (row: ICreditProduct) => RenderSize(row.borrower_size),
   },
   {
-    id: 'lower_limit',
-    type: 'currency',
+    id: "lower_limit",
+    type: "currency",
     disablePadding: false,
-    label: t('Lower'),
+    label: t("Lower"),
     sortable: false,
   },
   {
-    id: 'upper_limit',
-    type: 'currency',
+    id: "upper_limit",
+    type: "currency",
     disablePadding: false,
-    label: t('Upper'),
+    label: t("Upper"),
     sortable: false,
   },
 
   {
-    id: 'interest_rate',
+    id: "interest_rate",
     disablePadding: false,
-    label: t('Interest rate'),
+    label: t("Interest rate"),
     sortable: false,
   },
   {
-    id: 'type',
+    id: "type",
     disablePadding: false,
-    label: t('Type'),
+    label: t("Type"),
     sortable: false,
     render: (row: ICreditProduct) => renderCreditProductType(row.type),
   },
@@ -51,7 +51,7 @@ const actions = (row: ICreditProduct) => (
     className="p-1 justify-start"
     component={Link}
     to={`/settings/lender/${row.lender_id}/credit-product/${row.id}/edit`}
-    label={t('Edit')}
+    label={t("Edit")}
     size="small"
     noIcon
   />

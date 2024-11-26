@@ -1,20 +1,20 @@
-import { Box, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
-import { useT } from '@transifex/react';
-import { useState } from 'react';
-import Minus from 'src/assets/icons/minus.svg';
-import Plus from 'src/assets/icons/plus.svg';
+import { Box, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
+import { useT } from "@transifex/react";
+import { useState } from "react";
+import Minus from "src/assets/icons/minus.svg";
+import Plus from "src/assets/icons/plus.svg";
 
-import useLocalizedDateFormatter from '../hooks/useLocalizedDateFormatter';
-import { IAward } from '../schemas/application';
-import Loader from '../stories/loader/Loader';
-import { formatCurrency } from '../util';
-import { ApplicationTableAwardDataRowProps } from './ApplicationTableDataRow';
-import DataAvailability from './DataAvailability';
-import { DataTableCell, DataTableHeadCell, DataTableHeadLabel } from './DataTable';
+import useLocalizedDateFormatter from "../hooks/useLocalizedDateFormatter";
+import type { IAward } from "../schemas/application";
+import Loader from "../stories/loader/Loader";
+import { formatCurrency } from "../util";
+import type { ApplicationTableAwardDataRowProps } from "./ApplicationTableDataRow";
+import DataAvailability from "./DataAvailability";
+import { DataTableCell, DataTableHeadCell, DataTableHeadLabel } from "./DataTable";
 
 export type ApplicationTableDataPreviousAwardRowProps = Omit<
   ApplicationTableAwardDataRowProps,
-  'name' | 'missingData' | 'award' | 'readonly' | 'formLabel'
+  "name" | "missingData" | "award" | "readonly" | "formLabel"
 > & {
   previousAwards?: IAward[];
 };
@@ -26,7 +26,7 @@ const getIcon = (open: boolean) => {
     icon = Plus;
   }
 
-  return <img className="self-end" src={icon} alt={`icon-${open ? 'minus' : 'plus'}`} />;
+  return <img className="self-end" src={icon} alt={`icon-${open ? "minus" : "plus"}`} />;
 };
 
 export function ApplicationTableDataPreviousAwardRow({
@@ -53,9 +53,9 @@ export function ApplicationTableDataPreviousAwardRow({
           <DataAvailability available={!missing} label={label} readonly />
         </DataTableCell>
         {!missing && (
-          <DataTableCell className={preWhitespace ? 'whitespace-pre' : ''}>
+          <DataTableCell className={preWhitespace ? "whitespace-pre" : ""}>
             <Box className="flex flex-row items-center justify-between" onClick={handleToggle}>
-              {t('Data available for {previos_awards_count} previous contracts', {
+              {t("Data available for {previos_awards_count} previous contracts", {
                 previos_awards_count: previousAwards?.length,
               })}
               <Box className="self-end">{getIcon(open)}</Box>
@@ -63,14 +63,14 @@ export function ApplicationTableDataPreviousAwardRow({
           </DataTableCell>
         )}
         {missing && (
-          <DataTableCell className={preWhitespace ? 'whitespace-pre' : ''}>
-            {t('There are not previous contracts')}
+          <DataTableCell className={preWhitespace ? "whitespace-pre" : ""}>
+            {t("There are not previous contracts")}
           </DataTableCell>
         )}
       </TableRow>
       {open && (
         <TableRow>
-          <DataTableCell colSpan={3} className={open ? 'bg-softGray' : ''}>
+          <DataTableCell colSpan={3} className={open ? "bg-softGray" : ""}>
             {isLoading && <Loader />}
             {!isLoading && (
               <Paper elevation={0} square className="bg-softGray p-1">
@@ -79,19 +79,19 @@ export function ApplicationTableDataPreviousAwardRow({
                     <TableHead>
                       <TableRow>
                         <DataTableHeadCell width={260}>
-                          <DataTableHeadLabel label={t('Contract Title')} />
+                          <DataTableHeadLabel label={t("Contract Title")} />
                         </DataTableHeadCell>
                         <DataTableHeadCell width={240}>
-                          <DataTableHeadLabel label={t('Buyer')} />
+                          <DataTableHeadLabel label={t("Buyer")} />
                         </DataTableHeadCell>
                         <DataTableHeadCell>
-                          <DataTableHeadLabel label={t('Start Date')} />
+                          <DataTableHeadLabel label={t("Start Date")} />
                         </DataTableHeadCell>
                         <DataTableHeadCell>
-                          <DataTableHeadLabel label={t('End Date')} />
+                          <DataTableHeadLabel label={t("End Date")} />
                         </DataTableHeadCell>
                         <DataTableHeadCell>
-                          <DataTableHeadLabel label={t('Contract Value')} />
+                          <DataTableHeadLabel label={t("Contract Value")} />
                         </DataTableHeadCell>
                       </TableRow>
                     </TableHead>
@@ -99,23 +99,23 @@ export function ApplicationTableDataPreviousAwardRow({
                       {previousAwards?.map((award: IAward) => (
                         <TableRow key={award.id}>
                           <DataTableCell>
-                            {!award.title && <Box className="opacity-50">{t('Data not available')}</Box>}
+                            {!award.title && <Box className="opacity-50">{t("Data not available")}</Box>}
                             {award.title}
                           </DataTableCell>
                           <DataTableCell>
-                            {!award.buyer_name && <Box className="opacity-50">{t('Data not available')}</Box>}
+                            {!award.buyer_name && <Box className="opacity-50">{t("Data not available")}</Box>}
                             {award.buyer_name}
                           </DataTableCell>
                           <DataTableCell>
                             {!award.contractperiod_startdate && (
-                              <Box className="opacity-50">{t('Data not available')}</Box>
+                              <Box className="opacity-50">{t("Data not available")}</Box>
                             )}
 
                             {award.contractperiod_startdate && formatDateFromString(award.contractperiod_startdate)}
                           </DataTableCell>
                           <DataTableCell>
                             {!award.contractperiod_enddate && (
-                              <Box className="opacity-50">{t('Data not available')}</Box>
+                              <Box className="opacity-50">{t("Data not available")}</Box>
                             )}
 
                             {award.contractperiod_enddate && formatDateFromString(award.contractperiod_enddate)}

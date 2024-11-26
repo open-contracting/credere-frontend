@@ -1,12 +1,12 @@
-import { TableRow } from '@mui/material';
-import DocumentIcon from 'src/assets/icons/document.svg';
-import useConstants from 'src/hooks/useConstants';
+import { TableRow } from "@mui/material";
+import DocumentIcon from "src/assets/icons/document.svg";
+import useConstants from "src/hooks/useConstants";
 
-import LinkButton from '../stories/link-button/LinkButton';
-import { ApplicationTableDocumentDataRowProps } from './ApplicationTableDataRow';
-import DataAvailability from './DataAvailability';
-import { DataTableCell } from './DataTable';
-import DataVerificationForm from './DataVerificationForm';
+import LinkButton from "../stories/link-button/LinkButton";
+import type { ApplicationTableDocumentDataRowProps } from "./ApplicationTableDataRow";
+import DataAvailability from "./DataAvailability";
+import { DataTableCell } from "./DataTable";
+import DataVerificationForm from "./DataVerificationForm";
 
 export function ApplicationTableDataDocumentRow({
   document,
@@ -31,13 +31,13 @@ export function ApplicationTableDataDocumentRow({
   return (
     <TableRow>
       <DataTableCell>
-        {(constants?.BorrowerDocumentType || []).filter((d) => d.value === document.type)[0]?.label || ''}
+        {(constants?.BorrowerDocumentType || []).filter((d) => d.value === document.type)[0]?.label || ""}
       </DataTableCell>
       <DataTableCell>
         <DataAvailability available={!missing} label={document.type} readonly={readonly} />
       </DataTableCell>
       {!downloadDocument && (
-        <DataTableCell className={preWhitespace ? 'whitespace-pre' : ''}>{formattedValue}</DataTableCell>
+        <DataTableCell className={preWhitespace ? "whitespace-pre" : ""}>{formattedValue}</DataTableCell>
       )}
       {downloadDocument && (
         <DataTableCell>

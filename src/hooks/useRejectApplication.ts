@@ -1,13 +1,13 @@
-import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import axios from 'axios';
-import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { type UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import axios from "axios";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
-import { rejectApplicationFn } from '../api/private';
-import { DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
-import { IApplication, RejectApplicationInput } from '../schemas/application';
-import useApplicationContext from './useSecureApplicationContext';
+import { rejectApplicationFn } from "../api/private";
+import { DISPATCH_ACTIONS, QUERY_KEYS } from "../constants";
+import type { IApplication, RejectApplicationInput } from "../schemas/application";
+import useApplicationContext from "./useSecureApplicationContext";
 
 type IUseRejectApplication = {
   rejectApplicationMutation: UseMutateFunction<IApplication, unknown, RejectApplicationInput, unknown>;
@@ -30,18 +30,18 @@ export default function useRejectApplication(): IUseRejectApplication {
     onSuccess: (data) => {
       queryClient.setQueryData([QUERY_KEYS.applications, data.id], data);
       applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });
-      navigate('../stage-five-rejected');
+      navigate("../stage-five-rejected");
     },
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data && error.response.data.detail) {
-          enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-            variant: 'error',
+          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t('Error rejecting the application. {error}', { error }), {
-          variant: 'error',
+        enqueueSnackbar(t("Error rejecting the application. {error}", { error }), {
+          variant: "error",
         });
       }
     },

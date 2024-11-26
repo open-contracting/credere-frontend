@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { FAQContainer } from './FAQContainer';
-import { FAQSection } from './FAQSection';
+import { FAQContainer } from "./FAQContainer";
+import { FAQSection } from "./FAQSection";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
-  title: 'Example/FAQContainer',
+  title: "Example/FAQContainer",
   component: FAQContainer,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {},
 } satisfies Meta<typeof FAQContainer>;
 
@@ -21,8 +21,8 @@ function ComponentWithChildren() {
         Guaranteed loans give high-risk borrowers a way to access financing, and provide protection for the lender.
       </FAQSection>
       <FAQSection title="FAQSection 2">
-        The City of Bogota is trying to encourage more SME participation in public sector contracts. Your businesses was
-        identified as an SME.
+        The City of Bogota is trying to encourage more SME participation in public sector contracts. Your businesses
+        was identified as an SME.
       </FAQSection>
       <FAQSection title="FAQSection 3">
         This project is being run by the Open Contracting Partnership in conjunction with Mastercard. We have partnered

@@ -1,9 +1,9 @@
-import { Box } from '@mui/material';
-import { useT } from '@transifex/react';
+import { Box } from "@mui/material";
+import { useT } from "@transifex/react";
 
-import CheckGreen from '../assets/icons/check-green.svg';
-import WarnRed from '../assets/icons/warn-red.svg';
-import Text from '../stories/text/Text';
+import CheckGreen from "../assets/icons/check-green.svg";
+import WarnRed from "../assets/icons/warn-red.svg";
+import Text from "../stories/text/Text";
 
 const getIcon = (verified: boolean, name: string) => {
   let icon = CheckGreen;
@@ -29,7 +29,7 @@ export function DataVerificationStatus({ verified, name, customLabel }: DataVeri
       {getIcon(verified, name)}
 
       <Text fontVariant className="ml-3 mb-0 text-sm">
-        {customLabel || (verified ? t('Yes') : t('No'))}
+        {customLabel || (verified ? t("Yes") : t("No"))}
       </Text>
     </Box>
   );

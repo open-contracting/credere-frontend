@@ -1,12 +1,12 @@
 /* eslint-disable react/no-array-index-key */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { t } from '@transifex/native';
-import { useMemo } from 'react';
-import { Bar, BarChart, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
+import { t } from "@transifex/native";
+import { useMemo } from "react";
+import { Bar, BarChart, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
-import { COLORS } from '../constants';
-import { ChartData } from '../schemas/statitics';
+import { COLORS } from "../constants";
+import type { ChartData } from "../schemas/statitics";
 
 interface ChartsProps {
   data: ChartData[];
@@ -20,12 +20,12 @@ interface MultipleChartsProps {
 }
 
 const COLORS_TO_FILL = [
-  '#0088FE',
-  '#00C49F',
-  '#FFBB28',
-  '#FF8042',
-  '#82ca9d',
-  '#8884d8',
+  "#0088FE",
+  "#00C49F",
+  "#FFBB28",
+  "#FF8042",
+  "#82ca9d",
+  "#8884d8",
   COLORS.darkGreen,
   COLORS.red,
   COLORS.yellow,
@@ -59,9 +59,9 @@ export function ChartBar({ data }: ChartsProps) {
       <BarChart width={140} data={data}>
         <Tooltip
           labelFormatter={labelFormatterBase}
-          formatter={(value: any) => [value, '']}
+          formatter={(value: any) => [value, ""]}
           separator=""
-          cursor={{ stroke: COLORS.fieldBorder, strokeWidth: 0.5, fill: 'transparent' }}
+          cursor={{ stroke: COLORS.fieldBorder, strokeWidth: 0.5, fill: "transparent" }}
         />
         <Bar dataKey="value" fill={COLORS.darkGreen} minPointSize={1} />
       </BarChart>
@@ -98,7 +98,7 @@ export function ChartMultipleBar({ series, dataKeys, seriesNames, labelMapper }:
         <Tooltip
           separator=" "
           labelFormatter={(_label: any, payload: any) => labelFormatterBase(_label, payload, labelMapper)}
-          cursor={{ stroke: COLORS.fieldBorder, strokeWidth: 0.5, fill: 'transparent' }}
+          cursor={{ stroke: COLORS.fieldBorder, strokeWidth: 0.5, fill: "transparent" }}
         />
         <Legend />
       </BarChart>

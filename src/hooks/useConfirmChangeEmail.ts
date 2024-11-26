@@ -1,10 +1,10 @@
-import { UseMutateFunction, useMutation } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import axios from 'axios';
-import { useSnackbar } from 'notistack';
+import { type UseMutateFunction, useMutation } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import axios from "axios";
+import { useSnackbar } from "notistack";
 
-import { confirmChangeEmailFn } from '../api/public';
-import { ChangeEmailInput, ConfirmChangeEmailInput } from '../schemas/application';
+import { confirmChangeEmailFn } from "../api/public";
+import type { ChangeEmailInput, ConfirmChangeEmailInput } from "../schemas/application";
 
 type IUseConfirmChangeEmail = {
   confirmChangeEmailMutation: UseMutateFunction<ChangeEmailInput, unknown, ConfirmChangeEmailInput, unknown>;
@@ -28,13 +28,13 @@ export default function useConfirmChangeEmail(): IUseConfirmChangeEmail {
       onError: (error) => {
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.data && error.response.data.detail) {
-            enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-              variant: 'error',
+            enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+              variant: "error",
             });
           }
         } else {
-          enqueueSnackbar(t('Error confirming change of primary email. {error}', { error }), {
-            variant: 'error',
+          enqueueSnackbar(t("Error confirming change of primary email. {error}", { error }), {
+            variant: "error",
           });
         }
       },

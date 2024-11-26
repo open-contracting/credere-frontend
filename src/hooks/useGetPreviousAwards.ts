@@ -1,11 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import { useSnackbar } from 'notistack';
+import { useQuery } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import { useSnackbar } from "notistack";
 
-import { getPreviousAwardsFn } from '../api/private';
-import { QUERY_KEYS } from '../constants';
-import { IAward } from '../schemas/application';
-import { handleRequestError } from '../util/validation';
+import { getPreviousAwardsFn } from "../api/private";
+import { QUERY_KEYS } from "../constants";
+import type { IAward } from "../schemas/application";
+import { handleRequestError } from "../util/validation";
 
 type IUseGetPreviousAwards = {
   data?: IAward[];
@@ -22,7 +22,7 @@ export default function useGetPreviousAwards(applicationId?: number): IUseGetPre
     enabled: Boolean(applicationId),
     onSuccess: (dataResult) => dataResult,
     onError: (error) => {
-      handleRequestError(error, enqueueSnackbar, t('Error getting previous awards. {error}', { error }));
+      handleRequestError(error, enqueueSnackbar, t("Error getting previous awards. {error}", { error }));
     },
   });
 

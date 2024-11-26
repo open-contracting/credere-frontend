@@ -1,11 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import { useSnackbar } from 'notistack';
+import { useQuery } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import { useSnackbar } from "notistack";
 
-import { getStatisticsFI } from '../api/private';
-import { QUERY_KEYS } from '../constants';
-import { StatisticsFI } from '../schemas/statitics';
-import { handleRequestError } from '../util/validation';
+import { getStatisticsFI } from "../api/private";
+import { QUERY_KEYS } from "../constants";
+import type { StatisticsFI } from "../schemas/statitics";
+import { handleRequestError } from "../util/validation";
 
 type IUseGetStatisticsFI = {
   data?: StatisticsFI;
@@ -21,7 +21,7 @@ export default function useGetStatisticsFI(): IUseGetStatisticsFI {
     queryFn: () => getStatisticsFI(),
     onSuccess: (dataResult) => dataResult,
     onError: (error) => {
-      handleRequestError(error, enqueueSnackbar, t('Error getting statistics for fi. {error}', { error }));
+      handleRequestError(error, enqueueSnackbar, t("Error getting statistics for fi. {error}", { error }));
     },
   });
 

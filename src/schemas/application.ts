@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { t } from '@transifex/native';
-import { TypeOf, boolean, coerce, object, string } from 'zod';
+import { t } from "@transifex/native";
+import { type TypeOf, boolean, coerce, object, string } from "zod";
 
-import { APPLICATION_STATUS, USER_TYPES } from '../constants';
-import { isDateAfterCurrentDate } from '../util';
-import { emailSchema } from './auth';
+import type { APPLICATION_STATUS, USER_TYPES } from "../constants";
+import { isDateAfterCurrentDate } from "../util";
+import { emailSchema } from "./auth";
 
 export const introSchema = object({
   accept_terms_and_conditions: boolean().refine((value) => value === true, {
-    message: t('You need to check this option to Access the Scheme'),
+    message: t("You need to check this option to Access the Scheme"),
   }),
 });
 
@@ -16,7 +16,7 @@ export type IntroInput = TypeOf<typeof introSchema>;
 
 export const submitSchema = object({
   agree_topass_info_to_banking_partner: boolean().refine((value) => value === true, {
-    message: t('You need to check this option to submit the application'),
+    message: t("You need to check this option to submit the application"),
   }),
 });
 
@@ -35,31 +35,31 @@ export const declineApplicationSchema = object({
   decline_all: boolean(),
   uuid: UUIDType,
 }).refine((data) => data.decline_this || data.decline_all, {
-  path: ['decline_all'],
-  message: t('You need to check at least one option to Decline the Scheme'),
+  path: ["decline_all"],
+  message: t("You need to check at least one option to Decline the Scheme"),
 });
 
 export type DeclineApplicationInput = TypeOf<typeof declineApplicationSchema>;
 
 // eslint-disable-next-line no-shadow
 export enum DECLINE_FEEDBACK {
-  dont_need_access_credit = 'dont_need_access_credit',
-  already_have_acredit = 'already_have_acredit',
-  preffer_to_go_to_bank = 'preffer_to_go_to_bank',
-  dont_want_access_credit = 'dont_want_access_credit',
-  suspicious_email = 'suspicious_email',
-  other = 'other',
+  dont_need_access_credit = "dont_need_access_credit",
+  already_have_acredit = "already_have_acredit",
+  preffer_to_go_to_bank = "preffer_to_go_to_bank",
+  dont_want_access_credit = "dont_want_access_credit",
+  suspicious_email = "suspicious_email",
+  other = "other",
 }
 
 export const DECLINE_FEEDBACK_NAMES: { [key: string]: string } = {
   [DECLINE_FEEDBACK.dont_need_access_credit]: t("Don't need access credit"),
-  [DECLINE_FEEDBACK.already_have_acredit]: t('Already have acredit'),
-  [DECLINE_FEEDBACK.preffer_to_go_to_bank]: t('Preffer to go to bank'),
+  [DECLINE_FEEDBACK.already_have_acredit]: t("Already have acredit"),
+  [DECLINE_FEEDBACK.preffer_to_go_to_bank]: t("Preffer to go to bank"),
   [DECLINE_FEEDBACK.dont_want_access_credit]: t("Don't want access credit"),
   [DECLINE_FEEDBACK.suspicious_email]: t(
-    'I perceive the email as suspicious or I do not trust that the credit proposal is true',
+    "I perceive the email as suspicious or I do not trust that the credit proposal is true",
   ),
-  [DECLINE_FEEDBACK.other]: t('Other'),
+  [DECLINE_FEEDBACK.other]: t("Other"),
 };
 
 export const declineFeedbackSchema = object({
@@ -76,29 +76,29 @@ export const declineFeedbackSchema = object({
 export type DeclineFeedbackInput = TypeOf<typeof declineFeedbackSchema>;
 
 export const creditOptionsSchema = object({
-  borrower_size: string().min(1, t('Borrower size is required')),
-  sector: string().min(1, t('Sector is required')),
+  borrower_size: string().min(1, t("Borrower size is required")),
+  sector: string().min(1, t("Sector is required")),
   annual_revenue: coerce.number().optional().nullable(),
-  amount_requested: coerce.number().min(1, t('Amount requested must be greater than 0')),
+  amount_requested: coerce.number().min(1, t("Amount requested must be greater than 0")),
   uuid: UUIDType,
 });
 
 export type CreditOptionsInput = TypeOf<typeof creditOptionsSchema>;
 
-export type GetCreditProductsOptionsInput = Omit<CreditOptionsInput, 'sector' | 'annual_revenue'>;
+export type GetCreditProductsOptionsInput = Omit<CreditOptionsInput, "sector" | "annual_revenue">;
 
 export const repaymentTermsSchema = object({
   repayment_years: coerce
     .number({
-      required_error: t('Years is required'),
-      invalid_type_error: t('Years must be a number'),
+      required_error: t("Years is required"),
+      invalid_type_error: t("Years must be a number"),
     })
-    .gte(0, t('Years must be greater or equal than ')),
-  repayment_months: coerce.number().min(1, t('Months must be greater or equal than 1')),
+    .gte(0, t("Years must be greater or equal than ")),
+  repayment_months: coerce.number().min(1, t("Months must be greater or equal than 1")),
   payment_start_date: string()
-    .min(1, t('Payment start date is required'))
+    .min(1, t("Payment start date is required"))
     .refine((value) => isDateAfterCurrentDate(value), {
-      message: t('Payment start date must be after current date'),
+      message: t("Payment start date must be after current date"),
     }),
 });
 
@@ -135,7 +135,7 @@ export type PrivateApplicationInput = {
   application_id: number;
 };
 
-export type IUpdateAward = Partial<Omit<IAward, 'id' | 'borrower_id' | 'missing_data' | 'created_at' | 'updated_at'>> &
+export type IUpdateAward = Partial<Omit<IAward, "id" | "borrower_id" | "missing_data" | "created_at" | "updated_at">> &
   PrivateApplicationInput;
 
 export interface IBorrower {
@@ -160,7 +160,7 @@ export interface IBorrower {
 export type IUpdateBorrower = Partial<
   Omit<
     IBorrower,
-    'id' | 'borrower_identifier' | 'status' | 'missing_data' | 'created_at' | 'updated_at' | 'declined_at'
+    "id" | "borrower_identifier" | "status" | "missing_data" | "created_at" | "updated_at" | "declined_at"
   >
 > &
   PrivateApplicationInput;
@@ -285,10 +285,10 @@ export interface IExtendedApplication {
 }
 
 export const EXTENDED_APPLICATION_FROM = {
-  buyer_name: 'award.buyer_name',
-  borrower_name: 'borrower.legal_name',
-  lender_name: 'lender.name',
-  award_amount: 'award.award_amount',
+  buyer_name: "award.buyer_name",
+  borrower_name: "borrower.legal_name",
+  lender_name: "lender.name",
+  award_amount: "award.award_amount",
 };
 
 export interface IExtendedUser {
@@ -297,8 +297,8 @@ export interface IExtendedUser {
 }
 
 export const EXTENDED_USER_FROM: IExtendedUser = {
-  lender_name: 'lender.name',
-  name: 'name',
+  lender_name: "lender.name",
+  name: "name",
 };
 
 export interface IApplicationResponse {
@@ -314,7 +314,7 @@ export interface PaginationInput {
   page: number;
   page_size: number;
   sort_field: string;
-  sort_order: 'asc' | 'desc';
+  sort_order: "asc" | "desc";
   search_value?: string;
 }
 
@@ -338,7 +338,7 @@ export interface ILenderListResponse {
 }
 
 export const formEmailSchema = object({
-  message: string().min(1, t('A message is required')),
+  message: string().min(1, t("A message is required")),
 });
 
 export type FormEmailInput = TypeOf<typeof formEmailSchema>;
@@ -350,10 +350,10 @@ export const approveSchema = object({
   compliant_checks_passed: boolean(),
   disbursed_final_amount: coerce
     .number({
-      required_error: t('Disbursed final amount is required'),
-      invalid_type_error: t('Disbursed final amount must be a number'),
+      required_error: t("Disbursed final amount is required"),
+      invalid_type_error: t("Disbursed final amount must be a number"),
     })
-    .gt(0, t('Disbursed final amount must be greater than 0')),
+    .gt(0, t("Disbursed final amount must be greater than 0")),
 });
 
 export type FormApprovedInput = TypeOf<typeof approveSchema>;

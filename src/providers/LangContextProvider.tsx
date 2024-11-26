@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import { getLang, saveLang } from '../api/localstore';
-import { DISPATCH_ACTIONS } from '../constants';
+import { getLang, saveLang } from "../api/localstore";
+import { DISPATCH_ACTIONS } from "../constants";
 
 type LangState = {
   selected: string;
@@ -15,7 +15,7 @@ type ActionSetLang = {
 type Dispatch = (action: ActionSetLang) => void;
 
 const initialState: LangState = {
-  selected: `${getLang() || import.meta.env.VITE_DEFAULT_LANG || 'es'}`,
+  selected: `${getLang() || import.meta.env.VITE_DEFAULT_LANG || "es"}`,
 };
 
 type LangContextProviderProps = { children: React.ReactNode };

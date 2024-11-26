@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Container } from '@mui/material';
-import { useT } from '@transifex/react';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import useSignIn from 'src/hooks/useSignIn';
-import { LoginInput, loginSchema } from 'src/schemas/auth';
-import { Button } from 'src/stories/button/Button';
-import FormInput from 'src/stories/form-input/FormInput';
-import Text from 'src/stories/text/Text';
-import Title from 'src/stories/title/Title';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box, Container } from "@mui/material";
+import { useT } from "@transifex/react";
+import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import useSignIn from "src/hooks/useSignIn";
+import { type LoginInput, loginSchema } from "src/schemas/auth";
+import { Button } from "src/stories/button/Button";
+import FormInput from "src/stories/form-input/FormInput";
+import Text from "src/stories/text/Text";
+import Title from "src/stories/title/Title";
 
 export function SignInPage() {
   const t = useT();
@@ -31,23 +31,25 @@ export function SignInPage() {
       <Title
         type="page"
         className="lg:pt-16 lg:pl-20 md:pt-10 md:pl-12 sm:pt-9 sm:pl-10 pt-8 pl-6 lg:mb-10 mb-6"
-        label={t('Login to Credere')}
+        label={t("Login to Credere")}
       />
       <Container
         maxWidth={false}
         className="bg-background"
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-          }}>
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
           <FormProvider {...methods}>
             <Box
               component="form"
@@ -55,25 +57,31 @@ export function SignInPage() {
               noValidate
               autoComplete="off"
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                backgroundColor: '#ffffff',
-                p: { xs: '1rem', sm: '2rem' },
-                width: { sm: '580px' },
+                display: "flex",
+                flexDirection: "column",
+                backgroundColor: "#ffffff",
+                p: { xs: "1rem", sm: "2rem" },
+                width: { sm: "580px" },
                 borderRadius: 0,
-              }}>
-              <Title type="section" className="self-center mb-8" label={t('Log in')} />
-              <FormInput name="username" label={t('Email Address')} type="email" placeholder={t('example@email.com')} />
-              <FormInput name="password" label={t('Password')} type="password" />
-              <FormInput name="temp_password" label={t('One-Time Password Code (MFA)')} />
+              }}
+            >
+              <Title type="section" className="self-center mb-8" label={t("Log in")} />
+              <FormInput
+                name="username"
+                label={t("Email Address")}
+                type="email"
+                placeholder={t("example@email.com")}
+              />
+              <FormInput name="password" label={t("Password")} type="password" />
+              <FormInput name="temp_password" label={t("One-Time Password Code (MFA)")} />
 
               <Text className="underline mb-10">
                 <Link className="text-darkest" to="/reset-password">
-                  {t('Forgot Password?')}
+                  {t("Forgot Password?")}
                 </Link>
               </Text>
 
-              <Button className="mb-10" label={t('Login')} type="submit" disabled={isLoading} />
+              <Button className="mb-10" label={t("Login")} type="submit" disabled={isLoading} />
               <Box>
                 <Text className="inline-block">{t("Don't have an account? Email")}</Text>
                 <Text className="inline-block underline ml-1 mb-X">

@@ -1,12 +1,12 @@
-import { Box, Link as MUILink, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
-import { useT } from '@transifex/react';
-import ReactMarkdown from 'react-markdown';
-import Text from 'src/stories/text/Text';
+import { Box, Link as MUILink, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
+import { useT } from "@transifex/react";
+import ReactMarkdown from "react-markdown";
+import Text from "src/stories/text/Text";
 
-import { ICreditProduct } from '../schemas/application';
-import Button from '../stories/button/Button';
-import { formatCurrency } from '../util';
-import { DataTableCell, DataTableHeadCell, DataTableHeadLabel, TransparentDataTableCell } from './DataTable';
+import type { ICreditProduct } from "../schemas/application";
+import Button from "../stories/button/Button";
+import { formatCurrency } from "../util";
+import { DataTableCell, DataTableHeadCell, DataTableHeadLabel, TransparentDataTableCell } from "./DataTable";
 
 export interface CreditLinesTableProps {
   rows: ICreditProduct[];
@@ -19,7 +19,7 @@ export function CreditLinesTable({ rows, currency, isLoading, selectOption }: Cr
   const t = useT();
 
   if (!rows.length && !isLoading) {
-    return <Text>{t('No credit line options available')}</Text>;
+    return <Text>{t("No credit line options available")}</Text>;
   }
 
   return (
@@ -30,7 +30,7 @@ export function CreditLinesTable({ rows, currency, isLoading, selectOption }: Cr
             <TableHead>
               <TableRow>
                 <DataTableHeadCell width={240}>
-                  <span style={{ width: '240px' }} />
+                  <span style={{ width: "240px" }} />
                 </DataTableHeadCell>
                 {rows.map((row) => (
                   <DataTableHeadCell key={`header-${row.id}`}>
@@ -38,7 +38,7 @@ export function CreditLinesTable({ rows, currency, isLoading, selectOption }: Cr
                       <img
                         src={`/images/lenders/${row.lender.logo_filename}`}
                         alt="lender-logo"
-                        style={{ width: '8rem' }}
+                        style={{ width: "8rem" }}
                       />
                     ) : (
                       <DataTableHeadLabel label={row.lender.name} />
@@ -49,7 +49,7 @@ export function CreditLinesTable({ rows, currency, isLoading, selectOption }: Cr
             </TableHead>
             <TableBody>
               <TableRow>
-                <DataTableCell width={240}>{t('Max amount')}</DataTableCell>
+                <DataTableCell width={240}>{t("Max amount")}</DataTableCell>
                 {rows.map((row) => (
                   <DataTableCell key={`amount-${row.id}`}>
                     {`${currency} ${formatCurrency(row.upper_limit, currency)}`}
@@ -57,20 +57,21 @@ export function CreditLinesTable({ rows, currency, isLoading, selectOption }: Cr
                 ))}
               </TableRow>
               <TableRow>
-                <DataTableCell>{t('Additional Information')}</DataTableCell>
+                <DataTableCell>{t("Additional Information")}</DataTableCell>
                 {rows.map((row) => (
                   <DataTableCell
-                    key={`aditional-information-${row.id}`}>{`${row.additional_information}`}</DataTableCell>
+                    key={`aditional-information-${row.id}`}
+                  >{`${row.additional_information}`}</DataTableCell>
                 ))}
               </TableRow>
               <TableRow>
-                <DataTableCell>{t('Interest rate')}</DataTableCell>
+                <DataTableCell>{t("Interest rate")}</DataTableCell>
                 {rows.map((row) => (
                   <DataTableCell key={`interest-rate-${row.id}`}>{`${row.interest_rate}`}</DataTableCell>
                 ))}
               </TableRow>
               <TableRow>
-                <DataTableCell>{t('Other fees')}</DataTableCell>
+                <DataTableCell>{t("Other fees")}</DataTableCell>
                 {rows.map((row) => (
                   <DataTableCell key={`other-fees-details-${row.id}`}>
                     <ReactMarkdown>{`${row.other_fees_description}`}</ReactMarkdown>
@@ -78,11 +79,11 @@ export function CreditLinesTable({ rows, currency, isLoading, selectOption }: Cr
                 ))}
               </TableRow>
               <TableRow>
-                <DataTableCell>{t('More information')}</DataTableCell>
+                <DataTableCell>{t("More information")}</DataTableCell>
                 {rows.map((row) => (
                   <DataTableCell key={`more-info-${row.id}`}>
                     <MUILink color="inherit" target="_blank" rel="noreferrer" href={row.more_info_url}>
-                      {t('View details')}
+                      {t("View details")}
                     </MUILink>
                   </DataTableCell>
                 ))}
@@ -91,7 +92,7 @@ export function CreditLinesTable({ rows, currency, isLoading, selectOption }: Cr
                 <TransparentDataTableCell />
                 {rows.map((row) => (
                   <TransparentDataTableCell key={`pick-${row.id}`}>
-                    <Button disabled={isLoading} label={t('Select')} onClick={() => selectOption(row)} />
+                    <Button disabled={isLoading} label={t("Select")} onClick={() => selectOption(row)} />
                   </TransparentDataTableCell>
                 ))}
               </TableRow>

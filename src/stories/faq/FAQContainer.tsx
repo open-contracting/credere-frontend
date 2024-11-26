@@ -1,6 +1,6 @@
-import { Box, Container, Typography } from '@mui/material';
-import { PropsWithChildren } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { Box, Container, Typography } from "@mui/material";
+import type { PropsWithChildren } from "react";
+import { twMerge } from "tailwind-merge";
 
 type FAQContainerProps = {
   className?: string;
@@ -9,7 +9,7 @@ type FAQContainerProps = {
 };
 export function FAQContainer({
   className,
-  title = 'Frequently Asked Questions',
+  title = "Frequently Asked Questions",
   boxClassName,
   children,
 }: FAQContainerProps & PropsWithChildren) {
@@ -21,17 +21,20 @@ export function FAQContainer({
           lg: 345,
         },
       }}
-      className={twMerge(`mx-0 px-0 ${className}`)}>
+      className={twMerge(`mx-0 px-0 ${className}`)}
+    >
       <Box
         className={twMerge(`border-solid border-4 border-grass overflow-hidden bg-white ${boxClassName}`)}
         sx={{
-          borderTopLeftRadius: '40px',
-        }}>
+          borderTopLeftRadius: "40px",
+        }}
+      >
         <Box
           className="p-6 border-b border-lightGray bg-white"
           sx={{
-            borderBottomStyle: 'solid',
-          }}>
+            borderBottomStyle: "solid",
+          }}
+        >
           <Typography variant="h2" className="text-darkest text-2xl font-medium">
             {title}
           </Typography>
@@ -43,9 +46,9 @@ export function FAQContainer({
 }
 
 FAQContainer.defaultProps = {
-  className: '',
-  boxClassName: '',
-  title: 'Frequently Asked Questions',
+  className: "",
+  boxClassName: "",
+  title: "Frequently Asked Questions",
 };
 
 export default FAQContainer;

@@ -1,16 +1,16 @@
-import { Box } from '@mui/material';
-import { useT } from '@transifex/react';
-import axios from 'axios';
-import { useSnackbar } from 'notistack';
-import { useCallback, useEffect, useState } from 'react';
-import { uploadFileFn } from 'src/api/public';
-import Text from 'src/stories/text/Text';
+import { Box } from "@mui/material";
+import { useT } from "@transifex/react";
+import axios from "axios";
+import { useSnackbar } from "notistack";
+import { useCallback, useEffect, useState } from "react";
+import { uploadFileFn } from "src/api/public";
+import Text from "src/stories/text/Text";
 
-import useApplicationContext from '../hooks/useApplicationContext';
-import useSecureApplicationContext from '../hooks/useSecureApplicationContext';
-import { IBorrowerDocument, UploadFileInput } from '../schemas/application';
-import LinkButton from '../stories/link-button/LinkButton';
-import FileUploader from './FileUploader';
+import useApplicationContext from "../hooks/useApplicationContext";
+import useSecureApplicationContext from "../hooks/useSecureApplicationContext";
+import type { IBorrowerDocument, UploadFileInput } from "../schemas/application";
+import LinkButton from "../stories/link-button/LinkButton";
+import FileUploader from "./FileUploader";
 
 interface DocumentFieldProps {
   className?: string;
@@ -84,13 +84,13 @@ export function DocumentField({ label, documentType, secure = false, className, 
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.data && error.response.data.detail) {
-            enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-              variant: 'error',
+            enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+              variant: "error",
             });
           }
         } else {
-          enqueueSnackbar(t('Error uploading file. {error}', { error }), {
-            variant: 'error',
+          enqueueSnackbar(t("Error uploading file. {error}", { error }), {
+            variant: "error",
           });
         }
       }
@@ -112,13 +112,13 @@ export function DocumentField({ label, documentType, secure = false, className, 
       {current && (
         <Box className="flex flex-row items-center mb-4">
           <Box className="flex flex-col items-start">
-            <Text className="mb-0 text-sm">{t('Current uploaded document')}</Text>
+            <Text className="mb-0 text-sm">{t("Current uploaded document")}</Text>
             <Text className="mb-0 text-sm font-thin">{current.name}</Text>
           </Box>
           <LinkButton
             className="ml-4 "
             noIcon
-            label={showUploader ? t('Keep current') : t('Replace')}
+            label={showUploader ? t("Keep current") : t("Replace")}
             onClick={() => setShowUploader((prev) => !prev)}
           />
         </Box>
@@ -129,7 +129,7 @@ export function DocumentField({ label, documentType, secure = false, className, 
 }
 
 DocumentField.defaultProps = {
-  className: '',
+  className: "",
   secure: false,
   setUploadState: undefined,
 };

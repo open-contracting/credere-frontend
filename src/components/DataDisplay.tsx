@@ -1,8 +1,8 @@
-import { Box } from '@mui/material';
-import { useT } from '@transifex/react';
-import { useCallback } from 'react';
+import { Box } from "@mui/material";
+import { useT } from "@transifex/react";
+import { useCallback } from "react";
 
-import Text from '../stories/text/Text';
+import Text from "../stories/text/Text";
 
 interface DataDisplayProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -16,8 +16,8 @@ export function DataDisplay({ data, className }: DataDisplayProps) {
   const formatValue = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (value: any) => {
-      if (typeof value === 'boolean') {
-        return value ? t('Yes') : t('No');
+      if (typeof value === "boolean") {
+        return value ? t("Yes") : t("No");
       }
       return value.toString();
     },
@@ -26,7 +26,7 @@ export function DataDisplay({ data, className }: DataDisplayProps) {
 
   const formatKey = useCallback(
     (key: string) => {
-      const replacedStr = key.replace(/_/g, ' ');
+      const replacedStr = key.replace(/_/g, " ");
       // Convert the first letter to uppercase
       const firstLetter = replacedStr.charAt(0).toUpperCase();
       const remainingLetters = replacedStr.slice(1);
@@ -51,7 +51,7 @@ export function DataDisplay({ data, className }: DataDisplayProps) {
 }
 
 DataDisplay.defaultProps = {
-  className: '',
+  className: "",
 };
 
 export default DataDisplay;

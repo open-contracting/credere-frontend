@@ -1,8 +1,8 @@
-import { Box, Collapse } from '@mui/material';
-import { useState } from 'react';
+import { Box, Collapse } from "@mui/material";
+import { useState } from "react";
 
-import ArrowUp from '../assets/icons/arrow-up.svg';
-import Text from '../stories/text/Text';
+import ArrowUp from "../assets/icons/arrow-up.svg";
+import Text from "../stories/text/Text";
 
 interface DataWithDetailProps {
   name: string;
@@ -24,9 +24,9 @@ export function DataWithDetail({ name, detail }: DataWithDetailProps) {
             {name}
           </Text>
           <img
-            className={`self-start ${open ? 'rotate-180' : ''}`}
+            className={`self-start ${open ? "rotate-180" : ""}`}
             src={ArrowUp}
-            alt={`arrow-${open ? 'up' : 'down'}`}
+            alt={`arrow-${open ? "up" : "down"}`}
           />
         </Box>
         <Collapse in={open}>

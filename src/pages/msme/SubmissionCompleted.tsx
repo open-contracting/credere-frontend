@@ -1,11 +1,11 @@
-import { Link as MUILink } from '@mui/material';
-import { useT } from '@transifex/react';
-import { globalConfig } from 'src/api/axios';
-import { Button } from 'src/stories/button/Button';
-import Text from 'src/stories/text/Text';
-import Title from 'src/stories/title/Title';
+import { Link as MUILink } from "@mui/material";
+import { useT } from "@transifex/react";
+import { globalConfig } from "src/api/axios";
+import { Button } from "src/stories/button/Button";
+import Text from "src/stories/text/Text";
+import Title from "src/stories/title/Title";
 
-import useApplicationContext from '../../hooks/useApplicationContext';
+import useApplicationContext from "../../hooks/useApplicationContext";
 
 function SubmissionCompleted() {
   const t = useT();
@@ -16,12 +16,12 @@ function SubmissionCompleted() {
 
   return (
     <>
-      <Title type="page" label={t('Submission Complete')} className="mb-8" />
+      <Title type="page" label={t("Submission Complete")} className="mb-8" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 md:col-span-2 md:mr-10">
           <Text className="mb-8">
             {t(
-              'Thank you for submitting your credit application using Credere, Your application has been sent to {fi_name}.',
+              "Thank you for submitting your credit application using Credere, Your application has been sent to {fi_name}.",
               {
                 fi_name: applicationContext.state.data?.lender.name,
               },
@@ -32,14 +32,14 @@ function SubmissionCompleted() {
             <div className="mb-8">
               <Text className="mb-8">
                 {t(
-                  'However, {fi_name} requires an onboarding process in its systems, please complete the last step by completing the formalization process with {fi_name} by clicking on the following button.',
+                  "However, {fi_name} requires an onboarding process in its systems, please complete the last step by completing the formalization process with {fi_name} by clicking on the following button.",
                   {
                     fi_name: applicationContext.state.data?.lender.name,
                   },
                 )}
               </Text>
               <Button
-                label={t('Complete the onboarding process with {fi_name}', {
+                label={t("Complete the onboarding process with {fi_name}", {
                   fi_name: applicationContext.state.data?.lender.name,
                 })}
                 component={MUILink}
@@ -50,7 +50,7 @@ function SubmissionCompleted() {
             <div>
               <Text className="mb-8">
                 {t(
-                  'Pending some checks by {fi_name}, we will be in touch via email to let you know if the application has been approved and tell you the next steps for funds to be disbursed to you.',
+                  "Pending some checks by {fi_name}, we will be in touch via email to let you know if the application has been approved and tell you the next steps for funds to be disbursed to you.",
                   {
                     fi_name: applicationContext.state.data?.lender.name,
                   },
@@ -61,11 +61,11 @@ function SubmissionCompleted() {
           <div>
             <Text className="mb-8">
               {t(
-                'In the meantime if you have any questions, you can reach out to member of the Open Contracting Partnership team at: credere@open-contracting.org.',
+                "In the meantime if you have any questions, you can reach out to member of the Open Contracting Partnership team at: credere@open-contracting.org.",
               )}
             </Text>
-            <Text className="mb-8">{t('Thank you for choosing us')}</Text>
-            <Text className="mb-8">{t('Credere team')}</Text>
+            <Text className="mb-8">{t("Thank you for choosing us")}</Text>
+            <Text className="mb-8">{t("Credere team")}</Text>
           </div>
         </div>
       </div>

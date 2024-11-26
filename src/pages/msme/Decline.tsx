@@ -1,19 +1,17 @@
- 
-
 /* eslint-disable react/jsx-props-no-spreading */
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Box } from '@mui/material';
-import { useT } from '@transifex/react';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import FAQComponent from 'src/components/FAQComponent';
-import useApplicationContext from 'src/hooks/useApplicationContext';
-import useDeclineApplication from 'src/hooks/useDeclineApplication';
-import { DeclineApplicationInput, declineApplicationSchema } from 'src/schemas/application';
-import { Button } from 'src/stories/button/Button';
-import Checkbox from 'src/stories/checkbox/Checkbox';
-import Text from 'src/stories/text/Text';
-import Title from 'src/stories/title/Title';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box } from "@mui/material";
+import { useT } from "@transifex/react";
+import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import FAQComponent from "src/components/FAQComponent";
+import useApplicationContext from "src/hooks/useApplicationContext";
+import useDeclineApplication from "src/hooks/useDeclineApplication";
+import { type DeclineApplicationInput, declineApplicationSchema } from "src/schemas/application";
+import { Button } from "src/stories/button/Button";
+import Checkbox from "src/stories/checkbox/Checkbox";
+import Text from "src/stories/text/Text";
+import Title from "src/stories/title/Title";
 
 function Decline() {
   const t = useT();
@@ -31,15 +29,15 @@ function Decline() {
   };
 
   const onBackHandler = () => {
-    navigate('../intro');
+    navigate("../intro");
   };
 
   return (
     <>
-      <Title type="page" label={t('Confirm Removal')} className="mb-8" />
+      <Title type="page" label={t("Confirm Removal")} className="mb-8" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 md:col-span-2 md:mr-10">
-          <Text className="mb-8">{t('Please confirm your preferences.')}</Text>
+          <Text className="mb-8">{t("Please confirm your preferences.")}</Text>
           <FormProvider {...methods}>
             <Box
               component="form"
@@ -47,9 +45,10 @@ function Decline() {
               noValidate
               autoComplete="off"
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-              }}>
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
               <Checkbox
                 name="decline_this"
                 defaultValue={false}
@@ -62,11 +61,11 @@ function Decline() {
               />
               <div className="mt-5 grid grid-cols-1 gap-4 md:flex md:gap-0">
                 <div>
-                  <Button className="md:mr-4" label={t('Back')} onClick={onBackHandler} disabled={isLoading} />
+                  <Button className="md:mr-4" label={t("Back")} onClick={onBackHandler} disabled={isLoading} />
                 </div>
 
                 <div>
-                  <Button label={t('Submit')} type="submit" disabled={isLoading} />
+                  <Button label={t("Submit")} type="submit" disabled={isLoading} />
                 </div>
               </div>
             </Box>

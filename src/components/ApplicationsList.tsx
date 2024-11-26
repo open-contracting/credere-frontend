@@ -1,67 +1,74 @@
 /* eslint-disable camelcase */
-import { Box } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
-import { t } from '@transifex/native';
-import axios from 'axios';
-import { useSnackbar } from 'notistack';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { RenderStatus } from 'src/util';
+import { Box } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
+import { t } from "@transifex/native";
+import axios from "axios";
+import { useSnackbar } from "notistack";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { RenderStatus } from "src/util";
 
-import { getApplicationsFI, getApplicationsOCP } from '../api/private';
-import { COMPLETED_STATUS, NOT_STARTED_STATUS, PAGE_SIZES, QUERY_KEYS, STARTED_STATUS, USER_TYPES } from '../constants';
-import useDownloadApplication from '../hooks/useDownloadApplication';
-import useStartApplication from '../hooks/useStartApplication';
+import { getApplicationsFI, getApplicationsOCP } from "../api/private";
+import {
+  COMPLETED_STATUS,
+  NOT_STARTED_STATUS,
+  PAGE_SIZES,
+  QUERY_KEYS,
+  STARTED_STATUS,
+  USER_TYPES,
+} from "../constants";
+import useDownloadApplication from "../hooks/useDownloadApplication";
+import useStartApplication from "../hooks/useStartApplication";
 import {
   EXTENDED_APPLICATION_FROM,
-  IApplication,
-  IApplicationsListResponse,
-  IExtendedApplication,
-  PaginationInput,
-} from '../schemas/application';
-import LinkButton from '../stories/link-button/LinkButton';
-import { DataTable, HeadCell, Order } from './DataTable';
+  type IApplication,
+  type IApplicationsListResponse,
+  type IExtendedApplication,
+  type PaginationInput,
+} from "../schemas/application";
+import LinkButton from "../stories/link-button/LinkButton";
+import { DataTable, type HeadCell, type Order } from "./DataTable";
 
 const headCellsBase: HeadCell<IApplication & IExtendedApplication>[] = [
   {
-    id: 'borrower_name',
+    id: "borrower_name",
     disablePadding: false,
-    label: t('Name of Company'),
+    label: t("Name of Company"),
     sortable: true,
   },
   {
-    id: 'buyer_name',
+    id: "buyer_name",
     disablePadding: false,
-    label: t('Buyer'),
+    label: t("Buyer"),
     sortable: true,
   },
   {
-    id: 'award_amount',
+    id: "award_amount",
     disablePadding: false,
-    label: t('Award amount'),
+    label: t("Award amount"),
     sortable: true,
-    type: 'currency',
+    type: "currency",
   },
   {
-    id: 'amount_requested',
+    id: "amount_requested",
     disablePadding: false,
-    label: t('Amount requested'),
+    label: t("Amount requested"),
     sortable: true,
-    type: 'currency',
+    type: "currency",
   },
   {
-    id: 'borrower_submitted_at',
-    type: 'date',
+    id: "borrower_submitted_at",
+    type: "date",
     disablePadding: false,
-    label: t('Submission Date'),
+    label: t("Submission Date"),
     sortable: false,
     width: 155,
   },
   {
-    id: 'status',
-    type: 'label',
+    id: "status",
+    type: "label",
     disablePadding: false,
-    label: t('Stage'),
+    label: t("Stage"),
     sortable: true,
     render: (row: IApplication) => <RenderStatus status={row.status} />,
   },
@@ -69,9 +76,9 @@ const headCellsBase: HeadCell<IApplication & IExtendedApplication>[] = [
 
 const headCellsOCP: HeadCell<IApplication & IExtendedApplication>[] = [
   {
-    id: 'lender_name',
+    id: "lender_name",
     disablePadding: false,
-    label: t('Credit Provider'),
+    label: t("Credit Provider"),
     sortable: true,
     width: 174,
   },
@@ -93,7 +100,7 @@ const actionsFIBase = (
         component={Link}
         disabled={isLoading}
         to={`/applications/${row.id}/stage-one`}
-        label={t('Review')}
+        label={t("Review")}
         size="small"
         noIcon
       />
@@ -104,7 +111,7 @@ const actionsFIBase = (
         component={Link}
         disabled={isLoading}
         to={`/applications/${row.id}/stage-five`}
-        label={t('Decide')}
+        label={t("Decide")}
         size="small"
         noIcon
       />
@@ -113,7 +120,7 @@ const actionsFIBase = (
       <LinkButton
         className="p-1 justify-start"
         onClick={() => onStartApplicationHandler(row.id)}
-        label={t('Start')}
+        label={t("Start")}
         disabled={isLoading}
         size="small"
         noIcon
@@ -124,7 +131,7 @@ const actionsFIBase = (
         className="p-1 justify-start"
         component={Link}
         to={`/applications/${row.id}/view`}
-        label={t('View')}
+        label={t("View")}
         disabled={isLoading}
         size="small"
         noIcon
@@ -133,7 +140,7 @@ const actionsFIBase = (
     <LinkButton
       className="p-1 justify-start"
       onClick={() => onDownloadApplicationHandler(row.id)}
-      label={t('Download')}
+      label={t("Download")}
       disabled={isLoading}
       size="small"
       noIcon
@@ -147,7 +154,7 @@ const actionsOCP = (row: ExtendendApplication) => (
       className="p-1 justify-start"
       component={Link}
       to={`/admin/applications/${row.id}/view`}
-      label={t('View')}
+      label={t("View")}
       size="small"
       noIcon
     />
@@ -156,7 +163,7 @@ const actionsOCP = (row: ExtendendApplication) => (
         className="p-1 justify-start"
         component={Link}
         to={`/admin/applications/${row.id}/update`}
-        label={t('Update')}
+        label={t("Update")}
         size="small"
         noIcon
       />
@@ -178,9 +185,9 @@ export function ApplicationList({ type }: ApplicationListProps) {
   const [payload, setPayload] = useState<PaginationInput>({
     page: 0,
     page_size: PAGE_SIZES[0],
-    sort_field: 'application.borrower_submitted_at',
-    sort_order: 'desc',
-    search_value: '',
+    sort_field: "application.borrower_submitted_at",
+    sort_order: "desc",
+    search_value: "",
   });
 
   const [rows, setRows] = useState<ExtendendApplication[]>([]);
@@ -226,12 +233,12 @@ export function ApplicationList({ type }: ApplicationListProps) {
     retry: 1,
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response && error.response.data && error.response.data.detail) {
-        enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-          variant: 'error',
+        enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          variant: "error",
         });
       } else {
-        enqueueSnackbar(t('Error loading applications'), {
-          variant: 'error',
+        enqueueSnackbar(t("Error loading applications"), {
+          variant: "error",
         });
       }
     },
@@ -243,7 +250,7 @@ export function ApplicationList({ type }: ApplicationListProps) {
         ...item,
         borrower_name: item.borrower.legal_name,
         buyer_name: item.award.buyer_name,
-        lender_name: item.lender?.name || t('Not Assigned'),
+        lender_name: item.lender?.name || t("Not Assigned"),
         award_amount: item.award.award_amount,
       }));
       setRows(newRows);
@@ -267,10 +274,10 @@ export function ApplicationList({ type }: ApplicationListProps) {
     if (downloadedApplication) {
       const href = window.URL.createObjectURL(downloadedApplication);
 
-      const anchorElement = document.createElement('a');
+      const anchorElement = document.createElement("a");
 
       anchorElement.href = href;
-      const filename = `${t('application')}-${idToDownload}.zip`;
+      const filename = `${t("application")}-${idToDownload}.zip`;
       anchorElement.download = filename;
 
       document.body.appendChild(anchorElement);

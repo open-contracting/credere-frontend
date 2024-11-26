@@ -1,6 +1,6 @@
-import { Typography } from '@mui/material';
-import { PropsWithChildren } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { Typography } from "@mui/material";
+import type { PropsWithChildren } from "react";
+import { twMerge } from "tailwind-merge";
 
 export type TextProps = {
   className?: string;
@@ -14,18 +14,19 @@ export function Text({ children, fontVariant = false, className }: TextProps & P
       sx={
         fontVariant
           ? {
-              fontFamily: 'GT Eesti Pro Text',
+              fontFamily: "GT Eesti Pro Text",
             }
           : {}
       }
-      className={twMerge(`text-darkest text-lg mb-4 ${className}`)}>
+      className={twMerge(`text-darkest text-lg mb-4 ${className}`)}
+    >
       {children}
     </Typography>
   );
 }
 
 Text.defaultProps = {
-  className: '',
+  className: "",
   fontVariant: false,
 };
 

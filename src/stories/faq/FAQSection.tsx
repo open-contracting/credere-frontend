@@ -1,9 +1,9 @@
-import { Box, Collapse, Typography } from '@mui/material';
-import { PropsWithChildren, useState } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { Box, Collapse, Typography } from "@mui/material";
+import { type PropsWithChildren, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
-import ArrowGreen from '../../assets/icons/arrow-green.svg';
-import { Text } from '../text/Text';
+import ArrowGreen from "../../assets/icons/arrow-green.svg";
+import { Text } from "../text/Text";
 
 export type FAQSectionProps = {
   title: string;
@@ -21,17 +21,18 @@ export function FAQSection({ title, className, children }: FAQSectionProps & Pro
     <Box
       className={twMerge(`px-6 pt-4 pb-4 border-lightGray bg-white boder-b ${className}`)}
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        borderBottomStyle: 'solid',
-      }}>
+        display: "flex",
+        flexDirection: "column",
+        borderBottomStyle: "solid",
+      }}
+    >
       <Box className="border-b-2 border-lightGray flex items-center cursor-pointer" onClick={handleToggle}>
         <Typography variant="h6" className="text-darkest text-base font-normal">
           {title}
         </Typography>
         <Box className="ml-auto py-2 pr-2 pl-5">
           <img
-            className={twMerge(`transition-transform duration-300 ease-in-out transform ${open ? '' : 'rotate-180'}`)}
+            className={twMerge(`transition-transform duration-300 ease-in-out transform ${open ? "" : "rotate-180"}`)}
             src={ArrowGreen}
             alt="icon"
           />
@@ -46,7 +47,7 @@ export function FAQSection({ title, className, children }: FAQSectionProps & Pro
 }
 
 FAQSection.defaultProps = {
-  className: '',
+  className: "",
 };
 
 export default FAQSection;

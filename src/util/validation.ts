@@ -1,10 +1,13 @@
-import { t } from '@transifex/native';
-import axios from 'axios';
-import { EnqueueSnackbar } from 'notistack';
-import { ZodError, ZodType, z } from 'zod';
+import { t } from "@transifex/native";
+import axios from "axios";
+import type { EnqueueSnackbar } from "notistack";
+import type { ZodError, ZodType, z } from "zod";
 
 export class ValidationError extends Error {
-  constructor(message: string, public readonly cause: ZodError) {
+  constructor(
+    message: string,
+    public readonly cause: ZodError,
+  ) {
     super(message);
   }
 }
@@ -13,19 +16,19 @@ export const validation = <T extends ZodType>(schema: T, data: unknown, errorMes
   const result = schema.safeParse(data);
   if (result.success) return result.data;
 
-  throw new ValidationError(errorMessage ?? 'Validation error', result.error);
+  throw new ValidationError(errorMessage ?? "Validation error", result.error);
 };
 
 export const handleRequestError = (error: unknown, enqueueSnackbar: EnqueueSnackbar, defaultMessage: string) => {
   if (axios.isAxiosError(error) && error.response) {
     if (error.response.data && error.response.data.detail) {
-      enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-        variant: 'error',
+      enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+        variant: "error",
       });
     }
   } else {
     enqueueSnackbar(defaultMessage, {
-      variant: 'error',
+      variant: "error",
     });
   }
 };

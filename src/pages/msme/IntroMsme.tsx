@@ -1,20 +1,20 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Box } from '@mui/material';
-import { useT } from '@transifex/react';
-import { useMemo } from 'react';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-import FAQComponent from 'src/components/FAQComponent';
-import useAccessScheme from 'src/hooks/useAccessScheme';
-import useApplicationContext from 'src/hooks/useApplicationContext';
-import { IntroInput, introSchema } from 'src/schemas/application';
-import { Button } from 'src/stories/button/Button';
-import Checkbox from 'src/stories/checkbox/Checkbox';
-import Text from 'src/stories/text/Text';
-import Title from 'src/stories/title/Title';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box } from "@mui/material";
+import { useT } from "@transifex/react";
+import { useMemo } from "react";
+import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import FAQComponent from "src/components/FAQComponent";
+import useAccessScheme from "src/hooks/useAccessScheme";
+import useApplicationContext from "src/hooks/useApplicationContext";
+import { type IntroInput, introSchema } from "src/schemas/application";
+import { Button } from "src/stories/button/Button";
+import Checkbox from "src/stories/checkbox/Checkbox";
+import Text from "src/stories/text/Text";
+import Title from "src/stories/title/Title";
 
-import { formatCurrency } from '../../util';
+import { formatCurrency } from "../../util";
 
 function IntroMsme() {
   const t = useT();
@@ -32,7 +32,7 @@ function IntroMsme() {
   };
 
   const navigateDeclineHandler = () => {
-    navigate('../decline');
+    navigate("../decline");
   };
 
   const paramsForText = useMemo(() => {
@@ -49,7 +49,7 @@ function IntroMsme() {
 
   return (
     <>
-      <Title type="page" label={t('Credere by Open Contracting Partnership')} className="mb-8" />
+      <Title type="page" label={t("Credere by Open Contracting Partnership")} className="mb-8" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 md:col-span-2 md:mr-10">
           <Text className="mb-8">
@@ -63,7 +63,7 @@ function IntroMsme() {
           </Text>
           <Text className="mb-8">
             {t(
-              'As a business that has been awarded a public sector contract, you are eligible to apply for credit using this scheme. ',
+              "As a business that has been awarded a public sector contract, you are eligible to apply for credit using this scheme. ",
             )}
           </Text>
           <Text className="mb-8">
@@ -73,17 +73,17 @@ function IntroMsme() {
           </Text>
           <Text className="mb-8">
             {t(
-              'You have two weeks to select a credit option and make an application after which access to the scheme will be removed for security reasons.',
+              "You have two weeks to select a credit option and make an application after which access to the scheme will be removed for security reasons.",
             )}
           </Text>
           <Text className="mb-8">
             {t(
-              'The information about you and your company that appears in this message contains personal data of a public nature that has been found on the Colombian Open Data portal www.datos.gov.co. These data are used exclusively for the purpose of offering you access to credit. Any additional personal data will be collected with your prior consent.',
+              "The information about you and your company that appears in this message contains personal data of a public nature that has been found on the Colombian Open Data portal www.datos.gov.co. These data are used exclusively for the purpose of offering you access to credit. Any additional personal data will be collected with your prior consent.",
             )}
           </Text>
           <Text className="mb-8">
             {t(
-              'You are under no obligation to accept the credit when it is offered to you. You do not have to be an existing customer with any of our partners to be able to access this offer.',
+              "You are under no obligation to accept the credit when it is offered to you. You do not have to be an existing customer with any of our partners to be able to access this offer.",
             )}
           </Text>
           <FormProvider {...methods}>
@@ -93,28 +93,31 @@ function IntroMsme() {
               noValidate
               autoComplete="off"
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-              }}>
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
               <Checkbox
                 name="accept_terms_and_conditions"
                 defaultValue={false}
-                label={t('I have read the terms and conditions for the credit guarantee scheme.')}
+                label={t("I have read the terms and conditions for the credit guarantee scheme.")}
               />
               <Box>
-                <Text className="inline-block">{t('You can read')} </Text>
+                <Text className="inline-block">{t("You can read")} </Text>
 
                 <Link className="text-darkest" to="/terms-and-conditions">
-                  <Text className="inline-block underline ml-1 mb-X">{t('the terms and conditions in this link')}</Text>
+                  <Text className="inline-block underline ml-1 mb-X">
+                    {t("the terms and conditions in this link")}
+                  </Text>
                 </Link>
               </Box>
               <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
                 <div>
-                  <Button className="md:mr-4" label={t('Acces the scheme')} type="submit" disabled={isLoading} />
+                  <Button className="md:mr-4" label={t("Acces the scheme")} type="submit" disabled={isLoading} />
                 </div>
 
                 <div>
-                  <Button label={t('Decline')} onClick={navigateDeclineHandler} disabled={isLoading} />
+                  <Button label={t("Decline")} onClick={navigateDeclineHandler} disabled={isLoading} />
                 </div>
               </div>
             </Box>

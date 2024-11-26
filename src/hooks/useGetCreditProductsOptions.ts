@@ -1,10 +1,10 @@
-import { UseMutateFunction, useMutation } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import axios from 'axios';
-import { useSnackbar } from 'notistack';
+import { type UseMutateFunction, useMutation } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import axios from "axios";
+import { useSnackbar } from "notistack";
 
-import { getCreditProductOptionsFn } from '../api/public';
-import { GetCreditProductsOptionsInput, IApplicationCreditOptions } from '../schemas/application';
+import { getCreditProductOptionsFn } from "../api/public";
+import type { GetCreditProductsOptionsInput, IApplicationCreditOptions } from "../schemas/application";
 
 type IUseGetCreditProductsOptions = {
   getCreditProductOptionsMutation: UseMutateFunction<
@@ -33,13 +33,13 @@ export default function useGetCreditProductsOptions(): IUseGetCreditProductsOpti
       onError: (error) => {
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.data && error.response.data.detail) {
-            enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-              variant: 'error',
+            enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+              variant: "error",
             });
           }
         } else {
-          enqueueSnackbar(t('Error getting credit product options. {error}', { error }), {
-            variant: 'error',
+          enqueueSnackbar(t("Error getting credit product options. {error}", { error }), {
+            variant: "error",
           });
         }
       },

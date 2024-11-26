@@ -1,8 +1,8 @@
-import { useRouteError } from 'react-router-dom';
+import { useRouteError } from "react-router-dom";
 
-import PageLayout from '../layout/PageLayout';
-import Text from '../stories/text/Text';
-import Title from '../stories/title/Title';
+import PageLayout from "../layout/PageLayout";
+import Text from "../stories/text/Text";
+import Title from "../stories/title/Title";
 
 export default function RouterErrorPage() {
   const error = useRouteError();

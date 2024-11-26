@@ -1,69 +1,69 @@
-import { FormControl, FormControlLabel, FormHelperText, Switch as MUISwitch, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { useT } from '@transifex/react';
-import { ChangeEvent } from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
-import { twMerge } from 'tailwind-merge';
+import { FormControl, FormControlLabel, FormHelperText, Switch as MUISwitch, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { useT } from "@transifex/react";
+import type { ChangeEvent } from "react";
+import { Controller, useFormContext } from "react-hook-form";
+import { twMerge } from "tailwind-merge";
 
-import ToggleSwitch from '../../assets/icons/toggle-switch.svg';
-import { COLORS } from '../../constants';
-import { getProperty } from '../../util';
-import { FieldErrorType } from '../form-input/FormInput';
+import ToggleSwitch from "../../assets/icons/toggle-switch.svg";
+import { COLORS } from "../../constants";
+import { getProperty } from "../../util";
+import type { FieldErrorType } from "../form-input/FormInput";
 
 const LabeledSwitch = styled(MUISwitch)(() => ({
   width: 59,
   height: 29,
-  '&': {
+  "&": {
     padding: 0,
     marginRight: 10,
     marginLeft: 10,
   },
-  '& .MuiSwitch-switchBase': {
+  "& .MuiSwitch-switchBase": {
     padding: 2,
   },
-  '& .MuiSwitch-switchBase.Mui-checked': {
-    transform: 'translateX(30px)',
+  "& .MuiSwitch-switchBase.Mui-checked": {
+    transform: "translateX(30px)",
   },
-  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+  "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
     backgroundColor: `${COLORS.darkest}`,
     opacity: 1,
-    '&:before': {
+    "&:before": {
       content: '"Yes"',
       color: `${COLORS.white}`,
       left: 8,
     },
-    '&:after': {
+    "&:after": {
       content: '""',
     },
   },
-  '& .Mui-disabled+.MuiSwitch-track': {
+  "& .Mui-disabled+.MuiSwitch-track": {
     opacity: 0.5,
   },
-  '& .MuiSwitch-track': {
+  "& .MuiSwitch-track": {
     width: 59,
     height: 29,
     opacity: 1,
     borderRadius: 25,
     backgroundColor: `${COLORS.fieldBorder}`,
-    '&:before, &:after': {
+    "&:before, &:after": {
       content: '""',
-      position: 'absolute',
-      fontFamily: 'GT Eesti Pro Text',
+      position: "absolute",
+      fontFamily: "GT Eesti Pro Text",
       fontSize: 14,
-      top: '50%',
-      transform: 'translateY(-50%)',
+      top: "50%",
+      transform: "translateY(-50%)",
     },
-    '&:before': {
+    "&:before": {
       content: '""',
     },
-    '&:after': {
+    "&:after": {
       content: '"No"',
       color: `${COLORS.black}`,
       right: 8,
     },
   },
-  '& .MuiSwitch-thumb': {
-    boxShadow: 'none',
+  "& .MuiSwitch-thumb": {
+    boxShadow: "none",
     width: 16,
     height: 16,
     margin: 2,
@@ -101,22 +101,22 @@ export function Switch({
   return (
     <FormControl fullWidth className={`${fieldClassName}`}>
       <FormControlLabel
-        sx={{ alignItems: 'flex-start' }}
+        sx={{ alignItems: "flex-start" }}
         control={
           <LabeledSwitch
             id={name}
             sx={{
-              px: '10px',
-              py: '2px',
-              ':hover': { backgroundColor: 'transparent' },
-              '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                '&:before': {
-                  content: `'${t('Yes')}'`,
+              px: "10px",
+              py: "2px",
+              ":hover": { backgroundColor: "transparent" },
+              "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+                "&:before": {
+                  content: `'${t("Yes")}'`,
                 },
               },
-              '& .MuiSwitch-track': {
-                '&:after': {
-                  content: `'${t('No')}'`,
+              "& .MuiSwitch-track": {
+                "&:after": {
+                  content: `'${t("No")}'`,
                 },
               },
             }}
@@ -131,13 +131,14 @@ export function Switch({
         label={
           <Typography
             variant="body1"
-            className={twMerge(`text-darkest text-lg ${fieldError ? 'text-red' : ''} ${className}`)}>
+            className={twMerge(`text-darkest text-lg ${fieldError ? "text-red" : ""} ${className}`)}
+          >
             {label}
           </Typography>
         }
       />
       <FormHelperText className="text-red text-base mx-0" error={!!fieldError}>{`${
-        fieldError ? fieldError?.message : ''
+        fieldError ? fieldError?.message : ""
       }`}</FormHelperText>
     </FormControl>
   );
@@ -146,7 +147,7 @@ export function Switch({
 Switch.defaultProps = {
   className: undefined,
   value: undefined,
-  fieldClassName: '',
+  fieldClassName: "",
   defaultValue: false,
   disabled: undefined,
   onChange: undefined,
@@ -190,7 +191,7 @@ export function ControlledSwitch({
 
 ControlledSwitch.defaultProps = {
   className: undefined,
-  fieldClassName: '',
+  fieldClassName: "",
   defaultValue: false,
   disabled: undefined,
 };

@@ -1,7 +1,7 @@
-import { useT } from '@transifex/react';
+import { useT } from "@transifex/react";
 
-import ArrowInCircleIcon from '../assets/icons/arrow-in-circle.svg';
-import './AboutPage.css';
+import ArrowInCircleIcon from "../assets/icons/arrow-in-circle.svg";
+import "./AboutPage.css";
 
 function About() {
   const t = useT();
@@ -11,9 +11,9 @@ function About() {
       <div className="home-section-intro">
         <div className="home-hero">
           <div className="home-content">
-            <h1 className="home-title">{t('We break barriers')}</h1>
+            <h1 className="home-title">{t("We break barriers")}</h1>
             <span className="home-caption">
-              {t('CREDERE is a financial solution to open opportunities for small businesses in public procurement')}
+              {t("CREDERE is a financial solution to open opportunities for small businesses in public procurement")}
             </span>
           </div>
         </div>
@@ -23,11 +23,11 @@ function About() {
         <div className="home-section">
           <div className="home-image" />
           <div className="home-content1">
-            <h2 className="home-text01">{t('Why CREDERE?')}</h2>
+            <h2 className="home-text01">{t("Why CREDERE?")}</h2>
             <span className="home-text02">
               <span>
                 {t(
-                  'The public procurement market in Colombia exceeds $150 billion. But almost 70% of small and medium-sized businesses have not obtained external financing from financial institutions, limiting their ability to grow and develop.',
+                  "The public procurement market in Colombia exceeds $150 billion. But almost 70% of small and medium-sized businesses have not obtained external financing from financial institutions, limiting their ability to grow and develop.",
                 )}
               </span>
               <br />
@@ -46,14 +46,14 @@ function About() {
         <div className="home-section2">
           <div className="home-image2" />
           <div className="home-content2">
-            <h2 className="home-text07">{t('The solution')}</h2>
+            <h2 className="home-text07">{t("The solution")}</h2>
             <span className="home-text08">
-              <span>{t('CREDERE is an innovative tool developed by the Open Contracting Partnership.')}</span>
+              <span>{t("CREDERE is an innovative tool developed by the Open Contracting Partnership.")}</span>
               <br />
               <br />
               <span>
                 {t(
-                  'It is the first solution in the region that allows small businesses to gain access to financial products to fulfill public contracts and be more competitive.',
+                  "It is the first solution in the region that allows small businesses to gain access to financial products to fulfill public contracts and be more competitive.",
                 )}
               </span>
               <br />
@@ -66,28 +66,28 @@ function About() {
         <div className="home-stat">
           <span className="home-caption1">$150</span>
           <span className="home-description">
-            <span className="home-text">{t('billions of pesos in annual value of public contracts')}</span>
+            <span className="home-text">{t("billions of pesos in annual value of public contracts")}</span>
             <span />
           </span>
         </div>
         <div className="home-stat">
           <span className="home-caption1">78%</span>
           <span className="home-description">
-            <span className="home-text">{t('of SMEs has never won a public contract')}</span>
+            <span className="home-text">{t("of SMEs has never won a public contract")}</span>
             <span />
           </span>
         </div>
         <div className="home-stat">
           <span className="home-caption1">45%</span>
           <span className="home-description">
-            <span className="home-text">{t('cannot assume financial costs')}</span>
+            <span className="home-text">{t("cannot assume financial costs")}</span>
             <span />
           </span>
         </div>
         <div className="home-stat">
           <span className="home-caption1">89%</span>
           <span className="home-description">
-            <span className="home-text">{t('used informal credits')}</span>
+            <span className="home-text">{t("used informal credits")}</span>
             <span />
             <br />
           </span>
@@ -107,7 +107,8 @@ function About() {
             href="https://www.open-contracting.org/es/2023/10/04/credere-llega-a-colombia-para-ayudarle-a-las-pymes-a-contratar-con-el-estado/"
             target="_blank"
             rel="noreferrer noopener"
-            className="home-link1">
+            className="home-link1"
+          >
             <div className="feature-feature home-component01">
               <img alt="ocp-tech" src="/OCP-Credere-invitacion-header.avif" className="feature-image" />
               <div className="feature-content">
@@ -115,7 +116,8 @@ function About() {
                   href="https://www.open-contracting.org/es/2023/10/04/credere-llega-a-colombia-para-ayudarle-a-las-pymes-a-contratar-con-el-estado/"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="feature-title">
+                  className="feature-title"
+                >
                   CREDERE llega a Colombia para ayudarle a las Pymes a contratar con el Estado
                 </a>
                 <span className="feature-description">4 de Octubre 2023</span>
@@ -127,7 +129,8 @@ function About() {
             href="https://www.open-contracting.org/2023/06/06/building-financial-solutions-for-small-businesses-in-public-procurement-lessons-from-bogota/"
             target="_blank"
             rel="noreferrer noopener"
-            className="home-link1">
+            className="home-link1"
+          >
             <div className="feature-feature home-component01">
               <img alt="ocp-tech" src="/entrepreneur-woman-1200w.jpeg" className="feature-image" />
               <div className="feature-content">
@@ -135,7 +138,8 @@ function About() {
                   href="https://www.open-contracting.org/es/2023/06/06/building-financial-solutions-for-small-businesses-in-public-procurement-lessons-from-bogota/"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="feature-title">
+                  className="feature-title"
+                >
                   Generar soluciones financieras para las pequeñas empresas en la contratación pública: lecciones de
                   Bogotá
                 </a>
@@ -148,7 +152,8 @@ function About() {
             href="https://strivecommunity.org/programs/open-contracting-partnership"
             target="_blank"
             rel="noreferrer noopener"
-            className="home-link1">
+            className="home-link1"
+          >
             <div className="feature-feature home-component01">
               <img alt="ocp-tech" src="/empresaria_domrep-200h.jpg" className="feature-image" />
               <div className="feature-content">
@@ -156,7 +161,8 @@ function About() {
                   href="https://strivecommunity.org/programs/open-contracting-partnership"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="feature-title">
+                  className="feature-title"
+                >
                   Open Contracting Partnership: Government contracts made accessible for small businesses
                 </a>
                 <span className="feature-description">MasterCard Strive Community 2022</span>
@@ -194,7 +200,8 @@ function About() {
               href="https://www.open-contracting.org/es"
               target="_blank"
               rel="noreferrer noopener"
-              className="home-link3">
+              className="home-link3"
+            >
               <div className="home-ios-btn">
                 <img alt="pastedImage" src={ArrowInCircleIcon} className="home-apple" />
                 <span className="home-caption5">Aprende más</span>
@@ -233,9 +240,9 @@ function About() {
       <div className="home-get-started">
         <div className="home-content5">
           <div className="home-heading2">
-            <h2 className="home-text38">{t('Do you want to know more?')}</h2>
+            <h2 className="home-text38">{t("Do you want to know more?")}</h2>
             <span className="home-text39">
-              {t('Are you a financial institution and want to be part of this innovation?')}
+              {t("Are you a financial institution and want to be part of this innovation?")}
             </span>
           </div>
           <div className="home-hero-buttons">
@@ -243,7 +250,7 @@ function About() {
               <div className="home-ios-btn">
                 <img alt="pastedImage" src={ArrowInCircleIcon} className="home-apple" />
 
-                <span className="home-caption5">{t('Contact us to join')}</span>
+                <span className="home-caption5">{t("Contact us to join")}</span>
               </div>
             </a>
           </div>
@@ -281,7 +288,8 @@ function About() {
             href="https://www.open-contracting.org/es/about/politica-de-privacidad/"
             target="_blank"
             rel="noreferrer noopener"
-            className="footer-link">
+            className="footer-link"
+          >
             Privacidad
           </a>
         </div>

@@ -1,10 +1,10 @@
-import { Box, Collapse, Typography } from '@mui/material';
-import { PropsWithChildren } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { Box, Collapse, Typography } from "@mui/material";
+import type { PropsWithChildren } from "react";
+import { twMerge } from "tailwind-merge";
 
-import Minus from '../../assets/icons/minus.svg';
-import Plus from '../../assets/icons/plus.svg';
-import { Text } from '../text/Text';
+import Minus from "../../assets/icons/minus.svg";
+import Plus from "../../assets/icons/plus.svg";
+import { Text } from "../text/Text";
 
 export type FAQPageSectionProps = {
   title: string;
@@ -24,16 +24,17 @@ export function FAQPageSection({
     <Box
       className={twMerge(`mt-1 ${className}`)}
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-      }}>
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Box className="px-4 pt-4 pb-2 bg-white flex items-center cursor-pointer" onClick={handleToggle}>
         <Typography variant="h6" className="text-darkest text-lg font-bold">
           {title}
         </Typography>
         <Box className="ml-auto p-2">
           <img
-            className={twMerge(`transition-transform duration-300 ease-in-out transform ${open ? '' : 'rotate-180'}`)}
+            className={twMerge(`transition-transform duration-300 ease-in-out transform ${open ? "" : "rotate-180"}`)}
             src={open ? Plus : Minus}
             alt="icon"
           />
@@ -52,7 +53,7 @@ export function FAQPageSection({
 }
 
 FAQPageSection.defaultProps = {
-  className: '',
+  className: "",
 };
 
 export default FAQPageSection;

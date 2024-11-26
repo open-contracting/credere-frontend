@@ -1,29 +1,29 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Box } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import useConstants from 'src/hooks/useConstants';
-import { CreditProductInput, creditProductSchema } from 'src/schemas/OCPsettings';
-import Button from 'src/stories/button/Button';
-import Checkbox from 'src/stories/checkbox/Checkbox';
-import FormInput, { FormInputError } from 'src/stories/form-input/FormInput';
-import FormSelect from 'src/stories/form-select/FormSelect';
-import Text from 'src/stories/text/Text';
-import Title from 'src/stories/title/Title';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import useConstants from "src/hooks/useConstants";
+import { type CreditProductInput, creditProductSchema } from "src/schemas/OCPsettings";
+import Button from "src/stories/button/Button";
+import Checkbox from "src/stories/checkbox/Checkbox";
+import FormInput, { FormInputError } from "src/stories/form-input/FormInput";
+import FormSelect from "src/stories/form-select/FormSelect";
+import Text from "src/stories/text/Text";
+import Title from "src/stories/title/Title";
+import { z } from "zod";
 
-import { getCreditProductFn, getProcurementCategoriesFn } from '../../api/private';
-import { CREDIT_PRODUCT_OPTIONS, DEFAULT_BORROWER_SIZE, QUERY_KEYS } from '../../constants';
-import { useParamsTypeSafe } from '../../hooks/useParamsTypeSafe';
-import useUpsertCreditProduct from '../../hooks/useUpsertCreditProduct';
-import { ICreditProduct } from '../../schemas/application';
-import Loader from '../../stories/loader/Loader';
-import ApplicationErrorPage from '../msme/ApplicationErrorPage';
+import { getCreditProductFn, getProcurementCategoriesFn } from "../../api/private";
+import { CREDIT_PRODUCT_OPTIONS, DEFAULT_BORROWER_SIZE, QUERY_KEYS } from "../../constants";
+import { useParamsTypeSafe } from "../../hooks/useParamsTypeSafe";
+import useUpsertCreditProduct from "../../hooks/useUpsertCreditProduct";
+import type { ICreditProduct } from "../../schemas/application";
+import Loader from "../../stories/loader/Loader";
+import ApplicationErrorPage from "../msme/ApplicationErrorPage";
 
 export interface CreditProductFormProps {
   lenderId: number;
@@ -72,16 +72,16 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
     <>
       <div className="grid grid-cols-1 lg:grid-cols-3 lg:mb-8 md:mb-8 mb-4 md:grid-cols-2 gap-4 ">
         <div className="flex items-end col-span-1 md:mr-10">
-          <Title className="mb-0" type="page" label={t('Settings')} />
+          <Title className="mb-0" type="page" label={t("Settings")} />
         </div>
         <div className="flex justify-start items-start my-4 col-span-1 md:justify-end md:my-0 md:ml-10 lg:justify-end lg:col-span-2">
           <div className="grid grid-cols-1 gap-4 md:flex md:gap-0">
             <div>
-              <Button className="md:mr-4" label={t('Dashboard')} component={Link} to="/" />
+              <Button className="md:mr-4" label={t("Dashboard")} component={Link} to="/" />
             </div>
 
             <div>
-              <Button label={t('Applications')} component={Link} to="/admin/applications" />
+              <Button label={t("Applications")} component={Link} to="/admin/applications" />
             </div>
           </div>
         </div>
@@ -91,8 +91,8 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
         type="section"
         label={
           creditProduct
-            ? t('Edit Credit Product for {lenderName}', { lenderName: creditProduct.lender?.name })
-            : t('Add New Credit Product')
+            ? t("Edit Credit Product for {lenderName}", { lenderName: creditProduct.lender?.name })
+            : t("Add New Credit Product")
         }
         className="mb-6"
       />
@@ -104,35 +104,36 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
           autoComplete="off"
           maxWidth="md"
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
+            display: "flex",
+            flexDirection: "column",
             borderRadius: 0,
-          }}>
+          }}
+        >
           <FormSelect
             className="w-3/5"
-            label={t('Select type of business the credit provider is willing to offer credit to')}
+            label={t("Select type of business the credit provider is willing to offer credit to")}
             name="borrower_size"
             options={(constants?.BorrowerSize || []).filter((o) => o.value !== DEFAULT_BORROWER_SIZE)}
-            placeholder={t('Borrower size')}
+            placeholder={t("Borrower size")}
           />
           <FormSelect
             className="w-3/5"
-            label={t('Select type of procurement category to exclude (if any)')}
+            label={t("Select type of procurement category to exclude (if any)")}
             name="procurement_category_to_exclude"
             options={procurementCategories || []}
-            placeholder={t('Procurement category to exclude')}
+            placeholder={t("Procurement category to exclude")}
           />
 
           <FormSelect
             className="w-3/5"
-            label={t('Select the type of credit product')}
+            label={t("Select the type of credit product")}
             name="type"
             options={CREDIT_PRODUCT_OPTIONS}
-            placeholder={t('Type')}
+            placeholder={t("Type")}
           />
 
           <Text className="mb-4">
-            {t('Select the legal type of business the credit provider is willing to offer credit to')}
+            {t("Select the legal type of business the credit provider is willing to offer credit to")}
           </Text>
           <Box className="mb-4">
             <Box className="w-3/5 flex flex-col items-start justify-start gap-2">
@@ -141,7 +142,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
                   key={type.value}
                   label={type.label}
                   name={`borrower_types.${type.value}`}
-                  className={errors.borrower_types ? 'text-red' : ''}
+                  className={errors.borrower_types ? "text-red" : ""}
                 />
               ))}
             </Box>
@@ -150,26 +151,26 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
 
           <Text className="mb-1">
             {t(
-              'Enter the lower and upper limits that the credit provider will be willing to offer for this credit product',
+              "Enter the lower and upper limits that the credit provider will be willing to offer for this credit product",
             )}
           </Text>
           <Box className="mb-2 w-3/5 flex flex-row items-start justify-start gap-2">
-            <FormInput label="" name="lower_limit" placeholder={t('Lower limit')} type="currency" />
-            <FormInput label="" name="upper_limit" placeholder={t('Upper limit')} type="currency" />
+            <FormInput label="" name="lower_limit" placeholder={t("Lower limit")} type="currency" />
+            <FormInput label="" name="upper_limit" placeholder={t("Upper limit")} type="currency" />
           </Box>
 
           <FormInput
             className="w-3/5"
-            label={t('Interest rate of the credit product')}
+            label={t("Interest rate of the credit product")}
             name="interest_rate"
             multiline
             rows={4}
             big={false}
-            placeholder={t('Interes rate')}
+            placeholder={t("Interes rate")}
           />
 
           <Text className="mb-4">
-            {t('Select all the documents that the credit provider will require from the business')}
+            {t("Select all the documents that the credit provider will require from the business")}
           </Text>
           <Box className="mb-4">
             <Box className="w-3/5 flex flex-col items-start justify-start gap-2">
@@ -178,7 +179,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
                   key={type.value}
                   label={type.label}
                   name={`required_document_types.${type.value}`}
-                  className={errors.required_document_types ? 'text-red' : ''}
+                  className={errors.required_document_types ? "text-red" : ""}
                 />
               ))}
             </Box>
@@ -187,39 +188,39 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
 
           <FormInput
             className="w-3/5"
-            label={t('Enter the total amount of other fees that the credit provider will charge the business')}
+            label={t("Enter the total amount of other fees that the credit provider will charge the business")}
             name="other_fees_total_amount"
             big={false}
             type="currency"
-            placeholder={t('Other fees total amount')}
+            placeholder={t("Other fees total amount")}
           />
 
           <FormInput
             className="w-3/5"
-            label={t('Enter de details of the other fees that the credit provider will charge the business')}
+            label={t("Enter de details of the other fees that the credit provider will charge the business")}
             name="other_fees_description"
             multiline
             rows={4}
             big={false}
-            placeholder={t('Other fees description')}
+            placeholder={t("Other fees description")}
           />
 
           <FormInput
             className="w-3/5"
-            label={t('Enter any additional information for tne business about the credit product')}
+            label={t("Enter any additional information for tne business about the credit product")}
             name="additional_information"
             multiline
             rows={4}
             big={false}
-            placeholder={t('Additional information')}
+            placeholder={t("Additional information")}
           />
 
           <FormInput
             className="w-3/5"
-            label={t('Enter the URL where the business can find more information about the credit product')}
+            label={t("Enter the URL where the business can find more information about the credit product")}
             name="more_info_url"
             big={false}
-            placeholder={t('More info URL')}
+            placeholder={t("More info URL")}
           />
 
           <div className="mt-5 grid grid-cols-1 gap-4 md:flex md:gap-0">
@@ -227,7 +228,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
               <Button
                 className="md:mr-4"
                 primary={false}
-                label={t('Back')}
+                label={t("Back")}
                 component={Link}
                 to={`/settings/lender/${lenderId}/edit`}
               />
@@ -235,7 +236,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
             <div>
               <Button
                 disabled={isLoading}
-                label={creditProduct ? t('Update Credit product') : t('Add New Credit product')}
+                label={creditProduct ? t("Update Credit product") : t("Add New Credit product")}
                 type="submit"
               />
             </div>
@@ -252,7 +253,7 @@ CreditProductForm.defaultProps = {
 
 export function LoadCreditProduct() {
   const t = useT();
-  const [queryError, setQueryError] = useState<string>('');
+  const [queryError, setQueryError] = useState<string>("");
 
   const { id, lenderId } = useParamsTypeSafe(
     z.object({
@@ -273,7 +274,7 @@ export function LoadCreditProduct() {
       if (axios.isAxiosError(error) && error.response && error.response.data && error.response.data.detail) {
         setQueryError(error.response.data.detail);
       } else {
-        setQueryError(t('Error loading credit product'));
+        setQueryError(t("Error loading credit product"));
       }
     },
   });

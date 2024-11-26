@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import { DISPATCH_ACTIONS } from '../constants';
-import { IApplicationResponse } from '../schemas/application';
+import { DISPATCH_ACTIONS } from "../constants";
+import type { IApplicationResponse } from "../schemas/application";
 
 type ApplicationState = {
   data: IApplicationResponse | null;

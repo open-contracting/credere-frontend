@@ -1,8 +1,8 @@
-import { Box, CircularProgress, Container } from '@mui/material';
+import { Box, CircularProgress, Container } from "@mui/material";
 
 export function Progress() {
   return (
-    <Box display="flex" alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
+    <Box display="flex" alignItems="center" justifyContent="center" sx={{ height: "100%" }}>
       <CircularProgress className="text-grass" />
     </Box>
   );
@@ -10,7 +10,7 @@ export function Progress() {
 
 export function Loader() {
   return (
-    <Container sx={{ height: '95vh' }}>
+    <Container sx={{ height: "95vh" }}>
       <Progress />
     </Container>
   );

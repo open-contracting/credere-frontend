@@ -1,7 +1,7 @@
-import { Box } from '@mui/material';
+import { Box } from "@mui/material";
 
-import { Switch } from '../stories/switch/Switch';
-import DataVerificationStatus from './DataVerificationStatus';
+import { Switch } from "../stories/switch/Switch";
+import DataVerificationStatus from "./DataVerificationStatus";
 
 interface DataVerificationFormProps {
   name: string;

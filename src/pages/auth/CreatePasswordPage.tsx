@@ -1,17 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Container } from '@mui/material';
-import { useT } from '@transifex/react';
-import { useEffect } from 'react';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { useSearchParamsTypeSafe } from 'src/hooks/useParamsTypeSafe';
-import useUpdatePassword from 'src/hooks/useUpdatePassword';
-import { UpdatePasswordInput, UpdatePasswordPayload, setPasswordSchema } from 'src/schemas/auth';
-import { Button } from 'src/stories/button/Button';
-import FormInput from 'src/stories/form-input/FormInput';
-import Text from 'src/stories/text/Text';
-import Title from 'src/stories/title/Title';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box, Container } from "@mui/material";
+import { useT } from "@transifex/react";
+import { useEffect } from "react";
+import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useSearchParamsTypeSafe } from "src/hooks/useParamsTypeSafe";
+import useUpdatePassword from "src/hooks/useUpdatePassword";
+import { type UpdatePasswordInput, type UpdatePasswordPayload, setPasswordSchema } from "src/schemas/auth";
+import { Button } from "src/stories/button/Button";
+import FormInput from "src/stories/form-input/FormInput";
+import Text from "src/stories/text/Text";
+import Title from "src/stories/title/Title";
+import { z } from "zod";
 
 const params = z.object({
   email: z.coerce.string().email(),
@@ -21,7 +21,7 @@ const params = z.object({
 export function CreatePasswordPage() {
   const t = useT();
   const updatePassword = useUpdatePassword();
-  const { email: username, key: tempPassword } = useSearchParamsTypeSafe(params, t('This is an invalid link.'));
+  const { email: username, key: tempPassword } = useSearchParamsTypeSafe(params, t("This is an invalid link."));
 
   const methods = useForm<UpdatePasswordInput>({
     resolver: zodResolver(setPasswordSchema),
@@ -56,23 +56,25 @@ export function CreatePasswordPage() {
       <Title
         type="page"
         className="lg:pt-16 lg:pl-20 md:pt-10 md:pl-12 sm:pt-9 sm:pl-10 pt-8 pl-6 lg:mb-16 mb-10"
-        label={t('Create Password')}
+        label={t("Create Password")}
       />
       <Container
         maxWidth={false}
         className="bg-background"
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-          }}>
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
           <FormProvider {...methods}>
             <Box
               component="form"
@@ -80,20 +82,21 @@ export function CreatePasswordPage() {
               noValidate
               autoComplete="off"
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                backgroundColor: '#ffffff',
-                p: { xs: '1rem', sm: '2rem' },
-                width: { sm: '580px' },
+                display: "flex",
+                flexDirection: "column",
+                backgroundColor: "#ffffff",
+                p: { xs: "1rem", sm: "2rem" },
+                width: { sm: "580px" },
                 borderRadius: 0,
-              }}>
-              <Title type="section" className="self-center mb-8" label={t('Set account password')} />
-              <FormInput name="password" label={t('Password')} type="password" />
-              <FormInput name="passwordConfirm" label={t('Confirm password')} type="password" />
+              }}
+            >
+              <Title type="section" className="self-center mb-8" label={t("Set account password")} />
+              <FormInput name="password" label={t("Password")} type="password" />
+              <FormInput name="passwordConfirm" label={t("Confirm password")} type="password" />
 
-              <Button className="mb-10" label={t('Submit')} type="submit" />
+              <Button className="mb-10" label={t("Submit")} type="submit" />
               <Box>
-                <Text className="inline-block">{t('Need help? Email')}</Text>
+                <Text className="inline-block">{t("Need help? Email")}</Text>
                 <Text className="inline-block underline ml-1">
                   <a className="text-darkest" href="mailto:credere@open-contracting.org">
                     credere@open-contracting.org

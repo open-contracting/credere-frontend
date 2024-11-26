@@ -1,13 +1,13 @@
-import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import axios from 'axios';
-import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { type UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import axios from "axios";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
-import { applicationSubmitFn } from '../api/public';
-import { DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
-import { ApplicationBaseInput, IApplicationResponse } from '../schemas/application';
-import useApplicationContext from './useApplicationContext';
+import { applicationSubmitFn } from "../api/public";
+import { DISPATCH_ACTIONS, QUERY_KEYS } from "../constants";
+import type { ApplicationBaseInput, IApplicationResponse } from "../schemas/application";
+import useApplicationContext from "./useApplicationContext";
 
 type IUseSubmitApplication = {
   submitApplicationMutation: UseMutateFunction<IApplicationResponse, unknown, ApplicationBaseInput, unknown>;
@@ -30,18 +30,18 @@ export default function useSubmitApplication(): IUseSubmitApplication {
     onSuccess: (data) => {
       queryClient.setQueryData([QUERY_KEYS.application_uuid, data.application.uuid], data);
       applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });
-      navigate('../submission-completed');
+      navigate("../submission-completed");
     },
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data && error.response.data.detail) {
-          enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-            variant: 'error',
+          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t('Error submiting the application. {error}', { error }), {
-          variant: 'error',
+        enqueueSnackbar(t("Error submiting the application. {error}", { error }), {
+          variant: "error",
         });
       }
     },

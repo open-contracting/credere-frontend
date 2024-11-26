@@ -1,11 +1,11 @@
-import { useT } from '@transifex/react';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import FAQ_QUESTIONS from 'src/constants/faq-questions';
-import FAQPageSection from 'src/stories/faq/FAQPageSection';
+import { useT } from "@transifex/react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import FAQ_QUESTIONS from "src/constants/faq-questions";
+import FAQPageSection from "src/stories/faq/FAQPageSection";
 
-import FAQContainer from '../stories/faq/FAQContainer';
-import LinkButton from '../stories/link-button/LinkButton';
+import FAQContainer from "../stories/faq/FAQContainer";
+import LinkButton from "../stories/link-button/LinkButton";
 
 interface FAQComponentProps {
   className?: string;
@@ -18,7 +18,7 @@ export function FAQComponent({ className }: FAQComponentProps) {
     setOpen((prev) => ({ ...prev, [key]: !prev[key] }));
   };
   return (
-    <FAQContainer title={t('Frequently Asked Questions')} className={className}>
+    <FAQContainer title={t("Frequently Asked Questions")} className={className}>
       {Object.keys(FAQ_QUESTIONS)
         .slice(0, 3)
         .map((key: string) => (
@@ -26,17 +26,18 @@ export function FAQComponent({ className }: FAQComponentProps) {
             key={key}
             open={open[key]}
             handleToggle={() => handleToggle(key)}
-            title={t(FAQ_QUESTIONS[key].question)}>
+            title={t(FAQ_QUESTIONS[key].question)}
+          >
             {t(FAQ_QUESTIONS[key].answer)}
           </FAQPageSection>
         ))}
-      <LinkButton className="ml-1 mb-2" label={t('View all FAQs')} component={Link} to="/frequently-asked-questions" />
+      <LinkButton className="ml-1 mb-2" label={t("View all FAQs")} component={Link} to="/frequently-asked-questions" />
     </FAQContainer>
   );
 }
 
 FAQComponent.defaultProps = {
-  className: '',
+  className: "",
 };
 
 export default FAQComponent;
