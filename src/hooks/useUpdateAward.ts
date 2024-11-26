@@ -33,7 +33,7 @@ export default function useUpdateAward(): IUseUpdateAward {
       },
       onError: (error) => {
         if (axios.isAxiosError(error) && error.response) {
-          if (error.response.data && error.response.data.detail) {
+          if (error.response.data?.detail) {
             enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
               variant: "error",
             });

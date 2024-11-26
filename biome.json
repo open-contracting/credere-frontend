@@ -27,8 +27,7 @@
         "useKeyWithClickEvents": "off"
       },
       "complexity": {
-        "noForEach": "off",
-        "useOptionalChain": "off"
+        "noForEach": "off"
       },
       "correctness": {
         "noUnknownFunction": "off",

@@ -32,7 +32,7 @@ export function ApplicationTableDataBorrowerRow({
   const value = borrower[name];
   const missing = missingData[name] === undefined ? true : missingData[name];
 
-  const verified = (verifiedData && verifiedData[name]) || false;
+  const verified = verifiedData?.[name] || false;
 
   let formattedValue = formatter ? formatter(value) : value;
   if (useTranslation) {

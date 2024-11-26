@@ -83,7 +83,7 @@ export function DocumentField({ label, documentType, secure = false, className, 
         if (setUploadState) setUploadState((prev) => ({ ...prev, [documentType]: true }));
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
-          if (error.response.data && error.response.data.detail) {
+          if (error.response.data?.detail) {
             enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
               variant: "error",
             });
