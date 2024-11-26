@@ -32,7 +32,7 @@ const langReducer = (state: LangState, action: ActionSetLang) => {
       };
     }
     default: {
-      throw new Error(`Unhandled action type`);
+      throw new Error("Unhandled action type");
     }
   }
 };

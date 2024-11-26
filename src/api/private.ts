@@ -75,7 +75,7 @@ export const getCreditProductFn = async (id: string) => {
 };
 
 export const getProcurementCategoriesFn = async () => {
-  const response = await authApi.get<Array<string>>(`procurement-categories`);
+  const response = await authApi.get<Array<string>>("procurement-categories");
   return response.data;
 };
 
@@ -90,7 +90,7 @@ export const updateCreditProductFn = async (payload: ICreditProductUpdate) => {
 };
 
 export const createUserFn = async (payload: CreateUserInput) => {
-  const response = await authApi.post<IUser>(`users`, payload);
+  const response = await authApi.post<IUser>("users", payload);
   return response.data;
 };
 

@@ -21,7 +21,7 @@ export default function useSetupMFA(): IUseSetupMFA {
     {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onSuccess: (_data) => {
-        navigate(`/password-created`);
+        navigate("/password-created");
       },
       onError: (error) => {
         if (axios.isAxiosError(error) && error.response && error.response.status === 401) {

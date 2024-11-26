@@ -24,7 +24,7 @@ export default function useUpdatePassword(): IUseUpdatePassword {
       if (data.secret_code && data.session && data.username) {
         navigate(`/setup-mfa/${data.secret_code}/${data.session}?username=${data.username}`);
       } else {
-        navigate(`/password-created`);
+        navigate("/password-created");
       }
     },
     onError: (error) => {
