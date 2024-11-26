@@ -9,8 +9,6 @@ README.md
 node_modules
 dist
 .storybook
-.vscode
 .vite
 .git
-.env.example
 .pre-commit-config.yaml

@@ -12,10 +12,9 @@ npm install
 
 ## ENV Variables
 
-Copy the _.env.example_ into _.env_ and set the the backend URL with your dev server.
 As the build system is Vite, the variables name should start with **VITE\_**
 
-For VS Code Intellisense to recognize the new variables declare them in the file _vite-env.d.ts_
+For VS Code Intellisense to recognize the new variables declare them in the file `src/vite-env.d.ts`
 
 ## Package scripts
 
