@@ -1,12 +1,12 @@
-import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import axios from 'axios';
-import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { type UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import axios from "axios";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
-import { createUserFn, updateUserFn } from '../api/private';
-import { QUERY_KEYS } from '../constants';
-import { CreateUserInput, IUser, UpdateUserInput } from '../schemas/auth';
+import { createUserFn, updateUserFn } from "../api/private";
+import { QUERY_KEYS } from "../constants";
+import type { CreateUserInput, IUser, UpdateUserInput } from "../schemas/auth";
 
 type IUseUpsertUser = {
   createUserMutation: UseMutateFunction<IUser, unknown, CreateUserInput, unknown>;
@@ -28,21 +28,21 @@ export default function useUpsertUser(): IUseUpsertUser {
   } = useMutation<IUser, unknown, CreateUserInput, unknown>((payload) => createUserFn(payload), {
     onSuccess: (data) => {
       enqueueSnackbar(t('User "{name}" created', { name: data.name }), {
-        variant: 'success',
+        variant: "success",
       });
-      navigate('/settings');
+      navigate("/settings");
       return data;
     },
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
-        if (error.response.data && error.response.data.detail) {
-          enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-            variant: 'error',
+        if (error.response.data?.detail) {
+          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t('Error creating user. {error}', { error }), {
-          variant: 'error',
+        enqueueSnackbar(t("Error creating user. {error}", { error }), {
+          variant: "error",
         });
       }
     },
@@ -55,19 +55,19 @@ export default function useUpsertUser(): IUseUpsertUser {
   } = useMutation<IUser, unknown, UpdateUserInput, unknown>((payload) => updateUserFn(payload), {
     onSuccess: (data) => {
       queryClient.invalidateQueries([QUERY_KEYS.users]);
-      navigate('/settings');
+      navigate("/settings");
       return data;
     },
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
-        if (error.response.data && error.response.data.detail) {
-          enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-            variant: 'error',
+        if (error.response.data?.detail) {
+          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t('Error updating user. {error}', { error }), {
-          variant: 'error',
+        enqueueSnackbar(t("Error updating user. {error}", { error }), {
+          variant: "error",
         });
       }
     },

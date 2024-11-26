@@ -1,11 +1,10 @@
-/* eslint-disable no-console */
-import { UseMutateFunction, useMutation } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { type UseMutateFunction, useMutation } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
-import { updatePasswordFn } from '../api/auth';
-import { IUpdatePasswordResponse, UpdatePasswordPayload } from '../schemas/auth';
+import { updatePasswordFn } from "../api/auth";
+import type { IUpdatePasswordResponse, UpdatePasswordPayload } from "../schemas/auth";
 
 type IUseUpdatePassword = UseMutateFunction<IUpdatePasswordResponse, unknown, UpdatePasswordPayload, unknown>;
 
@@ -24,13 +23,13 @@ export default function useUpdatePassword(): IUseUpdatePassword {
       if (data.secret_code && data.session && data.username) {
         navigate(`/setup-mfa/${data.secret_code}/${data.session}?username=${data.username}`);
       } else {
-        navigate(`/password-created`);
+        navigate("/password-created");
       }
     },
     onError: (error) => {
       console.log(error);
-      enqueueSnackbar(`${t('Error on update password.')} ${error}`, {
-        variant: 'error',
+      enqueueSnackbar(`${t("Error on update password.")} ${error}`, {
+        variant: "error",
       });
     },
   });

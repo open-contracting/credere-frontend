@@ -1,34 +1,33 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Box } from '@mui/material';
-import { useT } from '@transifex/react';
-import { debounce } from 'lodash';
-import { useCallback, useEffect, useMemo } from 'react';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import NeedHelpComponent from 'src/components/NeedHelpComponent';
-import useConstants from 'src/hooks/useConstants';
-import Text from 'src/stories/text/Text';
-import Title from 'src/stories/title/Title';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box } from "@mui/material";
+import { useT } from "@transifex/react";
+import { debounce } from "lodash";
+import { useCallback, useEffect, useMemo } from "react";
+import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import NeedHelpComponent from "src/components/NeedHelpComponent";
+import useConstants from "src/hooks/useConstants";
+import Text from "src/stories/text/Text";
+import Title from "src/stories/title/Title";
 
-import CreditLinesTable from '../../components/CreditLinesTable';
-import LoansTable from '../../components/LoansTable';
-import { DEFAULT_BORROWER_SIZE } from '../../constants';
-import useApplicationContext from '../../hooks/useApplicationContext';
-import useGetCreditProductsOptions from '../../hooks/useGetCreditProductsOptions';
-import useLocalizedDateFormatter from '../../hooks/useLocalizedDateFormatter';
-import useSelectCreditProduct from '../../hooks/useSelectCreditProduct';
+import CreditLinesTable from "../../components/CreditLinesTable";
+import LoansTable from "../../components/LoansTable";
+import { DEFAULT_BORROWER_SIZE } from "../../constants";
+import useApplicationContext from "../../hooks/useApplicationContext";
+import useGetCreditProductsOptions from "../../hooks/useGetCreditProductsOptions";
+import useLocalizedDateFormatter from "../../hooks/useLocalizedDateFormatter";
+import useSelectCreditProduct from "../../hooks/useSelectCreditProduct";
 import {
-  CreditOptionsInput,
-  GetCreditProductsOptionsInput,
-  ICreditProduct,
-  RepaymentTermsInput,
-  SelectCreditProductInput,
+  type CreditOptionsInput,
+  type GetCreditProductsOptionsInput,
+  type ICreditProduct,
+  type RepaymentTermsInput,
+  type SelectCreditProductInput,
   repaymentTermsSchema,
-} from '../../schemas/application';
-import FormInput from '../../stories/form-input/FormInput';
-import FormSelect from '../../stories/form-select/FormSelect';
-import RadioGroup from '../../stories/radio-group/RadioGroup';
-import { formatCurrency } from '../../util';
+} from "../../schemas/application";
+import FormInput from "../../stories/form-input/FormInput";
+import FormSelect from "../../stories/form-select/FormSelect";
+import RadioGroup from "../../stories/radio-group/RadioGroup";
+import { formatCurrency } from "../../util";
 
 const DEBOUNCE_TIME = 1;
 function ViewCreditOptions() {
@@ -64,14 +63,13 @@ function ViewCreditOptions() {
     resolver: zodResolver(repaymentTermsSchema),
   });
 
-  const [borrowerSizeValue, amountRequestedValue] = watchMainForm(['borrower_size', 'amount_requested']);
+  const [borrowerSizeValue, amountRequestedValue] = watchMainForm(["borrower_size", "amount_requested"]);
 
   const {
     handleSubmit: handleSubmitLoanForm,
     // formState: { touchedFields },
   } = methodsLoanForm;
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceGetCreditProducts = useCallback(debounce(getCreditProductOptionsMutation, DEBOUNCE_TIME), [
     getCreditProductOptionsMutation,
     debounce,
@@ -152,14 +150,16 @@ function ViewCreditOptions() {
             applicationContext.state.data.award.award_amount,
             applicationContext.state.data.award.award_currency,
           )}`
-        : '',
-      award_contract_startdate: `${formatDateFromString(applicationContext.state.data.award.contractperiod_startdate)}`,
+        : "",
+      award_contract_startdate: `${formatDateFromString(
+        applicationContext.state.data.award.contractperiod_startdate,
+      )}`,
     };
   }, [applicationContext.state.data, formatDateFromString]);
 
   return (
     <>
-      <Title type="page" label={t('Financing Options')} className="mb-8" />
+      <Title type="page" label={t("Financing Options")} className="mb-8" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 md:col-span-2 md:mr-10">
           <Text className="mb-1">
@@ -167,20 +167,20 @@ function ViewCreditOptions() {
               "Fill out the required information on the left and we'll show you the available financing options on the right.",
             )}
           </Text>
-          <Text className="mb-8">{t('Financing can be through credit lines or through loans.')}</Text>
-          <Title type="subsection" className="mb-2" label={t('What are the differences?')} />
+          <Text className="mb-8">{t("Financing can be through credit lines or through loans.")}</Text>
+          <Title type="subsection" className="mb-2" label={t("What are the differences?")} />
           <ul>
             <li className="text-darkest">
               <Text className="mb-2">
                 {t(
-                  'In a loan, the entire amount of money approved is transferred to the borrower upfront. Interest must be paid from the moment that the money is delivered. The loan must be repaid within an agreed time.',
+                  "In a loan, the entire amount of money approved is transferred to the borrower upfront. Interest must be paid from the moment that the money is delivered. The loan must be repaid within an agreed time.",
                 )}
               </Text>
             </li>
             <li className="text-darkest">
               <Text className="mb-2">
                 {t(
-                  'In a line of credit, the borrower may choose how much of the approved amount to withdraw. Interest must be paid only on the withdrawn amount. The term of the line of credit can be extended. Interest rates on lines of credit may be higher.',
+                  "In a line of credit, the borrower may choose how much of the approved amount to withdraw. Interest must be paid only on the withdrawn amount. The term of the line of credit can be extended. Interest rates on lines of credit may be higher.",
                 )}
               </Text>
             </li>
@@ -198,24 +198,25 @@ function ViewCreditOptions() {
               noValidate
               autoComplete="off"
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-              }}>
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
               <RadioGroup
-                label={t('Number of employees')}
+                label={t("Number of employees")}
                 name="borrower_size"
                 options={(constants?.BorrowerSize || []).filter((o) => o.value !== DEFAULT_BORROWER_SIZE)}
               />
               <FormSelect
                 className="w-3/5"
-                label={t('Sector')}
+                label={t("Sector")}
                 name="sector"
                 options={constants?.BorrowerSector || []}
-                placeholder={t('Sector')}
+                placeholder={t("Sector")}
               />
               <FormInput
                 className="w-3/5"
-                label={t('Annual Revenue')}
+                label={t("Annual Revenue")}
                 name="annual_revenue"
                 big={false}
                 type="currency"
@@ -223,12 +224,12 @@ function ViewCreditOptions() {
               />
               <FormInput
                 className="w-3/5"
-                label={t('Amount to finance')}
+                label={t("Amount to finance")}
                 name="amount_requested"
                 big={false}
                 type="currency"
                 placeholder={`${
-                  t('Award amount') || ' ' || applicationContext.state.data?.award.award_currency
+                  t("Award amount") || " " || applicationContext.state.data?.award.award_currency
                 } ${formatCurrency(
                   applicationContext.state.data?.award.award_amount
                     ? applicationContext.state.data?.award.award_amount
@@ -240,7 +241,7 @@ function ViewCreditOptions() {
           </FormProvider>
         </div>
         <div className="grid grid-cols-1 md:col-span-2 gap-4 md:flex md:flex-col md:gap-0">
-          <Title type="subsection" className="mb-2" label={t('Credit Lines')} />
+          <Title type="subsection" className="mb-2" label={t("Credit Lines")} />
 
           {borrowerSizeValue && amountRequestedValue && (
             <CreditLinesTable
@@ -251,11 +252,11 @@ function ViewCreditOptions() {
             />
           )}
           {(!borrowerSizeValue || borrowerSizeValue === DEFAULT_BORROWER_SIZE) && (
-            <Text className="mb-0 text-sm">{t('Select a number of employees to evaluate available options')}</Text>
+            <Text className="mb-0 text-sm">{t("Select a number of employees to evaluate available options")}</Text>
           )}
           {!amountRequestedValue && (
             <Text className="mb-0 text-sm">
-              {t('Enter a value for amount to finance to evaluate available options')}
+              {t("Enter a value for amount to finance to evaluate available options")}
             </Text>
           )}
         </div>
@@ -265,7 +266,7 @@ function ViewCreditOptions() {
 
       <div className="mt-8 pb-10 grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 md:mr-10">
-          <Title type="subsection" className="mb-2" label={t('For loans')} />
+          <Title type="subsection" className="mb-2" label={t("For loans")} />
 
           <FormProvider {...methodsLoanForm}>
             <Box
@@ -273,28 +274,29 @@ function ViewCreditOptions() {
               noValidate
               autoComplete="off"
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-              }}>
-              <Text className="mb-1">{t('Repayment terms')}</Text>
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <Text className="mb-1">{t("Repayment terms")}</Text>
               <Box className="mb-2 w-3/5 flex flex-row items-start justify-start gap-2">
-                <FormInput label="" name="repayment_years" placeholder={t('Year(s)')} type="number" />
-                <FormInput label="" name="repayment_months" placeholder={t('Month(s)')} type="number" />
+                <FormInput label="" name="repayment_years" placeholder={t("Year(s)")} type="number" />
+                <FormInput label="" name="repayment_months" placeholder={t("Month(s)")} type="number" />
               </Box>
               <FormInput
                 className="w-3/5"
                 helperText={
                   applicationContext.state.data?.award.contractperiod_startdate
                     ? t(
-                        'The latest the payment start date can is three months after your contract begins on {award_contract_startdate}.',
+                        "The latest the payment start date can is three months after your contract begins on {award_contract_startdate}.",
                         {
                           award_contract_startdate: paramsForText.award_contract_startdate,
                         },
                       )
-                    : t('The latest the payment start date can be three months after your contract begins.')
+                    : t("The latest the payment start date can be three months after your contract begins.")
                 }
                 big={false}
-                label={t('Payment start date')}
+                label={t("Payment start date")}
                 name="payment_start_date"
                 type="date-picker"
               />
@@ -302,7 +304,7 @@ function ViewCreditOptions() {
           </FormProvider>
         </div>
         <div className="grid grid-cols-1 mb-8 md:col-span-2 gap-4 md:flex md:flex-col md:gap-0">
-          <Title type="subsection" className="mb-2" label={t('Loans')} />
+          <Title type="subsection" className="mb-2" label={t("Loans")} />
 
           {borrowerSizeValue && amountRequestedValue && (
             <LoansTable
@@ -314,11 +316,11 @@ function ViewCreditOptions() {
             />
           )}
           {(!borrowerSizeValue || borrowerSizeValue === DEFAULT_BORROWER_SIZE) && (
-            <Text className="mb-0 text-sm">{t('Select a number of employees to evaluate available options')}</Text>
+            <Text className="mb-0 text-sm">{t("Select a number of employees to evaluate available options")}</Text>
           )}
           {!amountRequestedValue && (
             <Text className="mb-0 text-sm">
-              {t('Enter a value for amount to finance to evaluate available options')}
+              {t("Enter a value for amount to finance to evaluate available options")}
             </Text>
           )}
         </div>

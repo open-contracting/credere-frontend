@@ -1,5 +1,4 @@
-/* eslint-disable camelcase */
-import {
+import type {
   ApproveApplicationInput,
   EmailToSMEInput,
   IApplication,
@@ -17,18 +16,18 @@ import {
   IVerifyDocument,
   PaginationInput,
   RejectApplicationInput,
-} from '../schemas/application';
-import { CreateUserInput, IUser, IUsersListResponse, UpdateUserInput } from '../schemas/auth';
-import { StatisticsFI, StatisticsOCPoptIn, StatisticsParmsInput } from '../schemas/statitics';
-import { authApi } from './axios';
+} from "../schemas/application";
+import type { CreateUserInput, IUser, IUsersListResponse, UpdateUserInput } from "../schemas/auth";
+import type { StatisticsFI, StatisticsOCPoptIn, StatisticsParmsInput } from "../schemas/statitics";
+import { authApi } from "./axios";
 
 export const getApplicationsOCP = async (payload: PaginationInput) => {
-  const response = await authApi.get<IApplicationsListResponse>('applications/admin-list', { params: payload });
+  const response = await authApi.get<IApplicationsListResponse>("applications/admin-list", { params: payload });
   return response.data;
 };
 
 export const getApplicationsFI = async (payload: PaginationInput) => {
-  const response = await authApi.get<IApplicationsListResponse>('applications', { params: payload });
+  const response = await authApi.get<IApplicationsListResponse>("applications", { params: payload });
   return response.data;
 };
 
@@ -43,12 +42,12 @@ export const getLenderFn = async (id: string) => {
 };
 
 export const getLendersFn = async () => {
-  const response = await authApi.get<ILenderListResponse>('lenders');
+  const response = await authApi.get<ILenderListResponse>("lenders");
   return response.data;
 };
 
 export const createLenderFn = async (payload: ILenderBase) => {
-  const response = await authApi.post<ILender>('lenders', payload);
+  const response = await authApi.post<ILender>("lenders", payload);
   return response.data;
 };
 
@@ -75,7 +74,7 @@ export const getCreditProductFn = async (id: string) => {
 };
 
 export const getProcurementCategoriesFn = async () => {
-  const response = await authApi.get<Array<string>>(`procurement-categories`);
+  const response = await authApi.get<Array<string>>("procurement-categories");
   return response.data;
 };
 
@@ -90,7 +89,7 @@ export const updateCreditProductFn = async (payload: ICreditProductUpdate) => {
 };
 
 export const createUserFn = async (payload: CreateUserInput) => {
-  const response = await authApi.post<IUser>(`users`, payload);
+  const response = await authApi.post<IUser>("users", payload);
   return response.data;
 };
 
@@ -105,7 +104,7 @@ export const getUserFn = async (id: string) => {
 };
 
 export const getUsersFn = async (payload: PaginationInput) => {
-  const response = await authApi.get<IUsersListResponse>('users', { params: payload });
+  const response = await authApi.get<IUsersListResponse>("users", { params: payload });
   return response.data;
 };
 
@@ -128,7 +127,7 @@ export const verifyDocumentFn = async (verifyDocumentPayload: IVerifyDocument) =
 
 export const downloadDocumentFn = async (id: number) => {
   const response = await authApi.get(`applications/documents/id/${id}`, {
-    responseType: 'blob',
+    responseType: "blob",
   });
 
   return response.data;
@@ -136,7 +135,7 @@ export const downloadDocumentFn = async (id: number) => {
 
 export const downloadApplicants = async (lang: string) => {
   const response = await authApi.get(`applications/export/${lang}`, {
-    responseType: 'blob',
+    responseType: "blob",
   });
 
   return response.data;
@@ -144,7 +143,7 @@ export const downloadApplicants = async (lang: string) => {
 
 export const downloadApplicationFn = async (id: number, lang: string) => {
   const response = await authApi.get(`applications/${id}/download-application/${lang}`, {
-    responseType: 'blob',
+    responseType: "blob",
   });
 
   return response.data;
@@ -174,16 +173,16 @@ export const getPreviousAwardsFn = async (id: number) => {
 };
 
 export const getStatisticsFI = async () => {
-  const response = await authApi.get<StatisticsFI>('statistics-fi');
+  const response = await authApi.get<StatisticsFI>("statistics-fi");
   return response.data;
 };
 
 export const getStatisticsOCPoptIn = async () => {
-  const response = await authApi.get<StatisticsOCPoptIn>('statistics-ocp/opt-in');
+  const response = await authApi.get<StatisticsOCPoptIn>("statistics-ocp/opt-in");
   return response.data;
 };
 
 export const getStatisticsOCP = async (params: StatisticsParmsInput) => {
-  const response = await authApi.get<StatisticsFI>('statistics-ocp', { params });
+  const response = await authApi.get<StatisticsFI>("statistics-ocp", { params });
   return response.data;
 };

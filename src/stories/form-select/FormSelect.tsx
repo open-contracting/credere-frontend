@@ -1,12 +1,11 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import { FormControl, FormHelperText, MenuItem, Select } from '@mui/material';
-import { useT } from '@transifex/react';
-import { useMemo } from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { FormControl, FormHelperText, MenuItem, Select } from "@mui/material";
+import { useT } from "@transifex/react";
+import { useMemo } from "react";
+import { Controller, useFormContext } from "react-hook-form";
 
-import { getProperty } from '../../util';
-import { FieldErrorType, Input } from '../form-input/FormInput';
-import { Text } from '../text/Text';
+import { getProperty } from "../../util";
+import { type FieldErrorType, Input } from "../form-input/FormInput";
+import { Text } from "../text/Text";
 
 export type FormSelectOption = {
   label: string;
@@ -25,7 +24,7 @@ export type FormSelectProps = {
 const defaultRenderOption = (option: FormSelectOption) => option.label;
 
 const isStringArray = (obj: unknown): obj is string[] =>
-  Array.isArray(obj) && obj.every((item) => typeof item === 'string');
+  Array.isArray(obj) && obj.every((item) => typeof item === "string");
 
 export function FormSelect({
   name,
@@ -67,10 +66,11 @@ export function FormSelect({
             error={!!fieldError}
             input={<Input />}
             inputProps={{ name, error: !!fieldError }}
-            {...field}>
+            {...field}
+          >
             {placeholder && (
               <MenuItem disabled value="">
-                <div className={` ${fieldError ? 'text-red opacity-50' : 'text-darkest opacity-50'}`}>
+                <div className={` ${fieldError ? "text-red opacity-50" : "text-darkest opacity-50"}`}>
                   {placeholder}
                 </div>
               </MenuItem>
@@ -83,7 +83,7 @@ export function FormSelect({
           </Select>
 
           <FormHelperText className="text-red text-base mx-0" error={!!fieldError}>{`${
-            fieldError ? t(fieldError?.message) : ''
+            fieldError ? t(fieldError?.message) : ""
           }`}</FormHelperText>
         </FormControl>
       )}
@@ -93,7 +93,7 @@ export function FormSelect({
 
 FormSelect.defaultProps = {
   placeholder: undefined,
-  className: '',
+  className: "",
   renderOption: defaultRenderOption,
 };
 

@@ -1,26 +1,25 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Box } from '@mui/material';
-import { useT } from '@transifex/react';
-import { useState } from 'react';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import StepImageEN from 'src/assets/pages/en/stage-five.svg';
-import StepImageES from 'src/assets/pages/es/stage-five.svg';
-import useApplicationContext from 'src/hooks/useSecureApplicationContext';
-import Button from 'src/stories/button/Button';
-import Checkbox from 'src/stories/checkbox/Checkbox';
-import FormInput from 'src/stories/form-input/FormInput';
-import Text from 'src/stories/text/Text';
-import Title from 'src/stories/title/Title';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box } from "@mui/material";
+import { useT } from "@transifex/react";
+import { useState } from "react";
+import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import StepImageEN from "src/assets/pages/en/stage-five.svg";
+import StepImageES from "src/assets/pages/es/stage-five.svg";
+import useApplicationContext from "src/hooks/useSecureApplicationContext";
+import Button from "src/stories/button/Button";
+import Checkbox from "src/stories/checkbox/Checkbox";
+import FormInput from "src/stories/form-input/FormInput";
+import Text from "src/stories/text/Text";
+import Title from "src/stories/title/Title";
 
-import CheckChecked from '../../assets/icons/check-checked.svg';
-import WarnRed from '../../assets/icons/warn-red.svg';
-import CreditProductReview from '../../components/CreditProductReview';
-import useApproveApplication from '../../hooks/useApproveApplication';
-import useLangContext from '../../hooks/useLangContext';
-import { ApproveApplicationInput, FormApprovedInput, approveSchema } from '../../schemas/application';
-import RejectApplicationDialog from './RejectApplicationDialog';
+import CheckChecked from "../../assets/icons/check-checked.svg";
+import WarnRed from "../../assets/icons/warn-red.svg";
+import CreditProductReview from "../../components/CreditProductReview";
+import useApproveApplication from "../../hooks/useApproveApplication";
+import useLangContext from "../../hooks/useLangContext";
+import { type ApproveApplicationInput, type FormApprovedInput, approveSchema } from "../../schemas/application";
+import RejectApplicationDialog from "./RejectApplicationDialog";
 
 export function StageFive() {
   const t = useT();
@@ -30,7 +29,7 @@ export function StageFive() {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   const langContext = useLangContext();
-  const StepImage = langContext.state.selected.startsWith('en') ? StepImageEN : StepImageES;
+  const StepImage = langContext.state.selected.startsWith("en") ? StepImageEN : StepImageES;
 
   const { approveApplicationMutation, isLoading } = useApproveApplication();
 
@@ -59,19 +58,19 @@ export function StageFive() {
   };
 
   const onGoHomeHandler = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const onGoBackHandler = () => {
-    navigate('../stage-four');
+    navigate("../stage-four");
   };
 
   return (
     <>
-      <Title type="page" label={t('Application Approval Process')} className="mb-4" />
+      <Title type="page" label={t("Application Approval Process")} className="mb-4" />
       <Text className="text-lg mb-12">{application?.borrower.legal_name}</Text>
       <img className="mb-14 ml-8" src={StepImage} alt="step" />
-      <Title type="section" label={t('Stage 5: Approve')} className="mb-8" />
+      <Title type="section" label={t("Stage 5: Approve")} className="mb-8" />
 
       {application && <CreditProductReview className="md:w-3/5" application={application} />}
 
@@ -83,13 +82,14 @@ export function StageFive() {
           noValidate
           autoComplete="off"
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-          }}>
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <Checkbox
             name="compliant_checks_completed"
             defaultValue={false}
-            label={t('Compliance checks have been completed for {legal_name} and all company directors', {
+            label={t("Compliance checks have been completed for {legal_name} and all company directors", {
               legal_name: application?.borrower.legal_name,
             })}
           />
@@ -97,38 +97,46 @@ export function StageFive() {
             className="mb-8"
             name="compliant_checks_passed"
             defaultValue={false}
-            label={t('{legal_name} has passed compliance checks', { legal_name: application?.borrower.legal_name })}
+            label={t("{legal_name} has passed compliance checks", { legal_name: application?.borrower.legal_name })}
           />
           <FormInput
             className="md:w-2/5"
-            label={t('Enter the credit final amount (if approving the application)')}
+            label={t("Enter the credit final amount (if approving the application)")}
             helperText={t(
-              'The final credit amount can be different if the contract value is significantly different to the award value.',
+              "The final credit amount can be different if the contract value is significantly different to the award value.",
             )}
             name="disbursed_final_amount"
             big={false}
             type="currency"
-            placeholder={t('Credit amount')}
+            placeholder={t("Credit amount")}
           />
           <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
             <div>
-              <Button primary={false} className="md:mr-4" label={t('Go Home')} onClick={onGoHomeHandler} />
+              <Button primary={false} className="md:mr-4" label={t("Go Home")} onClick={onGoHomeHandler} />
             </div>
 
             <div>
-              <Button primary={false} className="md:mr-4" label={t('Go Back')} onClick={onGoBackHandler} />
+              <Button primary={false} className="md:mr-4" label={t("Go Back")} onClick={onGoBackHandler} />
             </div>
 
             <div>
-              <Button className="md:mr-4" icon={CheckChecked} label={t('Approve')} type="submit" disabled={isLoading} />
+              <Button
+                className="md:mr-4"
+                icon={CheckChecked}
+                label={t("Approve")}
+                type="submit"
+                disabled={isLoading}
+              />
             </div>
 
             <div>
-              <Button label={t('Reject')} icon={WarnRed} onClick={onRejectApplication} disabled={isLoading} />
+              <Button label={t("Reject")} icon={WarnRed} onClick={onRejectApplication} disabled={isLoading} />
             </div>
           </div>
           <Text className="mb-10 text-m font-light">
-            {t('Data for the MSME application will only be stored for one week after the process has been completed. ')}
+            {t(
+              "Data for the MSME application will only be stored for one week after the process has been completed. ",
+            )}
           </Text>
         </Box>
       </FormProvider>

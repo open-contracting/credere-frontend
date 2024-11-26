@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { StateContext } from '../providers/StateContextProvider';
+import { StateContext } from "../providers/StateContextProvider";
 
 const useStateContext = () => {
   const context = React.useContext(StateContext);
@@ -9,7 +9,7 @@ const useStateContext = () => {
     return context;
   }
 
-  throw new Error('useStateContext must be used within a StateContextProvider');
+  throw new Error("useStateContext must be used within a StateContextProvider");
 };
 
 export default useStateContext;

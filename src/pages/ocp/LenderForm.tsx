@@ -1,27 +1,26 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Box } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { ProviderInput, lenderSchema } from 'src/schemas/OCPsettings';
-import Button from 'src/stories/button/Button';
-import FormInput from 'src/stories/form-input/FormInput';
-import FormSelect from 'src/stories/form-select/FormSelect';
-import Title from 'src/stories/title/Title';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { type ProviderInput, lenderSchema } from "src/schemas/OCPsettings";
+import Button from "src/stories/button/Button";
+import FormInput from "src/stories/form-input/FormInput";
+import FormSelect from "src/stories/form-select/FormSelect";
+import Title from "src/stories/title/Title";
+import { z } from "zod";
 
-import { getLenderFn } from '../../api/private';
-import CreditProductList from '../../components/CreditProductList';
-import { LENDER_TYPES, QUERY_KEYS } from '../../constants';
-import { useParamsTypeSafe } from '../../hooks/useParamsTypeSafe';
-import useUpsertLender from '../../hooks/useUpsertLender';
-import { ILender } from '../../schemas/application';
-import Loader from '../../stories/loader/Loader';
-import ApplicationErrorPage from '../msme/ApplicationErrorPage';
+import { getLenderFn } from "../../api/private";
+import CreditProductList from "../../components/CreditProductList";
+import { LENDER_TYPES, QUERY_KEYS } from "../../constants";
+import { useParamsTypeSafe } from "../../hooks/useParamsTypeSafe";
+import useUpsertLender from "../../hooks/useUpsertLender";
+import type { ILender } from "../../schemas/application";
+import Loader from "../../stories/loader/Loader";
+import ApplicationErrorPage from "../msme/ApplicationErrorPage";
 
 export interface LenderFormProps {
   lender?: ILender | null;
@@ -46,7 +45,6 @@ export function LenderForm({ lender }: LenderFormProps) {
     if (isSubmitSuccessful && !isError && !isLoading) {
       reset();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSubmitSuccessful, isError, isLoading]);
 
   const onSubmitHandler: SubmitHandler<ProviderInput> = (values) => {
@@ -61,16 +59,16 @@ export function LenderForm({ lender }: LenderFormProps) {
     <>
       <div className="grid grid-cols-1 lg:grid-cols-3 lg:mb-8 md:mb-8 mb-4 md:grid-cols-2 gap-4 ">
         <div className="flex items-end col-span-1 md:mr-10">
-          <Title className="mb-0" type="page" label={t('Settings')} />
+          <Title className="mb-0" type="page" label={t("Settings")} />
         </div>
         <div className="flex justify-start items-start my-4 col-span-1 md:justify-end md:my-0 md:ml-10 lg:justify-end lg:col-span-2">
           <div className="grid grid-cols-1 gap-4 md:flex md:gap-0">
             <div>
-              <Button className="md:mr-4" label={t('Dashboard')} component={Link} to="/" />
+              <Button className="md:mr-4" label={t("Dashboard")} component={Link} to="/" />
             </div>
 
             <div>
-              <Button label={t('Applications')} component={Link} to="/admin/applications" />
+              <Button label={t("Applications")} component={Link} to="/admin/applications" />
             </div>
           </div>
         </div>
@@ -78,7 +76,7 @@ export function LenderForm({ lender }: LenderFormProps) {
 
       <Title
         type="section"
-        label={lender ? t('Edit Credit Provider') : t('Add New Credit Provider')}
+        label={lender ? t("Edit Credit Provider") : t("Add New Credit Provider")}
         className="mb-6"
       />
       <FormProvider {...methods}>
@@ -89,68 +87,69 @@ export function LenderForm({ lender }: LenderFormProps) {
           autoComplete="off"
           maxWidth="md"
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
+            display: "flex",
+            flexDirection: "column",
             borderRadius: 0,
-          }}>
+          }}
+        >
           <FormInput
             className="w-3/5"
-            label={t('Credit provider name (as you want it to appear in the Credere UI)')}
+            label={t("Credit provider name (as you want it to appear in the Credere UI)")}
             name="name"
             big={false}
-            placeholder={t('Credit provider name')}
+            placeholder={t("Credit provider name")}
           />
           <FormSelect
             className="w-3/5"
-            label={t('Select the credit provider type')}
+            label={t("Select the credit provider type")}
             name="type"
             options={LENDER_TYPES}
-            placeholder={t('Type')}
+            placeholder={t("Type")}
           />
           <FormInput
             className="w-3/5"
-            label={t('Group destination to send notifications of new applications')}
+            label={t("Group destination to send notifications of new applications")}
             name="email_group"
             big={false}
-            placeholder={t('Email group list')}
+            placeholder={t("Email group list")}
           />
           <FormInput
             className="w-3/5"
-            label={t('Credit provider logo (as you want it to appear in the Credere UI)')}
+            label={t("Credit provider logo (as you want it to appear in the Credere UI)")}
             name="logo_filename"
             big={false}
-            placeholder={t('Credit provider logo')}
+            placeholder={t("Credit provider logo")}
           />
           <FormInput
             className="w-3/5"
             label={t(
-              'A URL to the lender onboarding system, if any, to indicate to the borrower where to continue the application process',
+              "A URL to the lender onboarding system, if any, to indicate to the borrower where to continue the application process",
             )}
             name="external_onboarding_url"
             big={false}
-            placeholder={t('URL to the lender onboarding system')}
+            placeholder={t("URL to the lender onboarding system")}
           />
           <FormInput
             className="w-3/5"
             label={t(
-              'Set service level agreement (SLA) agreed timeframe for processing applications in Credere (days)',
+              "Set service level agreement (SLA) agreed timeframe for processing applications in Credere (days)",
             )}
             name="sla_days"
             type="number"
             big={false}
-            placeholder={t('SLA days')}
+            placeholder={t("SLA days")}
           />
 
           {lender && (
             <>
-              <Title type="subsection" className="mt-5 mb-2" label={t('Credit Products of Lender')} />
+              <Title type="subsection" className="mt-5 mb-2" label={t("Credit Products of Lender")} />
               <CreditProductList rows={lender.credit_products} />
               <Button
                 size="small"
                 noIcon
                 primary={false}
                 className="my-2"
-                label={t('+ Add New Credit Product')}
+                label={t("+ Add New Credit Product")}
                 component={Link}
                 to={`/settings/lender/${lender.id}/credit-product/new`}
               />
@@ -159,12 +158,12 @@ export function LenderForm({ lender }: LenderFormProps) {
 
           <div className="mt-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
             <div>
-              <Button className="md:mr-4" primary={false} label={t('Back')} component={Link} to="/settings" />
+              <Button className="md:mr-4" primary={false} label={t("Back")} component={Link} to="/settings" />
             </div>
             <div>
               <Button
                 disabled={isLoading}
-                label={lender ? t('Update Credit Provider') : t('Save and Add Credit Product')}
+                label={lender ? t("Update Credit Provider") : t("Save and Add Credit Product")}
                 type="submit"
               />
             </div>
@@ -181,7 +180,7 @@ LenderForm.defaultProps = {
 
 export function LoadLender() {
   const t = useT();
-  const [queryError, setQueryError] = useState<string>('');
+  const [queryError, setQueryError] = useState<string>("");
 
   const { id } = useParamsTypeSafe(
     z.object({
@@ -201,7 +200,7 @@ export function LoadLender() {
       if (axios.isAxiosError(error) && error.response && error.response.data && error.response.data.detail) {
         setQueryError(error.response.data.detail);
       } else {
-        setQueryError(t('Error loading lender'));
+        setQueryError(t("Error loading lender"));
       }
     },
   });

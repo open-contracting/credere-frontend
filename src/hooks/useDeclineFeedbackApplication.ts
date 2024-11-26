@@ -1,13 +1,13 @@
-import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import axios from 'axios';
-import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { type UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import axios from "axios";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
-import { declineApplicationFeedbackFn, declineApplicationRollbackFn } from '../api/public';
-import { DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
-import { ApplicationBaseInput, DeclineFeedbackInput, IApplicationResponse } from '../schemas/application';
-import useApplicationContext from './useApplicationContext';
+import { declineApplicationFeedbackFn, declineApplicationRollbackFn } from "../api/public";
+import { DISPATCH_ACTIONS, QUERY_KEYS } from "../constants";
+import type { ApplicationBaseInput, DeclineFeedbackInput, IApplicationResponse } from "../schemas/application";
+import useApplicationContext from "./useApplicationContext";
 
 type IUseDeclineFeedbackApplication = {
   declineFeedbackMutation: UseMutateFunction<IApplicationResponse, unknown, DeclineFeedbackInput, unknown>;
@@ -31,18 +31,18 @@ export default function useDeclineFeedbackApplication(): IUseDeclineFeedbackAppl
     onSuccess: (data) => {
       queryClient.setQueryData([QUERY_KEYS.application_uuid, data.application.uuid], data);
       applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });
-      navigate('../decline-completed');
+      navigate("../decline-completed");
     },
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
-        if (error.response.data && error.response.data.detail) {
-          enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-            variant: 'error',
+        if (error.response.data?.detail) {
+          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t('Error on the decline feedback. {error}', { error }), {
-          variant: 'error',
+        enqueueSnackbar(t("Error on the decline feedback. {error}", { error }), {
+          variant: "error",
         });
       }
     },
@@ -57,18 +57,18 @@ export default function useDeclineFeedbackApplication(): IUseDeclineFeedbackAppl
     onSuccess: (data) => {
       queryClient.setQueryData([QUERY_KEYS.application_uuid, data.application.uuid], data);
       applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });
-      navigate('../decline');
+      navigate("../decline");
     },
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
-        if (error.response.data && error.response.data.detail) {
-          enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-            variant: 'error',
+        if (error.response.data?.detail) {
+          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t('Error on rollback declined application. {error}', { error }), {
-          variant: 'error',
+        enqueueSnackbar(t("Error on rollback declined application. {error}", { error }), {
+          variant: "error",
         });
       }
     },

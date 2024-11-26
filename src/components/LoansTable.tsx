@@ -1,12 +1,12 @@
-import { Box, Link as MUILink, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
-import { useT } from '@transifex/react';
-import ReactMarkdown from 'react-markdown';
-import Text from 'src/stories/text/Text';
+import { Box, Link as MUILink, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
+import { useT } from "@transifex/react";
+import ReactMarkdown from "react-markdown";
+import Text from "src/stories/text/Text";
 
-import { ICreditProduct } from '../schemas/application';
-import Button from '../stories/button/Button';
-import { formatCurrency } from '../util';
-import { DataTableCell, DataTableHeadCell, DataTableHeadLabel, TransparentDataTableCell } from './DataTable';
+import type { ICreditProduct } from "../schemas/application";
+import Button from "../stories/button/Button";
+import { formatCurrency } from "../util";
+import { DataTableCell, DataTableHeadCell, DataTableHeadLabel, TransparentDataTableCell } from "./DataTable";
 
 export interface LoansTableProps {
   rows: ICreditProduct[];
@@ -20,7 +20,7 @@ export function LoansTable({ rows, amountRequested, currency, isLoading, selectO
   const t = useT();
 
   if (!rows.length && !isLoading) {
-    return <Text>{t('No loan options available')}</Text>;
+    return <Text>{t("No loan options available")}</Text>;
   }
 
   return (
@@ -31,7 +31,7 @@ export function LoansTable({ rows, amountRequested, currency, isLoading, selectO
             <TableHead>
               <TableRow>
                 <DataTableHeadCell width={240}>
-                  <span style={{ width: '240px' }} />
+                  <span style={{ width: "240px" }} />
                 </DataTableHeadCell>
                 {rows.map((row) => (
                   <DataTableHeadCell key={`header-${row.id}`}>
@@ -39,7 +39,7 @@ export function LoansTable({ rows, amountRequested, currency, isLoading, selectO
                       <img
                         src={`/images/lenders/${row.lender.logo_filename}`}
                         alt="lender-logo"
-                        style={{ width: '8rem' }}
+                        style={{ width: "8rem" }}
                       />
                     ) : (
                       <DataTableHeadLabel label={row.lender.name} />
@@ -50,7 +50,7 @@ export function LoansTable({ rows, amountRequested, currency, isLoading, selectO
             </TableHead>
             <TableBody>
               <TableRow>
-                <DataTableCell width={240}>{t('Amount requested')}</DataTableCell>
+                <DataTableCell width={240}>{t("Amount requested")}</DataTableCell>
                 {rows.map((row) => (
                   <DataTableCell key={`amount-${row.id}`}>
                     {`${currency} ${formatCurrency(amountRequested, currency)}`}
@@ -58,20 +58,21 @@ export function LoansTable({ rows, amountRequested, currency, isLoading, selectO
                 ))}
               </TableRow>
               <TableRow>
-                <DataTableCell>{t('Additional Information')}</DataTableCell>
+                <DataTableCell>{t("Additional Information")}</DataTableCell>
                 {rows.map((row) => (
                   <DataTableCell
-                    key={`aditional-information-${row.id}`}>{`${row.additional_information}`}</DataTableCell>
+                    key={`aditional-information-${row.id}`}
+                  >{`${row.additional_information}`}</DataTableCell>
                 ))}
               </TableRow>
               <TableRow>
-                <DataTableCell>{t('Interest rate')}</DataTableCell>
+                <DataTableCell>{t("Interest rate")}</DataTableCell>
                 {rows.map((row) => (
                   <DataTableCell key={`interest-rate-${row.id}`}>{`${row.interest_rate}`}</DataTableCell>
                 ))}
               </TableRow>
               <TableRow>
-                <DataTableCell>{t('Other fees')}</DataTableCell>
+                <DataTableCell>{t("Other fees")}</DataTableCell>
                 {rows.map((row) => (
                   <DataTableCell key={`other-fees-details-${row.id}`}>
                     <ReactMarkdown>{`${row.other_fees_description}`}</ReactMarkdown>
@@ -79,11 +80,11 @@ export function LoansTable({ rows, amountRequested, currency, isLoading, selectO
                 ))}
               </TableRow>
               <TableRow>
-                <DataTableCell>{t('More information')}</DataTableCell>
+                <DataTableCell>{t("More information")}</DataTableCell>
                 {rows.map((row) => (
                   <DataTableCell key={`more-info-${row.id}`}>
                     <MUILink color="inherit" target="_blank" rel="noreferrer" href={row.more_info_url}>
-                      {t('View details')}
+                      {t("View details")}
                     </MUILink>
                   </DataTableCell>
                 ))}
@@ -92,7 +93,7 @@ export function LoansTable({ rows, amountRequested, currency, isLoading, selectO
                 <TransparentDataTableCell />
                 {rows.map((row) => (
                   <TransparentDataTableCell key={`pick-${row.id}`}>
-                    <Button disabled={isLoading} label={t('Select')} onClick={() => selectOption(row)} />
+                    <Button disabled={isLoading} label={t("Select")} onClick={() => selectOption(row)} />
                   </TransparentDataTableCell>
                 ))}
               </TableRow>

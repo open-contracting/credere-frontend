@@ -1,13 +1,12 @@
-/* eslint-disable camelcase */
-import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
-import { useT } from '@transifex/react';
-import { useEffect, useState } from 'react';
+import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
+import { useT } from "@transifex/react";
+import { useEffect, useState } from "react";
 
-import useDownloadDocument from '../hooks/useDownloadDocument';
-import useVerifyDocument from '../hooks/useVerifyDocument';
-import { IApplication, IVerifyDocument } from '../schemas/application';
-import ApplicationTableDataDocumentRow from './ApplicationTableDataDocumentRow';
-import { DataTableHeadCell, DataTableHeadLabel } from './DataTable';
+import useDownloadDocument from "../hooks/useDownloadDocument";
+import useVerifyDocument from "../hooks/useVerifyDocument";
+import type { IApplication, IVerifyDocument } from "../schemas/application";
+import ApplicationTableDataDocumentRow from "./ApplicationTableDataDocumentRow";
+import { DataTableHeadCell, DataTableHeadLabel } from "./DataTable";
 
 export interface ApplicationDocumentTableProps {
   application: IApplication;
@@ -39,7 +38,7 @@ export function ApplicationDocumentTable({
     if (downloadedDocument && filename) {
       const href = window.URL.createObjectURL(downloadedDocument);
 
-      const anchorElement = document.createElement('a');
+      const anchorElement = document.createElement("a");
 
       anchorElement.href = href;
       anchorElement.download = filename;
@@ -69,16 +68,16 @@ export function ApplicationDocumentTable({
           <TableHead>
             <TableRow>
               <DataTableHeadCell width={260}>
-                <DataTableHeadLabel label={t('Open Contracting Field')} />
+                <DataTableHeadLabel label={t("Open Contracting Field")} />
               </DataTableHeadCell>
               <DataTableHeadCell width={240}>
-                <DataTableHeadLabel label={t('Data Available')} />
+                <DataTableHeadLabel label={t("Data Available")} />
               </DataTableHeadCell>
               <DataTableHeadCell>
-                <DataTableHeadLabel label={t('Data')} />
+                <DataTableHeadLabel label={t("Data")} />
               </DataTableHeadCell>
               <DataTableHeadCell>
-                <DataTableHeadLabel label={t('Data Verified')} />
+                <DataTableHeadLabel label={t("Data Verified")} />
               </DataTableHeadCell>
             </TableRow>
           </TableHead>
@@ -102,7 +101,7 @@ export function ApplicationDocumentTable({
 
 ApplicationDocumentTable.defaultProps = {
   readonly: false,
-  className: '',
+  className: "",
   allowDataVerification: false,
 };
 

@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { ApplicationContext } from '../providers/ApplicationContextProvider';
+import { ApplicationContext } from "../providers/ApplicationContextProvider";
 
 const useApplicationContext = () => {
   const context = React.useContext(ApplicationContext);
@@ -9,7 +9,7 @@ const useApplicationContext = () => {
     return context;
   }
 
-  throw new Error('useApplicationContext must be used within a ApplicationContextProvider');
+  throw new Error("useApplicationContext must be used within a ApplicationContextProvider");
 };
 
 export default useApplicationContext;

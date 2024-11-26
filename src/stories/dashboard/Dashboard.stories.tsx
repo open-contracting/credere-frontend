@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { DashboardItemContainer } from './DashboardItemContainer';
+import { DashboardItemContainer } from "./DashboardItemContainer";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
-  title: 'Example/DashboardItemContainer',
+  title: "Example/DashboardItemContainer",
   component: DashboardItemContainer,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {},
 } satisfies Meta<typeof DashboardItemContainer>;
 
@@ -15,15 +15,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    description: 'Application(s) received',
-    value: '15',
+    description: "Application(s) received",
+    value: "15",
   },
 };
 
 export const Red: Story = {
   args: {
-    description: 'Application(s) received',
-    value: '15',
-    color: 'red',
+    description: "Application(s) received",
+    value: "15",
+    color: "red",
   },
 };

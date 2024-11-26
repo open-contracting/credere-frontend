@@ -1,4 +1,4 @@
-import {
+import type {
   ApplicationBaseInput,
   ChangeEmailInput,
   ConfirmChangeEmailInput,
@@ -11,26 +11,26 @@ import {
   ICreditProduct,
   SelectCreditProductInput,
   UploadFileInput,
-} from '../schemas/application';
-import { publicApi } from './axios';
+} from "../schemas/application";
+import { publicApi } from "./axios";
 
 export const applicationAccessSchemeFn = async (payload: ApplicationBaseInput) => {
-  const response = await publicApi.post<IApplicationResponse>('applications/access-scheme', payload);
+  const response = await publicApi.post<IApplicationResponse>("applications/access-scheme", payload);
   return response.data;
 };
 
 export const declineApplicationFn = async (payload: DeclineApplicationInput) => {
-  const response = await publicApi.post<IApplicationResponse>('applications/decline', payload);
+  const response = await publicApi.post<IApplicationResponse>("applications/decline", payload);
   return response.data;
 };
 
 export const declineApplicationFeedbackFn = async (payload: DeclineFeedbackInput) => {
-  const response = await publicApi.post<IApplicationResponse>('applications/decline-feedback', payload);
+  const response = await publicApi.post<IApplicationResponse>("applications/decline-feedback", payload);
   return response.data;
 };
 
 export const declineApplicationRollbackFn = async (payload: ApplicationBaseInput) => {
-  const response = await publicApi.post<IApplicationResponse>('applications/rollback-decline', payload);
+  const response = await publicApi.post<IApplicationResponse>("applications/rollback-decline", payload);
   return response.data;
 };
 
@@ -40,7 +40,7 @@ export const getApplicationFn = async (uuid: string) => {
 };
 
 export const getCreditProductOptionsFn = async (payload: GetCreditProductsOptionsInput) => {
-  const response = await publicApi.post<IApplicationCreditOptions>('applications/credit-product-options', payload);
+  const response = await publicApi.post<IApplicationCreditOptions>("applications/credit-product-options", payload);
   return response.data;
 };
 
@@ -50,56 +50,56 @@ export const getCreditProductFn = async (id: string) => {
 };
 
 export const selectCreditProductFn = async (payload: SelectCreditProductInput) => {
-  const response = await publicApi.post<IApplicationResponse>('applications/select-credit-product', payload);
+  const response = await publicApi.post<IApplicationResponse>("applications/select-credit-product", payload);
   return response.data;
 };
 
 export const rollbackSelectCreditProductFn = async (payload: ApplicationBaseInput) => {
-  const response = await publicApi.post<IApplicationResponse>('applications/rollback-select-credit-product', payload);
+  const response = await publicApi.post<IApplicationResponse>("applications/rollback-select-credit-product", payload);
   return response.data;
 };
 
 export const confirmCreditProductFn = async (payload: ApplicationBaseInput) => {
-  const response = await publicApi.post<IApplicationResponse>('applications/confirm-credit-product', payload);
+  const response = await publicApi.post<IApplicationResponse>("applications/confirm-credit-product", payload);
   return response.data;
 };
 
 export const rollbackConfirmCreditProductFn = async (payload: ApplicationBaseInput) => {
-  const response = await publicApi.post<IApplicationResponse>('applications/rollback-confirm-credit-product', payload);
+  const response = await publicApi.post<IApplicationResponse>("applications/rollback-confirm-credit-product", payload);
   return response.data;
 };
 
 export const uploadFileFn = async (payload: UploadFileInput) => {
-  const response = await publicApi.postForm<IBorrowerDocument>('applications/upload-document', payload);
+  const response = await publicApi.postForm<IBorrowerDocument>("applications/upload-document", payload);
   return response.data;
 };
 
 export const applicationSubmitFn = async (payload: ApplicationBaseInput) => {
-  const response = await publicApi.post<IApplicationResponse>('applications/submit', payload);
+  const response = await publicApi.post<IApplicationResponse>("applications/submit", payload);
   return response.data;
 };
 
 export const aditionalDataSubmitFn = async (payload: ApplicationBaseInput) => {
-  const response = await publicApi.post<IApplicationResponse>('applications/complete-information-request', payload);
+  const response = await publicApi.post<IApplicationResponse>("applications/complete-information-request", payload);
   return response.data;
 };
 
 export const changeEmailFn = async (payload: ChangeEmailInput) => {
-  const response = await publicApi.post<ChangeEmailInput>('applications/change-email', payload);
+  const response = await publicApi.post<ChangeEmailInput>("applications/change-email", payload);
   return response.data;
 };
 
 export const confirmChangeEmailFn = async (payload: ConfirmChangeEmailInput) => {
-  const response = await publicApi.post<ChangeEmailInput>('applications/confirm-change-email', payload);
+  const response = await publicApi.post<ChangeEmailInput>("applications/confirm-change-email", payload);
   return response.data;
 };
 
 export const findAlternativeCreditOptionFn = async (payload: ApplicationBaseInput) => {
-  const response = await publicApi.post<IApplicationResponse>('applications/find-alternative-credit-option', payload);
+  const response = await publicApi.post<IApplicationResponse>("applications/find-alternative-credit-option", payload);
   return response.data;
 };
 
 export const getConstants = async () => {
-  const response = await publicApi.get('meta');
+  const response = await publicApi.get("meta");
   return response.data;
 };

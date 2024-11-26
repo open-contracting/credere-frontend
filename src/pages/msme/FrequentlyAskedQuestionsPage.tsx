@@ -1,14 +1,14 @@
-import { Box } from '@mui/material';
-import { useT } from '@transifex/react';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import NeedHelpComponent from 'src/components/NeedHelpComponent';
-import FAQ_QUESTIONS from 'src/constants/faq-questions';
-import FAQPageSection from 'src/stories/faq/FAQPageSection';
-import LinkButton from 'src/stories/link-button/LinkButton';
-import Title from 'src/stories/title/Title';
+import { Box } from "@mui/material";
+import { useT } from "@transifex/react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import NeedHelpComponent from "src/components/NeedHelpComponent";
+import FAQ_QUESTIONS from "src/constants/faq-questions";
+import FAQPageSection from "src/stories/faq/FAQPageSection";
+import LinkButton from "src/stories/link-button/LinkButton";
+import Title from "src/stories/title/Title";
 
-import Button from '../../stories/button/Button';
+import Button from "../../stories/button/Button";
 
 function FrequentlyAskedQuestionsPage() {
   const t = useT();
@@ -52,7 +52,7 @@ function FrequentlyAskedQuestionsPage() {
 
   return (
     <>
-      <Title type="page" label={t('Frequently Asked Questions')} className="mb-8" />
+      <Title type="page" label={t("Frequently Asked Questions")} className="mb-8" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 md:col-span-2 md:mr-10">
           <Box className="flex items-end justify-end">
@@ -61,7 +61,7 @@ function FrequentlyAskedQuestionsPage() {
                 onClick={handleExpandAll}
                 className="mb-0 px-0 self-end"
                 iconClassName="rotate-90"
-                label={t('Expand all')}
+                label={t("Expand all")}
               />
             )}
             {allExpanded && (
@@ -69,7 +69,7 @@ function FrequentlyAskedQuestionsPage() {
                 onClick={handleCollapseAll}
                 className="mb-0 px-0 self-end"
                 iconClassName="-rotate-90"
-                label={t('Collapse all')}
+                label={t("Collapse all")}
               />
             )}
           </Box>
@@ -78,7 +78,8 @@ function FrequentlyAskedQuestionsPage() {
               key={key}
               open={open[key]}
               handleToggle={() => handleToggle(key)}
-              title={t(FAQ_QUESTIONS[key].question)}>
+              title={t(FAQ_QUESTIONS[key].question)}
+            >
               {t(FAQ_QUESTIONS[key].answer)}
             </FAQPageSection>
           ))}
@@ -87,7 +88,7 @@ function FrequentlyAskedQuestionsPage() {
           <NeedHelpComponent />
         </div>
       </div>
-      <Button className="my-8" primary={false} label={t('Go back')} onClick={() => navigate(-1)} />
+      <Button className="my-8" primary={false} label={t("Go back")} onClick={() => navigate(-1)} />
     </>
   );
 }

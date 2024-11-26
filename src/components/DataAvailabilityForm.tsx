@@ -1,28 +1,26 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Collapse } from '@mui/material';
-import { t as tNative } from '@transifex/native';
-import { useT } from '@transifex/react';
-import { useState } from 'react';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { TypeOf, object, string } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box, Collapse } from "@mui/material";
+import { t as tNative } from "@transifex/native";
+import { useT } from "@transifex/react";
+import { useState } from "react";
+import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { type TypeOf, object, string } from "zod";
 
-import FormInput from '../stories/form-input/FormInput';
-import LinkButton from '../stories/link-button/LinkButton';
-import Text from '../stories/text/Text';
+import FormInput from "../stories/form-input/FormInput";
+import LinkButton from "../stories/link-button/LinkButton";
+import Text from "../stories/text/Text";
 
 interface DataAvailabilityFormProps {
   name: string;
   value: string | number | null;
-  type?: 'currency' | 'date-picker' | 'date-field';
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  type?: "currency" | "date-picker" | "date-field";
   updateValue: (value: any) => void;
   isLoading: boolean;
   readonly: boolean;
 }
 
 const formCellSchema = object({
-  value: string().min(1, tNative('This field is required')),
+  value: string().min(1, tNative("This field is required")),
 });
 
 type FormCellInput = TypeOf<typeof formCellSchema>;
@@ -58,14 +56,14 @@ export function DataAvailabilityForm({
 
   return (
     <Box className="py-2 flex flex-col">
-      <Text fontVariant className={`mb-0 text-sm ${!value ? 'opacity-50' : ''}`}>
-        {value || t('(Blank)')}
+      <Text fontVariant className={`mb-0 text-sm ${!value ? "opacity-50" : ""}`}>
+        {value || t("(Blank)")}
       </Text>
       {!readonly && (
         <Box className="flex flex-col align-top">
           <Box className="flex flex-col align-top" onClick={handleToggle}>
             <Text fontVariant className="mb-0 mt-1 text-sm text-red">
-              {open ? '-' : '+'} {value ? t('Edit manually') : t('Add manually')}
+              {open ? "-" : "+"} {value ? t("Edit manually") : t("Add manually")}
             </Text>
           </Box>
 
@@ -76,7 +74,8 @@ export function DataAvailabilityForm({
                 className="flex flex-col mt-4 pr-4 align-top justify-end"
                 onSubmit={handleSubmit(onSubmitHandler)}
                 noValidate
-                autoComplete="off">
+                autoComplete="off"
+              >
                 <FormInput
                   inputCell
                   fontVariant
@@ -96,7 +95,7 @@ export function DataAvailabilityForm({
                   disabled={isLoading}
                   noIcon
                   className="min-w-min px-0 py-0 text-sm self-end justify-end"
-                  label={t('Update')}
+                  label={t("Update")}
                   type="submit"
                 />
               </Box>

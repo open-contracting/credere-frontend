@@ -1,7 +1,7 @@
-import { Container } from '@mui/material';
-import { PropsWithChildren } from 'react';
+import { Container } from "@mui/material";
+import type { PropsWithChildren } from "react";
 
-import BaseLayout from './BaseLayout';
+import BaseLayout from "./BaseLayout";
 
 export default function PublicPageLayout({ children }: PropsWithChildren) {
   return (

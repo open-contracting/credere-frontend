@@ -1,11 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import { useSnackbar } from 'notistack';
+import { useQuery } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import { useSnackbar } from "notistack";
 
-import { getStatisticsOCP } from '../api/private';
-import { QUERY_KEYS } from '../constants';
-import { StatisticsFI, StatisticsParmsInput } from '../schemas/statitics';
-import { handleRequestError } from '../util/validation';
+import { getStatisticsOCP } from "../api/private";
+import { QUERY_KEYS } from "../constants";
+import type { StatisticsFI, StatisticsParmsInput } from "../schemas/statitics";
+import { handleRequestError } from "../util/validation";
 
 type IUseGetStatisticsOCP = {
   data?: StatisticsFI;
@@ -40,7 +40,7 @@ export default function useGetStatisticsOCP(
     },
     onSuccess: (dataResult) => dataResult,
     onError: (error) => {
-      handleRequestError(error, enqueueSnackbar, t('Error getting statistics opt-in . {error}', { error }));
+      handleRequestError(error, enqueueSnackbar, t("Error getting statistics opt-in . {error}", { error }));
     },
   });
 

@@ -1,15 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { TableRow } from '@mui/material';
-import { useT } from '@transifex/react';
+import { TableRow } from "@mui/material";
+import { useT } from "@transifex/react";
 
-import { IUpdateBorrower } from '../schemas/application';
-import { ApplicationTableBorrowerDataRowProps } from './ApplicationTableDataRow';
-import DataAvailability from './DataAvailability';
-import DataAvailabilityForm from './DataAvailabilityForm';
-import { DataTableCell } from './DataTable';
-import DataVerificationForm from './DataVerificationForm';
+import type { IUpdateBorrower } from "../schemas/application";
+import type { ApplicationTableBorrowerDataRowProps } from "./ApplicationTableDataRow";
+import DataAvailability from "./DataAvailability";
+import DataAvailabilityForm from "./DataAvailabilityForm";
+import { DataTableCell } from "./DataTable";
+import DataVerificationForm from "./DataVerificationForm";
 
-const DATA_REQUESTED_FROM_MSME = ['size', 'sector', 'annual_revenue'];
+const DATA_REQUESTED_FROM_MSME = ["size", "sector", "annual_revenue"];
 export function ApplicationTableDataBorrowerRow({
   label,
   name,
@@ -33,7 +32,7 @@ export function ApplicationTableDataBorrowerRow({
   const value = borrower[name];
   const missing = missingData[name] === undefined ? true : missingData[name];
 
-  const verified = (verifiedData && verifiedData[name]) || false;
+  const verified = verifiedData?.[name] || false;
 
   let formattedValue = formatter ? formatter(value) : value;
   if (useTranslation) {
@@ -59,7 +58,7 @@ export function ApplicationTableDataBorrowerRow({
         />
       </DataTableCell>
       {(!missing || withoutVerify) && (
-        <DataTableCell className={preWhitespace ? 'whitespace-pre' : ''}>{formattedValue}</DataTableCell>
+        <DataTableCell className={preWhitespace ? "whitespace-pre" : ""}>{formattedValue}</DataTableCell>
       )}
       {missing && updateValue && (
         <DataTableCell>
@@ -69,7 +68,6 @@ export function ApplicationTableDataBorrowerRow({
             name={formLabel || label}
             value={value ? formattedValue : value}
             isLoading={isLoading}
-            // eslint-disable-next-line no-shadow
             updateValue={(value: any) => updateValue(value, name as keyof IUpdateBorrower)}
           />
         </DataTableCell>
@@ -77,7 +75,7 @@ export function ApplicationTableDataBorrowerRow({
       <DataTableCell>
         <DataVerificationForm
           name={name}
-          customLabel={withoutVerify ? t('Completed by business') : undefined}
+          customLabel={withoutVerify ? t("Completed by business") : undefined}
           value={verified || Boolean(withoutVerify)}
           readonly={readonly || !verifyData}
           verifyData={verifyDataValue}

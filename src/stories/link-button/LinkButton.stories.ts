@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { LinkButton } from './LinkButton';
+import { LinkButton } from "./LinkButton";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
-  title: 'Example/LinkButton',
+  title: "Example/LinkButton",
   component: LinkButton,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     // backgroundColor: { control: 'color' },
     icon: {
@@ -23,13 +23,13 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Primary: Story = {
   args: {
-    label: 'Link Button',
+    label: "Link Button",
   },
 };
 
 export const Disabled: Story = {
   args: {
     disabled: true,
-    label: 'Link Button',
+    label: "Link Button",
   },
 };

@@ -1,12 +1,12 @@
-import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import axios from 'axios';
-import { useSnackbar } from 'notistack';
+import { type UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import axios from "axios";
+import { useSnackbar } from "notistack";
 
-import { updateAwardFn } from '../api/private';
-import { DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
-import { IApplication, IUpdateAward } from '../schemas/application';
-import useApplicationContext from './useSecureApplicationContext';
+import { updateAwardFn } from "../api/private";
+import { DISPATCH_ACTIONS, QUERY_KEYS } from "../constants";
+import type { IApplication, IUpdateAward } from "../schemas/application";
+import useApplicationContext from "./useSecureApplicationContext";
 
 type IUseUpdateAward = {
   updateAwardMutation: UseMutateFunction<IApplication, unknown, IUpdateAward, unknown>;
@@ -27,20 +27,20 @@ export default function useUpdateAward(): IUseUpdateAward {
         queryClient.setQueryData([QUERY_KEYS.applications, `${data.id}`], data);
         applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });
 
-        enqueueSnackbar(t('Award Updated'), {
-          variant: 'success',
+        enqueueSnackbar(t("Award Updated"), {
+          variant: "success",
         });
       },
       onError: (error) => {
         if (axios.isAxiosError(error) && error.response) {
-          if (error.response.data && error.response.data.detail) {
-            enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-              variant: 'error',
+          if (error.response.data?.detail) {
+            enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+              variant: "error",
             });
           }
         } else {
-          enqueueSnackbar(t('Error updating award. {error}', { error }), {
-            variant: 'error',
+          enqueueSnackbar(t("Error updating award. {error}", { error }), {
+            variant: "error",
           });
         }
       },

@@ -1,11 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
-import { getMeFn } from '../api/auth';
-import { getUser, removeUser, saveUser } from '../api/localstore';
-import { DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
-import { IUser } from '../schemas/auth';
-import useStateContext from './useStateContext';
+import { getMeFn } from "../api/auth";
+import { getUser, removeUser, saveUser } from "../api/localstore";
+import { DISPATCH_ACTIONS, QUERY_KEYS } from "../constants";
+import type { IUser } from "../schemas/auth";
+import useStateContext from "./useStateContext";
 
 export default function useUser(): IUser | null {
   const stateContext = useStateContext();

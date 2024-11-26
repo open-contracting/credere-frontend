@@ -1,16 +1,15 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Dialog } from '@mui/material';
-import { useT } from '@transifex/react';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import useApplicationContext from 'src/hooks/useSecureApplicationContext';
-import Button from 'src/stories/button/Button';
-import Checkbox from 'src/stories/checkbox/Checkbox';
-import Title from 'src/stories/title/Title';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box, Dialog } from "@mui/material";
+import { useT } from "@transifex/react";
+import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import useApplicationContext from "src/hooks/useSecureApplicationContext";
+import Button from "src/stories/button/Button";
+import Checkbox from "src/stories/checkbox/Checkbox";
+import Title from "src/stories/title/Title";
 
-import useRejectApplication from '../../hooks/useRejectApplication';
-import { FormRejectInput, RejectApplicationInput, rejectSchema } from '../../schemas/application';
-import FormInput from '../../stories/form-input/FormInput';
+import useRejectApplication from "../../hooks/useRejectApplication";
+import { type FormRejectInput, type RejectApplicationInput, rejectSchema } from "../../schemas/application";
+import FormInput from "../../stories/form-input/FormInput";
 
 export interface RejectApplicationDialogProps {
   open: boolean;
@@ -33,7 +32,7 @@ export function RejectApplicationDialog({ open, handleClose }: RejectApplication
     if (application) {
       const payload: RejectApplicationInput = {
         ...values,
-        other_reason: values.other ? values.other_reason : '',
+        other_reason: values.other ? values.other_reason : "",
         application_id: application.id,
       };
 
@@ -41,7 +40,7 @@ export function RejectApplicationDialog({ open, handleClose }: RejectApplication
     }
   };
 
-  const rootElement = document.getElementById('root-app');
+  const rootElement = document.getElementById("root-app");
 
   return (
     <Dialog fullWidth maxWidth="sm" container={rootElement} open={open} onClose={handleClose}>
@@ -51,29 +50,30 @@ export function RejectApplicationDialog({ open, handleClose }: RejectApplication
           className="flex flex-col py-7 px-8"
           onSubmit={handleSubmit(onSubmitHandler)}
           noValidate
-          autoComplete="off">
-          <Title type="section" label={t('Select a reason for declining the application')} className="mb-4" />
+          autoComplete="off"
+        >
+          <Title type="section" label={t("Select a reason for declining the application")} className="mb-4" />
 
           <Checkbox
             fieldClassName="mb-0"
             name="compliance_checks_failed"
             defaultValue={false}
-            label={t('Compliance checks failed')}
+            label={t("Compliance checks failed")}
           />
           <Checkbox
             fieldClassName="mb-0"
             name="poor_credit_history"
             defaultValue={false}
-            label={t('Poor credit history')}
+            label={t("Poor credit history")}
           />
-          <Checkbox fieldClassName="mb-0" name="risk_of_fraud" defaultValue={false} label={t('Risk of fraud')} />
-          <Checkbox fieldClassName="mb-0" name="other" defaultValue={false} label={t('Other')} />
+          <Checkbox fieldClassName="mb-0" name="risk_of_fraud" defaultValue={false} label={t("Risk of fraud")} />
+          <Checkbox fieldClassName="mb-0" name="other" defaultValue={false} label={t("Other")} />
           <FormInput
             labelClassName="mb-1"
-            disabled={!watch('other')}
+            disabled={!watch("other")}
             multiline
             name="other_reason"
-            label={t('Please specify')}
+            label={t("Please specify")}
             big={false}
             rows={3}
           />
@@ -84,13 +84,13 @@ export function RejectApplicationDialog({ open, handleClose }: RejectApplication
                 primary={false}
                 disabled={isLoading}
                 className="md:mr-4"
-                label={t('Cancel')}
+                label={t("Cancel")}
                 onClick={handleClose}
               />
             </div>
 
             <div>
-              <Button label={t('Reject')} type="submit" disabled={isLoading} />
+              <Button label={t("Reject")} type="submit" disabled={isLoading} />
             </div>
           </div>
         </Box>

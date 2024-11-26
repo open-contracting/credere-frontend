@@ -1,57 +1,57 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import BaseLayout from 'src/layout/BaseLayout';
-import PublicApplicationLayout from 'src/layout/PublicApplicationLayout';
-import PublicPageLayout from 'src/layout/PublicPageLayout';
-import MuiTheme from 'src/mui-theme';
-import AppHome from 'src/pages/AppHome';
-import RouterErrorPage from 'src/pages/RouterErrorPage';
-import SelectLanguage from 'src/pages/SelectLanguage';
-import CreatePasswordPage from 'src/pages/auth/CreatePasswordPage';
-import PasswordCreated from 'src/pages/auth/PasswordCreated';
-import ResetPasswordPage from 'src/pages/auth/ResetPasswordPage';
-import SetupMFAPage from 'src/pages/auth/SetupMFAPage';
-import SignInPage from 'src/pages/auth/SignInPage';
-import StageFive from 'src/pages/fi/StageFive';
-import StageFour from 'src/pages/fi/StageFour';
-import StageOne from 'src/pages/fi/StageOne';
-import StageThree from 'src/pages/fi/StageThree';
-import StageTwo from 'src/pages/fi/StageTwo';
-import Decline from 'src/pages/msme/Decline';
-import DeclineCompleted from 'src/pages/msme/DeclineCompleted';
-import DeclineFeedback from 'src/pages/msme/DeclineFeedback';
-import ExternalOnboardingCompleted from 'src/pages/msme/ExternalOnboardingCompleted';
-import FrequentlyAskedQuestionsPage from 'src/pages/msme/FrequentlyAskedQuestionsPage';
-import IntroMsme from 'src/pages/msme/IntroMsme';
-import SubmissionCompleted from 'src/pages/msme/SubmissionCompleted';
-import ViewCreditOptions from 'src/pages/msme/ViewCreditOptions';
-import { LoadUser, UserForm } from 'src/pages/ocp/UserForm';
-import ApplicationContextProvider from 'src/providers/ApplicationContextProvider';
-import LangContextProvider from 'src/providers/LangContextProvider';
-import SecureApplicationContextProvider from 'src/providers/SecureApplicationContextProvider';
-import StateContextProvider from 'src/providers/StateContextProvider';
-import ProtectedRoute from 'src/routes/ProtectedRoute';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import BaseLayout from "src/layout/BaseLayout";
+import PublicApplicationLayout from "src/layout/PublicApplicationLayout";
+import PublicPageLayout from "src/layout/PublicPageLayout";
+import MuiTheme from "src/mui-theme";
+import AppHome from "src/pages/AppHome";
+import RouterErrorPage from "src/pages/RouterErrorPage";
+import SelectLanguage from "src/pages/SelectLanguage";
+import CreatePasswordPage from "src/pages/auth/CreatePasswordPage";
+import PasswordCreated from "src/pages/auth/PasswordCreated";
+import ResetPasswordPage from "src/pages/auth/ResetPasswordPage";
+import SetupMFAPage from "src/pages/auth/SetupMFAPage";
+import SignInPage from "src/pages/auth/SignInPage";
+import StageFive from "src/pages/fi/StageFive";
+import StageFour from "src/pages/fi/StageFour";
+import StageOne from "src/pages/fi/StageOne";
+import StageThree from "src/pages/fi/StageThree";
+import StageTwo from "src/pages/fi/StageTwo";
+import Decline from "src/pages/msme/Decline";
+import DeclineCompleted from "src/pages/msme/DeclineCompleted";
+import DeclineFeedback from "src/pages/msme/DeclineFeedback";
+import ExternalOnboardingCompleted from "src/pages/msme/ExternalOnboardingCompleted";
+import FrequentlyAskedQuestionsPage from "src/pages/msme/FrequentlyAskedQuestionsPage";
+import IntroMsme from "src/pages/msme/IntroMsme";
+import SubmissionCompleted from "src/pages/msme/SubmissionCompleted";
+import ViewCreditOptions from "src/pages/msme/ViewCreditOptions";
+import { LoadUser, UserForm } from "src/pages/ocp/UserForm";
+import ApplicationContextProvider from "src/providers/ApplicationContextProvider";
+import LangContextProvider from "src/providers/LangContextProvider";
+import SecureApplicationContextProvider from "src/providers/SecureApplicationContextProvider";
+import StateContextProvider from "src/providers/StateContextProvider";
+import ProtectedRoute from "src/routes/ProtectedRoute";
 
-import { USER_TYPES } from '../constants';
-import PageLayout from '../layout/PageLayout';
-import SecureApplicationLayout from '../layout/SecureApplicationLayout';
-import ApplicationCompleted from '../pages/fi/ApplicationCompleted';
-import StageFiveApproved from '../pages/fi/StageFiveApproved';
-import StageFiveRejected from '../pages/fi/StageFiveRejected';
-import ViewApplication from '../pages/fi/ViewApplication';
-import ApplicationMSMECompleted from '../pages/msme/ApplicationMSMECompleted';
-import ChangePrimaryEmail from '../pages/msme/ChangePrimaryEmail';
-import ConfirmCreditProduct from '../pages/msme/ConfirmCreditProduct';
-import ConfirmFindAlternativeCredit from '../pages/msme/ConfirmFindAlternativeCredit';
-import ConfirmSubmission from '../pages/msme/ConfirmSubmission';
-import Rejected from '../pages/msme/Rejected';
-import TermsAndConditions from '../pages/msme/TermsAndConditions';
-import UploadDocuments from '../pages/msme/UploadDocuments';
-import { LoadApplication } from '../pages/ocp/ApplicationDetail';
-import Applications from '../pages/ocp/Applications';
-import { LoadCreditProduct } from '../pages/ocp/CreditProductForm';
-import { LenderForm, LoadLender } from '../pages/ocp/LenderForm';
-import Settings from '../pages/ocp/Settings';
+import { USER_TYPES } from "../constants";
+import PageLayout from "../layout/PageLayout";
+import SecureApplicationLayout from "../layout/SecureApplicationLayout";
+import ApplicationCompleted from "../pages/fi/ApplicationCompleted";
+import StageFiveApproved from "../pages/fi/StageFiveApproved";
+import StageFiveRejected from "../pages/fi/StageFiveRejected";
+import ViewApplication from "../pages/fi/ViewApplication";
+import ApplicationMSMECompleted from "../pages/msme/ApplicationMSMECompleted";
+import ChangePrimaryEmail from "../pages/msme/ChangePrimaryEmail";
+import ConfirmCreditProduct from "../pages/msme/ConfirmCreditProduct";
+import ConfirmFindAlternativeCredit from "../pages/msme/ConfirmFindAlternativeCredit";
+import ConfirmSubmission from "../pages/msme/ConfirmSubmission";
+import Rejected from "../pages/msme/Rejected";
+import TermsAndConditions from "../pages/msme/TermsAndConditions";
+import UploadDocuments from "../pages/msme/UploadDocuments";
+import { LoadApplication } from "../pages/ocp/ApplicationDetail";
+import Applications from "../pages/ocp/Applications";
+import { LoadCreditProduct } from "../pages/ocp/CreditProductForm";
+import { LenderForm, LoadLender } from "../pages/ocp/LenderForm";
+import Settings from "../pages/ocp/Settings";
 
 // Create a React Query client
 const queryClient = new QueryClient({
@@ -64,7 +64,7 @@ const queryClient = new QueryClient({
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: (
       <PublicPageLayout>
         <AppHome />
@@ -73,7 +73,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/home',
+    path: "/home",
     element: (
       <ProtectedRoute>
         <PageLayout>
@@ -84,7 +84,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/admin/applications',
+    path: "/admin/applications",
     element: (
       <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
@@ -95,7 +95,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/admin/applications/:id/view',
+    path: "/admin/applications/:id/view",
     element: (
       <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
@@ -106,7 +106,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/admin/applications/:id/update',
+    path: "/admin/applications/:id/update",
     element: (
       <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
@@ -117,7 +117,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/settings',
+    path: "/settings",
     element: (
       <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
@@ -128,7 +128,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/settings/lender/new',
+    path: "/settings/lender/new",
     element: (
       <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
@@ -139,7 +139,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/settings/lender/:id/edit',
+    path: "/settings/lender/:id/edit",
     element: (
       <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
@@ -150,7 +150,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/settings/user/new',
+    path: "/settings/user/new",
     element: (
       <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
@@ -161,7 +161,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/settings/user/:id/edit',
+    path: "/settings/user/:id/edit",
     element: (
       <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
@@ -172,7 +172,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/settings/lender/:lenderId/credit-product/new',
+    path: "/settings/lender/:lenderId/credit-product/new",
     element: (
       <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
@@ -183,7 +183,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/settings/lender/:lenderId/credit-product/:id/edit',
+    path: "/settings/lender/:lenderId/credit-product/:id/edit",
     element: (
       <ProtectedRoute requiredUserType={USER_TYPES.OCP}>
         <PageLayout>
@@ -194,7 +194,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/login',
+    path: "/login",
     element: (
       <BaseLayout>
         <SignInPage />
@@ -203,7 +203,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/create-password',
+    path: "/create-password",
     element: (
       <BaseLayout>
         <CreatePasswordPage />
@@ -212,7 +212,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/setup-mfa/:secret/:session',
+    path: "/setup-mfa/:secret/:session",
     element: (
       <BaseLayout>
         <SetupMFAPage />
@@ -221,7 +221,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/password-created/',
+    path: "/password-created/",
     element: (
       <PublicPageLayout>
         <PasswordCreated />
@@ -230,7 +230,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/reset-password',
+    path: "/reset-password",
     element: (
       <BaseLayout>
         <ResetPasswordPage />
@@ -239,7 +239,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/set-language',
+    path: "/set-language",
     element: (
       <PublicPageLayout>
         <SelectLanguage />
@@ -248,7 +248,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/frequently-asked-questions',
+    path: "/frequently-asked-questions",
     element: (
       <PublicPageLayout>
         <FrequentlyAskedQuestionsPage />
@@ -257,7 +257,7 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/terms-and-conditions',
+    path: "/terms-and-conditions",
     element: (
       <PublicPageLayout>
         <TermsAndConditions />
@@ -266,106 +266,106 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/application/:uuid',
+    path: "/application/:uuid",
     element: <PublicApplicationLayout />,
     children: [
       {
-        path: 'intro',
+        path: "intro",
         element: <IntroMsme />,
       },
       {
-        path: 'credit-options',
+        path: "credit-options",
         element: <ViewCreditOptions />,
       },
       {
-        path: 'confirm-credit-product',
+        path: "confirm-credit-product",
         element: <ConfirmCreditProduct />,
       },
       {
-        path: 'documents',
+        path: "documents",
         element: <UploadDocuments />,
       },
       {
-        path: 'application-completed',
+        path: "application-completed",
         element: <ApplicationMSMECompleted />,
       },
       {
-        path: 'confirm-submission',
+        path: "confirm-submission",
         element: <ConfirmSubmission />,
       },
       {
-        path: 'submission-completed',
+        path: "submission-completed",
         element: <SubmissionCompleted />,
       },
       {
-        path: 'external-onboarding-completed',
+        path: "external-onboarding-completed",
         element: <ExternalOnboardingCompleted />,
       },
       {
-        path: 'decline',
+        path: "decline",
         element: <Decline />,
       },
       {
-        path: 'decline-feedback',
+        path: "decline-feedback",
         element: <DeclineFeedback />,
       },
       {
-        path: 'decline-completed',
+        path: "decline-completed",
         element: <DeclineCompleted />,
       },
       {
-        path: 'change-primary-email',
+        path: "change-primary-email",
         element: <ChangePrimaryEmail />,
       },
       {
-        path: 'rejected',
+        path: "rejected",
         element: <Rejected />,
       },
       {
-        path: 'find-alternative-credit',
+        path: "find-alternative-credit",
         element: <ConfirmFindAlternativeCredit />,
       },
     ],
     errorElement: <RouterErrorPage />,
   },
   {
-    path: '/applications/:id',
+    path: "/applications/:id",
     element: <SecureApplicationLayout />,
     children: [
       {
-        path: 'view',
+        path: "view",
         element: <ViewApplication />,
       },
       {
-        path: 'stage-one',
+        path: "stage-one",
         element: <StageOne />,
       },
       {
-        path: 'stage-two',
+        path: "stage-two",
         element: <StageTwo />,
       },
       {
-        path: 'stage-three',
+        path: "stage-three",
         element: <StageThree />,
       },
       {
-        path: 'stage-four',
+        path: "stage-four",
         element: <StageFour />,
       },
       {
-        path: 'stage-five',
+        path: "stage-five",
         element: <StageFive />,
       },
       {
-        path: 'stage-five-approved',
+        path: "stage-five-approved",
         element: <StageFiveApproved />,
       },
       {
-        path: 'stage-five-rejected',
+        path: "stage-five-rejected",
         element: <StageFiveRejected />,
       },
       {
-        path: 'application-completed',
+        path: "application-completed",
         element: <ApplicationCompleted />,
       },
     ],

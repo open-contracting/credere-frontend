@@ -45,7 +45,7 @@
   flex-direction: row;
   background-size: cover;
   justify-content: space-between;
-  background-image: url('/entrepreneur-woman-1200w.jpeg');
+  background-image: url("/entrepreneur-woman-1200w.jpeg");
 }
 .home-content {
   gap: var(--dl-space-space-oneandhalfunits);
@@ -155,7 +155,7 @@
   flex-direction: row;
   background-size: cover;
   justify-content: flex-end;
-  background-image: url('/credere-bogota-400h.png');
+  background-image: url("/credere-bogota-400h.png");
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -206,7 +206,7 @@
   padding-bottom: var(--dl-space-space-fiveunits);
   background-size: cover;
   justify-content: center;
-  background-image: url('/credere-circle-1200w.png');
+  background-image: url("/credere-circle-1200w.png");
   border-bottom-width: 1px;
   margin-top: 3rem;
 }
@@ -370,7 +370,7 @@ a {
   padding-right: var(--dl-space-space-sixunits);
   flex-direction: column;
   background-size: cover;
-  background-image: url('/teamocp-2022-500h.jpg');
+  background-image: url("/teamocp-2022-500h.jpg");
 }
 .home-text28 {
   color: var(--dl-color-gray-white);
@@ -992,7 +992,7 @@ a {
   align-items: flex-start;
 }
 .footer-pasted-image {
-  width: 100%px;
+  width: 100% px;
   height: 100%;
   margin-right: var(--dl-space-space-oneandhalfunits);
 }

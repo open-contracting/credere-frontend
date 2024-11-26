@@ -1,12 +1,12 @@
-import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
-import { useT } from '@transifex/react';
+import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
+import { useT } from "@transifex/react";
 
-import useUpdateBorrower from '../hooks/useUpdateBorrower';
-import useVerifyDataField from '../hooks/useVerifyDataField';
-import { IApplication, IUpdateBorrower } from '../schemas/application';
-import { RenderSector, RenderSize, formatCurrency } from '../util';
-import ApplicationTableDataBorrowerRow from './ApplicationTableDataBorrowerRow';
-import { DataTableHeadCell, DataTableHeadLabel } from './DataTable';
+import useUpdateBorrower from "../hooks/useUpdateBorrower";
+import useVerifyDataField from "../hooks/useVerifyDataField";
+import type { IApplication, IUpdateBorrower } from "../schemas/application";
+import { RenderSector, RenderSize, formatCurrency } from "../util";
+import ApplicationTableDataBorrowerRow from "./ApplicationTableDataBorrowerRow";
+import { DataTableHeadCell, DataTableHeadLabel } from "./DataTable";
 
 export interface ApplicationBorrowerTableProps {
   application: IApplication;
@@ -52,16 +52,16 @@ export function ApplicationBorrowerTable({
           <TableHead>
             <TableRow>
               <DataTableHeadCell width={260}>
-                <DataTableHeadLabel label={t('Open Contracting Field')} />
+                <DataTableHeadLabel label={t("Open Contracting Field")} />
               </DataTableHeadCell>
               <DataTableHeadCell width={240}>
-                <DataTableHeadLabel label={t('Data Available')} />
+                <DataTableHeadLabel label={t("Data Available")} />
               </DataTableHeadCell>
               <DataTableHeadCell>
-                <DataTableHeadLabel label={t('Data')} />
+                <DataTableHeadLabel label={t("Data")} />
               </DataTableHeadCell>
               <DataTableHeadCell>
-                <DataTableHeadLabel label={t('Data Verified')} />
+                <DataTableHeadLabel label={t("Data Verified")} />
               </DataTableHeadCell>
             </TableRow>
           </TableHead>
@@ -74,7 +74,7 @@ export function ApplicationBorrowerTable({
               verifyData={allowDataVerification ? verifyDataField : undefined}
               missingData={borrower.missing_data}
               name="legal_name"
-              label={t('Legal Name')}
+              label={t("Legal Name")}
               borrower={borrower}
               modifiedFields={application.modified_data_fields?.borrower_updates}
             />
@@ -87,7 +87,7 @@ export function ApplicationBorrowerTable({
               verifyData={allowDataVerification ? verifyDataField : undefined}
               missingData={borrower.missing_data}
               name="address"
-              label={t('Address')}
+              label={t("Address")}
               borrower={borrower}
               modifiedFields={application.modified_data_fields?.borrower_updates}
             />
@@ -99,7 +99,7 @@ export function ApplicationBorrowerTable({
               verifyData={allowDataVerification ? verifyDataField : undefined}
               missingData={borrower.missing_data}
               name="legal_identifier"
-              label={t('National Tax ID')}
+              label={t("National Tax ID")}
               borrower={borrower}
               modifiedFields={application.modified_data_fields?.borrower_updates}
             />
@@ -111,7 +111,7 @@ export function ApplicationBorrowerTable({
               verifyData={allowDataVerification ? verifyDataField : undefined}
               missingData={borrower.missing_data}
               name="type"
-              label={t('Registration Type')}
+              label={t("Registration Type")}
               borrower={borrower}
               modifiedFields={application.modified_data_fields?.borrower_updates}
             />
@@ -121,7 +121,7 @@ export function ApplicationBorrowerTable({
               withoutVerify
               useTranslation
               name="size"
-              label={t('Size')}
+              label={t("Size")}
               missingData={borrower.missing_data}
               verifiedData={application.secop_data_verification}
               borrower={borrower}
@@ -134,7 +134,7 @@ export function ApplicationBorrowerTable({
               withoutVerify
               useTranslation
               name="sector"
-              label={t('Sector')}
+              label={t("Sector")}
               missingData={borrower.missing_data}
               verifiedData={application.secop_data_verification}
               borrower={borrower}
@@ -147,12 +147,12 @@ export function ApplicationBorrowerTable({
               withoutVerify
               useTranslation
               name="annual_revenue"
-              label={t('Annual Revenue')}
+              label={t("Annual Revenue")}
               missingData={borrower.missing_data}
               verifiedData={application.secop_data_verification}
               borrower={borrower}
               formatter={(value) =>
-                value ? `${borrower.currency} ${formatCurrency(value, borrower.currency)}` : t('Not informed')
+                value ? `${borrower.currency} ${formatCurrency(value, borrower.currency)}` : t("Not informed")
               }
               modifiedFields={application.modified_data_fields?.borrower_updates}
             />
@@ -164,7 +164,7 @@ export function ApplicationBorrowerTable({
               verifyData={allowDataVerification ? verifyDataField : undefined}
               missingData={borrower.missing_data}
               name="email"
-              label={t('Business Email')}
+              label={t("Business Email")}
               borrower={borrower}
               modifiedFields={application.modified_data_fields?.borrower_updates}
             />
@@ -177,7 +177,7 @@ export function ApplicationBorrowerTable({
 
 ApplicationBorrowerTable.defaultProps = {
   readonly: false,
-  className: '',
+  className: "",
   allowDataVerification: false,
 };
 

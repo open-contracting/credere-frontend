@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import { DISPATCH_ACTIONS } from '../constants';
-import { IApplicationResponse } from '../schemas/application';
+import { DISPATCH_ACTIONS } from "../constants";
+import type { IApplicationResponse } from "../schemas/application";
 
 type ApplicationState = {
   data: IApplicationResponse | null;
@@ -33,7 +33,7 @@ const applicationReducer = (state: ApplicationState, action: Action) => {
       };
     }
     default: {
-      throw new Error(`Unhandled action type`);
+      throw new Error("Unhandled action type");
     }
   }
 };

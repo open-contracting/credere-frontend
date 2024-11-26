@@ -13,63 +13,64 @@ https://www.grillitype.com/typeface/gt-eesti
 - UltraBold */
 
 @font-face {
-  src: url('/fonts/GTEestiProText-Regular.woff2') format('woff2'),
-    url('/fonts/GTEestiProText-Regular.otf') format('opentype');
-  font-family: 'GT Eesti Pro Text';
+  src: url("/fonts/GTEestiProText-Regular.woff2") format("woff2"), url("/fonts/GTEestiProText-Regular.otf")
+    format("opentype");
+  font-family: "GT Eesti Pro Text";
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
-  src: url('/fonts/GT-Eesti-Text-Bold-Trial.woff2') format('woff2'),
-    url('/fonts/GT-Eesti-Text-Bold-Trial.otf') format('opentype');
-  font-family: 'GT Eesti Pro Text';
+  src: url("/fonts/GT-Eesti-Text-Bold-Trial.woff2") format("woff2"), url("/fonts/GT-Eesti-Text-Bold-Trial.otf")
+    format("opentype");
+  font-family: "GT Eesti Pro Text";
   font-weight: 500;
   font-display: swap;
 }
 
 @font-face {
-  src: url('/fonts/GT-Eesti-Text-Thin-Trial.woff2') format('woff2'),
-    url('/fonts/GT-Eesti-Text-Thin-Trial.otf') format('opentype');
-  font-family: 'GT Eesti Pro Text';
+  src: url("/fonts/GT-Eesti-Text-Thin-Trial.woff2") format("woff2"), url("/fonts/GT-Eesti-Text-Thin-Trial.otf")
+    format("opentype");
+  font-family: "GT Eesti Pro Text";
   font-weight: 300;
   font-display: swap;
 }
 
 @font-face {
-  src: url('/fonts/GTEestiProDisplay-Regular.woff2') format('woff2'),
-    url('/fonts/GTEestiProDisplay-Regular.otf') format('opentype');
-  font-family: 'GT Eesti Pro';
+  src: url("/fonts/GTEestiProDisplay-Regular.woff2") format("woff2"), url("/fonts/GTEestiProDisplay-Regular.otf")
+    format("opentype");
+  font-family: "GT Eesti Pro";
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
-  src: url('/fonts/GTEestiProDisplay-Bold.woff2') format('woff2'),
-    url('/fonts/GTEestiProDisplay-Bold.otf') format('opentype');
-  font-family: 'GT Eesti Pro';
+  src: url("/fonts/GTEestiProDisplay-Bold.woff2") format("woff2"), url("/fonts/GTEestiProDisplay-Bold.otf")
+    format("opentype");
+  font-family: "GT Eesti Pro";
   font-weight: 500;
   font-display: swap;
 }
 
 @font-face {
-  src: url('/fonts/GTEestiProDisplay-Thin.woff2') format('woff2'),
-    url('/fonts/GTEestiProDisplay-Thin.otf') format('opentype');
-  font-family: 'GT Eesti Pro';
+  src: url("/fonts/GTEestiProDisplay-Thin.woff2") format("woff2"), url("/fonts/GTEestiProDisplay-Thin.otf")
+    format("opentype");
+  font-family: "GT Eesti Pro";
   font-weight: 300;
   font-display: swap;
 }
 
 body * {
-  font-family: 'GT Eesti Pro';
+  font-family: "GT Eesti Pro", sans-serif;
 }
 
 body {
-  background-color: 'bg-background';
+  background-color: "bg-background";
 }
 
 .recharts-legend-item-text {
-  color: theme('colors.darkest') !important;
+  /* biome-ignore lint/correctness/noUnknownFunction: Tailwind */
+  color: theme("colors.darkest") !important;
 }
 
 .recharts-default-legend {

@@ -1,13 +1,12 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import { FormControl, FormControlLabel, FormHelperText, Checkbox as MUICheckbox, Typography } from '@mui/material';
-import { useT } from '@transifex/react';
-import { Controller, useFormContext } from 'react-hook-form';
-import { twMerge } from 'tailwind-merge';
+import { FormControl, FormControlLabel, FormHelperText, Checkbox as MUICheckbox, Typography } from "@mui/material";
+import { useT } from "@transifex/react";
+import { Controller, useFormContext } from "react-hook-form";
+import { twMerge } from "tailwind-merge";
 
-import Checked from '../../assets/icons/check-checked.svg';
-import NotChecked from '../../assets/icons/check-empty.svg';
-import { getProperty } from '../../util';
-import { FieldErrorType } from '../form-input/FormInput';
+import Checked from "../../assets/icons/check-checked.svg";
+import NotChecked from "../../assets/icons/check-empty.svg";
+import { getProperty } from "../../util";
+import type { FieldErrorType } from "../form-input/FormInput";
 
 export type CheckboxProps = {
   name: string;
@@ -34,10 +33,10 @@ export function Checkbox({ name, label, fieldClassName, defaultValue = false, cl
       render={({ field }) => (
         <FormControl fullWidth className={twMerge(`mb-2 ${fieldClassName}`)}>
           <FormControlLabel
-            sx={{ alignItems: 'flex-start' }}
+            sx={{ alignItems: "flex-start" }}
             control={
               <MUICheckbox
-                sx={{ px: '10px', py: '2px', ':hover': { backgroundColor: 'transparent' } }}
+                sx={{ px: "10px", py: "2px", ":hover": { backgroundColor: "transparent" } }}
                 icon={<img src={NotChecked} alt="check-icon-empty" />}
                 checkedIcon={<img src={Checked} alt="check-icon-checked" />}
                 {...field}
@@ -47,13 +46,14 @@ export function Checkbox({ name, label, fieldClassName, defaultValue = false, cl
             label={
               <Typography
                 variant="body1"
-                className={twMerge(`text-darkest text-lg ${fieldError ? 'text-red' : ''} ${className}`)}>
+                className={twMerge(`text-darkest text-lg ${fieldError ? "text-red" : ""} ${className}`)}
+              >
                 {label}
               </Typography>
             }
           />
           <FormHelperText className="text-red text-base mx-0" error={!!fieldError}>{`${
-            fieldError ? t(fieldError?.message) : ''
+            fieldError ? t(fieldError?.message) : ""
           }`}</FormHelperText>
         </FormControl>
       )}
@@ -63,7 +63,7 @@ export function Checkbox({ name, label, fieldClassName, defaultValue = false, cl
 
 Checkbox.defaultProps = {
   className: undefined,
-  fieldClassName: '',
+  fieldClassName: "",
   defaultValue: false,
 };
 

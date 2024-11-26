@@ -7,7 +7,7 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
+RUN npx tsc && npx vite build
 
 FROM nginxinc/nginx-unprivileged:latest AS production-stage
 USER root

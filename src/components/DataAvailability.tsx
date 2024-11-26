@@ -1,12 +1,12 @@
-import { Box, Collapse } from '@mui/material';
-import { useT } from '@transifex/react';
-import { useState } from 'react';
+import { Box, Collapse } from "@mui/material";
+import { useT } from "@transifex/react";
+import { useState } from "react";
 
-import CheckGreen from '../assets/icons/check-green.svg';
-import WarnRed from '../assets/icons/warn-red.svg';
-import useLocalizedDateFormatter from '../hooks/useLocalizedDateFormatter';
-import { IModifiedDataFields } from '../schemas/application';
-import Text from '../stories/text/Text';
+import CheckGreen from "../assets/icons/check-green.svg";
+import WarnRed from "../assets/icons/warn-red.svg";
+import useLocalizedDateFormatter from "../hooks/useLocalizedDateFormatter";
+import type { IModifiedDataFields } from "../schemas/application";
+import Text from "../stories/text/Text";
 
 const getIcon = (available: boolean, name: string) => {
   let icon = CheckGreen;
@@ -43,7 +43,7 @@ export function DataAvailability({ available, name, label, readonly, modifiedFie
         {getIcon(available, label)}
 
         <Text fontVariant className="ml-3 mb-0 text-sm">
-          {available ? t('Yes') : t('Data missing')}
+          {available ? t("Yes") : t("Data missing")}
         </Text>
       </Box>
     );
@@ -54,29 +54,30 @@ export function DataAvailability({ available, name, label, readonly, modifiedFie
         <Box
           className="flex flex-col self-start"
           sx={{
-            pt: '2px',
-          }}>
+            pt: "2px",
+          }}
+        >
           {getIcon(available, label)}
         </Box>
         <Box className="flex flex-col">
           <Text fontVariant className="ml-3 mb-0 text-sm">
-            {t('Data missing')}
+            {t("Data missing")}
           </Text>
 
           <Box className="flex flex-col align-top" onClick={handleToggle}>
             <Text fontVariant className="ml-3 mb-0 mt-1 text-red text-sm">
-              {open ? '↑ ' : '↓ '}
-              {t('More information')}
+              {open ? "↑ " : "↓ "}
+              {t("More information")}
             </Text>
             <Collapse in={open}>
               <Text fontVariant className="ml-3 mt-4 text-sm">
                 {!modified
                   ? t(
-                      'Data for the {fieldName} for the business is not available. Confirm manually through SECOP or alternative source.',
+                      "Data for the {fieldName} for the business is not available. Confirm manually through SECOP or alternative source.",
                       { fieldName: label },
                     )
                   : t(
-                      'Data for the {fieldName} was not available, but completed by {userType} user {userName} on {modifiedDate}.',
+                      "Data for the {fieldName} was not available, but completed by {userType} user {userName} on {modifiedDate}.",
                       {
                         fieldName: label,
                         userType: modified.user_type,

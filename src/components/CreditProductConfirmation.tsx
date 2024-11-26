@@ -1,13 +1,13 @@
-import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
-import { useT } from '@transifex/react';
-import ReactMarkdown from 'react-markdown';
+import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
+import { useT } from "@transifex/react";
+import ReactMarkdown from "react-markdown";
 
-import { CREDIT_PRODUCT_TYPE } from '../constants';
-import useLocalizedDateFormatter from '../hooks/useLocalizedDateFormatter';
-import { IApplication, ICreditProduct } from '../schemas/application';
-import Title from '../stories/title/Title';
-import { formatCurrency } from '../util';
-import { DataTableCell, DataTableHeadCell, DataTableHeadLabel } from './DataTable';
+import { CREDIT_PRODUCT_TYPE } from "../constants";
+import useLocalizedDateFormatter from "../hooks/useLocalizedDateFormatter";
+import type { IApplication, ICreditProduct } from "../schemas/application";
+import Title from "../stories/title/Title";
+import { formatCurrency } from "../util";
+import { DataTableCell, DataTableHeadCell, DataTableHeadLabel } from "./DataTable";
 
 export interface CreditProductConfirmationProps {
   creditProduct: ICreditProduct;
@@ -22,7 +22,7 @@ export function CreditProductConfirmation({ creditProduct, application }: Credit
 
   return (
     <>
-      <Title type="subsection" className="mb-2" label={isLoan ? t('Loan') : t('Credit Line')} />
+      <Title type="subsection" className="mb-2" label={isLoan ? t("Loan") : t("Credit Line")} />
 
       <Paper elevation={0} square className="bg-background">
         <TableContainer>
@@ -30,20 +30,20 @@ export function CreditProductConfirmation({ creditProduct, application }: Credit
             <TableHead>
               <TableRow>
                 <DataTableHeadCell>
-                  <DataTableHeadLabel label={t('Lender')} />
+                  <DataTableHeadLabel label={t("Lender")} />
                 </DataTableHeadCell>
 
                 <DataTableHeadCell>
-                  <DataTableHeadLabel label={t('Requested amount')} />
+                  <DataTableHeadLabel label={t("Requested amount")} />
                 </DataTableHeadCell>
 
                 {isLoan && (
                   <DataTableHeadCell>
-                    <DataTableHeadLabel label={t('Repayment')} />
+                    <DataTableHeadLabel label={t("Repayment")} />
                   </DataTableHeadCell>
                 )}
                 <DataTableHeadCell>
-                  <DataTableHeadLabel label={t('Additional information')} />
+                  <DataTableHeadLabel label={t("Additional information")} />
                 </DataTableHeadCell>
               </TableRow>
             </TableHead>
@@ -51,13 +51,13 @@ export function CreditProductConfirmation({ creditProduct, application }: Credit
               <TableRow>
                 <DataTableCell>{creditProduct.lender.name}</DataTableCell>
                 <DataTableCell>
-                  {application.currency}{' '}
+                  {application.currency}{" "}
                   {formatCurrency(application.calculator_data.amount_requested, application.currency)}
                 </DataTableCell>
 
                 {isLoan && (
                   <DataTableCell>
-                    {t('{repayment_years} year(s), {repayment_months} month(s)', {
+                    {t("{repayment_years} year(s), {repayment_months} month(s)", {
                       repayment_years: application.calculator_data.repayment_years,
                       repayment_months: application.calculator_data.repayment_months,
                     })}
@@ -77,16 +77,16 @@ export function CreditProductConfirmation({ creditProduct, application }: Credit
               <TableRow>
                 {isLoan && (
                   <DataTableHeadCell>
-                    <DataTableHeadLabel label={t('Payment start date')} />
+                    <DataTableHeadLabel label={t("Payment start date")} />
                   </DataTableHeadCell>
                 )}
 
                 <DataTableHeadCell>
-                  <DataTableHeadLabel label={t('Interest rate')} />
+                  <DataTableHeadLabel label={t("Interest rate")} />
                 </DataTableHeadCell>
 
                 <DataTableHeadCell>
-                  <DataTableHeadLabel label={t('Other fees')} />
+                  <DataTableHeadLabel label={t("Other fees")} />
                 </DataTableHeadCell>
               </TableRow>
             </TableHead>

@@ -1,53 +1,52 @@
-/* eslint-disable camelcase */
-import { useQuery } from '@tanstack/react-query';
-import { t } from '@transifex/native';
-import axios from 'axios';
-import { useSnackbar } from 'notistack';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { renderUserType } from 'src/util';
+import { useQuery } from "@tanstack/react-query";
+import { t } from "@transifex/native";
+import axios from "axios";
+import { useSnackbar } from "notistack";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { renderUserType } from "src/util";
 
-import { getUsersFn } from '../api/private';
-import { PAGE_SIZES, QUERY_KEYS } from '../constants';
-import { EXTENDED_USER_FROM, IExtendedUser, PaginationInput } from '../schemas/application';
-import { IUser, IUsersListResponse } from '../schemas/auth';
-import LinkButton from '../stories/link-button/LinkButton';
-import { DataTable, HeadCell, Order } from './DataTable';
+import { getUsersFn } from "../api/private";
+import { PAGE_SIZES, QUERY_KEYS } from "../constants";
+import { EXTENDED_USER_FROM, type IExtendedUser, type PaginationInput } from "../schemas/application";
+import type { IUser, IUsersListResponse } from "../schemas/auth";
+import LinkButton from "../stories/link-button/LinkButton";
+import { DataTable, type HeadCell, type Order } from "./DataTable";
 
 type ExtendendUser = IUser & IExtendedUser;
 const UserDataTable = DataTable<ExtendendUser>;
 
 const headCells: HeadCell<ExtendendUser>[] = [
   {
-    id: 'name',
+    id: "name",
     disablePadding: false,
-    label: t('Full Name'),
+    label: t("Full Name"),
     sortable: false,
   },
   {
-    id: 'email',
+    id: "email",
     disablePadding: false,
-    label: t('Email'),
+    label: t("Email"),
     sortable: true,
   },
   {
-    id: 'type',
+    id: "type",
     disablePadding: false,
-    label: t('Type'),
+    label: t("Type"),
     sortable: false,
     render: (row: ExtendendUser) => renderUserType(row.type),
   },
   {
-    id: 'lender_name',
+    id: "lender_name",
     disablePadding: false,
-    label: t('Lender'),
+    label: t("Lender"),
     sortable: false,
   },
   {
-    id: 'created_at',
-    type: 'date',
+    id: "created_at",
+    type: "date",
     disablePadding: false,
-    label: t('Created At'),
+    label: t("Created At"),
     sortable: false,
   },
 ];
@@ -57,7 +56,7 @@ const actions = (row: ExtendendUser) => (
     className="p-1 justify-start"
     component={Link}
     to={`/settings/user/${row.id}/edit`}
-    label={t('Edit')}
+    label={t("Edit")}
     size="small"
     noIcon
   />
@@ -68,8 +67,8 @@ export function UserList() {
   const [payload, setPayload] = useState<PaginationInput>({
     page: 0,
     page_size: PAGE_SIZES[0],
-    sort_field: 'created_at',
-    sort_order: 'desc',
+    sort_field: "created_at",
+    sort_order: "desc",
   });
 
   const [rows, setRows] = useState<ExtendendUser[]>([]);
@@ -104,12 +103,12 @@ export function UserList() {
     retry: 1,
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response && error.response.data && error.response.data.detail) {
-        enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-          variant: 'error',
+        enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          variant: "error",
         });
       } else {
-        enqueueSnackbar(t('Error loading users'), {
-          variant: 'error',
+        enqueueSnackbar(t("Error loading users"), {
+          variant: "error",
         });
       }
     },
@@ -119,7 +118,7 @@ export function UserList() {
     if (data) {
       const newRows = data.items.map((item) => ({
         ...item,
-        lender_name: item.lender?.name || '-',
+        lender_name: item.lender?.name || "-",
         user_name: item.name,
       }));
       setRows(newRows);

@@ -1,13 +1,13 @@
-import { Link as MUILink } from '@mui/material';
-import { useT } from '@transifex/react';
-import { Button } from 'src/stories/button/Button';
-import Text from 'src/stories/text/Text';
-import Title from 'src/stories/title/Title';
-import { z } from 'zod';
+import { Link as MUILink } from "@mui/material";
+import { useT } from "@transifex/react";
+import { Button } from "src/stories/button/Button";
+import Text from "src/stories/text/Text";
+import Title from "src/stories/title/Title";
+import { z } from "zod";
 
-import useApplicationContext from '../../hooks/useApplicationContext';
-import useConfirmChangeEmail from '../../hooks/useConfirmChangeEmail';
-import { useSearchParamsTypeSafe } from '../../hooks/useParamsTypeSafe';
+import useApplicationContext from "../../hooks/useApplicationContext";
+import useConfirmChangeEmail from "../../hooks/useConfirmChangeEmail";
+import { useSearchParamsTypeSafe } from "../../hooks/useParamsTypeSafe";
 
 const params = z.object({
   token: z.coerce.string(),
@@ -17,7 +17,7 @@ function ChangePrimaryEmail() {
   const t = useT();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data?.application;
-  const { token } = useSearchParamsTypeSafe(params, t('This is an invalid link.'));
+  const { token } = useSearchParamsTypeSafe(params, t("This is an invalid link."));
 
   const { confirmChangeEmailMutation, isLoading, data } = useConfirmChangeEmail();
 
@@ -32,13 +32,13 @@ function ChangePrimaryEmail() {
 
   return (
     <>
-      {data && <Title type="page" label={t('Primary Email Changed')} className="mb-8" />}
+      {data && <Title type="page" label={t("Primary Email Changed")} className="mb-8" />}
 
       {!data && (
         <Title
           type="page"
           label={
-            application?.pending_email_confirmation ? t('Confirm Email Change') : t('Primary email already changed')
+            application?.pending_email_confirmation ? t("Confirm Email Change") : t("Primary email already changed")
           }
           className="mb-8"
         />
@@ -57,7 +57,7 @@ function ChangePrimaryEmail() {
               </Text>
               <Text className="mb-8">
                 {t(
-                  'If you have any questions, you can reach out to member of the Open Contracting Partnership team at: credere@open-contracting.org.',
+                  "If you have any questions, you can reach out to member of the Open Contracting Partnership team at: credere@open-contracting.org.",
                 )}
               </Text>
             </>
@@ -87,18 +87,18 @@ function ChangePrimaryEmail() {
               {(data || !application?.pending_email_confirmation) && (
                 <Button
                   className="md:mr-4"
-                  label={t('Learn more about OCP')}
+                  label={t("Learn more about OCP")}
                   target="_blank"
                   rel="noreferrer"
                   component={MUILink}
-                  href={`${import.meta.env.VITE_MORE_INFO_OCP_URL || 'https://www.open-contracting.org/es/'}`}
+                  href={`${import.meta.env.VITE_MORE_INFO_OCP_URL || "https://www.open-contracting.org/es/"}`}
                 />
               )}
               {!data && application?.pending_email_confirmation && (
                 <Button
                   disabled={isLoading}
                   className="md:mr-4"
-                  label={t('Confirm Email Change')}
+                  label={t("Confirm Email Change")}
                   onClick={onConfirmEmailChangeHandler}
                 />
               )}

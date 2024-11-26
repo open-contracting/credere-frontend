@@ -1,6 +1,6 @@
-import { ACCESS_TOKEN_LOCAL_STORAGE_KEY, LANG_STORAGE_KEY, USER_LOCAL_STORAGE_KEY } from '../constants';
-import { IUser } from '../schemas/auth';
-import { setHeaderFromLocalStorage } from './axios';
+import { ACCESS_TOKEN_LOCAL_STORAGE_KEY, LANG_STORAGE_KEY, USER_LOCAL_STORAGE_KEY } from "../constants";
+import type { IUser } from "../schemas/auth";
+import { setHeaderFromLocalStorage } from "./axios";
 
 export function removeUser(): void {
   localStorage.removeItem(USER_LOCAL_STORAGE_KEY);

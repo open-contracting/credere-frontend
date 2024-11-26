@@ -1,10 +1,10 @@
-import { UseMutateFunction, useMutation } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import axios from 'axios';
-import { useSnackbar } from 'notistack';
+import { type UseMutateFunction, useMutation } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import axios from "axios";
+import { useSnackbar } from "notistack";
 
-import { changeEmailFn } from '../api/public';
-import { ChangeEmailInput } from '../schemas/application';
+import { changeEmailFn } from "../api/public";
+import type { ChangeEmailInput } from "../schemas/application";
 
 type IUseChangeEmail = {
   changeEmailMutation: UseMutateFunction<ChangeEmailInput, unknown, ChangeEmailInput, unknown>;
@@ -25,14 +25,14 @@ export default function useChangeEmail(): IUseChangeEmail {
     onSuccess: (dataResponse) => dataResponse,
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
-        if (error.response.data && error.response.data.detail) {
-          enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-            variant: 'error',
+        if (error.response.data?.detail) {
+          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t('Error changing primary email. {error}', { error }), {
-          variant: 'error',
+        enqueueSnackbar(t("Error changing primary email. {error}", { error }), {
+          variant: "error",
         });
       }
     },

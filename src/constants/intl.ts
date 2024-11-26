@@ -5,18 +5,18 @@ interface CurrencyFormatOptions {
 
 export const CURRENCY_FORMAT_OPTIONS: { [key: string]: CurrencyFormatOptions } = {
   COP: {
-    locale: 'es-CO', // 'en-US
+    locale: "es-CO", // 'en-US
     options: {
-      style: 'currency',
-      currency: 'COP',
+      style: "currency",
+      currency: "COP",
       minimumFractionDigits: 0,
     },
   },
   USD: {
-    locale: 'en-US',
+    locale: "en-US",
     options: {
-      style: 'currency',
-      currency: 'USD',
+      style: "currency",
+      currency: "USD",
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     },
@@ -24,7 +24,7 @@ export const CURRENCY_FORMAT_OPTIONS: { [key: string]: CurrencyFormatOptions } =
   default: {
     locale: import.meta.env.VITE_LOCALE,
     options: {
-      style: 'currency',
+      style: "currency",
       currency: import.meta.env.VITE_CURRENCY,
     },
   },

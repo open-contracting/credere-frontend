@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import { getUser, saveUser } from '../api/localstore';
-import { DISPATCH_ACTIONS } from '../constants';
-import { IUser } from '../schemas/auth';
+import { getUser, saveUser } from "../api/localstore";
+import { DISPATCH_ACTIONS } from "../constants";
+import type { IUser } from "../schemas/auth";
 
 type AuthState = {
   user: IUser | null;
@@ -33,7 +33,7 @@ const authReducer = (state: AuthState, action: ActionSetAuth) => {
       };
     }
     default: {
-      throw new Error(`Unhandled action type`);
+      throw new Error("Unhandled action type");
     }
   }
 };

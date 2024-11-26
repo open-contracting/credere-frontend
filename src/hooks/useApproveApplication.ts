@@ -1,13 +1,13 @@
-import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { type UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
-import { approveApplicationFn } from '../api/private';
-import { DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
-import { ApproveApplicationInput, IApplication } from '../schemas/application';
-import { handleRequestError } from '../util/validation';
-import useApplicationContext from './useSecureApplicationContext';
+import { approveApplicationFn } from "../api/private";
+import { DISPATCH_ACTIONS, QUERY_KEYS } from "../constants";
+import type { ApproveApplicationInput, IApplication } from "../schemas/application";
+import { handleRequestError } from "../util/validation";
+import useApplicationContext from "./useSecureApplicationContext";
 
 type IUseApproveApplication = {
   approveApplicationMutation: UseMutateFunction<IApplication, unknown, ApproveApplicationInput, unknown>;
@@ -26,16 +26,19 @@ export default function useApproveApplication(): IUseApproveApplication {
     mutate: approveApplicationMutation,
     isError,
     isLoading,
-  } = useMutation<IApplication, unknown, ApproveApplicationInput, unknown>((payload) => approveApplicationFn(payload), {
-    onSuccess: (data) => {
-      queryClient.setQueryData([QUERY_KEYS.applications, data.id], data);
-      applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });
-      navigate('../stage-five-approved');
+  } = useMutation<IApplication, unknown, ApproveApplicationInput, unknown>(
+    (payload) => approveApplicationFn(payload),
+    {
+      onSuccess: (data) => {
+        queryClient.setQueryData([QUERY_KEYS.applications, data.id], data);
+        applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });
+        navigate("../stage-five-approved");
+      },
+      onError: (error) => {
+        handleRequestError(error, enqueueSnackbar, t("Error approving the application. {error}", { error }));
+      },
     },
-    onError: (error) => {
-      handleRequestError(error, enqueueSnackbar, t('Error approving the application. {error}', { error }));
-    },
-  });
+  );
 
   return { approveApplicationMutation, isLoading, isError };
 }

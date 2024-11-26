@@ -1,10 +1,10 @@
-import { UseMutateFunction, useMutation } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { type UseMutateFunction, useMutation } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
-import { resetPasswordFn } from '../api/auth';
-import { IResponse, ResetPasswordInput } from '../schemas/auth';
+import { resetPasswordFn } from "../api/auth";
+import type { IResponse, ResetPasswordInput } from "../schemas/auth";
 
 type IUseResetPassword = {
   resetPasswordMutation: UseMutateFunction<IResponse, unknown, ResetPasswordInput, unknown>;
@@ -20,18 +20,18 @@ export default function useResetPassword(): IUseResetPassword {
     (payload) => resetPasswordFn(payload),
     {
       onSuccess: () => {
-        enqueueSnackbar(t('Check your email to continue'), {
-          variant: 'info',
+        enqueueSnackbar(t("Check your email to continue"), {
+          variant: "info",
         });
-        navigate('/login');
+        navigate("/login");
       },
       onError: () => {
         // console.log(error);
         // show success message always to avoid email enumeration
-        enqueueSnackbar(t('Check your email to continue'), {
-          variant: 'info',
+        enqueueSnackbar(t("Check your email to continue"), {
+          variant: "info",
         });
-        navigate('/login');
+        navigate("/login");
       },
     },
   );

@@ -1,13 +1,13 @@
-import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useT } from '@transifex/react';
-import axios from 'axios';
-import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { type UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useT } from "@transifex/react";
+import axios from "axios";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
-import { applicationAccessSchemeFn } from '../api/public';
-import { DISPATCH_ACTIONS, QUERY_KEYS } from '../constants';
-import { ApplicationBaseInput, IApplicationResponse } from '../schemas/application';
-import useApplicationContext from './useApplicationContext';
+import { applicationAccessSchemeFn } from "../api/public";
+import { DISPATCH_ACTIONS, QUERY_KEYS } from "../constants";
+import type { ApplicationBaseInput, IApplicationResponse } from "../schemas/application";
+import useApplicationContext from "./useApplicationContext";
 
 type IUseAccesScheme = {
   accessSchemeMutation: UseMutateFunction<IApplicationResponse, unknown, ApplicationBaseInput, unknown>;
@@ -30,18 +30,18 @@ export default function useAccesScheme(): IUseAccesScheme {
     onSuccess: (data) => {
       queryClient.setQueryData([QUERY_KEYS.application_uuid, data.application.uuid], data);
       applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });
-      navigate('../credit-options');
+      navigate("../credit-options");
     },
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
-        if (error.response.data && error.response.data.detail) {
-          enqueueSnackbar(t('Error: {error}', { error: error.response.data.detail }), {
-            variant: 'error',
+        if (error.response.data?.detail) {
+          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t('Error accessing the scheme. {error}', { error }), {
-          variant: 'error',
+        enqueueSnackbar(t("Error accessing the scheme. {error}", { error }), {
+          variant: "error",
         });
       }
     },

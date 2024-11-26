@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { ApplicationContext } from '../providers/SecureApplicationContextProvider';
+import { ApplicationContext } from "../providers/SecureApplicationContextProvider";
 
 const useApplicationContext = () => {
   const context = React.useContext(ApplicationContext);
@@ -9,7 +9,7 @@ const useApplicationContext = () => {
     return context;
   }
 
-  throw new Error('useApplicationContext must be used within a SecureApplicationContextProvider');
+  throw new Error("useApplicationContext must be used within a SecureApplicationContextProvider");
 };
 
 export default useApplicationContext;

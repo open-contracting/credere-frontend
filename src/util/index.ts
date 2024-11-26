@@ -1,32 +1,32 @@
-import { t } from '@transifex/native';
-import dayjs from 'dayjs';
-import lodash from 'lodash';
-import { createElement } from 'react';
-import useConstants from 'src/hooks/useConstants';
+import { t } from "@transifex/native";
+import dayjs from "dayjs";
+import lodash from "lodash";
+import { createElement } from "react";
+import useConstants from "src/hooks/useConstants";
 
-import { CREDIT_PRODUCT_OPTIONS, LENDER_TYPES, USER_TYPE_OPTIONS } from '../constants';
-import CURRENCY_FORMAT_OPTIONS from '../constants/intl';
-import { FormSelectOption } from '../stories/form-select/FormSelect';
+import { CREDIT_PRODUCT_OPTIONS, LENDER_TYPES, USER_TYPE_OPTIONS } from "../constants";
+import CURRENCY_FORMAT_OPTIONS from "../constants/intl";
+import type { FormSelectOption } from "../stories/form-select/FormSelect";
 
 const dateFormatOptions: Intl.DateTimeFormatOptions = {
-  month: 'long', // Display full month name
-  day: 'numeric', // Display day of the month
-  year: 'numeric', // Display full year
+  month: "long", // Display full month name
+  day: "numeric", // Display day of the month
+  year: "numeric", // Display full year
 };
 
 const dateFileNameFormatOptions: Intl.DateTimeFormatOptions = {
-  year: 'numeric',
-  month: '2-digit',
-  day: '2-digit',
-  timeZone: 'UTC',
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  timeZone: "UTC",
 };
 
-export const formatDateForFileName = (date: Date) => date.toLocaleDateString('en-US', dateFileNameFormatOptions);
+export const formatDateForFileName = (date: Date) => date.toLocaleDateString("en-US", dateFileNameFormatOptions);
 export const formatLocalizedDate = (locale: string, date: Date) => date.toLocaleDateString(locale, dateFormatOptions);
 
 export const formatLocalizedDateFromString = (locale: string, date: string | null | undefined) => {
   if (!date) {
-    return t('No defined');
+    return t("No defined");
   }
 
   const dateObj = new Date(date);
@@ -34,7 +34,7 @@ export const formatLocalizedDateFromString = (locale: string, date: string | nul
 };
 
 export const formatCurrency = (amount: number, currency?: string) => {
-  const currencyFormatOptions = CURRENCY_FORMAT_OPTIONS[currency || 'default'] || CURRENCY_FORMAT_OPTIONS.default;
+  const currencyFormatOptions = CURRENCY_FORMAT_OPTIONS[currency || "default"] || CURRENCY_FORMAT_OPTIONS.default;
 
   const formatter = new Intl.NumberFormat(currencyFormatOptions.locale, currencyFormatOptions.options);
   return formatter.format(amount);
@@ -42,10 +42,10 @@ export const formatCurrency = (amount: number, currency?: string) => {
 
 export const formatPaymentMethod = (value: { [key: string]: string }) => {
   if (!value) {
-    return t('No defined');
+    return t("No defined");
   }
 
-  let paymentMethodString = '';
+  let paymentMethodString = "";
 
   Object.keys(value).forEach((key) => {
     if (Number(value[key])) {
@@ -84,18 +84,16 @@ export const RenderStatusString = (status: string) => {
 
 export function RenderStatus({ status }: { status: string }) {
   const constants = useConstants();
-  return createElement('div', {}, findLabelByValue(status, constants?.ApplicationStatus || []));
+  return createElement("div", {}, findLabelByValue(status, constants?.ApplicationStatus || []));
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getProperty(obj: any, propertyString: string): any {
   if (!obj) {
     return undefined;
   }
-  const properties = propertyString.split('.');
+  const properties = propertyString.split(".");
   let result = obj;
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const property of properties) {
     result = result[property];
     if (result === undefined) {
@@ -108,30 +106,30 @@ export function getProperty(obj: any, propertyString: string): any {
 }
 
 export const isDateBeforeMonths = (date: string, referenceDate: string, months: number) => {
-  const diffInMonths = dayjs(referenceDate).diff(date, 'month');
+  const diffInMonths = dayjs(referenceDate).diff(date, "month");
 
   return diffInMonths > 0 && diffInMonths <= months;
 };
 
 export const addMonthsToDate = (date: string | undefined, months: number) => {
   if (!date) {
-    return '';
+    return "";
   }
 
-  const addedDate = dayjs(date).add(months, 'month');
+  const addedDate = dayjs(date).add(months, "month");
 
-  return addedDate.toDate().toLocaleDateString('en-US', dateFormatOptions);
+  return addedDate.toDate().toLocaleDateString("en-US", dateFormatOptions);
 };
 
 export const isDateAfterCurrentDate = (date: string) => {
   const currentDate = dayjs();
-  return dayjs(date).isAfter(currentDate, 'day');
+  return dayjs(date).isAfter(currentDate, "day");
 };
 
 export const downloadBlob = (blob: Blob, filename: string) => {
   if (blob) {
     const href = window.URL.createObjectURL(blob);
-    const anchorElement = document.createElement('a');
+    const anchorElement = document.createElement("a");
     anchorElement.href = href;
     anchorElement.download = filename;
     document.body.appendChild(anchorElement);
