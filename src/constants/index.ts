@@ -1,4 +1,3 @@
-/* tslint:disable:no-unused-variable */
 import { t } from "@transifex/native";
 
 import type { FormSelectOption } from "../stories/form-select/FormSelect";
