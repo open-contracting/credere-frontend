@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { t } from "@transifex/native";
@@ -296,7 +295,6 @@ export function ApplicationList({ type }: ApplicationListProps) {
     [setIdToDownload],
   );
 
-  // eslint-disable-next-line no-shadow
   const actionsFI = (row: ExtendendApplication, isLoading?: boolean) =>
     actionsFIBase(
       row,

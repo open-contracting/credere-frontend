@@ -22,7 +22,6 @@ export default function useSignOut(): IUseSignOut {
     try {
       await logoutUserFn();
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.log(error);
       enqueueSnackbar(t("Error on logout {error}", error), {
         variant: "error",

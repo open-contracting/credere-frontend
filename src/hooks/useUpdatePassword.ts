@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { type UseMutateFunction, useMutation } from "@tanstack/react-query";
 import { useT } from "@transifex/react";
 import { useSnackbar } from "notistack";

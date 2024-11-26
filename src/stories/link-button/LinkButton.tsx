@@ -37,7 +37,6 @@ export function LinkButton<C extends React.ElementType>({
           `bg-transparent hover:bg-transparent normal-case ${className}`,
         ].join(" "),
       )}
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       <Box

@@ -30,7 +30,6 @@ tx.setCurrentLocale(`${getLang() || import.meta.env.VITE_DEFAULT_LANG || "es"}`)
     renderApp();
   },
   (error) => {
-    // eslint-disable-next-line no-console
     console.error(error);
     renderApp();
   },

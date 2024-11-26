@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { FormControl, FormControlLabel, FormHelperText, Checkbox as MUICheckbox, Typography } from "@mui/material";
 import { useT } from "@transifex/react";
 import { Controller, useFormContext } from "react-hook-form";

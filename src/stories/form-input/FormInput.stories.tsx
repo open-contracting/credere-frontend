@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { Meta, StoryObj } from "@storybook/react";
 import { FormProvider, useForm } from "react-hook-form";

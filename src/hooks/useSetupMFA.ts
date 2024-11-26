@@ -19,7 +19,6 @@ export default function useSetupMFA(): IUseSetupMFA {
   const { mutate: setupMFAMutation, isLoading } = useMutation<IResponse, unknown, SetupMFAInput, unknown>(
     (payload) => setupMFAFn(payload),
     {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onSuccess: (_data) => {
         navigate("/password-created");
       },

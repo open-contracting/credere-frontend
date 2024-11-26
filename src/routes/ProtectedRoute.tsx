@@ -18,7 +18,6 @@ export default function ProtectedRoute({ children, requiredUserType }: Protected
     throw new Error(t("Not authorized to access this page"));
   }
 
-  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{children}</>;
 }
 

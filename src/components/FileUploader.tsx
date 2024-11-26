@@ -1,10 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-
-/* eslint-disable react/jsx-props-no-spreading */
 import { t as tNative } from "@transifex/native";
 import { useT } from "@transifex/react";
 import { useSnackbar } from "notistack";
@@ -63,10 +56,8 @@ export function FileUploader({ className, loading, onAcceptedFile }: FileUploade
     fileRejections.forEach((file) => {
       let errorMessage = "";
       file.errors.forEach((error) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         if (fileUploadErrorsMap[error.code]) {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           errorMessage += `${t(fileUploadErrorsMap[error.code])}.\n`;
         } else {

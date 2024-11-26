@@ -5,7 +5,6 @@ import { useCallback } from "react";
 import Text from "../stories/text/Text";
 
 interface DataDisplayProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: { [key: string]: any };
   className?: string;
 }
@@ -14,7 +13,6 @@ export function DataDisplay({ data, className }: DataDisplayProps) {
   const t = useT();
 
   const formatValue = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (value: any) => {
       if (typeof value === "boolean") {
         return value ? t("Yes") : t("No");

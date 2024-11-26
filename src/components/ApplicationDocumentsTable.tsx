@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useT } from "@transifex/react";
 import { useEffect, useState } from "react";

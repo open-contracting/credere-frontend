@@ -10,9 +10,7 @@ import SelectLanguageComponent from "../components/SelectLanguageComponent";
 import { Button } from "../stories/button/Button";
 
 export interface AppBarProps {
-  // eslint-disable-next-line react/require-default-props
   auth?: boolean;
-  // eslint-disable-next-line react/require-default-props
   logout?: () => void | undefined;
 }
 

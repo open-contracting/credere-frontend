@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /* tslint:disable:no-unused-variable */
 import { t } from "@transifex/native";
@@ -26,7 +25,6 @@ export const USER_LOCAL_STORAGE_KEY = "CREDERE_USER";
 export const ACCESS_TOKEN_LOCAL_STORAGE_KEY = "CREDERE_USER_ACCESS_TOKEN";
 export const LANG_STORAGE_KEY = "CREDERE_LANG";
 
-// eslint-disable-next-line no-shadow
 export enum QUERY_KEYS {
   user = "user",
   application_uuid = "application_uuid",
@@ -51,7 +49,6 @@ export const DISPATCH_ACTIONS = {
 
 export const PAGE_SIZES = [5, 10, 25];
 
-// eslint-disable-next-line no-shadow
 export enum APPLICATION_STATUS {
   PENDING = "PENDING",
   ACCEPTED = "ACCEPTED",
@@ -101,7 +98,6 @@ export const CREDIT_PRODUCT_OPTIONS: FormSelectOption[] = [
   },
 ];
 
-// eslint-disable-next-line no-shadow
 export enum STATISTICS_DATE_FILTER {
   CUSTOM_RANGE = "CUSTOM_RANGE",
   LAST_WEEK = "LAST_WEEK",
@@ -125,7 +121,6 @@ export const STATISTICS_DATE_FILTER_OPTIONS: FormSelectOption[] = [
 
 export const DEFAULT_BORROWER_SIZE = "NOT_INFORMED";
 
-// eslint-disable-next-line no-shadow
 export enum USER_TYPES {
   OCP = "OCP",
   FI = "FI",

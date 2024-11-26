@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TableRow } from "@mui/material";
 import { useT } from "@transifex/react";
 
@@ -69,7 +68,6 @@ export function ApplicationTableDataBorrowerRow({
             name={formLabel || label}
             value={value ? formattedValue : value}
             isLoading={isLoading}
-            // eslint-disable-next-line no-shadow
             updateValue={(value: any) => updateValue(value, name as keyof IUpdateBorrower)}
           />
         </DataTableCell>

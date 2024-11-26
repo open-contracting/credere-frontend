@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Dialog } from "@mui/material";
 import { useT } from "@transifex/react";
@@ -68,7 +67,6 @@ export function StageTwo() {
       reset();
       setEmailSent(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSubmitSuccessful, isError, isLoading]);
 
   const onSubmitHandler: SubmitHandler<FormEmailInput> = (values) => {

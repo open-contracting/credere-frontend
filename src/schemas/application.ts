@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { t } from "@transifex/native";
 import { type TypeOf, boolean, coerce, object, string } from "zod";
 
@@ -41,7 +40,6 @@ export const declineApplicationSchema = object({
 
 export type DeclineApplicationInput = TypeOf<typeof declineApplicationSchema>;
 
-// eslint-disable-next-line no-shadow
 export enum DECLINE_FEEDBACK {
   dont_need_access_credit = "dont_need_access_credit",
   already_have_acredit = "already_have_acredit",

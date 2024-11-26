@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Collapse } from "@mui/material";
 import { t as tNative } from "@transifex/native";
@@ -15,7 +14,6 @@ interface DataAvailabilityFormProps {
   name: string;
   value: string | number | null;
   type?: "currency" | "date-picker" | "date-field";
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   updateValue: (value: any) => void;
   isLoading: boolean;
   readonly: boolean;

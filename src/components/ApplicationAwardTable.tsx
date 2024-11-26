@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useT } from "@transifex/react";
 

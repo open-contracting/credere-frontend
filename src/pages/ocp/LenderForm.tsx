@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
@@ -46,7 +45,6 @@ export function LenderForm({ lender }: LenderFormProps) {
     if (isSubmitSuccessful && !isError && !isLoading) {
       reset();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSubmitSuccessful, isError, isLoading]);
 
   const onSubmitHandler: SubmitHandler<ProviderInput> = (values) => {

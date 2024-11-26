@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
 import { tx } from "@transifex/native";
@@ -34,7 +33,6 @@ function SelectLanguage() {
 
   useEffect(() => {
     if (languages && languages.length > 0) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const optionsChecked: FormSelectOption[] = languages.map((lang: any) => ({
         label: lang.name,
         value: lang.code,
@@ -49,7 +47,6 @@ function SelectLanguage() {
     if (options && options.length > 0 && langContext.state.selected) {
       setValue("lang", langContext.state.selected);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options, setValue]);
 
   const onSubmitHandler: SubmitHandler<LangInput> = (values) => {

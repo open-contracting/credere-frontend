@@ -35,7 +35,6 @@ export function Button<C extends React.ElementType>({
           `normal-case ${className}`,
         ].join(" "),
       )}
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       {label}

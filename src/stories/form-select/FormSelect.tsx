@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { FormControl, FormHelperText, MenuItem, Select } from "@mui/material";
 import { useT } from "@transifex/react";
 import { useMemo } from "react";

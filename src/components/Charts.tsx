@@ -1,6 +1,4 @@
-/* eslint-disable react/no-array-index-key */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { t } from "@transifex/native";
 import { useMemo } from "react";
 import { Bar, BarChart, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";

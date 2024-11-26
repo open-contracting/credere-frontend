@@ -38,7 +38,6 @@ function SelectLanguageComponent() {
 
   useEffect(() => {
     if (languages && languages.length > 0) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const optionsChecked: FormSelectOption[] = languages.map((lang: any) => ({
         label: lang.localized_name,
         value: lang.code,
@@ -51,7 +50,6 @@ function SelectLanguageComponent() {
     if (options && options.length > 0 && langContext.state.selected) {
       setValue(langContext.state.selected);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options, setValue]);
 
   const onChange = (valueSelected: string) => {

@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import { COLORS } from "./src/constants";
 
-// eslint-disable-next-line import/no-extraneous-dependencies, @typescript-eslint/no-var-requires
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 export default {

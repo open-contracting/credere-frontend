@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { useQuery } from "@tanstack/react-query";
 import { t } from "@transifex/native";
 import axios from "axios";

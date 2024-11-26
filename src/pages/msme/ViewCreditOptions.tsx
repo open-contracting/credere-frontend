@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
 import { useT } from "@transifex/react";
@@ -71,7 +70,6 @@ function ViewCreditOptions() {
     // formState: { touchedFields },
   } = methodsLoanForm;
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceGetCreditProducts = useCallback(debounce(getCreditProductOptionsMutation, DEBOUNCE_TIME), [
     getCreditProductOptionsMutation,
     debounce,

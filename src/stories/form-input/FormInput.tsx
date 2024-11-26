@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { FormControl, FormHelperText, InputAdornment, type InputProps, Input as _Input } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { DateField as MUIDateField, DatePicker as MUIDatePicker } from "@mui/x-date-pickers";
@@ -161,11 +160,9 @@ export const DatePicker = styled(MUIDatePicker)`
 `;
 
 interface CustomProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange: (...event: any[]) => void;
 }
 
-// eslint-disable-next-line react/display-name
 const NumericFormatCustom = React.forwardRef<NumericFormatProps, CustomProps>((props, ref) => {
   const { onChange, ...other } = props;
 
@@ -222,7 +219,6 @@ const getIcon = (type: string | undefined) => {
 };
 
 const TEXT_TYPES = ["text", "email", "password", "number"];
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type FieldErrorType = FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
 interface FormInputErrorProps {
   fieldError: FieldErrorType;
@@ -302,7 +298,6 @@ export function FormInput({
           )}
           {!inputCell && type === "currency" && (
             <Input
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               inputComponent={NumericFormatCustom as any}
               type={type}
               startAdornment={noIcon ? undefined : getIcon(type)}
@@ -428,7 +423,6 @@ export function FormInput({
           )}
           {inputCell && type === "currency" && (
             <InputFormCell
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               inputComponent={NumericFormatCustom as any}
               type={type}
               startAdornment={noIcon ? undefined : getIcon(type)}

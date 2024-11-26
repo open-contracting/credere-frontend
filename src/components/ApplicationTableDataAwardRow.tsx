@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TableRow } from "@mui/material";
 
 import type { IUpdateAward } from "../schemas/application";
@@ -46,7 +45,6 @@ export function ApplicationTableDataAwardRow({
             name={formLabel || label}
             value={value ? formattedValue : value}
             isLoading={isLoading}
-            // eslint-disable-next-line no-shadow
             updateValue={(value: any) => updateValue(value, name as keyof IUpdateAward)}
           />
         </DataTableCell>
