@@ -20,16 +20,13 @@ For VS Code Intellisense to recognize the new variables declare them in the file
 
 These are the commands available in _package.json_
 
-| Commnad                   | Description                                                                                                   |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `npm run dev`             | Runs dev server with the HMR locally on port `3000`                                                           |
-| `npm run lint`            | Runs eslint to find errors                                                                                    |
-| `npm run lint-fix`        | Runs eslint to find errors and auto-fix the ones it can                                                       |
-| `npm run build`           | Builds optimized app package in the dist directory                                                            |
-| `npm run preview`         | Runs server using the dist folder from a build                                                                |
-| `npm run test`            | Runs tests                                                                                                    |
-| `npm run storybook`       | Runs a Storybook locally on port `6006`                                                                       |
-| `npm run build-storybook` | Builds static app with [a Storybook's content](https://storybook.js.org/docs/react/sharing/publish-storybook) |
+| Command                     | Description                                                                                                   |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `npx vite`                  | Runs dev server with the HMR locally on port `3000`                                                           |
+| `npx tsc && npx vite build` | Builds optimized app package in the dist directory                                                            |
+| `npx vite preview`          | Runs server using the dist folder from a build                                                                |
+| `npx storybook dev -p 6006` | Runs a Storybook locally on port `6006`                                                                       |
+| `npx storybook build`       | Builds static app with [a Storybook's content](https://storybook.js.org/docs/react/sharing/publish-storybook) |
 
 ## Transifex
 
