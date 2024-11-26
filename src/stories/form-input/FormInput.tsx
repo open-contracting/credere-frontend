@@ -199,7 +199,7 @@ const getIcon = (type: string | undefined) => {
     return undefined;
   }
 
-  let icon;
+  let icon: string | undefined;
   if (type === "email") {
     icon = EmailIcon;
   }
