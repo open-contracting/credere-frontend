@@ -1,23 +1,8 @@
+ci:
+  autoupdate_schedule: quarterly
 repos:
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: 'v9.15.0'
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v0.5.0
     hooks:
-      - id: eslint
-        verbose: true
-        additional_dependencies:
-          - '@typescript-eslint/eslint-plugin@^5.59.6'
-          - '@typescript-eslint/parser@^5.59.6'
-          - eslint@^8.40.0
-          - eslint-config-airbnb@^19.0.4
-          - eslint-config-airbnb-typescript@^17.0.0
-          - eslint-import-resolver-typescript@^3.5.5
-          - eslint-plugin-import@^2.27.5
-          - eslint-plugin-jsx-a11y@^6.7.1 # checks accessibility rules on jsx elements
-          - eslint-plugin-react@^7.32.2 # react specific linting rules
-          - eslint-plugin-react-hooks@^4.6.0 # enforces the rules of hooks
-          - eslint-plugin-react-refresh@^0.3.4
-          - eslint-plugin-storybook@^0.6.12
-          - typescript@^5.0.2
-        files: ^src/.*\.[t]sx?$ # *.ts and *.tsx
-        types: [file]
-        args: ['--config=.eslintrc.cjs', '--ignore-path=.eslintignore', '--rule', 'import/no-unresolved: 0']
+      - id: biome-check
+        additional_dependencies: ["@biomejs/biome@1.9.4"]

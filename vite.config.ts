@@ -18,9 +18,6 @@ export default ({ mode }) => {
       tsconfigPaths(),
       checker({
         typescript: true,
-        eslint: {
-          lintCommand: 'eslint "./src/**/*.{ts,tsx}"',
-        },
       }),
     ],
   });
