@@ -10,16 +10,13 @@ repos:
           - eslint@^8.40.0
           - eslint-config-airbnb@^19.0.4
           - eslint-config-airbnb-typescript@^17.0.0
-          - eslint-config-prettier@^8.8.0 # turns off all rules that might conflict with prettier
           - eslint-import-resolver-typescript@^3.5.5
           - eslint-plugin-import@^2.27.5
           - eslint-plugin-jsx-a11y@^6.7.1 # checks accessibility rules on jsx elements
-          - eslint-plugin-prettier@^4.2.1 # runs prettier as an eslint rule
           - eslint-plugin-react@^7.32.2 # react specific linting rules
           - eslint-plugin-react-hooks@^4.6.0 # enforces the rules of hooks
           - eslint-plugin-react-refresh@^0.3.4
           - eslint-plugin-storybook@^0.6.12
-          - prettier@^2.8.8
           - typescript@^5.0.2
         files: ^src/.*\.[t]sx?$ # *.ts and *.tsx
         types: [file]

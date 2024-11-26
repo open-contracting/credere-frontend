@@ -28,8 +28,7 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:import/recommended",
     "plugin:jsx-a11y/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier",
+    "plugin:@typescript-eslint/recommended"
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -39,7 +38,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ["react-refresh", "@typescript-eslint", "react", "prettier"],
+  plugins: ["react-refresh", "@typescript-eslint", "react"],
   rules: {
     "react-refresh/only-export-components": "warn",
     "import/order": "warn",
