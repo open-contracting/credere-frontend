@@ -9,13 +9,8 @@ README.md
 node_modules
 dist
 .storybook
-.husky
 .vscode
 .vite
 .git
 .env.example
-.commitlintrc.json
-.env.example
 .pre-commit-config.yaml
-
-
