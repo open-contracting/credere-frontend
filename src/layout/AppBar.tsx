@@ -11,7 +11,7 @@ import { Button } from "../stories/button/Button";
 
 export interface AppBarProps {
   auth?: boolean;
-  logout?: () => void | undefined;
+  logout?: () => void;
 }
 
 const styleWithMobileLogo = {
