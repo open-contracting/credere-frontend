@@ -30,14 +30,7 @@
         "noForEach": "off"
       },
       "correctness": {
-        "noUnknownFunction": "off",
         "useExhaustiveDependencies": "off"
-      },
-      "performance": {
-        "noDelete": "off"
-      },
-      "style": {
-        "useNodejsImportProtocol": "off"
       },
       "suspicious": {
         "noArrayIndexKey": "off",
