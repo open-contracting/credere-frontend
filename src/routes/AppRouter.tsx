@@ -32,6 +32,7 @@ import SecureApplicationContextProvider from "src/providers/SecureApplicationCon
 import StateContextProvider from "src/providers/StateContextProvider";
 import ProtectedRoute from "src/routes/ProtectedRoute";
 
+import StageFiveLapsed from "src/pages/fi/StageFiveLapsed";
 import { USER_TYPES } from "../constants";
 import PageLayout from "../layout/PageLayout";
 import SecureApplicationLayout from "../layout/SecureApplicationLayout";
@@ -52,7 +53,6 @@ import Applications from "../pages/ocp/Applications";
 import { LoadCreditProduct } from "../pages/ocp/CreditProductForm";
 import { LenderForm, LoadLender } from "../pages/ocp/LenderForm";
 import Settings from "../pages/ocp/Settings";
-import StageFiveLapsed from "src/pages/fi/StageFiveLapsed";
 
 // Create a React Query client
 const queryClient = new QueryClient({

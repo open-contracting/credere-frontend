@@ -14,14 +14,14 @@ import Text from "src/stories/text/Text";
 import Title from "src/stories/title/Title";
 
 import Approve from "../../assets/icons/approve.svg";
-import Reject from "../../assets/icons/reject.svg";
 import Lapse from "../../assets/icons/lapse.svg";
+import Reject from "../../assets/icons/reject.svg";
 import CreditProductReview from "../../components/CreditProductReview";
 import useApproveApplication from "../../hooks/useApproveApplication";
 import useLangContext from "../../hooks/useLangContext";
 import { type ApproveApplicationInput, type FormApprovedInput, approveSchema } from "../../schemas/application";
-import RejectApplicationDialog from "./RejectApplicationDialog";
 import LapseApplicationDialog from "./LapseApplicationDialog";
+import RejectApplicationDialog from "./RejectApplicationDialog";
 
 export function StageFive() {
   const t = useT();
@@ -30,7 +30,6 @@ export function StageFive() {
   const application = applicationContext.state.data;
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [openLapseDialog, setOpenLapseDialog] = useState<boolean>(false);
-
 
   const langContext = useLangContext();
   const StepImage = langContext.state.selected.startsWith("en") ? StepImageEN : StepImageES;
@@ -132,20 +131,26 @@ export function StageFive() {
             </div>
 
             <div>
-              <Button
-                className="md:mr-4"
-                icon={Approve}
-                label={t("Approve")}
-                type="submit"
-                disabled={isLoading}
-              />
+              <Button className="md:mr-4" icon={Approve} label={t("Approve")} type="submit" disabled={isLoading} />
             </div>
 
             <div>
-              <Button className="md:mr-4" label={t("Reject")} icon={Reject} onClick={onRejectApplication} disabled={isLoading} />
+              <Button
+                className="md:mr-4"
+                label={t("Reject")}
+                icon={Reject}
+                onClick={onRejectApplication}
+                disabled={isLoading}
+              />
             </div>
             <div>
-            <Button className="md:mr-4" label={t("Lapse")} icon={Lapse} onClick={onLapseApplication} disabled={isLoading} />
+              <Button
+                className="md:mr-4"
+                label={t("Lapse")}
+                icon={Lapse}
+                onClick={onLapseApplication}
+                disabled={isLoading}
+              />
             </div>
           </div>
           <Text className="mb-10 text-m font-light">
