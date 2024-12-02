@@ -13,13 +13,15 @@ import FormInput from "src/stories/form-input/FormInput";
 import Text from "src/stories/text/Text";
 import Title from "src/stories/title/Title";
 
-import CheckChecked from "../../assets/icons/check-checked.svg";
-import WarnRed from "../../assets/icons/warn-red.svg";
+import Approve from "../../assets/icons/approve.svg";
+import Reject from "../../assets/icons/reject.svg";
+import Lapse from "../../assets/icons/lapse.svg";
 import CreditProductReview from "../../components/CreditProductReview";
 import useApproveApplication from "../../hooks/useApproveApplication";
 import useLangContext from "../../hooks/useLangContext";
 import { type ApproveApplicationInput, type FormApprovedInput, approveSchema } from "../../schemas/application";
 import RejectApplicationDialog from "./RejectApplicationDialog";
+import LapseApplicationDialog from "./LapseApplicationDialog";
 
 export function StageFive() {
   const t = useT();
@@ -27,6 +29,8 @@ export function StageFive() {
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;
   const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [openLapseDialog, setOpenLapseDialog] = useState<boolean>(false);
+
 
   const langContext = useLangContext();
   const StepImage = langContext.state.selected.startsWith("en") ? StepImageEN : StepImageES;
@@ -39,6 +43,14 @@ export function StageFive() {
 
   const onRejectApplication = () => {
     setOpenDialog(true);
+  };
+
+  const handleCloseLapse = () => {
+    setOpenLapseDialog(false);
+  };
+
+  const onLapseApplication = () => {
+    setOpenLapseDialog(true);
   };
 
   const methods = useForm<FormApprovedInput>({
@@ -110,7 +122,7 @@ export function StageFive() {
             type="currency"
             placeholder={t("Credit amount")}
           />
-          <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
+          <div className="mt-6 md:mb-8 grid grid-cols-1 gap-5 md:flex md:gap-0">
             <div>
               <Button primary={false} className="md:mr-4" label={t("Go Home")} onClick={onGoHomeHandler} />
             </div>
@@ -122,7 +134,7 @@ export function StageFive() {
             <div>
               <Button
                 className="md:mr-4"
-                icon={CheckChecked}
+                icon={Approve}
                 label={t("Approve")}
                 type="submit"
                 disabled={isLoading}
@@ -130,7 +142,10 @@ export function StageFive() {
             </div>
 
             <div>
-              <Button label={t("Reject")} icon={WarnRed} onClick={onRejectApplication} disabled={isLoading} />
+              <Button className="md:mr-4" label={t("Reject")} icon={Reject} onClick={onRejectApplication} disabled={isLoading} />
+            </div>
+            <div>
+            <Button className="md:mr-4" label={t("Lapse")} icon={Lapse} onClick={onLapseApplication} disabled={isLoading} />
             </div>
           </div>
           <Text className="mb-10 text-m font-light">
@@ -141,6 +156,7 @@ export function StageFive() {
         </Box>
       </FormProvider>
       <RejectApplicationDialog open={openDialog} handleClose={handleClose} />
+      <LapseApplicationDialog open={openLapseDialog} handleClose={handleCloseLapse} />
     </>
   );
 }

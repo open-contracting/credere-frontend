@@ -9,7 +9,7 @@ import Title from "src/stories/title/Title";
 
 import useLangContext from "../../hooks/useLangContext";
 
-export function StageFiveRejected() {
+export function StageFiveLapsed() {
   const t = useT();
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
@@ -30,7 +30,7 @@ export function StageFiveRejected() {
       <Title type="section" label={t("Stage 5: Approve")} className="mb-8" />
 
       <Text className="mb-8">
-        {t("The credit application has been rejected. The business will be notified by email shortly.")}
+        {t("The credit application has been lapsed. You won't see this application in your application list anymore.")}
       </Text>
 
       <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
@@ -42,4 +42,4 @@ export function StageFiveRejected() {
   );
 }
 
-export default StageFiveRejected;
+export default StageFiveLapsed;

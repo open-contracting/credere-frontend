@@ -52,6 +52,7 @@ import Applications from "../pages/ocp/Applications";
 import { LoadCreditProduct } from "../pages/ocp/CreditProductForm";
 import { LenderForm, LoadLender } from "../pages/ocp/LenderForm";
 import Settings from "../pages/ocp/Settings";
+import StageFiveLapsed from "src/pages/fi/StageFiveLapsed";
 
 // Create a React Query client
 const queryClient = new QueryClient({
@@ -363,6 +364,10 @@ const router = createBrowserRouter([
       {
         path: "stage-five-rejected",
         element: <StageFiveRejected />,
+      },
+      {
+        path: "stage-five-lapsed",
+        element: <StageFiveLapsed />,
       },
       {
         path: "application-completed",
