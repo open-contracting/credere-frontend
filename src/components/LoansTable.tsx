@@ -60,22 +60,20 @@ export function LoansTable({ rows, amountRequested, currency, isLoading, selectO
               <TableRow>
                 <DataTableCell>{t("Additional Information")}</DataTableCell>
                 {rows.map((row) => (
-                  <DataTableCell
-                    key={`aditional-information-${row.id}`}
-                  >{`${row.additional_information}`}</DataTableCell>
+                  <DataTableCell key={`additional-information-${row.id}`}>{row.additional_information}</DataTableCell>
                 ))}
               </TableRow>
               <TableRow>
                 <DataTableCell>{t("Interest rate")}</DataTableCell>
                 {rows.map((row) => (
-                  <DataTableCell key={`interest-rate-${row.id}`}>{`${row.interest_rate}`}</DataTableCell>
+                  <DataTableCell key={`interest-rate-${row.id}`}>{row.interest_rate}</DataTableCell>
                 ))}
               </TableRow>
               <TableRow>
                 <DataTableCell>{t("Other fees")}</DataTableCell>
                 {rows.map((row) => (
                   <DataTableCell key={`other-fees-details-${row.id}`}>
-                    <ReactMarkdown>{`${row.other_fees_description}`}</ReactMarkdown>
+                    <ReactMarkdown>{row.other_fees_description}</ReactMarkdown>
                   </DataTableCell>
                 ))}
               </TableRow>

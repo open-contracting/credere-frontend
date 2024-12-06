@@ -50,7 +50,7 @@ export function StageOne() {
         rel="noreferrer"
         label={t("View data in SECOP II")}
         component={MUILink}
-        href={`${application?.award.source_url}`}
+        href={application?.award.source_url}
       />
       {application && (
         <ApplicationBorrowerTable allowDataVerification className="xl:w-4/5" application={application} />

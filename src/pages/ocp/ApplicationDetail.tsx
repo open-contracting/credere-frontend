@@ -66,7 +66,7 @@ export function ApplicationDetail({ application, readonly }: ApplicationDetailPr
         rel="noreferrer"
         label={t("View data in SECOP II")}
         component={MUILink}
-        href={`${application.award.source_url}`}
+        href={application.award.source_url}
       />
       <ApplicationAwardTable application={application} readonly={readonly} />
       <Title type="section" className="mt-10 mb-4" label={t("Business Data")} />

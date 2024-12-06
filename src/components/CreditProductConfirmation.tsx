@@ -95,9 +95,9 @@ export function CreditProductConfirmation({ creditProduct, application }: Credit
                 {isLoan && (
                   <DataTableCell>{formatDateFromString(application.calculator_data.payment_start_date)}</DataTableCell>
                 )}
-                <DataTableCell>{`${creditProduct.interest_rate}`}</DataTableCell>
+                <DataTableCell>{creditProduct.interest_rate}</DataTableCell>
                 <DataTableCell>
-                  <ReactMarkdown>{`${creditProduct.other_fees_description}`}</ReactMarkdown>
+                  <ReactMarkdown>{creditProduct.other_fees_description}</ReactMarkdown>
                 </DataTableCell>
               </TableRow>
             </TableBody>

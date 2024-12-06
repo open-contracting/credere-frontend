@@ -84,9 +84,9 @@ export function CreditProductReview({ application, className }: CreditProductRev
                   </DataTableCell>
                 )}
                 {isLoan && <DataTableCell>{formatDateFromString(application.payment_start_date)}</DataTableCell>}
-                <DataTableCell>{`${creditProduct.interest_rate}`}</DataTableCell>
+                <DataTableCell>{creditProduct.interest_rate}</DataTableCell>
                 <DataTableCell>
-                  <ReactMarkdown>{`${creditProduct.other_fees_description}`}</ReactMarkdown>
+                  <ReactMarkdown>{creditProduct.other_fees_description}</ReactMarkdown>
                 </DataTableCell>
               </TableRow>
             </TableBody>
