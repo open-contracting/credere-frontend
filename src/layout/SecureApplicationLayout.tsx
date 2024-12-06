@@ -54,7 +54,7 @@ export default function SecureApplicationLayout() {
 
       if (lastSegment !== "view") {
         if (application.status === APPLICATION_STATUS.LAPSED) {
-          navigate("./view");
+          if (lastSegment !== "stage-five-lapsed") navigate("./stage-five-lapsed");
         } else if (application.status === APPLICATION_STATUS.APPROVED) {
           if (lastSegment !== "application-completed") navigate("./application-completed");
         } else if (application.status === APPLICATION_STATUS.REJECTED) {

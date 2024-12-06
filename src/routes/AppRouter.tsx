@@ -32,6 +32,7 @@ import SecureApplicationContextProvider from "src/providers/SecureApplicationCon
 import StateContextProvider from "src/providers/StateContextProvider";
 import ProtectedRoute from "src/routes/ProtectedRoute";
 
+import StageFiveLapsed from "src/pages/fi/StageFiveLapsed";
 import { USER_TYPES } from "../constants";
 import PageLayout from "../layout/PageLayout";
 import SecureApplicationLayout from "../layout/SecureApplicationLayout";
@@ -363,6 +364,10 @@ const router = createBrowserRouter([
       {
         path: "stage-five-rejected",
         element: <StageFiveRejected />,
+      },
+      {
+        path: "stage-five-lapsed",
+        element: <StageFiveLapsed />,
       },
       {
         path: "application-completed",
