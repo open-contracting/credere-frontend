@@ -39,7 +39,7 @@ export function DataDisplay({ data, className }: DataDisplayProps) {
   return (
     <Box className={`flex flex-col mb-8 ${className}`}>
       {Object.keys(data).map((key) => (
-        <Box key={`${key}`} className="flex flex-row">
+        <Box key={key} className="flex flex-row">
           <Text className="mb-0 mr-2">{formatKey(key)}</Text>
           <Text className="font-light mb-0">{formatValue(data[key])}</Text>
         </Box>

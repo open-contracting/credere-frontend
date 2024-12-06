@@ -300,7 +300,7 @@ export function DataTable<T>({
             />
             <TableBody>
               {visibleRows.map((row: T, index) => (
-                <TableRow tabIndex={-1} key={`${String(index)}`}>
+                <TableRow tabIndex={-1} key={String(index)}>
                   {headCells.map((headCell) => (
                     <DataTableCell key={`${String(`${row[headCell.id]}-${index}-${headCell.id}`)}`}>
                       {headCell.type === "label" && renderValue(row, headCell)}

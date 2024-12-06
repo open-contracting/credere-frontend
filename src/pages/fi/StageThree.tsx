@@ -51,7 +51,7 @@ export function StageThree() {
         rel="noreferrer"
         label={t("View data in SECOP II")}
         component={MUILink}
-        href={`${application?.award.source_url}`}
+        href={application?.award.source_url}
       />
       {application && <ApplicationAwardTable className="xl:w-4/5" application={application} />}
       <div className="mt-6 md:mb-8 grid grid-cols-1 gap-4 md:flex md:gap-0">
