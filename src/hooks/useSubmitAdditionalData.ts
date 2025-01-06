@@ -4,7 +4,7 @@ import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 
-import { aditionalDataSubmitFn } from "../api/public";
+import { additionalDataSubmitFn } from "../api/public";
 import { DISPATCH_ACTIONS, QUERY_KEYS } from "../constants";
 import type { ApplicationBaseInput, IApplicationResponse } from "../schemas/application";
 import useApplicationContext from "./useApplicationContext";
@@ -26,7 +26,7 @@ export default function useSubmitAdditionalData(): IUseSubmitAdditionalData {
     unknown,
     ApplicationBaseInput,
     unknown
-  >((payload) => aditionalDataSubmitFn(payload), {
+  >((payload) => additionalDataSubmitFn(payload), {
     onSuccess: (data) => {
       queryClient.setQueryData([QUERY_KEYS.application_uuid, data.application.uuid], data);
       applicationContext.dispatch({ type: DISPATCH_ACTIONS.SET_APPLICATION, payload: data });

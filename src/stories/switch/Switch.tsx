@@ -99,7 +99,7 @@ export function Switch({
   const t = useT();
 
   return (
-    <FormControl fullWidth className={`${fieldClassName}`}>
+    <FormControl fullWidth className={fieldClassName}>
       <FormControlLabel
         sx={{ alignItems: "flex-start" }}
         control={
