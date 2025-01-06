@@ -37,7 +37,7 @@ export function SetupMFAPage() {
 
   const onSubmitHandler: SubmitHandler<SetupMFAInputForm> = (values) => {
     // Executing the Mutation
-    setupMFAMutation({ temp_password: values.temp_password, secret, session });
+    setupMFAMutation({ temp_password: values.temp_password, session });
   };
 
   return (
