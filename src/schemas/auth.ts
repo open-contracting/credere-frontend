@@ -27,7 +27,6 @@ export type SetupMFAInputForm = TypeOf<typeof setupMFASchema>;
 export interface SetupMFAInput {
   temp_password: string;
   session: string;
-  secret: string;
 }
 
 const nameSchema = string().nonempty(t("Full name is required"));
