@@ -53,7 +53,7 @@ export function Checkbox({ name, label, fieldClassName, defaultValue = false, cl
             }
           />
           <FormHelperText className="text-red text-base mx-0" error={!!fieldError}>{`${
-            fieldError ? t(fieldError?.message) : ""
+            fieldError?.message ? t(`${fieldError.message}`) : ""
           }`}</FormHelperText>
         </FormControl>
       )}

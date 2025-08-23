@@ -304,7 +304,7 @@ export function DataTable<T>({
                   {headCells.map((headCell) => (
                     <DataTableCell key={`${String(`${row[headCell.id]}-${index}-${headCell.id}`)}`}>
                       {headCell.type === "label" && renderValue(row, headCell)}
-                      {headCell.type !== "date" && headCell.type !== "label" && t(renderValue(row, headCell))}
+                      {headCell.type !== "date" && headCell.type !== "label" && t(`${renderValue(row, headCell)}`)}
                       {headCell.type === "date" && formatDateFromString(String(row[headCell.id]))}
                     </DataTableCell>
                   ))}
