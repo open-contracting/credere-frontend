@@ -36,12 +36,12 @@ export default function useUpsertUser(): IUseUpsertUser {
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data?.detail) {
-          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
             variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t("Error creating user. {error}", { error }), {
+        enqueueSnackbar(t("Error creating user. {{error}}", { error }), {
           variant: "error",
         });
       }
@@ -61,12 +61,12 @@ export default function useUpsertUser(): IUseUpsertUser {
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data?.detail) {
-          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
             variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t("Error updating user. {error}", { error }), {
+        enqueueSnackbar(t("Error updating user. {{error}}", { error }), {
           variant: "error",
         });
       }

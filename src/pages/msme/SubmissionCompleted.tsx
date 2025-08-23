@@ -39,7 +39,7 @@ function SubmissionCompleted() {
                 )}
               </Text>
               <Button
-                label={t("Complete the onboarding process with {fi_name}", {
+                label={t("Complete the onboarding process with {{fi_name}}", {
                   fi_name: applicationContext.state.data?.lender.name,
                 })}
                 component={MUILink}

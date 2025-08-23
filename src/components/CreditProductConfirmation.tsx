@@ -57,7 +57,7 @@ export function CreditProductConfirmation({ creditProduct, application }: Credit
 
                 {isLoan && (
                   <DataTableCell>
-                    {t("{repayment_years} year(s), {repayment_months} month(s)", {
+                    {t("{{repayment_years}} year(s), {{repayment_months}} month(s)", {
                       repayment_years: application.calculator_data.repayment_years,
                       repayment_months: application.calculator_data.repayment_months,
                     })}

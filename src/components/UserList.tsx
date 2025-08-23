@@ -103,7 +103,7 @@ export function UserList() {
     retry: 1,
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response && error.response.data && error.response.data.detail) {
-        enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+        enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
           variant: "error",
         });
       } else {

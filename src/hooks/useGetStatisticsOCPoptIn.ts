@@ -21,7 +21,7 @@ export default function useGetStatisticsOCPoptIn(): IUseGetStatisticsOCPoptIn {
     queryFn: () => getStatisticsOCPoptIn(),
     onSuccess: (dataResult) => dataResult,
     onError: (error) => {
-      handleRequestError(error, enqueueSnackbar, t("Error getting statistics opt-in . {error}", { error }));
+      handleRequestError(error, enqueueSnackbar, t("Error getting statistics opt-in . {{error}}", { error }));
     },
   });
 

@@ -33,12 +33,12 @@ export default function useGetCreditProductsOptions(): IUseGetCreditProductsOpti
       onError: (error) => {
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.data?.detail) {
-            enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
               variant: "error",
             });
           }
         } else {
-          enqueueSnackbar(t("Error getting credit product options. {error}", { error }), {
+          enqueueSnackbar(t("Error getting credit product options. {{error}}", { error }), {
             variant: "error",
           });
         }

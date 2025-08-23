@@ -36,12 +36,12 @@ export default function useUpsertLender(): IUseUpsertLender {
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data?.detail) {
-          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
             variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t("Error creating lender. {error}", { error }), {
+        enqueueSnackbar(t("Error creating lender. {{error}}", { error }), {
           variant: "error",
         });
       }
@@ -61,12 +61,12 @@ export default function useUpsertLender(): IUseUpsertLender {
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data?.detail) {
-          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
             variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t("Error updating lender. {error}", { error }), {
+        enqueueSnackbar(t("Error updating lender. {{error}}", { error }), {
           variant: "error",
         });
       }

@@ -14,7 +14,7 @@ function ExternalOnboardingCompleted() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 md:col-span-2 md:mr-10">
           <Text className="mb-8">
-            {t("Thank you for confirming that you have already started the onboarding process with {fi_name}. ", {
+            {t("Thank you for confirming that you have already started the onboarding process with {{fi_name}}. ", {
               fi_name: applicationContext.state.data?.lender.name,
             })}
           </Text>

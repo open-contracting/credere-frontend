@@ -33,12 +33,12 @@ export default function useEmailToSME(): IUseEmailToSME {
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data?.detail) {
-          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
             variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t("Error starting the application. {error}", { error }), {
+        enqueueSnackbar(t("Error starting the application. {{error}}", { error }), {
           variant: "error",
         });
       }

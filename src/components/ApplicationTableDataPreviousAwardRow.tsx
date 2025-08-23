@@ -55,7 +55,7 @@ export function ApplicationTableDataPreviousAwardRow({
         {!missing && (
           <DataTableCell className={preWhitespace ? "whitespace-pre" : ""}>
             <Box className="flex flex-row items-center justify-between" onClick={handleToggle}>
-              {t("Data available for {previos_awards_count} previous contracts", {
+              {t("Data available for {{previos_awards_count}} previous contracts", {
                 previos_awards_count: previousAwards?.length,
               })}
               <Box className="self-end">{getIcon(open)}</Box>

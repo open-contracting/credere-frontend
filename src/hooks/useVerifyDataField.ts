@@ -31,12 +31,12 @@ export default function useVerifyDataField(): IUseVerifyDataField {
       onError: (error) => {
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.data?.detail) {
-            enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
               variant: "error",
             });
           }
         } else {
-          enqueueSnackbar(t("Error verifying data field. {error}", { error }), {
+          enqueueSnackbar(t("Error verifying data field. {{error}}", { error }), {
             variant: "error",
           });
         }

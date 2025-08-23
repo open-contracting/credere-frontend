@@ -22,7 +22,7 @@ export default function useGetPreviousAwards(applicationId?: number): IUseGetPre
     enabled: Boolean(applicationId),
     onSuccess: (dataResult) => dataResult,
     onError: (error) => {
-      handleRequestError(error, enqueueSnackbar, t("Error getting previous awards. {error}", { error }));
+      handleRequestError(error, enqueueSnackbar, t("Error getting previous awards. {{error}}", { error }));
     },
   });
 

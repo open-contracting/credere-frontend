@@ -21,7 +21,7 @@ export default function useGetStatisticsFI(): IUseGetStatisticsFI {
     queryFn: () => getStatisticsFI(),
     onSuccess: (dataResult) => dataResult,
     onError: (error) => {
-      handleRequestError(error, enqueueSnackbar, t("Error getting statistics for fi. {error}", { error }));
+      handleRequestError(error, enqueueSnackbar, t("Error getting statistics for fi. {{error}}", { error }));
     },
   });
 

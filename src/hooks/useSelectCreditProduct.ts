@@ -48,12 +48,12 @@ export default function useSelectCreditProduct(): IUseGetCreditProductsOptions {
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data?.detail) {
-          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
             variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t("Error selecting credit product. {error}", { error }), {
+        enqueueSnackbar(t("Error selecting credit product. {{error}}", { error }), {
           variant: "error",
         });
       }
@@ -74,12 +74,12 @@ export default function useSelectCreditProduct(): IUseGetCreditProductsOptions {
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data?.detail) {
-          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
             variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t("Error on rollback credit product selection. {error}", { error }), {
+        enqueueSnackbar(t("Error on rollback credit product selection. {{error}}", { error }), {
           variant: "error",
         });
       }
@@ -100,12 +100,12 @@ export default function useSelectCreditProduct(): IUseGetCreditProductsOptions {
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data?.detail) {
-          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
             variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t("Error on rollback credit product selection. {error}", { error }), {
+        enqueueSnackbar(t("Error on rollback credit product selection. {{error}}", { error }), {
           variant: "error",
         });
       }
@@ -126,12 +126,12 @@ export default function useSelectCreditProduct(): IUseGetCreditProductsOptions {
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data?.detail) {
-          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
             variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t("Error on rollback confirm credit product. {error}", { error }), {
+        enqueueSnackbar(t("Error on rollback confirm credit product. {{error}}", { error }), {
           variant: "error",
         });
       }

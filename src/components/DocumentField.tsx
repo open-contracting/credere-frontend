@@ -84,12 +84,12 @@ export function DocumentField({ label, documentType, secure = false, className, 
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.data?.detail) {
-            enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
               variant: "error",
             });
           }
         } else {
-          enqueueSnackbar(t("Error uploading file. {error}", { error }), {
+          enqueueSnackbar(t("Error uploading file. {{error}}", { error }), {
             variant: "error",
           });
         }

@@ -34,7 +34,7 @@ export default function useSignIn(): IUseSignIn {
       onError: (error) => {
         if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
           if (error.response.data?.detail) {
-            enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
               variant: "error",
             });
           } else {
@@ -47,7 +47,7 @@ export default function useSignIn(): IUseSignIn {
             variant: "error",
           });
         } else {
-          enqueueSnackbar(t("Error on sign in. {error}", { error }), {
+          enqueueSnackbar(t("Error on sign in. {{error}}", { error }), {
             variant: "error",
           });
         }

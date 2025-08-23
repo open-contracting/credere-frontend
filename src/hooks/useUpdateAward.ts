@@ -34,12 +34,12 @@ export default function useUpdateAward(): IUseUpdateAward {
       onError: (error) => {
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.data?.detail) {
-            enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
               variant: "error",
             });
           }
         } else {
-          enqueueSnackbar(t("Error updating award. {error}", { error }), {
+          enqueueSnackbar(t("Error updating award. {{error}}", { error }), {
             variant: "error",
           });
         }

@@ -100,7 +100,7 @@ export function StageFive() {
           <Checkbox
             name="compliant_checks_completed"
             defaultValue={false}
-            label={t("Compliance checks have been completed for {legal_name} and all company directors", {
+            label={t("Compliance checks have been completed for {{legal_name}} and all company directors", {
               legal_name: application?.borrower.legal_name,
             })}
           />
@@ -108,7 +108,7 @@ export function StageFive() {
             className="mb-8"
             name="compliant_checks_passed"
             defaultValue={false}
-            label={t("{legal_name} has passed compliance checks", { legal_name: application?.borrower.legal_name })}
+            label={t("{{legal_name}} has passed compliance checks", { legal_name: application?.borrower.legal_name })}
           />
           <FormInput
             className="md:w-2/5"

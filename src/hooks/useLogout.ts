@@ -23,7 +23,7 @@ export default function useSignOut(): IUseSignOut {
       await logoutUserFn();
     } catch (error) {
       console.log(error);
-      enqueueSnackbar(t("Error on logout {error}", error), {
+      enqueueSnackbar(t("Error on logout {{error}}", { error }), {
         variant: "error",
       });
     } finally {

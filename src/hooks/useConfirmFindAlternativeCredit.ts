@@ -38,7 +38,7 @@ export default function useConfirmFindAlternativeCredit(): IUseConfirmFindAltern
       navigate(`/application/${data.application.uuid}/credit-options`);
     },
     onError: (error) => {
-      handleRequestError(error, enqueueSnackbar, t("Error creating new application. {error}", { error }));
+      handleRequestError(error, enqueueSnackbar, t("Error creating new application. {{error}}", { error }));
     },
   });
 

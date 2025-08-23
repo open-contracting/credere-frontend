@@ -64,7 +64,7 @@ export function FileUploader({ className, loading, onAcceptedFile }: FileUploade
           errorMessage += `${error.message}.\n`;
         }
       });
-      enqueueSnackbar(t("File not uploaded: {errorMessage}", { errorMessage }), {
+      enqueueSnackbar(t("File not uploaded: {{errorMessage}}", { errorMessage }), {
         variant: "error",
       });
     });

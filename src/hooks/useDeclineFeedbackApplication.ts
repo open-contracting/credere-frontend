@@ -36,12 +36,12 @@ export default function useDeclineFeedbackApplication(): IUseDeclineFeedbackAppl
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data?.detail) {
-          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
             variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t("Error on the decline feedback. {error}", { error }), {
+        enqueueSnackbar(t("Error on the decline feedback. {{error}}", { error }), {
           variant: "error",
         });
       }
@@ -62,12 +62,12 @@ export default function useDeclineFeedbackApplication(): IUseDeclineFeedbackAppl
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data?.detail) {
-          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
             variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t("Error on rollback declined application. {error}", { error }), {
+        enqueueSnackbar(t("Error on rollback declined application. {{error}}", { error }), {
           variant: "error",
         });
       }

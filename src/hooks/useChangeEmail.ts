@@ -26,12 +26,12 @@ export default function useChangeEmail(): IUseChangeEmail {
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data?.detail) {
-          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
             variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t("Error changing primary email. {error}", { error }), {
+        enqueueSnackbar(t("Error changing primary email. {{error}}", { error }), {
           variant: "error",
         });
       }

@@ -89,7 +89,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
         type="section"
         label={
           creditProduct
-            ? t("Edit Credit Product for {lenderName}", { lenderName: creditProduct.lender?.name })
+            ? t("Edit Credit Product for {{lenderName}}", { lenderName: creditProduct.lender?.name })
             : t("Add New Credit Product")
         }
         className="mb-6"

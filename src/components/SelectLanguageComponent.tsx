@@ -57,7 +57,7 @@ function SelectLanguageComponent() {
     const selected = options.find((option) => option.value === valueSelected);
     tx.setCurrentLocale(valueSelected);
     langContext.dispatch({ type: DISPATCH_ACTIONS.SET_LANG, payload: valueSelected });
-    enqueueSnackbar(t("Language changed to: {language}", { language: selected?.label }), {
+    enqueueSnackbar(t("Language changed to: {{language}}", { language: selected?.label }), {
       variant: "info",
     });
   };

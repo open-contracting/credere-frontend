@@ -35,7 +35,7 @@ export default function useApproveApplication(): IUseApproveApplication {
         navigate("../stage-five-approved");
       },
       onError: (error) => {
-        handleRequestError(error, enqueueSnackbar, t("Error approving the application. {error}", { error }));
+        handleRequestError(error, enqueueSnackbar, t("Error approving the application. {{error}}", { error }));
       },
     },
   );
