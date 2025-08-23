@@ -1,7 +1,7 @@
-import { t } from "@transifex/native";
 import axios from "axios";
 import type { EnqueueSnackbar } from "notistack";
 import type { ZodError, ZodType, z } from "zod";
+import { t } from "../i18n-utils";
 
 export class ValidationError extends Error {
   constructor(

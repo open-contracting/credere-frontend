@@ -1,7 +1,7 @@
 import { type UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 
 import { verifyDocumentFn } from "../api/private";
 import { QUERY_KEYS } from "../constants";
@@ -13,7 +13,7 @@ type IUseVerifyDocument = {
 };
 
 export default function useVerifyDocument(): IUseVerifyDocument {
-  const t = useT();
+  const { t } = useT();
 
   const queryClient = useQueryClient();
 

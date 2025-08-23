@@ -1,5 +1,5 @@
 import { Box, Link as MUILink, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import Text from "src/stories/text/Text";
 
@@ -17,7 +17,7 @@ export interface LoansTableProps {
 }
 
 export function LoansTable({ rows, amountRequested, currency, isLoading, selectOption }: LoansTableProps) {
-  const t = useT();
+  const { t } = useT();
 
   if (!rows.length && !isLoading) {
     return <Text>{t("No loan options available")}</Text>;

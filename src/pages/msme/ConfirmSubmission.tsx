@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
-import { useT } from "@transifex/react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import useConstants from "src/hooks/useConstants";
 import Text from "src/stories/text/Text";
@@ -17,7 +17,7 @@ import Button from "../../stories/button/Button";
 import Checkbox from "../../stories/checkbox/Checkbox";
 
 function ConfirmSubmission() {
-  const t = useT();
+  const { t } = useT();
   const constants = useConstants();
   const navigate = useNavigate();
   const { isLoading, submitApplicationMutation } = useSubmitApplication();

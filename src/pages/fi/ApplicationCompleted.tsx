@@ -1,5 +1,5 @@
-import { useT } from "@transifex/react";
 import { useEffect, useState } from "react";
+import { useTranslation as useT } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Button } from "src/stories/button/Button";
 import Text from "src/stories/text/Text";
@@ -9,7 +9,7 @@ import useDownloadApplication from "../../hooks/useDownloadApplication";
 import useApplicationContext from "../../hooks/useSecureApplicationContext";
 
 function ApplicationCompleted() {
-  const t = useT();
+  const { t } = useT();
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;

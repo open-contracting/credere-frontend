@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Container } from "@mui/material";
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import useDownloadApplicants from "src/hooks/useDownloadApplicants";
 import Button from "src/stories/button/Button";
 import Text from "src/stories/text/Text";
@@ -14,7 +14,7 @@ import Loader from "../../stories/loader/Loader";
 import { formatCurrency } from "../../util";
 
 export function HomeFI() {
-  const t = useT();
+  const { t } = useT();
   const { data, isLoading } = useGetStatisticsFI();
   const { downloadDocument, isDownloading } = useDownloadApplicants();
 

@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { t } from "@transifex/native";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { renderUserType } from "src/util";
+import { t } from "../i18n-utils";
 
 import { getUsersFn } from "../api/private";
 import { PAGE_SIZES, QUERY_KEYS } from "../constants";

@@ -1,5 +1,5 @@
-import { useT } from "@transifex/react";
 import { useState } from "react";
+import { useTranslation as useT } from "react-i18next";
 import { Link } from "react-router-dom";
 import FAQ_QUESTIONS from "src/constants/faq-questions";
 import FAQPageSection from "src/stories/faq/FAQPageSection";
@@ -12,7 +12,7 @@ interface FAQComponentProps {
 }
 
 export function FAQComponent({ className }: FAQComponentProps) {
-  const t = useT();
+  const { t } = useT();
   const [open, setOpen] = useState<Record<string, boolean>>({});
   const handleToggle = (key: string) => {
     setOpen((prev) => ({ ...prev, [key]: !prev[key] }));

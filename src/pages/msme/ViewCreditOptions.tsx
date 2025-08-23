@@ -1,9 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
-import { useT } from "@transifex/react";
 import { debounce } from "lodash";
 import { useCallback, useEffect, useMemo } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import NeedHelpComponent from "src/components/NeedHelpComponent";
 import useConstants from "src/hooks/useConstants";
 import Text from "src/stories/text/Text";
@@ -31,7 +31,7 @@ import { formatCurrency } from "../../util";
 
 const DEBOUNCE_TIME = 1;
 function ViewCreditOptions() {
-  const t = useT();
+  const { t } = useT();
   const constants = useConstants();
   const { formatDateFromString } = useLocalizedDateFormatter();
 

@@ -1,11 +1,11 @@
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Button } from "src/stories/button/Button";
 import Text from "src/stories/text/Text";
 import Title from "src/stories/title/Title";
 
 function PasswordCreated() {
-  const t = useT();
+  const { t } = useT();
   return (
     <>
       <Title type="page" label={t("Password Set")} className="mb-8" />

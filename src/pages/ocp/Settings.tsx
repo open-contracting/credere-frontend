@@ -1,4 +1,4 @@
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import { Link } from "react-router-dom";
 import Button from "src/stories/button/Button";
 import Title from "src/stories/title/Title";
@@ -7,7 +7,7 @@ import LenderList from "../../components/LenderList";
 import UserList from "../../components/UserList";
 
 export function Settings() {
-  const t = useT();
+  const { t } = useT();
 
   return (
     <>

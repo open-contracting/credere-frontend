@@ -1,6 +1,6 @@
 import { FormControl, FormControlLabel, FormHelperText, Checkbox as MUICheckbox, Typography } from "@mui/material";
-import { useT } from "@transifex/react";
 import { Controller, useFormContext } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 
 import Checked from "../../assets/icons/check-checked.svg";
@@ -21,7 +21,7 @@ export function Checkbox({ name, label, fieldClassName, defaultValue = false, cl
     control,
     formState: { errors, defaultValues },
   } = useFormContext();
-  const t = useT();
+  const { t } = useT();
 
   const fieldError: FieldErrorType = getProperty(errors, name);
   const defultValueForm = getProperty(defaultValues, name) || defaultValue;

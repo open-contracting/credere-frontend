@@ -1,5 +1,5 @@
-import { t } from "@transifex/native";
 import { type TypeOf, boolean, coerce, nativeEnum, object, preprocess, record, string } from "zod";
+import { t } from "../i18n-utils";
 
 import { CREDIT_PRODUCT_TYPE } from "../constants";
 

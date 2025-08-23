@@ -1,7 +1,7 @@
 import { type UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 
 import { updateBorrowerFn } from "../api/private";
 import { DISPATCH_ACTIONS, QUERY_KEYS } from "../constants";
@@ -14,7 +14,7 @@ type IUseUpdateBorrower = {
 };
 
 export default function useUpdateBorrower(): IUseUpdateBorrower {
-  const t = useT();
+  const { t } = useT();
 
   const queryClient = useQueryClient();
   const applicationContext = useApplicationContext();

@@ -1,4 +1,4 @@
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import StepImageEN from "src/assets/pages/en/stage-five.svg";
 import StepImageES from "src/assets/pages/es/stage-five.svg";
@@ -10,7 +10,7 @@ import Title from "src/stories/title/Title";
 import useLangContext from "../../hooks/useLangContext";
 
 export function StageFiveLapsed() {
-  const t = useT();
+  const { t } = useT();
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;

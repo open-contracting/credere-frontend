@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import { useSnackbar } from "notistack";
 import { useCallback } from "react";
+import { useTranslation as useT } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { logoutUserFn } from "../api/auth";
@@ -12,7 +12,7 @@ import useStateContext from "./useStateContext";
 type IUseSignOut = () => void;
 
 export default function useSignOut(): IUseSignOut {
-  const t = useT();
+  const { t } = useT();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const stateContext = useStateContext();

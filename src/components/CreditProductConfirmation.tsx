@@ -1,5 +1,5 @@
 import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 
 import { CREDIT_PRODUCT_TYPE } from "../constants";
@@ -15,7 +15,7 @@ export interface CreditProductConfirmationProps {
 }
 
 export function CreditProductConfirmation({ creditProduct, application }: CreditProductConfirmationProps) {
-  const t = useT();
+  const { t } = useT();
   const { formatDateFromString } = useLocalizedDateFormatter();
 
   const isLoan = creditProduct.type === CREDIT_PRODUCT_TYPE.LOAN;

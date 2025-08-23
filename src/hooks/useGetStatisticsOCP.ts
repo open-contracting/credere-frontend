@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 
 import { getStatisticsOCP } from "../api/private";
 import { QUERY_KEYS } from "../constants";
@@ -18,7 +18,7 @@ export default function useGetStatisticsOCP(
   finalDate: string | null,
   lenderId: number | null,
 ): IUseGetStatisticsOCP {
-  const t = useT();
+  const { t } = useT();
   const { enqueueSnackbar } = useSnackbar();
 
   const { data, isLoading } = useQuery<StatisticsFI>({

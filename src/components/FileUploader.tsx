@@ -1,11 +1,11 @@
-import { t as tNative } from "@transifex/native";
-import { useT } from "@transifex/react";
 import { useSnackbar } from "notistack";
 import { useEffect } from "react";
 import { ErrorCode, useDropzone } from "react-dropzone";
+import { useTranslation as useT } from "react-i18next";
 import Cloud from "src/assets/icons/cloud.svg";
 import Button from "src/stories/button/Button";
 import Text from "src/stories/text/Text";
+import { t as tNative } from "../i18n-utils";
 
 import { Progress } from "../stories/loader/Loader";
 
@@ -24,7 +24,7 @@ const fileUploadErrorsMap = {
 };
 
 export function FileUploader({ className, loading, onAcceptedFile }: FileUploaderProps) {
-  const t = useT();
+  const { t } = useT();
   const { enqueueSnackbar } = useSnackbar();
 
   const {

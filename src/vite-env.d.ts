@@ -4,7 +4,6 @@ interface ImportMetaEnv {
   readonly VITE_APP_VERSION: string;
   readonly VITE_API_URL: string;
   readonly VITE_HOST: string;
-  readonly VITE_TRANSIFEX_TOKEN: string;
   readonly VITE_DEFAULT_LANG: string;
   readonly VITE_LOCALE: string;
   readonly VITE_CURRENCY: string;

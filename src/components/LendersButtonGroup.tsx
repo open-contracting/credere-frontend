@@ -1,8 +1,8 @@
 import { Box, ButtonGroup } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 import { Button } from "src/stories/button/Button";
 
 import { getLendersFn } from "../api/private";
@@ -14,7 +14,7 @@ interface LendersButtonGroupProps {
 }
 
 export function LendersButtonGroup({ onLenderSelected }: LendersButtonGroupProps) {
-  const t = useT();
+  const { t } = useT();
   // Get the lenders from the API
   const { data } = useQuery({
     queryKey: [QUERY_KEYS.lenders],

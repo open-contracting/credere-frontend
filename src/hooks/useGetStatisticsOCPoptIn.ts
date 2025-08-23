@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 
 import { getStatisticsOCPoptIn } from "../api/private";
 import { QUERY_KEYS } from "../constants";
@@ -13,7 +13,7 @@ type IUseGetStatisticsOCPoptIn = {
 };
 
 export default function useGetStatisticsOCPoptIn(): IUseGetStatisticsOCPoptIn {
-  const t = useT();
+  const { t } = useT();
   const { enqueueSnackbar } = useSnackbar();
 
   const { data, isLoading } = useQuery<StatisticsOCPoptIn>({

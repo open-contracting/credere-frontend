@@ -1,10 +1,10 @@
 import { FormControl, FormHelperText, InputAdornment, type InputProps, Input as _Input } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { DateField as MUIDateField, DatePicker as MUIDatePicker } from "@mui/x-date-pickers";
-import { useT } from "@transifex/react";
 import dayjs, { type Dayjs } from "dayjs";
 import React from "react";
 import { Controller, type FieldError, type FieldErrorsImpl, type Merge, useFormContext } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { NumericFormat, type NumericFormatProps } from "react-number-format";
 
 import EmailIcon from "../../assets/icons/email.svg";
@@ -226,7 +226,7 @@ interface FormInputErrorProps {
 }
 
 export function FormInputError({ fieldError, className = "" }: FormInputErrorProps) {
-  const t = useT();
+  const { t } = useT();
   if (!fieldError) {
     return null;
   }
@@ -263,7 +263,7 @@ export function FormInput({
     control,
     formState: { errors },
   } = useFormContext();
-  const t = useT();
+  const { t } = useT();
 
   const fieldError: FieldErrorType = getProperty(errors, name);
   return (

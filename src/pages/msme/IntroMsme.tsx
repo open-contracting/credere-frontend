@@ -1,8 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
-import { useT } from "@transifex/react";
 import { useMemo } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import FAQComponent from "src/components/FAQComponent";
 import useAccessScheme from "src/hooks/useAccessScheme";
@@ -16,7 +16,7 @@ import Title from "src/stories/title/Title";
 import { formatCurrency } from "../../util";
 
 function IntroMsme() {
-  const t = useT();
+  const { t } = useT();
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
   const { accessSchemeMutation, isLoading } = useAccessScheme();

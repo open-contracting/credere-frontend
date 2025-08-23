@@ -1,4 +1,4 @@
-import { t } from "@transifex/native";
+import { t } from "../i18n-utils";
 
 import type { FormSelectOption } from "../stories/form-select/FormSelect";
 

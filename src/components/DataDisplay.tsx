@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
-import { useT } from "@transifex/react";
 import { useCallback } from "react";
+import { useTranslation as useT } from "react-i18next";
 
 import Text from "../stories/text/Text";
 
@@ -10,7 +10,7 @@ interface DataDisplayProps {
 }
 
 export function DataDisplay({ data, className }: DataDisplayProps) {
-  const t = useT();
+  const { t } = useT();
 
   const formatValue = useCallback(
     (value: any) => {

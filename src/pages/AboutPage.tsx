@@ -1,10 +1,10 @@
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 
 import ArrowInCircleIcon from "../assets/icons/arrow-in-circle.svg";
 import "./AboutPage.css";
 
 function About() {
-  const t = useT();
+  const { t } = useT();
 
   return (
     <div className="home-container">

@@ -1,7 +1,7 @@
 import { type UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { declineApplicationFeedbackFn, declineApplicationRollbackFn } from "../api/public";
@@ -16,7 +16,7 @@ type IUseDeclineFeedbackApplication = {
 };
 
 export default function useDeclineFeedbackApplication(): IUseDeclineFeedbackApplication {
-  const t = useT();
+  const { t } = useT();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const applicationContext = useApplicationContext();

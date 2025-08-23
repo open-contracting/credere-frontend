@@ -1,11 +1,11 @@
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import Text from "src/stories/text/Text";
 import Title from "src/stories/title/Title";
 
 import useApplicationContext from "../../hooks/useApplicationContext";
 
 function ExternalOnboardingCompleted() {
-  const t = useT();
+  const { t } = useT();
   const applicationContext = useApplicationContext();
 
   return (

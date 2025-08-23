@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 
 import { downloadApplicationFn } from "../api/private";
 import { QUERY_KEYS } from "../constants";
@@ -13,7 +13,7 @@ type IUseDownloadApplication = {
 };
 
 export default function useDownloadApplication(id?: number): IUseDownloadApplication {
-  const t = useT();
+  const { t } = useT();
   const langContext = useLangContext();
   const { enqueueSnackbar } = useSnackbar();
   const lang = langContext.state.selected.split("_")[0];

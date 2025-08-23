@@ -1,8 +1,8 @@
 import { FormControl, FormControlLabel, FormHelperText, Switch as MUISwitch, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { useT } from "@transifex/react";
 import type { ChangeEvent } from "react";
 import { Controller, useFormContext } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 
 import ToggleSwitch from "../../assets/icons/toggle-switch.svg";
@@ -96,7 +96,7 @@ export function Switch({
   value,
   className,
 }: SwitchProps) {
-  const t = useT();
+  const { t } = useT();
 
   return (
     <FormControl fullWidth className={fieldClassName}>

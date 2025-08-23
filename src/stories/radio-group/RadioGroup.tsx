@@ -6,9 +6,9 @@ import {
   Radio,
   Typography,
 } from "@mui/material";
-import { useT } from "@transifex/react";
 import { useMemo } from "react";
 import { Controller, useFormContext } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 
 import { getProperty } from "../../util";
@@ -44,7 +44,7 @@ export function RadioGroup({
     control,
     formState: { errors, defaultValues },
   } = useFormContext();
-  const t = useT();
+  const { t } = useT();
 
   const optionsChecked: FormSelectOption[] = useMemo(() => {
     if (isStringArray(options)) {

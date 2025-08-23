@@ -1,4 +1,4 @@
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import { Button } from "src/stories/button/Button";
 import Text from "src/stories/text/Text";
 import Title from "src/stories/title/Title";
@@ -7,7 +7,7 @@ import useApplicationContext from "../../hooks/useApplicationContext";
 import useConfirmFindAlternativeCredit from "../../hooks/useConfirmFindAlternativeCredit";
 
 function ConfirmFindAlternativeCredit() {
-  const t = useT();
+  const { t } = useT();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data?.application;
 

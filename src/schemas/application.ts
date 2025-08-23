@@ -1,5 +1,5 @@
-import { t } from "@transifex/native";
 import { type TypeOf, boolean, coerce, object, string } from "zod";
+import { t } from "../i18n-utils";
 
 import type { APPLICATION_STATUS, USER_TYPES } from "../constants";
 import { isDateAfterCurrentDate } from "../util";

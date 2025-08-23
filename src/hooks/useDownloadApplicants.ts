@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 import { downloadBlob } from "src/util/index";
 
 import { downloadApplicants } from "../api/private";
@@ -14,7 +14,7 @@ type IUseDownloadDocument = {
 };
 
 export default function useDownloadApplicants(): IUseDownloadDocument {
-  const t = useT();
+  const { t } = useT();
   const langContext = useLangContext();
   const { enqueueSnackbar } = useSnackbar();
 

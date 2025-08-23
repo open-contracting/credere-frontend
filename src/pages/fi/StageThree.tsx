@@ -1,5 +1,5 @@
 import { Link as MUILink } from "@mui/material";
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import StepImageEN from "src/assets/pages/en/stage-three.svg";
 import StepImageES from "src/assets/pages/es/stage-three.svg";
@@ -13,7 +13,7 @@ import ApplicationAwardTable from "../../components/ApplicationAwardTable";
 import useLangContext from "../../hooks/useLangContext";
 
 export function StageThree() {
-  const t = useT();
+  const { t } = useT();
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;

@@ -1,11 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Button } from "src/stories/button/Button";
 import FormInput from "src/stories/form-input/FormInput";
@@ -26,7 +26,7 @@ export interface UserFormProps {
   user?: IUser | null;
 }
 export function UserForm({ user }: UserFormProps) {
-  const t = useT();
+  const { t } = useT();
   const { createUserMutation, updateUserMutation, isLoading } = useUpsertUser();
 
   const [options, setOptions] = useState<FormSelectOption[]>([]);
@@ -162,7 +162,7 @@ UserForm.defaultProps = {
 };
 
 export function LoadUser() {
-  const t = useT();
+  const { t } = useT();
   const [queryError, setQueryError] = useState<string>("");
 
   const { id } = useParamsTypeSafe(

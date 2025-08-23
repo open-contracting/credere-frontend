@@ -1,5 +1,5 @@
 import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 
 import useGetPreviousAwards from "../hooks/useGetPreviousAwards";
 import useLocalizedDateFormatter from "../hooks/useLocalizedDateFormatter";
@@ -17,7 +17,7 @@ export interface ApplicationAwardTableProps {
 }
 
 export function ApplicationAwardTable({ application, readonly = false, className }: ApplicationAwardTableProps) {
-  const t = useT();
+  const { t } = useT();
   const { formatDateFromString } = useLocalizedDateFormatter();
   const { updateAwardMutation, isLoading } = useUpdateAward();
   const { data: previousAwards, isLoading: isLoadingPreviousAwards } = useGetPreviousAwards(application.id);

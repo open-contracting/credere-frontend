@@ -1,6 +1,6 @@
 import { Box, Collapse } from "@mui/material";
-import { useT } from "@transifex/react";
 import { useState } from "react";
+import { useTranslation as useT } from "react-i18next";
 
 import CheckGreen from "../assets/icons/check-green.svg";
 import WarnRed from "../assets/icons/warn-red.svg";
@@ -27,7 +27,7 @@ interface DataAvailabilityProps {
 }
 
 export function DataAvailability({ available, name, label, readonly, modifiedFields }: DataAvailabilityProps) {
-  const t = useT();
+  const { t } = useT();
   const { formatDateFromString } = useLocalizedDateFormatter();
   const [open, setOpen] = useState(false);
 

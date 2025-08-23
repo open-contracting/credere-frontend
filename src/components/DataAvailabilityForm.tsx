@@ -1,10 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Collapse } from "@mui/material";
-import { t as tNative } from "@transifex/native";
-import { useT } from "@transifex/react";
 import { useState } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { type TypeOf, object, string } from "zod";
+import { t as tNative } from "../i18n-utils";
 
 import FormInput from "../stories/form-input/FormInput";
 import LinkButton from "../stories/link-button/LinkButton";
@@ -33,7 +33,7 @@ export function DataAvailabilityForm({
   type,
   updateValue,
 }: DataAvailabilityFormProps) {
-  const t = useT();
+  const { t } = useT();
   const [open, setOpen] = useState(false);
 
   const methods = useForm<FormCellInput>({
