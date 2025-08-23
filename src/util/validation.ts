@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { EnqueueSnackbar } from "notistack";
 import type { ZodError, ZodType, z } from "zod";
-import { t } from "../i18n-utils";
+import { t } from "../util/i18n";
 
 export class ValidationError extends Error {
   constructor(

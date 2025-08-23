@@ -3,7 +3,7 @@ import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { t } from "../i18n-utils";
+import { t } from "../util/i18n";
 
 import { getLendersFn } from "../api/private";
 import { QUERY_KEYS } from "../constants";

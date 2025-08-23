@@ -1,5 +1,5 @@
 import { type TypeOf, boolean, coerce, nativeEnum, object, preprocess, record, string } from "zod";
-import { t } from "../i18n-utils";
+import { t } from "../util/i18n";
 
 import { CREDIT_PRODUCT_TYPE } from "../constants";
 

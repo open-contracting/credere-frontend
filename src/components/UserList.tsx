@@ -4,7 +4,7 @@ import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { renderUserType } from "src/util";
-import { t } from "../i18n-utils";
+import { t } from "../util/i18n";
 
 import { getUsersFn } from "../api/private";
 import { PAGE_SIZES, QUERY_KEYS } from "../constants";

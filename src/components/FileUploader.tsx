@@ -5,7 +5,7 @@ import { useTranslation as useT } from "react-i18next";
 import Cloud from "src/assets/icons/cloud.svg";
 import Button from "src/stories/button/Button";
 import Text from "src/stories/text/Text";
-import { t as tNative } from "../i18n-utils";
+import { t as tNative } from "../util/i18n";
 
 import { Progress } from "../stories/loader/Loader";
 

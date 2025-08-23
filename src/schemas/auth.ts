@@ -1,5 +1,5 @@
 import { type TypeOf, coerce, nativeEnum, object, string } from "zod";
-import { t } from "../i18n-utils";
+import { t } from "../util/i18n";
 
 import { USER_TYPES } from "../constants";
 import type { ILender } from "./application";

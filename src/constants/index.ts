@@ -1,4 +1,4 @@
-import { t } from "../i18n-utils";
+import { t } from "../util/i18n";
 
 import type { FormSelectOption } from "../stories/form-select/FormSelect";
 

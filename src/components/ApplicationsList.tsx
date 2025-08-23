@@ -5,7 +5,7 @@ import { useSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { RenderStatus } from "src/util";
-import { t } from "../i18n-utils";
+import { t } from "../util/i18n";
 
 import { getApplicationsFI, getApplicationsOCP } from "../api/private";
 import {

@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import lodash from "lodash";
 import { createElement } from "react";
 import useConstants from "src/hooks/useConstants";
-import { t } from "../i18n-utils";
+import { t } from "../util/i18n";
 
 import { CREDIT_PRODUCT_OPTIONS, LENDER_TYPES, USER_TYPE_OPTIONS } from "../constants";
 import CURRENCY_FORMAT_OPTIONS from "../constants/intl";
