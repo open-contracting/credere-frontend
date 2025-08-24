@@ -1,4 +1,5 @@
 import { type TypeOf, z } from "zod";
+import { t } from "../util/i18n";
 
 import type { APPLICATION_STATUS, USER_TYPES } from "../constants";
 import { isDateAfterCurrentDate } from "../util";
@@ -51,13 +52,14 @@ export enum DECLINE_FEEDBACK {
 }
 
 export const DECLINE_FEEDBACK_NAMES: { [key: string]: string } = {
-  [DECLINE_FEEDBACK.dont_need_access_credit]: "Don't need access credit",
-  [DECLINE_FEEDBACK.already_have_acredit]: "Already have acredit",
-  [DECLINE_FEEDBACK.preffer_to_go_to_bank]: "Preffer to go to bank",
-  [DECLINE_FEEDBACK.dont_want_access_credit]: "Don't want access credit",
-  [DECLINE_FEEDBACK.suspicious_email]:
+  [DECLINE_FEEDBACK.dont_need_access_credit]: t("Don't need access credit"),
+  [DECLINE_FEEDBACK.already_have_acredit]: t("Already have acredit"),
+  [DECLINE_FEEDBACK.preffer_to_go_to_bank]: t("Preffer to go to bank"),
+  [DECLINE_FEEDBACK.dont_want_access_credit]: t("Don't want access credit"),
+  [DECLINE_FEEDBACK.suspicious_email]: t(
     "I perceive the email as suspicious or I do not trust that the credit proposal is true",
-  [DECLINE_FEEDBACK.other]: "Other",
+  ),
+  [DECLINE_FEEDBACK.other]: t("Other"),
 };
 
 export const declineFeedbackSchema = z.object({
