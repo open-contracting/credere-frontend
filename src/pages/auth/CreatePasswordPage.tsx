@@ -13,7 +13,7 @@ import Title from "src/stories/title/Title";
 import { z } from "zod";
 
 const params = z.object({
-  email: z.coerce.string().email(),
+  email: z.coerce.string().pipe(z.email()),
   key: z.coerce.string(),
 });
 
