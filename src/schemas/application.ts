@@ -1,5 +1,4 @@
 import { type TypeOf, z } from "zod";
-import { t } from "../util/i18n";
 
 import type { APPLICATION_STATUS, USER_TYPES } from "../constants";
 import { isDateAfterCurrentDate } from "../util";
@@ -7,7 +6,7 @@ import { emailSchema } from "./auth";
 
 export const introSchema = z.object({
   accept_terms_and_conditions: z.boolean().refine((value) => value === true, {
-    message: t("You need to check this option to Access the Scheme"),
+    message: "You need to check this option to Access the Scheme",
   }),
 });
 
@@ -15,7 +14,7 @@ export type IntroInput = TypeOf<typeof introSchema>;
 
 export const submitSchema = z.object({
   agree_topass_info_to_banking_partner: z.boolean().refine((value) => value === true, {
-    message: t("You need to check this option to submit the application"),
+    message: "You need to check this option to submit the application",
   }),
 });
 
@@ -29,14 +28,16 @@ export const applicationBaseSchema = z.object({
 
 export type ApplicationBaseInput = TypeOf<typeof applicationBaseSchema>;
 
-export const declineApplicationSchema = z.object({
-  decline_this: z.boolean(),
-  decline_all: z.boolean(),
-  uuid: UUIDType,
-}).refine((data) => data.decline_this || data.decline_all, {
-  path: ["decline_all"],
-  message: t("You need to check at least one option to Decline the Scheme"),
-});
+export const declineApplicationSchema = z
+  .object({
+    decline_this: z.boolean(),
+    decline_all: z.boolean(),
+    uuid: UUIDType,
+  })
+  .refine((data) => data.decline_this || data.decline_all, {
+    path: ["decline_all"],
+    message: "You need to check at least one option to Decline the Scheme",
+  });
 
 export type DeclineApplicationInput = TypeOf<typeof declineApplicationSchema>;
 
@@ -50,14 +51,13 @@ export enum DECLINE_FEEDBACK {
 }
 
 export const DECLINE_FEEDBACK_NAMES: { [key: string]: string } = {
-  [DECLINE_FEEDBACK.dont_need_access_credit]: t("Don't need access credit"),
-  [DECLINE_FEEDBACK.already_have_acredit]: t("Already have acredit"),
-  [DECLINE_FEEDBACK.preffer_to_go_to_bank]: t("Preffer to go to bank"),
-  [DECLINE_FEEDBACK.dont_want_access_credit]: t("Don't want access credit"),
-  [DECLINE_FEEDBACK.suspicious_email]: t(
+  [DECLINE_FEEDBACK.dont_need_access_credit]: "Don't need access credit",
+  [DECLINE_FEEDBACK.already_have_acredit]: "Already have acredit",
+  [DECLINE_FEEDBACK.preffer_to_go_to_bank]: "Preffer to go to bank",
+  [DECLINE_FEEDBACK.dont_want_access_credit]: "Don't want access credit",
+  [DECLINE_FEEDBACK.suspicious_email]:
     "I perceive the email as suspicious or I do not trust that the credit proposal is true",
-  ),
-  [DECLINE_FEEDBACK.other]: t("Other"),
+  [DECLINE_FEEDBACK.other]: "Other",
 };
 
 export const declineFeedbackSchema = z.object({
@@ -74,10 +74,10 @@ export const declineFeedbackSchema = z.object({
 export type DeclineFeedbackInput = TypeOf<typeof declineFeedbackSchema>;
 
 export const creditOptionsSchema = z.object({
-  borrower_size: z.string().min(1, t("Borrower size is required")),
-  sector: z.string().min(1, t("Sector is required")),
+  borrower_size: z.string().min(1, "Borrower size is required"),
+  sector: z.string().min(1, "Sector is required"),
   annual_revenue: z.coerce.number().optional().nullable(),
-  amount_requested: z.coerce.number().min(1, t("Amount requested must be greater than 0")),
+  amount_requested: z.coerce.number().min(1, "Amount requested must be greater than 0"),
   uuid: UUIDType,
 });
 
@@ -88,15 +88,16 @@ export type GetCreditProductsOptionsInput = Omit<CreditOptionsInput, "sector" | 
 export const repaymentTermsSchema = z.object({
   repayment_years: z.coerce
     .number({
-      required_error: t("Years is required"),
-      invalid_type_error: t("Years must be a number"),
+      required_error: "Years is required",
+      invalid_type_error: "Years must be a number",
     })
-    .gte(0, t("Years must be greater or equal than ")),
-  repayment_months: z.coerce.number().min(1, t("Months must be greater or equal than 1")),
-  payment_start_date: z.string()
-    .min(1, t("Payment start date is required"))
+    .gte(0, "Years must be greater or equal than "),
+  repayment_months: z.coerce.number().min(1, "Months must be greater or equal than 1"),
+  payment_start_date: z
+    .string()
+    .min(1, "Payment start date is required")
     .refine((value) => isDateAfterCurrentDate(value), {
-      message: t("Payment start date must be after current date"),
+      message: "Payment start date must be after current date",
     }),
 });
 
@@ -336,7 +337,7 @@ export interface ILenderListResponse {
 }
 
 export const formEmailSchema = z.object({
-  message: z.string().min(1, t("A message is required")),
+  message: z.string().min(1, "A message is required"),
 });
 
 export type FormEmailInput = TypeOf<typeof formEmailSchema>;
@@ -348,10 +349,10 @@ export const approveSchema = z.object({
   compliant_checks_passed: z.boolean(),
   disbursed_final_amount: z.coerce
     .number({
-      required_error: t("Disbursed final amount is required"),
-      invalid_type_error: t("Disbursed final amount must be a number"),
+      required_error: "Disbursed final amount is required",
+      invalid_type_error: "Disbursed final amount must be a number",
     })
-    .gt(0, t("Disbursed final amount must be greater than 0")),
+    .gt(0, "Disbursed final amount must be greater than 0"),
 });
 
 export type FormApprovedInput = TypeOf<typeof approveSchema>;

@@ -1,14 +1,11 @@
 import { type TypeOf, z } from "zod";
-import { t } from "../util/i18n";
 
 import { USER_TYPES } from "../constants";
 import type { ILender } from "./application";
 
-export const emailSchema = z.string().min(1, t("Email address is required")).email(t("Email Address is invalid"));
-const passwordSchema = z.string()
-  .min(1, t("Password is required"))
-  .min(14, t("Password must be more than 14 characters"));
-const otp = z.string().min(6, t("OTP length must be 6 digits")).max(6, t("OTP length must be 6 digits"));
+export const emailSchema = z.string().min(1, "Email address is required").email("Email Address is invalid");
+const passwordSchema = z.string().min(1, "Password is required").min(14, "Password must be more than 14 characters");
+const otp = z.string().min(6, "OTP length must be 6 digits").max(6, "OTP length must be 6 digits");
 
 export const loginSchema = z.object({
   username: emailSchema,
@@ -29,7 +26,7 @@ export interface SetupMFAInput {
   session: string;
 }
 
-const nameSchema = z.string().nonempty(t("Full name is required"));
+const nameSchema = z.string().nonempty("Full name is required");
 
 export const createUserSchema = z.object({
   name: nameSchema,
@@ -39,9 +36,9 @@ export const createUserSchema = z.object({
       switch (issue.code) {
         case "invalid_type":
         case "invalid_enum_value":
-          return { message: t("Type of user is required") };
+          return { message: "Type of user is required" };
         default:
-          return { message: t("Select an option") };
+          return { message: "Select an option" };
       }
     },
   }),
@@ -52,13 +49,15 @@ export type CreateUserInput = TypeOf<typeof createUserSchema>;
 
 export type UpdateUserInput = Omit<CreateUserInput, "email"> & { id: string | undefined };
 
-export const setPasswordSchema = z.object({
-  password: passwordSchema,
-  passwordConfirm: z.string().min(1, t("Please confirm your password")),
-}).refine((data) => data.password === data.passwordConfirm, {
-  path: ["passwordConfirm"],
-  message: t("Passwords do not match"),
-});
+export const setPasswordSchema = z
+  .object({
+    password: passwordSchema,
+    passwordConfirm: z.string().min(1, "Please confirm your password"),
+  })
+  .refine((data) => data.password === data.passwordConfirm, {
+    path: ["passwordConfirm"],
+    message: "Passwords do not match",
+  });
 
 export type UpdatePasswordInput = TypeOf<typeof setPasswordSchema>;
 export type UpdatePasswordPayload = {
