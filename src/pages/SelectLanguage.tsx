@@ -1,13 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
-import { tx } from "@transifex/native";
-import { useLanguages, useT } from "@transifex/react";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { type TypeOf, object, string } from "zod";
 
-import { DISPATCH_ACTIONS } from "../constants";
+import { AVAILABLE_LANGUAGES, DISPATCH_ACTIONS } from "../constants";
 import useLangContext from "../hooks/useLangContext";
 import { Button } from "../stories/button/Button";
 import FormSelect, { type FormSelectOption } from "../stories/form-select/FormSelect";
@@ -20,37 +19,26 @@ const langSchema = object({
 type LangInput = TypeOf<typeof langSchema>;
 
 function SelectLanguage() {
-  const t = useT();
-  const languages = useLanguages();
+  const { t, i18n } = useT();
   const langContext = useLangContext();
 
-  const [options, setOptions] = useState<FormSelectOption[]>([]);
+  const [options] = useState<FormSelectOption[]>(AVAILABLE_LANGUAGES);
   const { enqueueSnackbar } = useSnackbar();
 
   const methods = useForm<LangInput>({
     resolver: zodResolver(langSchema),
   });
 
-  useEffect(() => {
-    if (languages && languages.length > 0) {
-      const optionsChecked: FormSelectOption[] = languages.map((lang: any) => ({
-        label: lang.name,
-        value: lang.code,
-      }));
-      setOptions(optionsChecked);
-    }
-  }, [languages]);
-
   const { handleSubmit, setValue } = methods;
 
   useEffect(() => {
-    if (options && options.length > 0 && langContext.state.selected) {
+    if (langContext.state.selected) {
       setValue("lang", langContext.state.selected);
     }
-  }, [options, setValue]);
+  }, [setValue]);
 
   const onSubmitHandler: SubmitHandler<LangInput> = (values) => {
-    tx.setCurrentLocale(values.lang);
+    i18n.changeLanguage(values.lang);
     langContext.dispatch({ type: DISPATCH_ACTIONS.SET_LANG, payload: values.lang });
     enqueueSnackbar(t("Language changed to: {{language}}", { language: values.lang }), {
       variant: "success",

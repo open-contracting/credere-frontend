@@ -134,3 +134,8 @@ export const USER_TYPE_OPTIONS: FormSelectOption[] = [
     label: t("FI User"),
   },
 ];
+
+export const AVAILABLE_LANGUAGES: FormSelectOption[] = [
+  { label: "English", value: "en" },
+  { label: "Español", value: "es" },
+];
