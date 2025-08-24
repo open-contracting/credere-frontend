@@ -108,7 +108,7 @@ function ViewCreditOptions() {
       selectCreditProductMutation(formInput);
     };
 
-    handleSubmitMainForm(onSubmitHandlerMainForm)();
+    handleSubmitMainForm(onSubmitHandlerMainForm as any)();
   };
 
   const onSelectLoan = async (option: ICreditProduct) => {
@@ -138,7 +138,7 @@ function ViewCreditOptions() {
         selectCreditProductMutation(formInput);
       }
     };
-    await handleSubmitMainForm(onSubmitHandlerMainForm)();
+    await handleSubmitMainForm(onSubmitHandlerMainForm as any)();
     await handleSubmitLoanForm(onSubmitHandlerLoanForm)();
   };
 

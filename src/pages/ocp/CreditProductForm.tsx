@@ -35,7 +35,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
   const { createCreditProductMutation, updateCreditProductMutation, isLoading, isError } = useUpsertCreditProduct();
 
   const methods = useForm({
-    resolver: zodResolver(creditProductSchema),
+    resolver: zodResolver(creditProductSchema) as any,
     defaultValues: creditProduct || {
       required_document_types: {},
     },
@@ -97,7 +97,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
       <FormProvider {...methods}>
         <Box
           component="form"
-          onSubmit={handleSubmit(onSubmitHandler)}
+          onSubmit={handleSubmit(onSubmitHandler as any)}
           noValidate
           autoComplete="off"
           maxWidth="md"
@@ -140,11 +140,11 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
                   key={type.value}
                   label={type.label}
                   name={`borrower_types.${type.value}`}
-                  className={errors.borrower_types ? "text-red" : ""}
+                  className={(errors as any).borrower_types ? "text-red" : ""}
                 />
               ))}
             </Box>
-            <FormInputError fieldError={errors.borrower_types} />
+            <FormInputError fieldError={(errors as any).borrower_types} />
           </Box>
 
           <Text className="mb-1">
