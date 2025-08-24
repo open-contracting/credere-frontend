@@ -3,7 +3,7 @@ import { Box, Collapse } from "@mui/material";
 import { useState } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation as useT } from "react-i18next";
-import { type TypeOf, object, string } from "zod";
+import { type TypeOf, z } from "zod";
 import { t as tNative } from "../util/i18n";
 
 import FormInput from "../stories/form-input/FormInput";
@@ -19,8 +19,8 @@ interface DataAvailabilityFormProps {
   readonly: boolean;
 }
 
-const formCellSchema = object({
-  value: string().min(1, tNative("This field is required")),
+const formCellSchema = z.object({
+  value: z.string().min(1, tNative("This field is required")),
 });
 
 type FormCellInput = TypeOf<typeof formCellSchema>;

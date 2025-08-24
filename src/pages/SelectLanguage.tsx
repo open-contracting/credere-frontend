@@ -4,7 +4,7 @@ import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation as useT } from "react-i18next";
-import { type TypeOf, object, string } from "zod";
+import { type TypeOf, z } from "zod";
 
 import { AVAILABLE_LANGUAGES, DISPATCH_ACTIONS } from "../constants";
 import useLangContext from "../hooks/useLangContext";
@@ -12,8 +12,8 @@ import { Button } from "../stories/button/Button";
 import FormSelect, { type FormSelectOption } from "../stories/form-select/FormSelect";
 import Title from "../stories/title/Title";
 
-const langSchema = object({
-  lang: string(),
+const langSchema = z.object({
+  lang: z.string(),
 });
 
 type LangInput = TypeOf<typeof langSchema>;

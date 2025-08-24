@@ -1,32 +1,32 @@
-import { type TypeOf, boolean, coerce, nativeEnum, object, preprocess, record, string } from "zod";
+import { type TypeOf, z } from "zod";
 import { t } from "../util/i18n";
 
 import { CREDIT_PRODUCT_TYPE } from "../constants";
 
-const creditProviderNameSchema = string().min(1, t("Provider name is required"));
-const creditProviderTypeSchema = string().min(1, t("Provider type is required"));
+const creditProviderNameSchema = z.string().min(1, t("Provider name is required"));
+const creditProviderTypeSchema = z.string().min(1, t("Provider type is required"));
 
-export const lenderSchema = object({
+export const lenderSchema = z.object({
   name: creditProviderNameSchema,
   type: creditProviderTypeSchema,
-  sla_days: coerce
+  sla_days: z.coerce
     .number()
     .int()
     .positive(t("SLA days must be greater than 0"))
     .min(1, t("SLA days must be greater than 0")),
-  email_group: string().email(t("Email Address is invalid")),
-  logo_filename: string(),
-  external_onboarding_url: string().url(t("URL is invalid (Hint: include http:// or https://)")),
+  email_group: z.string().email(t("Email Address is invalid")),
+  logo_filename: z.string(),
+  external_onboarding_url: z.string().url(t("URL is invalid (Hint: include http:// or https://)")),
 });
 
 export type ProviderInput = TypeOf<typeof lenderSchema>;
 
-export const creditProductSchema = object({
-  borrower_size: string().min(1, t("Borrower size is required")),
-  lower_limit: coerce.number().min(1, t("Lower limit must be greater than 0")),
-  upper_limit: coerce.number().min(1, t("Upper limit must be greater than 0")),
-  interest_rate: string().min(1, t("Interest rate description is required")),
-  type: nativeEnum(CREDIT_PRODUCT_TYPE, {
+export const creditProductSchema = z.object({
+  borrower_size: z.string().min(1, t("Borrower size is required")),
+  lower_limit: z.coerce.number().min(1, t("Lower limit must be greater than 0")),
+  upper_limit: z.coerce.number().min(1, t("Upper limit must be greater than 0")),
+  interest_rate: z.string().min(1, t("Interest rate description is required")),
+  type: z.nativeEnum(CREDIT_PRODUCT_TYPE, {
     errorMap: (issue) => {
       switch (issue.code) {
         case "invalid_type":
@@ -37,21 +37,21 @@ export const creditProductSchema = object({
       }
     },
   }),
-  procurement_category_to_exclude: string(),
-  required_document_types: record(string().min(1), boolean()),
-  borrower_types: record(string().min(1), boolean()),
-  other_fees_total_amount: preprocess(
+  procurement_category_to_exclude: z.string(),
+  required_document_types: z.record(z.string().min(1), z.boolean()),
+  borrower_types: z.record(z.string().min(1), z.boolean()),
+  other_fees_total_amount: z.preprocess(
     (args) => (args === "" ? undefined : args),
-    coerce
+    z.coerce
       .number({
         required_error: t("Other fees total amount is required"),
         invalid_type_error: t("Other fees total amount must be a number"),
       })
       .gte(0, t("Other fees total amount must be greater or equal than 0")),
   ),
-  other_fees_description: string().min(1, t("Other fees description is required")),
-  additional_information: string(),
-  more_info_url: string().url(t("URL is invalid (Hint: include http:// or https://)")),
+  other_fees_description: z.string().min(1, t("Other fees description is required")),
+  additional_information: z.string(),
+  more_info_url: z.string().url(t("URL is invalid (Hint: include http:// or https://)")),
 })
   .refine((data) => data.lower_limit < data.upper_limit, {
     path: ["lower_limit"],
