@@ -52,7 +52,7 @@ export function StageTwo() {
     setOpenEmailDialog(false);
   };
 
-  const methods = useForm<FormEmailInput>({
+  const methods = useForm({
     resolver: zodResolver(formEmailSchema),
   });
 

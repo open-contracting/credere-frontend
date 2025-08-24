@@ -27,7 +27,7 @@ function ConfirmSubmission() {
     submitApplicationMutation({ uuid: applicationContext.state.data?.application.uuid });
   };
 
-  const methods = useForm<SubmitInput>({
+  const methods = useForm({
     resolver: zodResolver(submitSchema),
   });
 

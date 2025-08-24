@@ -22,7 +22,7 @@ export function CreatePasswordPage() {
   const updatePassword = useUpdatePassword();
   const { email: username, key: tempPassword } = useSearchParamsTypeSafe(params, t("This is an invalid link."));
 
-  const methods = useForm<UpdatePasswordInput>({
+  const methods = useForm({
     resolver: zodResolver(setPasswordSchema),
   });
 

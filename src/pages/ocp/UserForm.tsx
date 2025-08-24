@@ -31,7 +31,7 @@ export function UserForm({ user }: UserFormProps) {
 
   const [options, setOptions] = useState<FormSelectOption[]>([]);
 
-  const methods = useForm<CreateUserInput>({
+  const methods = useForm({
     resolver: zodResolver(createUserSchema),
     defaultValues: user || {},
   });

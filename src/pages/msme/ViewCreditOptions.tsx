@@ -39,7 +39,7 @@ function ViewCreditOptions() {
   const { data, isLoading: isLoadingOptions, getCreditProductOptionsMutation } = useGetCreditProductsOptions();
   const { isLoading, selectCreditProductMutation } = useSelectCreditProduct();
 
-  const methodsMainForm = useForm<CreditOptionsInput>({
+  const methodsMainForm = useForm({
     defaultValues: {
       borrower_size: applicationContext.state.data?.application.calculator_data.borrower_size || undefined,
       sector: applicationContext.state.data?.borrower.sector || undefined,
@@ -54,7 +54,7 @@ function ViewCreditOptions() {
     // formState: { touchedFields },
   } = methodsMainForm;
 
-  const methodsLoanForm = useForm<RepaymentTermsInput>({
+  const methodsLoanForm = useForm({
     defaultValues: {
       repayment_years: applicationContext.state.data?.application.calculator_data.repayment_years || undefined,
       repayment_months: applicationContext.state.data?.application.calculator_data.repayment_months || undefined,

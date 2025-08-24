@@ -25,7 +25,7 @@ function SelectLanguage() {
   const [options] = useState<FormSelectOption[]>(AVAILABLE_LANGUAGES);
   const { enqueueSnackbar } = useSnackbar();
 
-  const methods = useForm<LangInput>({
+  const methods = useForm({
     resolver: zodResolver(langSchema),
   });
 

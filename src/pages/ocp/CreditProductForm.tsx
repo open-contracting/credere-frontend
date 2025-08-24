@@ -34,7 +34,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
   const constants = useConstants();
   const { createCreditProductMutation, updateCreditProductMutation, isLoading, isError } = useUpsertCreditProduct();
 
-  const methods = useForm<CreditProductInput>({
+  const methods = useForm({
     resolver: zodResolver(creditProductSchema),
     defaultValues: creditProduct || {
       required_document_types: {},

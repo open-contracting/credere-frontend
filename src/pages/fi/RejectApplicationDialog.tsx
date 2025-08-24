@@ -22,7 +22,7 @@ export function RejectApplicationDialog({ open, handleClose }: RejectApplication
   const application = applicationContext.state.data;
   const { isLoading, rejectApplicationMutation } = useRejectApplication();
 
-  const methods = useForm<FormRejectInput>({
+  const methods = useForm({
     resolver: zodResolver(rejectSchema),
   });
 

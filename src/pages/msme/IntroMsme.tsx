@@ -21,7 +21,7 @@ function IntroMsme() {
   const applicationContext = useApplicationContext();
   const { accessSchemeMutation, isLoading } = useAccessScheme();
 
-  const methods = useForm<IntroInput>({
+  const methods = useForm({
     resolver: zodResolver(introSchema),
   });
   const { handleSubmit } = methods;

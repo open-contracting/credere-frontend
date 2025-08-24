@@ -14,7 +14,7 @@ export function ResetPasswordPage() {
   const { t } = useT();
   const { resetPasswordMutation, isLoading } = useResetPassword();
 
-  const methods = useForm<ResetPasswordInput>({
+  const methods = useForm({
     resolver: zodResolver(resetPasswordSchema),
   });
 

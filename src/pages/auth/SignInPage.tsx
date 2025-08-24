@@ -14,7 +14,7 @@ export function SignInPage() {
   const { t } = useT();
   const { signInMutation, isLoading } = useSignIn();
 
-  const methods = useForm<LoginInput>({
+  const methods = useForm({
     resolver: zodResolver(loginSchema),
   });
 

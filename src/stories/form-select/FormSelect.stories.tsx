@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { Meta, StoryObj } from "@storybook/react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { type LoginInput, loginSchema } from "../../schemas/auth";
+import { loginSchema } from "../../schemas/auth";
 import FormSelect, { type FormSelectProps } from "./FormSelect";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
@@ -17,7 +17,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 function ComponentWithHooks(args: FormSelectProps) {
-  const methods = useForm<LoginInput>({
+  const methods = useForm({
     resolver: zodResolver(loginSchema),
   });
 

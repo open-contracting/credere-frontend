@@ -52,7 +52,7 @@ export function StageFive() {
     setOpenLapseDialog(true);
   };
 
-  const methods = useForm<FormApprovedInput>({
+  const methods = useForm({
     resolver: zodResolver(approveSchema),
   });
 

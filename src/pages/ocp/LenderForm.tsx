@@ -30,7 +30,7 @@ export function LenderForm({ lender }: LenderFormProps) {
   const { t } = useT();
   const { createLenderMutation, updateLenderMutation, isLoading, isError } = useUpsertLender();
 
-  const methods = useForm<ProviderInput>({
+  const methods = useForm({
     resolver: zodResolver(lenderSchema),
     defaultValues: lender || {},
   });

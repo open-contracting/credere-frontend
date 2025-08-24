@@ -18,7 +18,7 @@ function DeclineFeedback() {
   const applicationContext = useApplicationContext();
   const { declineFeedbackMutation, declineRollbackMutation, isLoading } = useDeclineFeedbackApplication();
 
-  const methods = useForm<DeclineFeedbackInput>({
+  const methods = useForm({
     resolver: zodResolver(declineFeedbackSchema),
   });
 

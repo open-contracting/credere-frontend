@@ -18,7 +18,7 @@ function Decline() {
   const applicationContext = useApplicationContext();
   const { declineApplicationMutation, isLoading } = useDeclineApplication();
 
-  const methods = useForm<DeclineApplicationInput>({
+  const methods = useForm({
     resolver: zodResolver(declineApplicationSchema),
   });
 

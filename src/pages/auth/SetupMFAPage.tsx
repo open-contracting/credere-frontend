@@ -29,7 +29,7 @@ export function SetupMFAPage() {
     }),
   );
 
-  const methods = useForm<SetupMFAInputForm>({
+  const methods = useForm({
     resolver: zodResolver(setupMFASchema),
   });
 
