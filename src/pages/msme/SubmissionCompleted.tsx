@@ -1,5 +1,5 @@
 import { Link as MUILink } from "@mui/material";
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import { globalConfig } from "src/api/axios";
 import { Button } from "src/stories/button/Button";
 import Text from "src/stories/text/Text";
@@ -8,7 +8,7 @@ import Title from "src/stories/title/Title";
 import useApplicationContext from "../../hooks/useApplicationContext";
 
 function SubmissionCompleted() {
-  const t = useT();
+  const { t } = useT();
   const applicationContext = useApplicationContext();
 
   const uuid = applicationContext.state.data?.application.uuid;
@@ -39,7 +39,7 @@ function SubmissionCompleted() {
                 )}
               </Text>
               <Button
-                label={t("Complete the onboarding process with {fi_name}", {
+                label={t("Complete the onboarding process with {{fi_name}}", {
                   fi_name: applicationContext.state.data?.lender.name,
                 })}
                 component={MUILink}

@@ -1,8 +1,8 @@
 import { Box, Link as MUILink } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useState } from "react";
+import { useTranslation as useT } from "react-i18next";
 import { Link } from "react-router-dom";
 import Button from "src/stories/button/Button";
 import Text from "src/stories/text/Text";
@@ -28,7 +28,7 @@ export interface ApplicationDetailProps {
 }
 
 export function ApplicationDetail({ application, readonly }: ApplicationDetailProps) {
-  const t = useT();
+  const { t } = useT();
 
   return (
     <>
@@ -85,7 +85,7 @@ export interface LoadApplicationProps {
 }
 
 export function LoadApplication({ readonly }: LoadApplicationProps) {
-  const t = useT();
+  const { t } = useT();
   const [queryError, setQueryError] = useState<string>("");
 
   const { id } = useParamsTypeSafe(

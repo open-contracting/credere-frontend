@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Dialog } from "@mui/material";
-import { useT } from "@transifex/react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import useApplicationContext from "src/hooks/useSecureApplicationContext";
 import Button from "src/stories/button/Button";
 import Checkbox from "src/stories/checkbox/Checkbox";
@@ -17,7 +17,7 @@ export interface RejectApplicationDialogProps {
 }
 
 export function RejectApplicationDialog({ open, handleClose }: RejectApplicationDialogProps) {
-  const t = useT();
+  const { t } = useT();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;
   const { isLoading, rejectApplicationMutation } = useRejectApplication();

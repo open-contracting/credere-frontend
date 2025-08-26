@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import useApplicationContext from "src/hooks/useSecureApplicationContext";
 import Button from "src/stories/button/Button";
@@ -14,7 +14,7 @@ import { APPLICATION_STATUS } from "../../constants";
 import { RenderStatusString } from "../../util";
 
 export function ViewApplication() {
-  const t = useT();
+  const { t } = useT();
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;

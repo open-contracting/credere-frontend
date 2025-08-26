@@ -1,8 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Container } from "@mui/material";
-import { useT } from "@transifex/react";
 import { useEffect } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { useSearchParamsTypeSafe } from "src/hooks/useParamsTypeSafe";
 import useUpdatePassword from "src/hooks/useUpdatePassword";
 import { type UpdatePasswordInput, type UpdatePasswordPayload, setPasswordSchema } from "src/schemas/auth";
@@ -18,7 +18,7 @@ const params = z.object({
 });
 
 export function CreatePasswordPage() {
-  const t = useT();
+  const { t } = useT();
   const updatePassword = useUpdatePassword();
   const { email: username, key: tempPassword } = useSearchParamsTypeSafe(params, t("This is an invalid link."));
 

@@ -1,7 +1,7 @@
 import { type UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 
 import { verifyDataFieldFn } from "../api/private";
 import { QUERY_KEYS } from "../constants";
@@ -13,7 +13,7 @@ type IUseVerifyDataField = {
 };
 
 export default function useVerifyDataField(): IUseVerifyDataField {
-  const t = useT();
+  const { t } = useT();
 
   const queryClient = useQueryClient();
 
@@ -31,12 +31,12 @@ export default function useVerifyDataField(): IUseVerifyDataField {
       onError: (error) => {
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.data?.detail) {
-            enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
               variant: "error",
             });
           }
         } else {
-          enqueueSnackbar(t("Error verifying data field. {error}", { error }), {
+          enqueueSnackbar(t("Error verifying data field. {{error}}", { error }), {
             variant: "error",
           });
         }

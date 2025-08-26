@@ -1,4 +1,4 @@
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import Text from "src/stories/text/Text";
 import Title from "src/stories/title/Title";
 
@@ -7,7 +7,7 @@ export type ApplicationErrorPageProps = {
 };
 
 export function ApplicationErrorPage({ message }: ApplicationErrorPageProps) {
-  const t = useT();
+  const { t } = useT();
 
   return (
     <>

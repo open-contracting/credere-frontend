@@ -1,7 +1,7 @@
 import { type UseMutateFunction, useMutation } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 
 import { confirmChangeEmailFn } from "../api/public";
 import type { ChangeEmailInput, ConfirmChangeEmailInput } from "../schemas/application";
@@ -13,7 +13,7 @@ type IUseConfirmChangeEmail = {
 };
 
 export default function useConfirmChangeEmail(): IUseConfirmChangeEmail {
-  const t = useT();
+  const { t } = useT();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -28,12 +28,12 @@ export default function useConfirmChangeEmail(): IUseConfirmChangeEmail {
       onError: (error) => {
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.data?.detail) {
-            enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
               variant: "error",
             });
           }
         } else {
-          enqueueSnackbar(t("Error confirming change of primary email. {error}", { error }), {
+          enqueueSnackbar(t("Error confirming change of primary email. {{error}}", { error }), {
             variant: "error",
           });
         }

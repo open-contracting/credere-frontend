@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
-import { useT } from "@transifex/react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import FAQComponent from "src/components/FAQComponent";
 import useApplicationContext from "src/hooks/useApplicationContext";
@@ -13,7 +13,7 @@ import Text from "src/stories/text/Text";
 import Title from "src/stories/title/Title";
 
 function Decline() {
-  const t = useT();
+  const { t } = useT();
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
   const { declineApplicationMutation, isLoading } = useDeclineApplication();

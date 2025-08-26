@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useCallback, useEffect, useState } from "react";
+import { useTranslation as useT } from "react-i18next";
 import { uploadFileFn } from "src/api/public";
 import Text from "src/stories/text/Text";
 
@@ -25,7 +25,7 @@ interface DocumentFieldProps {
 }
 
 export function DocumentField({ label, documentType, secure = false, className, setUploadState }: DocumentFieldProps) {
-  const t = useT();
+  const { t } = useT();
   const { enqueueSnackbar } = useSnackbar();
   const [current, setCurrent] = useState<IBorrowerDocument | undefined>();
   const [showUploader, setShowUploader] = useState<boolean>(true);
@@ -84,12 +84,12 @@ export function DocumentField({ label, documentType, secure = false, className, 
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.data?.detail) {
-            enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
               variant: "error",
             });
           }
         } else {
-          enqueueSnackbar(t("Error uploading file. {error}", { error }), {
+          enqueueSnackbar(t("Error uploading file. {{error}}", { error }), {
             variant: "error",
           });
         }

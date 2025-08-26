@@ -1,5 +1,5 @@
 import { List, ListItem, Link as MUILink } from "@mui/material";
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Button } from "src/stories/button/Button";
 import Text from "src/stories/text/Text";
@@ -8,7 +8,7 @@ import Title from "src/stories/title/Title";
 import FAQComponent from "../../components/FAQComponent";
 
 function TermsAndConditions() {
-  const t = useT();
+  const { t } = useT();
   const navigate = useNavigate();
 
   return (

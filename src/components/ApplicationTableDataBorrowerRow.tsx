@@ -1,5 +1,5 @@
 import { TableRow } from "@mui/material";
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 
 import type { IUpdateBorrower } from "../schemas/application";
 import type { ApplicationTableBorrowerDataRowProps } from "./ApplicationTableDataRow";
@@ -27,7 +27,7 @@ export function ApplicationTableDataBorrowerRow({
   readonly,
   modifiedFields,
 }: ApplicationTableBorrowerDataRowProps) {
-  const t = useT();
+  const { t } = useT();
 
   const value = borrower[name];
   const missing = missingData[name] === undefined ? true : missingData[name];
