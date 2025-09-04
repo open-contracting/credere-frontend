@@ -1,5 +1,5 @@
 import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 
 import useUpdateBorrower from "../hooks/useUpdateBorrower";
 import useVerifyDataField from "../hooks/useVerifyDataField";
@@ -21,7 +21,7 @@ export function ApplicationBorrowerTable({
   allowDataVerification = false,
   className,
 }: ApplicationBorrowerTableProps) {
-  const t = useT();
+  const { t } = useT();
   const { updateBorrowerMutation, isLoading } = useUpdateBorrower();
   const { verifyDataFieldMutation, isLoading: isLoadingVerifyDataField } = useVerifyDataField();
 

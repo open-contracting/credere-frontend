@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 
 import { getPreviousAwardsFn } from "../api/private";
 import { QUERY_KEYS } from "../constants";
@@ -13,7 +13,7 @@ type IUseGetPreviousAwards = {
 };
 
 export default function useGetPreviousAwards(applicationId?: number): IUseGetPreviousAwards {
-  const t = useT();
+  const { t } = useT();
   const { enqueueSnackbar } = useSnackbar();
 
   const { data, isLoading } = useQuery<IAward[]>({
@@ -22,7 +22,7 @@ export default function useGetPreviousAwards(applicationId?: number): IUseGetPre
     enabled: Boolean(applicationId),
     onSuccess: (dataResult) => dataResult,
     onError: (error) => {
-      handleRequestError(error, enqueueSnackbar, t("Error getting previous awards. {error}", { error }));
+      handleRequestError(error, enqueueSnackbar, t("Error getting previous awards. {{error}}", { error }));
     },
   });
 

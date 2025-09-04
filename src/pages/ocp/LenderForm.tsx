@@ -1,10 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { Link } from "react-router-dom";
 import { type ProviderInput, lenderSchema } from "src/schemas/OCPsettings";
 import Button from "src/stories/button/Button";
@@ -27,7 +27,7 @@ export interface LenderFormProps {
 }
 
 export function LenderForm({ lender }: LenderFormProps) {
-  const t = useT();
+  const { t } = useT();
   const { createLenderMutation, updateLenderMutation, isLoading, isError } = useUpsertLender();
 
   const methods = useForm<ProviderInput>({
@@ -179,7 +179,7 @@ LenderForm.defaultProps = {
 };
 
 export function LoadLender() {
-  const t = useT();
+  const { t } = useT();
   const [queryError, setQueryError] = useState<string>("");
 
   const { id } = useParamsTypeSafe(

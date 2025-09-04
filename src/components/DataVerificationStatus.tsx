@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 
 import CheckGreen from "../assets/icons/check-green.svg";
 import WarnRed from "../assets/icons/warn-red.svg";
@@ -22,7 +22,7 @@ interface DataVerificationStatusProps {
 }
 
 export function DataVerificationStatus({ verified, name, customLabel }: DataVerificationStatusProps) {
-  const t = useT();
+  const { t } = useT();
 
   return (
     <Box className="py-2 flex flex-row">

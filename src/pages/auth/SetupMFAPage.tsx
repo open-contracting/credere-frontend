@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Container } from "@mui/material";
-import { useT } from "@transifex/react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import QRCode from "react-qr-code";
 import { useParamsTypeSafe, useSearchParamsTypeSafe } from "src/hooks/useParamsTypeSafe";
 import useSetupMFA from "src/hooks/useSetupMFA";
@@ -13,7 +13,7 @@ import Title from "src/stories/title/Title";
 import { z } from "zod";
 
 export function SetupMFAPage() {
-  const t = useT();
+  const { t } = useT();
   const { setupMFAMutation, isLoading } = useSetupMFA();
 
   const { secret, session } = useParamsTypeSafe(

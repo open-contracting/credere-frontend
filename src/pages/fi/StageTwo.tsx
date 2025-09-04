@@ -1,8 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Dialog } from "@mui/material";
-import { useT } from "@transifex/react";
 import { useEffect, useState } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import EmailIcon from "src/assets/icons/email.svg";
 import StepImageEN from "src/assets/pages/en/stage-two.svg";
@@ -21,7 +21,7 @@ import FormInput from "../../stories/form-input/FormInput";
 import LinkButton from "../../stories/link-button/LinkButton";
 
 export function StageTwo() {
-  const t = useT();
+  const { t } = useT();
   const [openEmailDialog, setOpenEmailDialog] = useState<boolean>(false);
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();

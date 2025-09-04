@@ -1,6 +1,6 @@
 import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useT } from "@transifex/react";
 import { useEffect, useState } from "react";
+import { useTranslation as useT } from "react-i18next";
 
 import useDownloadDocument from "../hooks/useDownloadDocument";
 import useVerifyDocument from "../hooks/useVerifyDocument";
@@ -21,7 +21,7 @@ export function ApplicationDocumentTable({
   allowDataVerification = false,
   className,
 }: ApplicationDocumentTableProps) {
-  const t = useT();
+  const { t } = useT();
   const [idToDownload, setIdToDownload] = useState<number | undefined>();
   const [filename, setFilename] = useState<string | undefined>();
   const { downloadedDocument, isLoading } = useDownloadDocument(idToDownload);

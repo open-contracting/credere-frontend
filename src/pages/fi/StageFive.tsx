@@ -1,8 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
-import { useT } from "@transifex/react";
 import { useState } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import StepImageEN from "src/assets/pages/en/stage-five.svg";
 import StepImageES from "src/assets/pages/es/stage-five.svg";
@@ -24,7 +24,7 @@ import LapseApplicationDialog from "./LapseApplicationDialog";
 import RejectApplicationDialog from "./RejectApplicationDialog";
 
 export function StageFive() {
-  const t = useT();
+  const { t } = useT();
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;
@@ -100,7 +100,7 @@ export function StageFive() {
           <Checkbox
             name="compliant_checks_completed"
             defaultValue={false}
-            label={t("Compliance checks have been completed for {legal_name} and all company directors", {
+            label={t("Compliance checks have been completed for {{legal_name}} and all company directors", {
               legal_name: application?.borrower.legal_name,
             })}
           />
@@ -108,7 +108,7 @@ export function StageFive() {
             className="mb-8"
             name="compliant_checks_passed"
             defaultValue={false}
-            label={t("{legal_name} has passed compliance checks", { legal_name: application?.borrower.legal_name })}
+            label={t("{{legal_name}} has passed compliance checks", { legal_name: application?.borrower.legal_name })}
           />
           <FormInput
             className="md:w-2/5"

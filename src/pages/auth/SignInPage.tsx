@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Container } from "@mui/material";
-import { useT } from "@transifex/react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { Link } from "react-router-dom";
 import useSignIn from "src/hooks/useSignIn";
 import { type LoginInput, loginSchema } from "src/schemas/auth";
@@ -11,7 +11,7 @@ import Text from "src/stories/text/Text";
 import Title from "src/stories/title/Title";
 
 export function SignInPage() {
-  const t = useT();
+  const { t } = useT();
   const { signInMutation, isLoading } = useSignIn();
 
   const methods = useForm<LoginInput>({

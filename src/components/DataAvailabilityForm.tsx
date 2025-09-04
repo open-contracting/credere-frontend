@@ -1,10 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Collapse } from "@mui/material";
-import { t as tNative } from "@transifex/native";
-import { useT } from "@transifex/react";
 import { useState } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
-import { type TypeOf, object, string } from "zod";
+import { useTranslation as useT } from "react-i18next";
+import { type TypeOf, z } from "zod";
+import { t as tNative } from "../util/i18n";
 
 import FormInput from "../stories/form-input/FormInput";
 import LinkButton from "../stories/link-button/LinkButton";
@@ -19,8 +19,8 @@ interface DataAvailabilityFormProps {
   readonly: boolean;
 }
 
-const formCellSchema = object({
-  value: string().min(1, tNative("This field is required")),
+const formCellSchema = z.object({
+  value: z.string().min(1, tNative("This field is required")),
 });
 
 type FormCellInput = TypeOf<typeof formCellSchema>;
@@ -33,7 +33,7 @@ export function DataAvailabilityForm({
   type,
   updateValue,
 }: DataAvailabilityFormProps) {
-  const t = useT();
+  const { t } = useT();
   const [open, setOpen] = useState(false);
 
   const methods = useForm<FormCellInput>({

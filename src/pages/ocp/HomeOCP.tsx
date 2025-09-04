@@ -1,8 +1,8 @@
 import { Container, MenuItem, Select, type SelectChangeEvent } from "@mui/material";
-import { useT } from "@transifex/react";
 import dayjs, { type Dayjs } from "dayjs";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
+import { useTranslation as useT } from "react-i18next";
 import { Link } from "react-router-dom";
 import useConstants from "src/hooks/useConstants";
 import Button from "src/stories/button/Button";
@@ -23,7 +23,7 @@ import Loader from "../../stories/loader/Loader";
 import { formatCurrency, formatDateForFileName } from "../../util";
 
 export function HomeOCP() {
-  const t = useT();
+  const { t } = useT();
   const constants = useConstants();
   const { data, isLoading } = useGetStatisticsOCPoptIn();
 

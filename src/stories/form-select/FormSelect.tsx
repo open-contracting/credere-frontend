@@ -1,7 +1,7 @@
 import { FormControl, FormHelperText, MenuItem, Select } from "@mui/material";
-import { useT } from "@transifex/react";
 import { useMemo } from "react";
 import { Controller, useFormContext } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 
 import { getProperty } from "../../util";
 import { type FieldErrorType, Input } from "../form-input/FormInput";
@@ -34,7 +34,7 @@ export function FormSelect({
   renderOption = defaultRenderOption,
   options,
 }: FormSelectProps) {
-  const t = useT();
+  const { t } = useT();
   const {
     control,
     formState: { errors },
@@ -83,7 +83,7 @@ export function FormSelect({
           </Select>
 
           <FormHelperText className="text-red text-base mx-0" error={!!fieldError}>{`${
-            fieldError ? t(fieldError?.message) : ""
+            fieldError?.message ? t(`${fieldError.message}`) : ""
           }`}</FormHelperText>
         </FormControl>
       )}

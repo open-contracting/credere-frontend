@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useTranslation as useT } from "react-i18next";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
 
@@ -15,7 +15,7 @@ import Loader from "../stories/loader/Loader";
 import PublicPageLayout from "./PublicPageLayout";
 
 export default function PublicApplicationLayout() {
-  const t = useT();
+  const { t } = useT();
   const navigate = useNavigate();
   const location = useLocation();
   const [queryError, setQueryError] = useState<string>("");

@@ -1,16 +1,13 @@
-import { t } from "@transifex/native";
-import { type TypeOf, coerce, nativeEnum, object, string } from "zod";
+import { type TypeOf, z } from "zod";
 
 import { USER_TYPES } from "../constants";
 import type { ILender } from "./application";
 
-export const emailSchema = string().min(1, t("Email address is required")).email(t("Email Address is invalid"));
-const passwordSchema = string()
-  .min(1, t("Password is required"))
-  .min(14, t("Password must be more than 14 characters"));
-const otp = string().min(6, t("OTP length must be 6 digits")).max(6, t("OTP length must be 6 digits"));
+export const emailSchema = z.string().min(1, "Email address is required").email("Email Address is invalid");
+const passwordSchema = z.string().min(1, "Password is required").min(14, "Password must be more than 14 characters");
+const otp = z.string().min(6, "OTP length must be 6 digits").max(6, "OTP length must be 6 digits");
 
-export const loginSchema = object({
+export const loginSchema = z.object({
   username: emailSchema,
   password: passwordSchema,
   temp_password: otp,
@@ -18,7 +15,7 @@ export const loginSchema = object({
 
 export type LoginInput = TypeOf<typeof loginSchema>;
 
-export const setupMFASchema = object({
+export const setupMFASchema = z.object({
   temp_password: otp,
 });
 
@@ -29,36 +26,38 @@ export interface SetupMFAInput {
   session: string;
 }
 
-const nameSchema = string().nonempty(t("Full name is required"));
+const nameSchema = z.string().nonempty("Full name is required");
 
-export const createUserSchema = object({
+export const createUserSchema = z.object({
   name: nameSchema,
   email: emailSchema,
-  type: nativeEnum(USER_TYPES, {
+  type: z.nativeEnum(USER_TYPES, {
     errorMap: (issue) => {
       switch (issue.code) {
         case "invalid_type":
         case "invalid_enum_value":
-          return { message: t("Type of user is required") };
+          return { message: "Type of user is required" };
         default:
-          return { message: t("Select an option") };
+          return { message: "Select an option" };
       }
     },
   }),
-  lender_id: coerce.number().positive().optional(),
+  lender_id: z.coerce.number().positive().optional(),
 });
 
 export type CreateUserInput = TypeOf<typeof createUserSchema>;
 
 export type UpdateUserInput = Omit<CreateUserInput, "email"> & { id: string | undefined };
 
-export const setPasswordSchema = object({
-  password: passwordSchema,
-  passwordConfirm: string().min(1, t("Please confirm your password")),
-}).refine((data) => data.password === data.passwordConfirm, {
-  path: ["passwordConfirm"],
-  message: t("Passwords do not match"),
-});
+export const setPasswordSchema = z
+  .object({
+    password: passwordSchema,
+    passwordConfirm: z.string().min(1, "Please confirm your password"),
+  })
+  .refine((data) => data.password === data.passwordConfirm, {
+    path: ["passwordConfirm"],
+    message: "Passwords do not match",
+  });
 
 export type UpdatePasswordInput = TypeOf<typeof setPasswordSchema>;
 export type UpdatePasswordPayload = {
@@ -67,7 +66,7 @@ export type UpdatePasswordPayload = {
   password: string;
 };
 
-export const resetPasswordSchema = object({
+export const resetPasswordSchema = z.object({
   username: emailSchema,
 });
 

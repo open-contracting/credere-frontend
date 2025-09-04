@@ -1,6 +1,6 @@
 import { type UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { findAlternativeCreditOptionFn } from "../api/public";
@@ -20,7 +20,7 @@ type IUseConfirmFindAlternativeCredit = {
 };
 
 export default function useConfirmFindAlternativeCredit(): IUseConfirmFindAlternativeCredit {
-  const t = useT();
+  const { t } = useT();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const applicationContext = useApplicationContext();
@@ -38,7 +38,7 @@ export default function useConfirmFindAlternativeCredit(): IUseConfirmFindAltern
       navigate(`/application/${data.application.uuid}/credit-options`);
     },
     onError: (error) => {
-      handleRequestError(error, enqueueSnackbar, t("Error creating new application. {error}", { error }));
+      handleRequestError(error, enqueueSnackbar, t("Error creating new application. {{error}}", { error }));
     },
   });
 

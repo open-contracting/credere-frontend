@@ -1,5 +1,5 @@
-import { useT } from "@transifex/react";
 import type { PropsWithChildren } from "react";
+import { useTranslation as useT } from "react-i18next";
 import { Navigate } from "react-router-dom";
 
 import type { USER_TYPES } from "../constants";
@@ -11,7 +11,7 @@ export interface ProtectedRouteProps extends PropsWithChildren {
 
 export default function ProtectedRoute({ children, requiredUserType }: ProtectedRouteProps) {
   const user = useUser();
-  const t = useT();
+  const { t } = useT();
 
   if (!user) return <Navigate to="/login" replace />;
   if (requiredUserType && requiredUserType !== user.type) {

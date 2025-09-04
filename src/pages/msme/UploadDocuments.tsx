@@ -1,8 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
-import { useT } from "@transifex/react";
 import { useEffect, useMemo, useState } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ConfirmIcon from "src/assets/icons/confirm.svg";
 import EditIcon from "src/assets/icons/edit.svg";
@@ -24,7 +24,7 @@ import FormInput from "../../stories/form-input/FormInput";
 import LinkButton from "../../stories/link-button/LinkButton";
 
 function UploadDocuments() {
-  const t = useT();
+  const { t } = useT();
   const constants = useConstants();
   const navigate = useNavigate();
   const [editEmail, setEditEmail] = useState<boolean>(false);

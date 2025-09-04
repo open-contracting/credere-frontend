@@ -1,5 +1,5 @@
-import { t } from "@transifex/native";
 import { Link } from "react-router-dom";
+import { t } from "../util/i18n";
 
 import type { ICreditProduct } from "../schemas/application";
 import LinkButton from "../stories/link-button/LinkButton";

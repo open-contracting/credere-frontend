@@ -1,4 +1,4 @@
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import StepImageEN from "src/assets/pages/en/stage-four.svg";
 import StepImageES from "src/assets/pages/es/stage-four.svg";
@@ -14,7 +14,7 @@ import useLangContext from "../../hooks/useLangContext";
 import LinkButton from "../../stories/link-button/LinkButton";
 
 export function StageFour() {
-  const t = useT();
+  const { t } = useT();
   const navigate = useNavigate();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;

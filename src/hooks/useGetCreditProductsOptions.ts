@@ -1,7 +1,7 @@
 import { type UseMutateFunction, useMutation } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 
 import { getCreditProductOptionsFn } from "../api/public";
 import type { GetCreditProductsOptionsInput, IApplicationCreditOptions } from "../schemas/application";
@@ -18,7 +18,7 @@ type IUseGetCreditProductsOptions = {
 };
 
 export default function useGetCreditProductsOptions(): IUseGetCreditProductsOptions {
-  const t = useT();
+  const { t } = useT();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -33,12 +33,12 @@ export default function useGetCreditProductsOptions(): IUseGetCreditProductsOpti
       onError: (error) => {
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.data?.detail) {
-            enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+            enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
               variant: "error",
             });
           }
         } else {
-          enqueueSnackbar(t("Error getting credit product options. {error}", { error }), {
+          enqueueSnackbar(t("Error getting credit product options. {{error}}", { error }), {
             variant: "error",
           });
         }

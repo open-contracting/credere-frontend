@@ -1,6 +1,6 @@
 import { type UseMutateFunction, useMutation } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { updatePasswordFn } from "../api/auth";
@@ -11,7 +11,7 @@ type IUseUpdatePassword = UseMutateFunction<IUpdatePasswordResponse, unknown, Up
 export default function useUpdatePassword(): IUseUpdatePassword {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-  const t = useT();
+  const { t } = useT();
 
   const { mutate: updatePasswordMutation } = useMutation<
     IUpdatePasswordResponse,

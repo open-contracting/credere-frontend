@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { t } from "@transifex/native";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { t } from "../util/i18n";
 
 import { getLendersFn } from "../api/private";
 import { QUERY_KEYS } from "../constants";
@@ -62,7 +62,7 @@ export function LenderList() {
     retry: 1,
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response && error.response.data && error.response.data.detail) {
-        enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+        enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
           variant: "error",
         });
       } else {
