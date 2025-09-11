@@ -38,7 +38,7 @@
     "@storybook/addon-styling": "^1.0.8",
     "@storybook/blocks": "^7.0.18",
     "@storybook/react": "^7.0.18",
-    "@storybook/react-vite": "^7.0.18",
+    "@storybook/react-vite": "^9.1.5",
     "@storybook/testing-library": "^0.1.0",
     "@types/lodash": "^4.14.194",
     "@types/react": "^18.0.28",
@@ -51,7 +51,7 @@
     "storybook": "^7.0.18",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.0.2",
-    "vite": "^4.5.14",
+    "vite": "^7.1.5",
     "vite-plugin-checker": "^0.6.0",
     "vite-tsconfig-paths": "^4.2.0"
   }
