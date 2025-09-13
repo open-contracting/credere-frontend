@@ -14,7 +14,7 @@
     "@transifex/cli": "^7.1.0",
     "@transifex/native": "^7.1.0",
     "@transifex/react": "^7.1.0",
-    "axios": "^1.11.0",
+    "axios": "^1.12.1",
     "dayjs": "^1.11.8",
     "lodash": "^4.17.21",
     "notistack": "^3.0.1",
