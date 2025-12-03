@@ -1,16 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import { t } from "@transifex/native";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { renderUserType } from "src/util";
-
 import { getUsersFn } from "../api/private";
 import { PAGE_SIZES, QUERY_KEYS } from "../constants";
 import { EXTENDED_USER_FROM, type IExtendedUser, type PaginationInput } from "../schemas/application";
 import type { IUser, IUsersListResponse } from "../schemas/auth";
 import LinkButton from "../stories/link-button/LinkButton";
+import { t } from "../util/i18n";
 import { DataTable, type HeadCell, type Order } from "./DataTable";
 
 type ExtendendUser = IUser & IExtendedUser;
@@ -103,7 +102,7 @@ export function UserList() {
     retry: 1,
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response && error.response.data && error.response.data.detail) {
-        enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+        enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
           variant: "error",
         });
       } else {

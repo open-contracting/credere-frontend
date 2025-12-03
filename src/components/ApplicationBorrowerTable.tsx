@@ -1,10 +1,10 @@
 import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 
 import useUpdateBorrower from "../hooks/useUpdateBorrower";
 import useVerifyDataField from "../hooks/useVerifyDataField";
 import type { IApplication, IUpdateBorrower } from "../schemas/application";
-import { RenderSector, RenderSize, formatCurrency } from "../util";
+import { formatCurrency, RenderSector, RenderSize } from "../util";
 import ApplicationTableDataBorrowerRow from "./ApplicationTableDataBorrowerRow";
 import { DataTableHeadCell, DataTableHeadLabel } from "./DataTable";
 
@@ -21,7 +21,7 @@ export function ApplicationBorrowerTable({
   allowDataVerification = false,
   className,
 }: ApplicationBorrowerTableProps) {
-  const t = useT();
+  const { t } = useT();
   const { updateBorrowerMutation, isLoading } = useUpdateBorrower();
   const { verifyDataFieldMutation, isLoading: isLoadingVerifyDataField } = useVerifyDataField();
 

@@ -1,10 +1,9 @@
 import { Box, Dialog } from "@mui/material";
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
+import useLapseApplication from "src/hooks/useLapseApplication";
 import useApplicationContext from "src/hooks/useSecureApplicationContext";
 import Button from "src/stories/button/Button";
 import Title from "src/stories/title/Title";
-
-import useLapseApplication from "src/hooks/useLapseApplication";
 
 export interface LapseApplicationDialogProps {
   open: boolean;
@@ -12,7 +11,7 @@ export interface LapseApplicationDialogProps {
 }
 
 export function LapseApplicationDialog({ open, handleClose }: LapseApplicationDialogProps) {
-  const t = useT();
+  const { t } = useT();
   const applicationContext = useApplicationContext();
   const application = applicationContext.state.data;
   const { isLoading, lapseApplicationMutation } = useLapseApplication();

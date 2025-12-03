@@ -1,6 +1,6 @@
 import { Box, Container, Toolbar, useMediaQuery } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import { Link } from "react-router-dom";
 import Text from "src/stories/text/Text";
 
@@ -23,7 +23,7 @@ const styleWithMobileLogoStrive = {
 };
 
 export function AppBar({ auth = true, logout }: AppBarProps) {
-  const t = useT();
+  const { t } = useT();
   const matches = useMediaQuery("(min-width:600px)");
 
   return (

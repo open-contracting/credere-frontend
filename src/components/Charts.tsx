@@ -1,9 +1,8 @@
-import { t } from "@transifex/native";
 import { useMemo } from "react";
 import { Bar, BarChart, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
-
 import { COLORS } from "../constants";
 import type { ChartData } from "../schemas/statitics";
+import { t } from "../util/i18n";
 
 interface ChartsProps {
   data: ChartData[];

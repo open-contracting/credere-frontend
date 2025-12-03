@@ -1,6 +1,6 @@
 import { Box, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useT } from "@transifex/react";
 import { useState } from "react";
+import { useTranslation as useT } from "react-i18next";
 import Minus from "src/assets/icons/minus.svg";
 import Plus from "src/assets/icons/plus.svg";
 
@@ -35,7 +35,7 @@ export function ApplicationTableDataPreviousAwardRow({
   previousAwards,
   preWhitespace,
 }: ApplicationTableDataPreviousAwardRowProps) {
-  const t = useT();
+  const { t } = useT();
   const { formatDateFromString } = useLocalizedDateFormatter();
 
   const [open, setOpen] = useState(false);
@@ -55,7 +55,7 @@ export function ApplicationTableDataPreviousAwardRow({
         {!missing && (
           <DataTableCell className={preWhitespace ? "whitespace-pre" : ""}>
             <Box className="flex flex-row items-center justify-between" onClick={handleToggle}>
-              {t("Data available for {previos_awards_count} previous contracts", {
+              {t("Data available for {{previos_awards_count}} previous contracts", {
                 previos_awards_count: previousAwards?.length,
               })}
               <Box className="self-end">{getIcon(open)}</Box>

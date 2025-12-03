@@ -9,12 +9,12 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import { useT } from "@transifex/react";
 import * as React from "react";
 import { useEffect, useMemo } from "react";
+import { useTranslation as useT } from "react-i18next";
+import SorterIcon from "src/assets/icons/sorter.svg";
 import SorterDownIcon from "src/assets/icons/sorter-down.svg";
 import SorterUpIcon from "src/assets/icons/sorter-up.svg";
-import SorterIcon from "src/assets/icons/sorter.svg";
 import { twMerge } from "tailwind-merge";
 
 import { PAGE_SIZES } from "../constants";
@@ -136,7 +136,7 @@ function DataTableHead<T>({
   onRequestSort,
   headCells,
 }: DataTableHeadProps<T>) {
-  const t = useT();
+  const { t } = useT();
 
   const createSortHandler = (property: Extract<keyof T, string>) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property);
@@ -218,7 +218,7 @@ export function DataTable<T>({
   actions,
   isLoading,
 }: DataTableProps<T>) {
-  const t = useT();
+  const { t } = useT();
   const { formatDateFromString } = useLocalizedDateFormatter();
   const [visibleRows, setVisibleRows] = React.useState<T[]>(rows);
   const [order, setOrder] = React.useState<Order>("asc");
@@ -304,7 +304,7 @@ export function DataTable<T>({
                   {headCells.map((headCell) => (
                     <DataTableCell key={`${String(`${row[headCell.id]}-${index}-${headCell.id}`)}`}>
                       {headCell.type === "label" && renderValue(row, headCell)}
-                      {headCell.type !== "date" && headCell.type !== "label" && t(renderValue(row, headCell))}
+                      {headCell.type !== "date" && headCell.type !== "label" && t(`${renderValue(row, headCell)}`)}
                       {headCell.type === "date" && formatDateFromString(String(row[headCell.id]))}
                     </DataTableCell>
                   ))}

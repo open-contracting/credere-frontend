@@ -1,11 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Button } from "src/stories/button/Button";
 import FormInput from "src/stories/form-input/FormInput";
@@ -14,11 +14,11 @@ import Title from "src/stories/title/Title";
 import { z } from "zod";
 
 import { getLendersFn, getUserFn } from "../../api/private";
-import { QUERY_KEYS, USER_TYPES, USER_TYPE_OPTIONS } from "../../constants";
+import { QUERY_KEYS, USER_TYPE_OPTIONS, USER_TYPES } from "../../constants";
 import { useParamsTypeSafe } from "../../hooks/useParamsTypeSafe";
 import useUpsertUser from "../../hooks/useUpsertUser";
 import type { ILender, ILenderListResponse } from "../../schemas/application";
-import { type CreateUserInput, type IUser, createUserSchema } from "../../schemas/auth";
+import { type CreateUserInput, createUserSchema, type IUser } from "../../schemas/auth";
 import Loader from "../../stories/loader/Loader";
 import ApplicationErrorPage from "../msme/ApplicationErrorPage";
 
@@ -26,7 +26,7 @@ export interface UserFormProps {
   user?: IUser | null;
 }
 export function UserForm({ user }: UserFormProps) {
-  const t = useT();
+  const { t } = useT();
   const { createUserMutation, updateUserMutation, isLoading } = useUpsertUser();
 
   const [options, setOptions] = useState<FormSelectOption[]>([]);
@@ -49,7 +49,7 @@ export function UserForm({ user }: UserFormProps) {
     retry: 1,
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response && error.response.data && error.response.data.detail) {
-        enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+        enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
           variant: "error",
         });
       } else {
@@ -162,7 +162,7 @@ UserForm.defaultProps = {
 };
 
 export function LoadUser() {
-  const t = useT();
+  const { t } = useT();
   const [queryError, setQueryError] = useState<string>("");
 
   const { id } = useParamsTypeSafe(

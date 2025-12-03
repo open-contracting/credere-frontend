@@ -1,7 +1,7 @@
 import { type UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { declineApplicationFeedbackFn, declineApplicationRollbackFn } from "../api/public";
@@ -16,7 +16,7 @@ type IUseDeclineFeedbackApplication = {
 };
 
 export default function useDeclineFeedbackApplication(): IUseDeclineFeedbackApplication {
-  const t = useT();
+  const { t } = useT();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const applicationContext = useApplicationContext();
@@ -36,12 +36,12 @@ export default function useDeclineFeedbackApplication(): IUseDeclineFeedbackAppl
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data?.detail) {
-          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
             variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t("Error on the decline feedback. {error}", { error }), {
+        enqueueSnackbar(t("Error on the decline feedback. {{error}}", { error }), {
           variant: "error",
         });
       }
@@ -62,12 +62,12 @@ export default function useDeclineFeedbackApplication(): IUseDeclineFeedbackAppl
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.data?.detail) {
-          enqueueSnackbar(t("Error: {error}", { error: error.response.data.detail }), {
+          enqueueSnackbar(t("Error: {{error}}", { error: error.response.data.detail }), {
             variant: "error",
           });
         }
       } else {
-        enqueueSnackbar(t("Error on rollback declined application. {error}", { error }), {
+        enqueueSnackbar(t("Error on rollback declined application. {{error}}", { error }), {
           variant: "error",
         });
       }

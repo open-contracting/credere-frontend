@@ -1,5 +1,5 @@
 import { CssBaseline } from "@mui/material";
-import { StyledEngineProvider, ThemeProvider, createTheme } from "@mui/material/styles";
+import { createTheme, StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
 import { SnackbarProvider } from "notistack";
 import type { ReactNode } from "react";
 
@@ -80,7 +80,7 @@ const theme = createTheme({
         },
       },
     },
-    // @ts-ignore
+    // @ts-expect-error
     MuiPickersDay: {
       styleOverrides: {
         root: {

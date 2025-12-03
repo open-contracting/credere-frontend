@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
-import { useT } from "@transifex/react";
 import { useEffect, useState } from "react";
+import { useTranslation as useT } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import NeedHelpComponent from "src/components/NeedHelpComponent";
 import FAQ_QUESTIONS from "src/constants/faq-questions";
@@ -11,7 +11,7 @@ import Title from "src/stories/title/Title";
 import Button from "../../stories/button/Button";
 
 function FrequentlyAskedQuestionsPage() {
-  const t = useT();
+  const { t } = useT();
   const navigate = useNavigate();
 
   const [open, setOpen] = useState<Record<string, boolean>>({});

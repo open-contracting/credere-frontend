@@ -1,13 +1,12 @@
-import { t as tNative } from "@transifex/native";
-import { useT } from "@transifex/react";
 import { useSnackbar } from "notistack";
 import { useEffect } from "react";
 import { ErrorCode, useDropzone } from "react-dropzone";
+import { useTranslation as useT } from "react-i18next";
 import Cloud from "src/assets/icons/cloud.svg";
 import Button from "src/stories/button/Button";
 import Text from "src/stories/text/Text";
-
 import { Progress } from "../stories/loader/Loader";
+import { t as tNative } from "../util/i18n";
 
 interface FileUploaderProps {
   className?: string;
@@ -24,7 +23,7 @@ const fileUploadErrorsMap = {
 };
 
 export function FileUploader({ className, loading, onAcceptedFile }: FileUploaderProps) {
-  const t = useT();
+  const { t } = useT();
   const { enqueueSnackbar } = useSnackbar();
 
   const {
@@ -56,15 +55,15 @@ export function FileUploader({ className, loading, onAcceptedFile }: FileUploade
     fileRejections.forEach((file) => {
       let errorMessage = "";
       file.errors.forEach((error) => {
-        // @ts-ignore
+        // @ts-expect-error
         if (fileUploadErrorsMap[error.code]) {
-          // @ts-ignore
+          // @ts-expect-error
           errorMessage += `${t(fileUploadErrorsMap[error.code])}.\n`;
         } else {
           errorMessage += `${error.message}.\n`;
         }
       });
-      enqueueSnackbar(t("File not uploaded: {errorMessage}", { errorMessage }), {
+      enqueueSnackbar(t("File not uploaded: {{errorMessage}}", { errorMessage }), {
         variant: "error",
       });
     });

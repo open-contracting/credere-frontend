@@ -1,7 +1,7 @@
 import { type UseMutateFunction, useMutation } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { setupMFAFn } from "../api/auth";
@@ -15,7 +15,7 @@ type IUseSetupMFA = {
 export default function useSetupMFA(): IUseSetupMFA {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const t = useT();
+  const { t } = useT();
   const { mutate: setupMFAMutation, isLoading } = useMutation<IResponse, unknown, SetupMFAInput, unknown>(
     (payload) => setupMFAFn(payload),
     {

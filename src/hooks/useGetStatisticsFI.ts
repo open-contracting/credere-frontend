@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import { useSnackbar } from "notistack";
+import { useTranslation as useT } from "react-i18next";
 
 import { getStatisticsFI } from "../api/private";
 import { QUERY_KEYS } from "../constants";
@@ -13,7 +13,7 @@ type IUseGetStatisticsFI = {
 };
 
 export default function useGetStatisticsFI(): IUseGetStatisticsFI {
-  const t = useT();
+  const { t } = useT();
   const { enqueueSnackbar } = useSnackbar();
 
   const { data, isLoading } = useQuery<StatisticsFI>({
@@ -21,7 +21,7 @@ export default function useGetStatisticsFI(): IUseGetStatisticsFI {
     queryFn: () => getStatisticsFI(),
     onSuccess: (dataResult) => dataResult,
     onError: (error) => {
-      handleRequestError(error, enqueueSnackbar, t("Error getting statistics for fi. {error}", { error }));
+      handleRequestError(error, enqueueSnackbar, t("Error getting statistics for fi. {{error}}", { error }));
     },
   });
 

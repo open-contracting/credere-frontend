@@ -1,6 +1,5 @@
-import { t } from "@transifex/native";
-
 import type { FormSelectOption } from "../stories/form-select/FormSelect";
+import { t } from "../util/i18n";
 
 export const COLORS: { [key: string]: string } = {
   grass: "#D6E100",
@@ -133,4 +132,9 @@ export const USER_TYPE_OPTIONS: FormSelectOption[] = [
     value: USER_TYPES.FI,
     label: t("FI User"),
   },
+];
+
+export const AVAILABLE_LANGUAGES: FormSelectOption[] = [
+  { label: "English", value: "en" },
+  { label: "Español", value: "es" },
 ];

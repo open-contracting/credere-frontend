@@ -1,12 +1,11 @@
-import { t } from "@transifex/native";
 import dayjs from "dayjs";
 import lodash from "lodash";
 import { createElement } from "react";
 import useConstants from "src/hooks/useConstants";
-
 import { CREDIT_PRODUCT_OPTIONS, LENDER_TYPES, USER_TYPE_OPTIONS } from "../constants";
 import CURRENCY_FORMAT_OPTIONS from "../constants/intl";
 import type { FormSelectOption } from "../stories/form-select/FormSelect";
+import { t } from "../util/i18n";
 
 const dateFormatOptions: Intl.DateTimeFormatOptions = {
   month: "long", // Display full month name

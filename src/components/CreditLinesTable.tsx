@@ -1,5 +1,5 @@
 import { Box, Link as MUILink, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import Text from "src/stories/text/Text";
 
@@ -16,7 +16,7 @@ export interface CreditLinesTableProps {
 }
 
 export function CreditLinesTable({ rows, currency, isLoading, selectOption }: CreditLinesTableProps) {
-  const t = useT();
+  const { t } = useT();
 
   if (!rows.length && !isLoading) {
     return <Text>{t("No credit line options available")}</Text>;

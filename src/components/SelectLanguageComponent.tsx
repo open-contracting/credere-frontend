@@ -1,13 +1,12 @@
-import { MenuItem, Select, Input as _Input } from "@mui/material";
+import { Input as _Input, MenuItem, Select } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { t as tNative, tx } from "@transifex/native";
-import { useLanguages, useT } from "@transifex/react";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
-
-import { COLORS, DISPATCH_ACTIONS } from "../constants";
+import { useTranslation as useT } from "react-i18next";
+import { AVAILABLE_LANGUAGES, COLORS, DISPATCH_ACTIONS } from "../constants";
 import useLangContext from "../hooks/useLangContext";
 import type { FormSelectOption } from "../stories/form-select/FormSelect";
+import { t as tNative } from "../util/i18n";
 
 export const InputSelectSmall = styled(_Input)`
   background-color: white;
@@ -29,22 +28,11 @@ const loadingOption: FormSelectOption = {
 };
 
 function SelectLanguageComponent() {
-  const t = useT();
-  const languages = useLanguages();
+  const { t, i18n } = useT();
   const langContext = useLangContext();
   const [value, setValue] = useState<string>(loadingOption.value);
-  const [options, setOptions] = useState<FormSelectOption[]>([]);
+  const [options] = useState<FormSelectOption[]>(AVAILABLE_LANGUAGES);
   const { enqueueSnackbar } = useSnackbar();
-
-  useEffect(() => {
-    if (languages && languages.length > 0) {
-      const optionsChecked: FormSelectOption[] = languages.map((lang: any) => ({
-        label: lang.localized_name,
-        value: lang.code,
-      }));
-      setOptions(optionsChecked);
-    }
-  }, [languages]);
 
   useEffect(() => {
     if (options && options.length > 0 && langContext.state.selected) {
@@ -55,9 +43,9 @@ function SelectLanguageComponent() {
   const onChange = (valueSelected: string) => {
     setValue(valueSelected);
     const selected = options.find((option) => option.value === valueSelected);
-    tx.setCurrentLocale(valueSelected);
+    i18n.changeLanguage(valueSelected);
     langContext.dispatch({ type: DISPATCH_ACTIONS.SET_LANG, payload: valueSelected });
-    enqueueSnackbar(t("Language changed to: {language}", { language: selected?.label }), {
+    enqueueSnackbar(t("Language changed to: {{language}}", { language: selected?.label }), {
       variant: "info",
     });
   };

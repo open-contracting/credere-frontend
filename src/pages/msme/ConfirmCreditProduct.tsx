@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useState } from "react";
+import { useTranslation as useT } from "react-i18next";
 import useApplicationContext from "src/hooks/useApplicationContext";
 import { Button } from "src/stories/button/Button";
 import Text from "src/stories/text/Text";
@@ -17,7 +17,7 @@ import Loader from "../../stories/loader/Loader";
 import ApplicationErrorPage from "./ApplicationErrorPage";
 
 function ConfirmCreditProduct() {
-  const t = useT();
+  const { t } = useT();
   const [queryError, setQueryError] = useState<string>("");
 
   const applicationContext = useApplicationContext();

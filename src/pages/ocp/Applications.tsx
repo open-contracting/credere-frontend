@@ -1,4 +1,4 @@
-import { useT } from "@transifex/react";
+import { useTranslation as useT } from "react-i18next";
 import { Link } from "react-router-dom";
 import Button from "src/stories/button/Button";
 import Text from "src/stories/text/Text";
@@ -8,7 +8,7 @@ import ApplicationsList from "../../components/ApplicationsList";
 import { USER_TYPES } from "../../constants";
 
 export function Applications() {
-  const t = useT();
+  const { t } = useT();
 
   return (
     <>

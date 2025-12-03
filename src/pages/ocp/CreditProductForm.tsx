@@ -1,10 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { useT } from "@transifex/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { Link } from "react-router-dom";
 import useConstants from "src/hooks/useConstants";
 import { type CreditProductInput, creditProductSchema } from "src/schemas/OCPsettings";
@@ -30,7 +30,7 @@ export interface CreditProductFormProps {
 }
 
 export function CreditProductForm({ creditProduct, lenderId }: CreditProductFormProps) {
-  const t = useT();
+  const { t } = useT();
   const constants = useConstants();
   const { createCreditProductMutation, updateCreditProductMutation, isLoading, isError } = useUpsertCreditProduct();
 
@@ -89,7 +89,7 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
         type="section"
         label={
           creditProduct
-            ? t("Edit Credit Product for {lenderName}", { lenderName: creditProduct.lender?.name })
+            ? t("Edit Credit Product for {{lenderName}}", { lenderName: creditProduct.lender?.name })
             : t("Add New Credit Product")
         }
         className="mb-6"
@@ -250,7 +250,7 @@ CreditProductForm.defaultProps = {
 };
 
 export function LoadCreditProduct() {
-  const t = useT();
+  const { t } = useT();
   const [queryError, setQueryError] = useState<string>("");
 
   const { id, lenderId } = useParamsTypeSafe(

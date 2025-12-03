@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@mui/material";
-import { useT } from "@transifex/react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation as useT } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import useConstants from "src/hooks/useConstants";
 import Text from "src/stories/text/Text";
@@ -17,7 +17,7 @@ import Button from "../../stories/button/Button";
 import Checkbox from "../../stories/checkbox/Checkbox";
 
 function ConfirmSubmission() {
-  const t = useT();
+  const { t } = useT();
   const constants = useConstants();
   const navigate = useNavigate();
   const { isLoading, submitApplicationMutation } = useSubmitApplication();
@@ -43,7 +43,7 @@ function ConfirmSubmission() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 md:col-span-2 md:mr-10">
           <Text className="mb-2">
-            {t("Please, confirm the data you will submit to Credere and {fi_name}.", {
+            {t("Please, confirm the data you will submit to Credere and {{fi_name}}.", {
               fi_name: applicationContext.state.data?.lender.name,
             })}
           </Text>
@@ -63,7 +63,7 @@ function ConfirmSubmission() {
           <Title
             type="subsection"
             className="mb-2 mt-8"
-            label={t("Documents to share with  {fi_name}.", {
+            label={t("Documents to share with  {{fi_name}}.", {
               fi_name: applicationContext.state.data?.lender.name,
             })}
           />
