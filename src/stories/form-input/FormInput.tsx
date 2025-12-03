@@ -242,7 +242,7 @@ FormInputError.defaultProps = {
   className: "",
 };
 
-const AUTH_LABELS_CLASSNAMES = "text-moodyBlue text-xl mb-3";
+const AUTH_LABELS_CLASSNAMES = "text-moody-blue text-xl mb-3";
 export function FormInput({
   name,
   label,

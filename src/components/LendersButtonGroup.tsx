@@ -40,7 +40,7 @@ export function LendersButtonGroup({ onLenderSelected }: LendersButtonGroupProps
     <Box className="py-2 flex flex-col">
       <ButtonGroup className="rounded-none" variant="outlined" aria-label="lender selector">
         <Button
-          className="bg-white text-moodyBlue font-medium"
+          className="bg-white text-moody-blue font-medium"
           label={t("All FIs")}
           primary={false}
           noIcon

@@ -29,7 +29,7 @@ export function Button<C extends React.ElementType>({
       startIcon={!noIcon ? <img src={icon} alt="button-icon" /> : undefined}
       className={twMerge(
         [
-          primary ? "bg-grass" : "bg-lightGray hover:bg-softGray",
+          primary ? "bg-grass" : "bg-light-gray hover:bg-soft-gray",
           "w-max text-lg text-darkest font-normal disabled:opacity-50",
           size === "large" ? "px-6 py-4" : "px-4 py-2",
           `normal-case ${className}`,

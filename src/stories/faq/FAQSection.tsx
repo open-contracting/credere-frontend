@@ -19,14 +19,14 @@ export function FAQSection({ title, className, children }: FAQSectionProps & Pro
 
   return (
     <Box
-      className={twMerge(`px-6 pt-4 pb-4 border-lightGray bg-white boder-b ${className}`)}
+      className={twMerge(`px-6 pt-4 pb-4 border-light-gray bg-white boder-b ${className}`)}
       sx={{
         display: "flex",
         flexDirection: "column",
         borderBottomStyle: "solid",
       }}
     >
-      <Box className="border-b-2 border-lightGray flex items-center cursor-pointer" onClick={handleToggle}>
+      <Box className="border-b-2 border-light-gray flex items-center cursor-pointer" onClick={handleToggle}>
         <Typography variant="h6" className="text-darkest text-base font-normal">
           {title}
         </Typography>

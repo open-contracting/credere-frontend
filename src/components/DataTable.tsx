@@ -100,7 +100,7 @@ export function DataTableHeadCell(props: TableCellProps) {
 }
 
 export function DataTableHeadLabel({ label }: { label: string }) {
-  return <span className="flex flex-row justify-between text-moodyBlue text-sm font-normal">{label}</span>;
+  return <span className="flex flex-row justify-between text-moody-blue text-sm font-normal">{label}</span>;
 }
 
 export function DataTableCell(props: TableCellProps) {
@@ -157,7 +157,7 @@ function DataTableHead<T>({
               <TableSortLabel
                 active={orderBy === headCell.id}
                 direction={orderBy === headCell.id ? order : "asc"}
-                className="flex flex-row justify-between text-moodyBlue text-sm font-normal"
+                className="flex flex-row justify-between text-moody-blue text-sm font-normal"
                 IconComponent={orderBy === headCell.id ? SorterDirection : Sorter}
                 onClick={createSortHandler(headCell.id)}
               >

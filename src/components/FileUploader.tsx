@@ -79,7 +79,7 @@ export function FileUploader({ className, loading, onAcceptedFile }: FileUploade
           <label
             htmlFor="dropzone-file"
             onClick={(e) => e.stopPropagation()}
-            className="flex flex-col items-center justify-center w-full h-64 border-1 border-fieldBorder border-dashed rounded-lg cursor-pointer bg-white dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100"
+            className="flex flex-col items-center justify-center w-full h-64 border border-field-border border-dashed rounded-lg cursor-pointer bg-white dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100"
           >
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
               <div className="flex flex-row items-center justify-center">
@@ -93,7 +93,7 @@ export function FileUploader({ className, loading, onAcceptedFile }: FileUploade
               <Button
                 noIcon
                 primary={false}
-                className="mt-4 border border-solid border-fieldBorder"
+                className="mt-4 border border-solid border-field-border"
                 label={t("Browse file")}
                 onClick={open}
               />

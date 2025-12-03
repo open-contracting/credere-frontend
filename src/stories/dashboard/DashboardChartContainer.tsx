@@ -22,7 +22,7 @@ export function DashboardChartContainer({
     <Container className={twMerge(`mb-6 px-0 ${className}`)}>
       <Box
         className={twMerge([
-          color === "default" ? "border-moodyBlue" : "border-red",
+          color === "default" ? "border-moody-blue" : "border-red",
           `px-6 pt-4 pb-10 border-solid border-2 overflow-hidden bg-white ${boxClassName}`,
         ])}
         sx={{

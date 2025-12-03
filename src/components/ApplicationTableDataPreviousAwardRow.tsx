@@ -70,10 +70,10 @@ export function ApplicationTableDataPreviousAwardRow({
       </TableRow>
       {open && (
         <TableRow>
-          <DataTableCell colSpan={3} className={open ? "bg-softGray" : ""}>
+          <DataTableCell colSpan={3} className={open ? "bg-soft-gray" : ""}>
             {isLoading && <Loader />}
             {!isLoading && (
-              <Paper elevation={0} square className="bg-softGray p-1">
+              <Paper elevation={0} square className="bg-soft-gray p-1">
                 <TableContainer>
                   <Table aria-labelledby="application-table" size="medium">
                     <TableHead>

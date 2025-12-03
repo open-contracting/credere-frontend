@@ -30,7 +30,7 @@ export function FAQContainer({
         }}
       >
         <Box
-          className="p-6 border-b border-lightGray bg-white"
+          className="p-6 border-b border-light-gray bg-white"
           sx={{
             borderBottomStyle: "solid",
           }}

@@ -42,7 +42,7 @@ export function FAQPageSection({
       </Box>
 
       <Collapse in={open}>
-        <Box className="mt-2 pl-8 pr-14 pt-8 pb-10 bg-lightGray">
+        <Box className="mt-2 pl-8 pr-14 pt-8 pb-10 bg-light-gray">
           <Text fontVariant className="text-darkest text-base font-normal">
             {children}
           </Text>
