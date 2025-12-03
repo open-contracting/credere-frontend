@@ -1,13 +1,12 @@
-import { MenuItem, Select, Input as _Input } from "@mui/material";
+import { Input as _Input, MenuItem, Select } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { useTranslation as useT } from "react-i18next";
-import { t as tNative } from "../util/i18n";
-
 import { AVAILABLE_LANGUAGES, COLORS, DISPATCH_ACTIONS } from "../constants";
 import useLangContext from "../hooks/useLangContext";
 import type { FormSelectOption } from "../stories/form-select/FormSelect";
+import { t as tNative } from "../util/i18n";
 
 export const InputSelectSmall = styled(_Input)`
   background-color: white;

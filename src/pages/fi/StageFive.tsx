@@ -19,7 +19,7 @@ import Reject from "../../assets/icons/reject.svg";
 import CreditProductReview from "../../components/CreditProductReview";
 import useApproveApplication from "../../hooks/useApproveApplication";
 import useLangContext from "../../hooks/useLangContext";
-import { type ApproveApplicationInput, type FormApprovedInput, approveSchema } from "../../schemas/application";
+import { type ApproveApplicationInput, approveSchema, type FormApprovedInput } from "../../schemas/application";
 import LapseApplicationDialog from "./LapseApplicationDialog";
 import RejectApplicationDialog from "./RejectApplicationDialog";
 

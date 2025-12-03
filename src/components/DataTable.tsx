@@ -12,9 +12,9 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import * as React from "react";
 import { useEffect, useMemo } from "react";
 import { useTranslation as useT } from "react-i18next";
+import SorterIcon from "src/assets/icons/sorter.svg";
 import SorterDownIcon from "src/assets/icons/sorter-down.svg";
 import SorterUpIcon from "src/assets/icons/sorter-up.svg";
-import SorterIcon from "src/assets/icons/sorter.svg";
 import { twMerge } from "tailwind-merge";
 
 import { PAGE_SIZES } from "../constants";

@@ -18,7 +18,7 @@ import useApplicationContext from "../../hooks/useApplicationContext";
 import useChangeEmail from "../../hooks/useChangeEmail";
 import useSelectCreditProduct from "../../hooks/useSelectCreditProduct";
 import useSubmitAdditionalData from "../../hooks/useSubmitAdditionalData";
-import { type FormChangeEmailInput, changeEmailSchema } from "../../schemas/application";
+import { changeEmailSchema, type FormChangeEmailInput } from "../../schemas/application";
 import Button from "../../stories/button/Button";
 import FormInput from "../../stories/form-input/FormInput";
 import LinkButton from "../../stories/link-button/LinkButton";

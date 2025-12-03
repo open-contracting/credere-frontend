@@ -4,7 +4,7 @@ import { useTranslation as useT } from "react-i18next";
 import useUpdateBorrower from "../hooks/useUpdateBorrower";
 import useVerifyDataField from "../hooks/useVerifyDataField";
 import type { IApplication, IUpdateBorrower } from "../schemas/application";
-import { RenderSector, RenderSize, formatCurrency } from "../util";
+import { formatCurrency, RenderSector, RenderSize } from "../util";
 import ApplicationTableDataBorrowerRow from "./ApplicationTableDataBorrowerRow";
 import { DataTableHeadCell, DataTableHeadLabel } from "./DataTable";
 

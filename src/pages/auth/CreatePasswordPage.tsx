@@ -5,7 +5,7 @@ import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation as useT } from "react-i18next";
 import { useSearchParamsTypeSafe } from "src/hooks/useParamsTypeSafe";
 import useUpdatePassword from "src/hooks/useUpdatePassword";
-import { type UpdatePasswordInput, type UpdatePasswordPayload, setPasswordSchema } from "src/schemas/auth";
+import { setPasswordSchema, type UpdatePasswordInput, type UpdatePasswordPayload } from "src/schemas/auth";
 import { Button } from "src/stories/button/Button";
 import FormInput from "src/stories/form-input/FormInput";
 import Text from "src/stories/text/Text";

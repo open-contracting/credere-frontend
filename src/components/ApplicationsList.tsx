@@ -5,8 +5,6 @@ import { useSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { RenderStatus } from "src/util";
-import { t } from "../util/i18n";
-
 import { getApplicationsFI, getApplicationsOCP } from "../api/private";
 import {
   COMPLETED_STATUS,
@@ -26,6 +24,7 @@ import {
   type PaginationInput,
 } from "../schemas/application";
 import LinkButton from "../stories/link-button/LinkButton";
+import { t } from "../util/i18n";
 import { DataTable, type HeadCell, type Order } from "./DataTable";
 
 const headCellsBase: HeadCell<IApplication & IExtendedApplication>[] = [

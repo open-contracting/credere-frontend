@@ -4,13 +4,12 @@ import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { renderUserType } from "src/util";
-import { t } from "../util/i18n";
-
 import { getUsersFn } from "../api/private";
 import { PAGE_SIZES, QUERY_KEYS } from "../constants";
 import { EXTENDED_USER_FROM, type IExtendedUser, type PaginationInput } from "../schemas/application";
 import type { IUser, IUsersListResponse } from "../schemas/auth";
 import LinkButton from "../stories/link-button/LinkButton";
+import { t } from "../util/i18n";
 import { DataTable, type HeadCell, type Order } from "./DataTable";
 
 type ExtendendUser = IUser & IExtendedUser;

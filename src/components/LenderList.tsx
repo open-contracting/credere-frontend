@@ -3,13 +3,12 @@ import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { t } from "../util/i18n";
-
 import { getLendersFn } from "../api/private";
 import { QUERY_KEYS } from "../constants";
 import type { ILender, ILenderListResponse } from "../schemas/application";
 import LinkButton from "../stories/link-button/LinkButton";
 import { renderLenderType } from "../util";
+import { t } from "../util/i18n";
 import { DataTable, type HeadCell } from "./DataTable";
 
 const headCells: HeadCell<ILender>[] = [

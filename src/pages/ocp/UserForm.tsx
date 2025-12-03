@@ -14,11 +14,11 @@ import Title from "src/stories/title/Title";
 import { z } from "zod";
 
 import { getLendersFn, getUserFn } from "../../api/private";
-import { QUERY_KEYS, USER_TYPES, USER_TYPE_OPTIONS } from "../../constants";
+import { QUERY_KEYS, USER_TYPE_OPTIONS, USER_TYPES } from "../../constants";
 import { useParamsTypeSafe } from "../../hooks/useParamsTypeSafe";
 import useUpsertUser from "../../hooks/useUpsertUser";
 import type { ILender, ILenderListResponse } from "../../schemas/application";
-import { type CreateUserInput, type IUser, createUserSchema } from "../../schemas/auth";
+import { type CreateUserInput, createUserSchema, type IUser } from "../../schemas/auth";
 import Loader from "../../stories/loader/Loader";
 import ApplicationErrorPage from "../msme/ApplicationErrorPage";
 

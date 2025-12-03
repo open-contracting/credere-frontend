@@ -1,6 +1,5 @@
-import { t } from "../util/i18n";
-
 import type { FormSelectOption } from "../stories/form-select/FormSelect";
+import { t } from "../util/i18n";
 
 export const COLORS: { [key: string]: string } = {
   grass: "#D6E100",
