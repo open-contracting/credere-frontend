@@ -5,9 +5,8 @@ import { useTranslation as useT } from "react-i18next";
 import Cloud from "src/assets/icons/cloud.svg";
 import Button from "src/stories/button/Button";
 import Text from "src/stories/text/Text";
-import { t as tNative } from "../util/i18n";
-
 import { Progress } from "../stories/loader/Loader";
+import { t as tNative } from "../util/i18n";
 
 interface FileUploaderProps {
   className?: string;
@@ -56,9 +55,9 @@ export function FileUploader({ className, loading, onAcceptedFile }: FileUploade
     fileRejections.forEach((file) => {
       let errorMessage = "";
       file.errors.forEach((error) => {
-        // @ts-ignore
+        // @ts-expect-error
         if (fileUploadErrorsMap[error.code]) {
-          // @ts-ignore
+          // @ts-expect-error
           errorMessage += `${t(fileUploadErrorsMap[error.code])}.\n`;
         } else {
           errorMessage += `${error.message}.\n`;
