@@ -28,10 +28,10 @@ Run server from the `dist` directory:
 npx vite preview
 ```
 
-Run a Storybook locally on port `6006`:
+Run a Storybook locally:
 
 ```bash
-npx storybook dev -p 6006
+npx storybook dev
 ```
 
 Build static app with a [Storybook's content](https://storybook.js.org/docs/react/sharing/publish-storybook):
