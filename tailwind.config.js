@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 import { COLORS } from "./src/constants";
 
-const defaultTheme = require("tailwindcss/defaultTheme");
+// const defaultTheme = require("tailwindcss/defaultTheme");
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", ".storybook/preview.tsx"],
@@ -9,7 +9,17 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["GT Eesti Pro", ...defaultTheme.fontFamily.sans],
+        sans: [
+          "GT Eesti Pro",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica Neue",
+          "Arial",
+          "sans-serif",
+        ],
       },
     },
     colors: COLORS,
