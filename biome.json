@@ -18,6 +18,11 @@
     "indentWidth": 2,
     "lineWidth": 119
   },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
   "json": {
     "formatter": {
       "indentWidth": 2
