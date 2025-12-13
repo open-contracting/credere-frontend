@@ -37,10 +37,8 @@ export const refreshAccessTokenFn = async () => {
 
 export const resetAuthApi = () => {
   if (globalConfig.headers) {
-    // biome-ignore lint/performance/noDelete: Axios
     delete globalConfig.headers.Authorization;
   }
-  // biome-ignore lint/performance/noDelete: Axios
   delete authApi.defaults.headers.Authorization;
 };
 
