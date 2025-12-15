@@ -3,7 +3,7 @@ import { COLORS } from "./src/constants";
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", ".storybook/preview.tsx"],
-  important: "#root-app",
+  important: true, // Tailwind layers would be lower priority than MUI classes.
   theme: {
     extend: {
       fontFamily: {
