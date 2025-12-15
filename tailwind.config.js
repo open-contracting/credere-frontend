@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import { COLORS } from "./src/constants";
 
-// const defaultTheme = require("tailwindcss/defaultTheme");
-
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", ".storybook/preview.tsx"],
   important: "#root-app",
@@ -11,14 +9,20 @@ export default {
       fontFamily: {
         sans: [
           "GT Eesti Pro",
+          "ui-sans-serif",
           "system-ui",
           "-apple-system",
           "BlinkMacSystemFont",
-          "Segoe UI",
+          '"Segoe UI"',
           "Roboto",
-          "Helvetica Neue",
+          '"Helvetica Neue"',
           "Arial",
+          '"Noto Sans"',
           "sans-serif",
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+          '"Noto Color Emoji"',
         ],
       },
     },
