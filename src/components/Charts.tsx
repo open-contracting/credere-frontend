@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { Bar, BarChart, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
-import { COLORS } from "../constants";
 import type { ChartData } from "../schemas/statitics";
 import { t } from "../util/i18n";
 
@@ -22,9 +21,9 @@ const COLORS_TO_FILL = [
   "#FF8042",
   "#82ca9d",
   "#8884d8",
-  COLORS.darkGreen,
-  COLORS.red,
-  COLORS.yellow,
+  "var(--color-dark-green)",
+  "var(--color-red)",
+  "var(--color-yellow)",
 ];
 
 const labelFormatterBase = (_label: any, payload: any, labelMapper?: (label: any) => string) => {
@@ -57,9 +56,9 @@ export function ChartBar({ data }: ChartsProps) {
           labelFormatter={labelFormatterBase}
           formatter={(value: any) => [value, ""]}
           separator=""
-          cursor={{ stroke: COLORS.fieldBorder, strokeWidth: 0.5, fill: "transparent" }}
+          cursor={{ stroke: "var(--color-field-border)", strokeWidth: 0.5, fill: "transparent" }}
         />
-        <Bar dataKey="value" fill={COLORS.darkGreen} minPointSize={1} />
+        <Bar dataKey="value" fill="var(--color-dark-green)" minPointSize={1} />
       </BarChart>
     </ResponsiveContainer>
   );
@@ -94,7 +93,7 @@ export function ChartMultipleBar({ series, dataKeys, seriesNames, labelMapper }:
         <Tooltip
           separator=" "
           labelFormatter={(_label: any, payload: any) => labelFormatterBase(_label, payload, labelMapper)}
-          cursor={{ stroke: COLORS.fieldBorder, strokeWidth: 0.5, fill: "transparent" }}
+          cursor={{ stroke: "var(--color-field-border)", strokeWidth: 0.5, fill: "transparent" }}
         />
         <Legend />
       </BarChart>

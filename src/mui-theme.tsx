@@ -3,8 +3,6 @@ import { createTheme, StyledEngineProvider, ThemeProvider } from "@mui/material/
 import { SnackbarProvider } from "notistack";
 import type { ReactNode } from "react";
 
-import { COLORS } from "./constants";
-
 const rootElement = document.getElementById("root");
 
 // All `Portal`-related components need to have the the main app wrapper element as a container
@@ -12,10 +10,10 @@ const rootElement = document.getElementById("root");
 const theme = createTheme({
   palette: {
     primary: {
-      main: COLORS.moodyBlue,
+      main: "#6c75e1", // sync with --color-moody-blue in src/index.css
     },
     secondary: {
-      main: COLORS.grass,
+      main: "#d6e100", // sync with --color-grass in src/index.css
     },
   },
   typography: {

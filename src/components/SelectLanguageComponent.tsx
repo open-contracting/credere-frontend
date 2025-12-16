@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { useTranslation as useT } from "react-i18next";
-import { AVAILABLE_LANGUAGES, COLORS, DISPATCH_ACTIONS } from "../constants";
+import { AVAILABLE_LANGUAGES, DISPATCH_ACTIONS } from "../constants";
 import useLangContext from "../hooks/useLangContext";
 import type { FormSelectOption } from "../stories/form-select/FormSelect";
 import { t as tNative } from "../util/i18n";
@@ -14,7 +14,7 @@ export const InputSelectSmall = styled(_Input)`
   font-size: 14px;
   border-width: 1px;
   border-style: solid;
-  border-color: ${COLORS.fieldBorder};
+  border-color: var(--color-field-border);
   border-radius: 4px;
   & input {
     padding-top: 4px;

@@ -6,7 +6,6 @@ import { useTranslation as useT } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 
 import ToggleSwitch from "../../assets/icons/toggle-switch.svg";
-import { COLORS } from "../../constants";
 import { getProperty } from "../../util";
 import type { FieldErrorType } from "../form-input/FormInput";
 
@@ -25,11 +24,11 @@ const LabeledSwitch = styled(MUISwitch)(() => ({
     transform: "translateX(30px)",
   },
   "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-    backgroundColor: `${COLORS.darkest}`,
+    backgroundColor: "var(--color-darkest)",
     opacity: 1,
     "&:before": {
       content: '"Yes"',
-      color: `${COLORS.white}`,
+      color: "var(--color-white)",
       left: 8,
     },
     "&:after": {
@@ -44,7 +43,7 @@ const LabeledSwitch = styled(MUISwitch)(() => ({
     height: 29,
     opacity: 1,
     borderRadius: 25,
-    backgroundColor: `${COLORS.fieldBorder}`,
+    backgroundColor: "var(--color-field-border)",
     "&:before, &:after": {
       content: '""',
       position: "absolute",
@@ -58,7 +57,7 @@ const LabeledSwitch = styled(MUISwitch)(() => ({
     },
     "&:after": {
       content: '"No"',
-      color: `${COLORS.black}`,
+      color: "var(--color-black)",
       right: 8,
     },
   },

@@ -9,7 +9,6 @@ import { NumericFormat, type NumericFormatProps } from "react-number-format";
 
 import EmailIcon from "../../assets/icons/email.svg";
 import KeyIcon from "../../assets/icons/key.svg";
-import { COLORS } from "../../constants";
 import { getProperty } from "../../util";
 import { Text } from "../text/Text";
 
@@ -19,10 +18,10 @@ export const Input = styled(_Input)`
   margin-bottom: 0.5rem;
   border-width: 1px;
   border-style: solid;
-  border-color: ${COLORS.fieldBorder};
+  border-color: var(--color-field-border);
   &.Mui-error {
-    border-color: ${COLORS.red};
-    color: ${COLORS.red};
+    border-color: var(--color-red);
+    color: var(--color-red);
   }
 `;
 
@@ -32,12 +31,12 @@ export const InputFormCell = styled(_Input)`
   font-size: 14px;
   border-width: 1px;
   border-style: solid;
-  border-color: ${COLORS.fieldBorder};
+  border-color: var(--color-field-border);
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
   &.Mui-error {
-    border-color: ${COLORS.red};
-    color: ${COLORS.red};
+    border-color: var(--color-red);
+    color: var(--color-red);
   }
   & input {
     padding-top: 4px;
@@ -55,8 +54,8 @@ export const DateField = styled(MUIDateField)`
   }
   .Mui-error {
     input {
-      border-color: ${COLORS.red};
-      color: ${COLORS.red};
+      border-color: var(--color-red);
+      color: var(--color-red);
     }
   }
   & input {
@@ -68,12 +67,12 @@ export const DateField = styled(MUIDateField)`
     font-size: 14px;
     border-width: 1px;
     border-style: solid;
-    border-color: ${COLORS.fieldBorder};
+    border-color: var(--color-field-border);
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
     &.Mui-error {
-      border-color: ${COLORS.red};
-      color: ${COLORS.red};
+      border-color: var(--color-red);
+      color: var(--color-red);
     }
   }
 `;
@@ -88,8 +87,8 @@ export const DatePickerCell = styled(MUIDatePicker)`
   }
   .Mui-error {
     input {
-      border-color: ${COLORS.red};
-      color: ${COLORS.red};
+      border-color: var(--color-red);
+      color: var(--color-red);
     }
   }
   &.MuiTextField-root {
@@ -101,12 +100,12 @@ export const DatePickerCell = styled(MUIDatePicker)`
     font-size: 14px;
     border-width: 1px;
     border-style: solid;
-    border-color: ${COLORS.fieldBorder};
+    border-color: var(--color-field-border);
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
     &.Mui-error {
-      border-color: ${COLORS.red};
-      color: ${COLORS.red};
+      border-color: var(--color-red);
+      color: var(--color-red);
     }
   }
   & input {
@@ -129,8 +128,8 @@ export const DatePicker = styled(MUIDatePicker)`
   }
   .Mui-error {
     input {
-      border-color: ${COLORS.red};
-      color: ${COLORS.red};
+      border-color: var(--color-red);
+      color: var(--color-red);
     }
   }
   &.MuiTextField-root {
@@ -142,11 +141,11 @@ export const DatePicker = styled(MUIDatePicker)`
     font-size: 14px;
     border-width: 1px;
     border-style: solid;
-    border-color: ${COLORS.fieldBorder};
+    border-color: var(--color-field-border);
     &.Mui-error,
     &:has(.Mui-error) {
-      border-color: ${COLORS.red};
-      color: ${COLORS.red};
+      border-color: var(--color-red);
+      color: var(--color-red);
     }
   }
   & input {

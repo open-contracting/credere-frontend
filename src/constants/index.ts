@@ -1,23 +1,6 @@
 import type { FormSelectOption } from "../stories/form-select/FormSelect";
 import { t } from "../util/i18n";
 
-export const COLORS: { [key: string]: string } = {
-  grass: "#D6E100",
-  background: "#F2F2F2",
-  darkest: "#444444",
-  gray: "#4D4D54",
-  softGray: "#C4C4C4",
-  lightGray: "#EEEEEE",
-  secondary: "#24B2A7",
-  moodyBlue: "#6C75E1",
-  red: "#FB6045",
-  darkGreen: "#17736B",
-  fieldBorder: "#DADADA",
-  white: "#FFFFFF",
-  black: "#000000",
-  transparent: "transparent",
-};
-
 export const USER_LOCAL_STORAGE_KEY = "CREDERE_USER";
 export const ACCESS_TOKEN_LOCAL_STORAGE_KEY = "CREDERE_USER_ACCESS_TOKEN";
 export const LANG_STORAGE_KEY = "CREDERE_LANG";
