@@ -32,7 +32,7 @@ const getIcon = (open: boolean) => {
 export function ApplicationTableDataPreviousAwardRow({
   label,
   isLoading,
-  previousAwards,
+  previousAwards = undefined,
   preWhitespace,
 }: ApplicationTableDataPreviousAwardRowProps) {
   const { t } = useT();
@@ -137,9 +137,5 @@ export function ApplicationTableDataPreviousAwardRow({
     </>
   );
 }
-
-ApplicationTableDataPreviousAwardRow.defaultProps = {
-  previousAwards: undefined,
-};
 
 export default ApplicationTableDataPreviousAwardRow;

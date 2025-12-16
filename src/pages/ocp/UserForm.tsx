@@ -25,7 +25,7 @@ import ApplicationErrorPage from "../msme/ApplicationErrorPage";
 export interface UserFormProps {
   user?: IUser | null;
 }
-export function UserForm({ user }: UserFormProps) {
+export function UserForm({ user = null }: UserFormProps) {
   const { t } = useT();
   const { createUserMutation, updateUserMutation, isLoading } = useUpsertUser();
 
@@ -156,10 +156,6 @@ export function UserForm({ user }: UserFormProps) {
     </>
   );
 }
-
-UserForm.defaultProps = {
-  user: null,
-};
 
 export function LoadUser() {
   const { t } = useT();

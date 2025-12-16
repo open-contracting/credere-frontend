@@ -14,7 +14,7 @@ export interface CreditProductReviewProps {
   className?: string;
 }
 
-export function CreditProductReview({ application, className }: CreditProductReviewProps) {
+export function CreditProductReview({ application, className = "" }: CreditProductReviewProps) {
   const { t } = useT();
   const { formatDateFromString } = useLocalizedDateFormatter();
 
@@ -96,9 +96,5 @@ export function CreditProductReview({ application, className }: CreditProductRev
     </>
   );
 }
-
-CreditProductReview.defaultProps = {
-  className: "",
-};
 
 export default CreditProductReview;

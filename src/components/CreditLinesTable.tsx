@@ -15,7 +15,7 @@ export interface CreditLinesTableProps {
   selectOption: (value: ICreditProduct) => void;
 }
 
-export function CreditLinesTable({ rows, currency, isLoading, selectOption }: CreditLinesTableProps) {
+export function CreditLinesTable({ rows, currency, isLoading = false, selectOption }: CreditLinesTableProps) {
   const { t } = useT();
 
   if (!rows.length && !isLoading) {
@@ -101,9 +101,5 @@ export function CreditLinesTable({ rows, currency, isLoading, selectOption }: Cr
     </Box>
   );
 }
-
-CreditLinesTable.defaultProps = {
-  isLoading: false,
-};
 
 export default CreditLinesTable;

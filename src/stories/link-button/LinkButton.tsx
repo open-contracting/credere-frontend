@@ -16,13 +16,13 @@ export interface LinkButtonProps {
 }
 
 export function LinkButton<C extends React.ElementType>({
-  size,
+  size = "large",
   label,
-  noIcon,
-  iconClassName,
-  labelClassName,
+  noIcon = false,
+  iconClassName = undefined,
+  labelClassName = undefined,
   className,
-  icon,
+  icon = ArrowInCircleIcon,
   ...props
 }: MUIButtonProps<C, { component?: C }> & LinkButtonProps) {
   return (
@@ -50,14 +50,5 @@ export function LinkButton<C extends React.ElementType>({
     </MUIButton>
   );
 }
-
-LinkButton.defaultProps = {
-  size: "large" as SizeType,
-  noIcon: false,
-  icon: ArrowInCircleIcon,
-  iconClassName: undefined,
-  labelClassName: undefined,
-  onClick: undefined,
-};
 
 export default LinkButton;

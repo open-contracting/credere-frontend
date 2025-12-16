@@ -10,7 +10,7 @@ export type FAQSectionProps = {
   className?: string;
 };
 
-export function FAQSection({ title, className, children }: FAQSectionProps & PropsWithChildren) {
+export function FAQSection({ title, className = "", children }: FAQSectionProps & PropsWithChildren) {
   const [open, setOpen] = useState(false);
 
   const handleToggle = () => {
@@ -45,9 +45,5 @@ export function FAQSection({ title, className, children }: FAQSectionProps & Pro
     </Box>
   );
 }
-
-FAQSection.defaultProps = {
-  className: "",
-};
 
 export default FAQSection;

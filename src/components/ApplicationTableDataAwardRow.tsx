@@ -10,15 +10,15 @@ export function ApplicationTableDataAwardRow({
   label,
   name,
   award,
-  formLabel,
+  formLabel = undefined,
   missingData,
-  type,
-  formatter,
-  preWhitespace,
-  updateValue,
+  type = undefined,
+  formatter = undefined,
+  preWhitespace = false,
+  updateValue = undefined,
   isLoading,
   readonly,
-  modifiedFields,
+  modifiedFields = undefined,
 }: ApplicationTableAwardDataRowProps) {
   const value = award[name];
   const missing = missingData[name];
@@ -52,14 +52,5 @@ export function ApplicationTableDataAwardRow({
     </TableRow>
   );
 }
-
-ApplicationTableDataAwardRow.defaultProps = {
-  formatter: undefined,
-  updateValue: undefined,
-  preWhitespace: false,
-  type: undefined,
-  formLabel: undefined,
-  modifiedFields: undefined,
-};
 
 export default ApplicationTableDataAwardRow;

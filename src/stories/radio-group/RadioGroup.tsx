@@ -34,9 +34,9 @@ const isStringArray = (obj: unknown): obj is string[] =>
 export function RadioGroup({
   name,
   label,
-  className,
-  labelClassName,
-  defaultValue,
+  className = "",
+  labelClassName = "",
+  defaultValue = undefined,
   renderOption = defaultRenderOption,
   options,
 }: RadioGroupProps) {
@@ -101,12 +101,5 @@ export function RadioGroup({
     />
   );
 }
-
-RadioGroup.defaultProps = {
-  className: "",
-  defaultValue: undefined,
-  labelClassName: "",
-  renderOption: defaultRenderOption,
-};
 
 export default RadioGroup;

@@ -19,7 +19,7 @@ export function ApplicationBorrowerTable({
   application,
   readonly = false,
   allowDataVerification = false,
-  className,
+  className = "",
 }: ApplicationBorrowerTableProps) {
   const { t } = useT();
   const { updateBorrowerMutation, isLoading } = useUpdateBorrower();
@@ -174,11 +174,5 @@ export function ApplicationBorrowerTable({
     </Paper>
   );
 }
-
-ApplicationBorrowerTable.defaultProps = {
-  readonly: false,
-  className: "",
-  allowDataVerification: false,
-};
 
 export default ApplicationBorrowerTable;

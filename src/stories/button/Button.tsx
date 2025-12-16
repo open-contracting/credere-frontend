@@ -14,12 +14,12 @@ export interface ButtonProps {
 }
 
 export function Button<C extends React.ElementType>({
-  primary,
-  size,
+  primary = true,
+  size = "large",
   label,
-  noIcon,
+  noIcon = false,
   className,
-  icon,
+  icon = ArrowInCircleIcon,
   ...props
 }: MUIButtonProps<C, { component?: C }> & ButtonProps) {
   return (
@@ -41,13 +41,5 @@ export function Button<C extends React.ElementType>({
     </MUIButton>
   );
 }
-
-Button.defaultProps = {
-  primary: true,
-  size: "large" as SizeType,
-  noIcon: false,
-  icon: ArrowInCircleIcon,
-  onClick: undefined,
-};
 
 export default Button;

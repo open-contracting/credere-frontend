@@ -12,8 +12,8 @@ type DashboardChartContainerProps = {
 };
 
 export function DashboardChartContainer({
-  className,
-  boxClassName,
+  className = "",
+  boxClassName = "",
   label,
   children,
   color = "default",
@@ -45,11 +45,5 @@ export function DashboardChartContainer({
     </Container>
   );
 }
-
-DashboardChartContainer.defaultProps = {
-  className: "",
-  boxClassName: "",
-  color: "default" as DashboardColor,
-};
 
 export default DashboardChartContainer;

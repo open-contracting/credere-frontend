@@ -26,7 +26,7 @@ export interface LenderFormProps {
   lender?: ILender | null;
 }
 
-export function LenderForm({ lender }: LenderFormProps) {
+export function LenderForm({ lender = null }: LenderFormProps) {
   const { t } = useT();
   const { createLenderMutation, updateLenderMutation, isLoading, isError } = useUpsertLender();
 
@@ -173,10 +173,6 @@ export function LenderForm({ lender }: LenderFormProps) {
     </>
   );
 }
-
-LenderForm.defaultProps = {
-  lender: null,
-};
 
 export function LoadLender() {
   const { t } = useT();

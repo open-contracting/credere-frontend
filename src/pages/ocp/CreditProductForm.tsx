@@ -29,7 +29,7 @@ export interface CreditProductFormProps {
   creditProduct?: ICreditProduct | null;
 }
 
-export function CreditProductForm({ creditProduct, lenderId }: CreditProductFormProps) {
+export function CreditProductForm({ creditProduct = null, lenderId }: CreditProductFormProps) {
   const { t } = useT();
   const constants = useConstants();
   const { createCreditProductMutation, updateCreditProductMutation, isLoading, isError } = useUpsertCreditProduct();
@@ -244,10 +244,6 @@ export function CreditProductForm({ creditProduct, lenderId }: CreditProductForm
     </>
   );
 }
-
-CreditProductForm.defaultProps = {
-  creditProduct: null,
-};
 
 export function LoadCreditProduct() {
   const { t } = useT();

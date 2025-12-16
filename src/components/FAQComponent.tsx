@@ -11,7 +11,7 @@ interface FAQComponentProps {
   className?: string;
 }
 
-export function FAQComponent({ className }: FAQComponentProps) {
+export function FAQComponent({ className = "" }: FAQComponentProps) {
   const { t } = useT();
   const [open, setOpen] = useState<Record<string, boolean>>({});
   const handleToggle = (key: string) => {
@@ -35,9 +35,5 @@ export function FAQComponent({ className }: FAQComponentProps) {
     </FAQContainer>
   );
 }
-
-FAQComponent.defaultProps = {
-  className: "",
-};
 
 export default FAQComponent;

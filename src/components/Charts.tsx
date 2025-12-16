@@ -64,7 +64,12 @@ export function ChartBar({ data }: ChartsProps) {
   );
 }
 
-export function ChartMultipleBar({ series, dataKeys, seriesNames, labelMapper }: MultipleChartsProps) {
+export function ChartMultipleBar({
+  series,
+  dataKeys,
+  seriesNames,
+  labelMapper = (label: any) => label,
+}: MultipleChartsProps) {
   const data = useMemo(() => {
     const result: any = [];
     dataKeys.forEach((key) => {
@@ -100,7 +105,3 @@ export function ChartMultipleBar({ series, dataKeys, seriesNames, labelMapper }:
     </ResponsiveContainer>
   );
 }
-
-ChartMultipleBar.defaultProps = {
-  labelMapper: (label: any) => label,
-};

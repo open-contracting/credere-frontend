@@ -26,7 +26,13 @@ interface DataAvailabilityProps {
   modifiedFields?: { [key: string]: IModifiedDataFields };
 }
 
-export function DataAvailability({ available, name, label, readonly, modifiedFields }: DataAvailabilityProps) {
+export function DataAvailability({
+  available,
+  name = undefined,
+  label,
+  readonly,
+  modifiedFields = undefined,
+}: DataAvailabilityProps) {
   const { t } = useT();
   const { formatDateFromString } = useLocalizedDateFormatter();
   const [open, setOpen] = useState(false);
@@ -93,10 +99,5 @@ export function DataAvailability({ available, name, label, readonly, modifiedFie
     </Box>
   );
 }
-
-DataAvailability.defaultProps = {
-  modifiedFields: undefined,
-  name: undefined,
-};
 
 export default DataAvailability;

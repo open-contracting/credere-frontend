@@ -9,7 +9,7 @@ export interface ProtectedRouteProps extends PropsWithChildren {
   requiredUserType?: USER_TYPES;
 }
 
-export default function ProtectedRoute({ children, requiredUserType }: ProtectedRouteProps) {
+export default function ProtectedRoute({ children, requiredUserType = undefined }: ProtectedRouteProps) {
   const user = useUser();
   const { t } = useT();
 
@@ -20,7 +20,3 @@ export default function ProtectedRoute({ children, requiredUserType }: Protected
 
   return <>{children}</>;
 }
-
-ProtectedRoute.defaultProps = {
-  requiredUserType: undefined,
-};

@@ -21,7 +21,7 @@ interface DataVerificationStatusProps {
   customLabel?: string;
 }
 
-export function DataVerificationStatus({ verified, name, customLabel }: DataVerificationStatusProps) {
+export function DataVerificationStatus({ verified, name, customLabel = undefined }: DataVerificationStatusProps) {
   const { t } = useT();
 
   return (
@@ -34,9 +34,5 @@ export function DataVerificationStatus({ verified, name, customLabel }: DataVeri
     </Box>
   );
 }
-
-DataVerificationStatus.defaultProps = {
-  customLabel: undefined,
-};
 
 export default DataVerificationStatus;

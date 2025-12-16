@@ -14,11 +14,11 @@ type DashboardItemContainerProps = {
 };
 
 export function DashboardItemContainer({
-  className,
-  valueClassName,
-  boxClassName,
+  className = "",
+  valueClassName = "",
+  boxClassName = "",
   value,
-  suffix,
+  suffix = "",
   description,
   color = "default",
 }: DashboardItemContainerProps) {
@@ -46,13 +46,5 @@ export function DashboardItemContainer({
     </Container>
   );
 }
-
-DashboardItemContainer.defaultProps = {
-  className: "",
-  valueClassName: "",
-  boxClassName: "",
-  suffix: "",
-  color: "default" as DashboardColor,
-};
 
 export default DashboardItemContainer;

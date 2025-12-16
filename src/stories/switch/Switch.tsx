@@ -87,13 +87,13 @@ export type SwitchProps = ControlledSwitchProps & {
 export function Switch({
   name,
   label,
-  disabled,
-  fieldClassName,
-  onChange,
-  fieldError,
+  disabled = undefined,
+  fieldClassName = "",
+  onChange = undefined,
+  fieldError = undefined,
   defaultValue = false,
-  value,
-  className,
+  value = undefined,
+  className = undefined,
 }: SwitchProps) {
   const { t } = useT();
 
@@ -143,22 +143,13 @@ export function Switch({
   );
 }
 
-Switch.defaultProps = {
-  className: undefined,
-  value: undefined,
-  fieldClassName: "",
-  defaultValue: false,
-  disabled: undefined,
-  onChange: undefined,
-  fieldError: undefined,
-};
 export function ControlledSwitch({
   name,
   label,
-  disabled,
-  fieldClassName,
+  disabled = undefined,
+  fieldClassName = "",
   defaultValue = false,
-  className,
+  className = undefined,
 }: ControlledSwitchProps) {
   const {
     control,
@@ -187,12 +178,5 @@ export function ControlledSwitch({
     />
   );
 }
-
-ControlledSwitch.defaultProps = {
-  className: undefined,
-  fieldClassName: "",
-  defaultValue: false,
-  disabled: undefined,
-};
 
 export default ControlledSwitch;

@@ -177,10 +177,6 @@ function DataTableHead<T>({
   );
 }
 
-DataTableHead.defaultProps = {
-  hasActions: false,
-};
-
 export interface HandlePagination {
   totalCount: number;
   handleChangePage: (newPage: number, rowsPerPage: number) => void;
@@ -212,11 +208,11 @@ export function DataTable<T>({
   rows,
   headCells,
   useEmptyRows = true,
-  handleRequestSort,
-  handleSearch,
-  pagination,
-  actions,
-  isLoading,
+  handleRequestSort = undefined,
+  handleSearch = undefined,
+  pagination = undefined,
+  actions = undefined,
+  isLoading = false,
 }: DataTableProps<T>) {
   const { t } = useT();
   const { formatDateFromString } = useLocalizedDateFormatter();
@@ -351,14 +347,5 @@ export function DataTable<T>({
     </Box>
   );
 }
-
-DataTable.defaultProps = {
-  handleRequestSort: undefined,
-  handleSearch: undefined,
-  pagination: undefined,
-  useEmptyRows: true,
-  actions: undefined,
-  isLoading: false,
-};
 
 export default DataTable;

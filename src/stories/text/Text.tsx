@@ -7,7 +7,7 @@ export type TextProps = {
   fontVariant?: boolean;
 };
 
-export function Text({ children, fontVariant = false, className }: TextProps & PropsWithChildren) {
+export function Text({ children, fontVariant = false, className = "" }: TextProps & PropsWithChildren) {
   return (
     <Typography
       variant="body1"
@@ -24,10 +24,5 @@ export function Text({ children, fontVariant = false, className }: TextProps & P
     </Typography>
   );
 }
-
-Text.defaultProps = {
-  className: "",
-  fontVariant: false,
-};
 
 export default Text;

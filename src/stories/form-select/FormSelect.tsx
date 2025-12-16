@@ -29,8 +29,8 @@ const isStringArray = (obj: unknown): obj is string[] =>
 export function FormSelect({
   name,
   label,
-  className,
-  placeholder,
+  className = "",
+  placeholder = undefined,
   renderOption = defaultRenderOption,
   options,
 }: FormSelectProps) {
@@ -90,11 +90,5 @@ export function FormSelect({
     />
   );
 }
-
-FormSelect.defaultProps = {
-  placeholder: undefined,
-  className: "",
-  renderOption: defaultRenderOption,
-};
 
 export default FormSelect;

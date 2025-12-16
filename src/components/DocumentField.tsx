@@ -24,7 +24,13 @@ interface DocumentFieldProps {
   >;
 }
 
-export function DocumentField({ label, documentType, secure = false, className, setUploadState }: DocumentFieldProps) {
+export function DocumentField({
+  label,
+  documentType,
+  secure = false,
+  className = "",
+  setUploadState = undefined,
+}: DocumentFieldProps) {
   const { t } = useT();
   const { enqueueSnackbar } = useSnackbar();
   const [current, setCurrent] = useState<IBorrowerDocument | undefined>();
@@ -127,11 +133,5 @@ export function DocumentField({ label, documentType, secure = false, className, 
     </Box>
   );
 }
-
-DocumentField.defaultProps = {
-  className: "",
-  secure: false,
-  setUploadState: undefined,
-};
 
 export default DocumentField;

@@ -12,20 +12,20 @@ const DATA_REQUESTED_FROM_MSME = ["size", "sector", "annual_revenue"];
 export function ApplicationTableDataBorrowerRow({
   label,
   name,
-  useTranslation,
+  useTranslation = false,
   borrower,
-  formLabel,
+  formLabel = undefined,
   missingData,
   verifiedData,
-  type,
-  formatter,
-  preWhitespace,
-  updateValue,
+  type = undefined,
+  formatter = undefined,
+  preWhitespace = false,
+  updateValue = undefined,
   verifyData,
-  withoutVerify,
+  withoutVerify = false,
   isLoading,
   readonly,
-  modifiedFields,
+  modifiedFields = undefined,
 }: ApplicationTableBorrowerDataRowProps) {
   const { t } = useT();
 
@@ -85,16 +85,5 @@ export function ApplicationTableDataBorrowerRow({
     </TableRow>
   );
 }
-
-ApplicationTableDataBorrowerRow.defaultProps = {
-  formatter: undefined,
-  updateValue: undefined,
-  preWhitespace: false,
-  type: undefined,
-  formLabel: undefined,
-  withoutVerify: false,
-  modifiedFields: undefined,
-  useTranslation: false,
-};
 
 export default ApplicationTableDataBorrowerRow;

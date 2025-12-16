@@ -8,9 +8,9 @@ type FAQContainerProps = {
   title?: string;
 };
 export function FAQContainer({
-  className,
+  className = "",
   title = "Frequently Asked Questions",
-  boxClassName,
+  boxClassName = "",
   children,
 }: FAQContainerProps & PropsWithChildren) {
   return (
@@ -44,11 +44,5 @@ export function FAQContainer({
     </Container>
   );
 }
-
-FAQContainer.defaultProps = {
-  className: "",
-  boxClassName: "",
-  title: "Frequently Asked Questions",
-};
 
 export default FAQContainer;

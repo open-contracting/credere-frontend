@@ -10,9 +10,9 @@ import DataVerificationForm from "./DataVerificationForm";
 
 export function ApplicationTableDataDocumentRow({
   document,
-  formatter,
-  preWhitespace,
-  downloadDocument,
+  formatter = undefined,
+  preWhitespace = false,
+  downloadDocument = undefined,
   verifyData,
   isLoading = false,
   readonly = false,
@@ -62,13 +62,5 @@ export function ApplicationTableDataDocumentRow({
     </TableRow>
   );
 }
-
-ApplicationTableDataDocumentRow.defaultProps = {
-  formatter: undefined,
-  downloadDocument: undefined,
-  preWhitespace: false,
-  type: undefined,
-  formLabel: undefined,
-};
 
 export default ApplicationTableDataDocumentRow;

@@ -84,7 +84,7 @@ export interface LoadApplicationProps {
   readonly?: boolean;
 }
 
-export function LoadApplication({ readonly }: LoadApplicationProps) {
+export function LoadApplication({ readonly = false }: LoadApplicationProps) {
   const { t } = useT();
   const [queryError, setQueryError] = useState<string>("");
 
@@ -119,7 +119,3 @@ export function LoadApplication({ readonly }: LoadApplicationProps) {
     </>
   );
 }
-
-LoadApplication.defaultProps = {
-  readonly: false,
-};

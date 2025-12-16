@@ -29,7 +29,7 @@ export function DataAvailabilityForm({
   value,
   isLoading,
   readonly,
-  type,
+  type = undefined,
   updateValue,
 }: DataAvailabilityFormProps) {
   const { t } = useT();
@@ -105,9 +105,5 @@ export function DataAvailabilityForm({
     </Box>
   );
 }
-
-DataAvailabilityForm.defaultProps = {
-  type: undefined,
-};
 
 export default DataAvailabilityForm;

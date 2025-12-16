@@ -16,7 +16,7 @@ export interface ApplicationAwardTableProps {
   className?: string;
 }
 
-export function ApplicationAwardTable({ application, readonly = false, className }: ApplicationAwardTableProps) {
+export function ApplicationAwardTable({ application, readonly = false, className = "" }: ApplicationAwardTableProps) {
   const { t } = useT();
   const { formatDateFromString } = useLocalizedDateFormatter();
   const { updateAwardMutation, isLoading } = useUpdateAward();
@@ -183,10 +183,5 @@ export function ApplicationAwardTable({ application, readonly = false, className
     </Paper>
   );
 }
-
-ApplicationAwardTable.defaultProps = {
-  readonly: false,
-  className: "",
-};
 
 export default ApplicationAwardTable;

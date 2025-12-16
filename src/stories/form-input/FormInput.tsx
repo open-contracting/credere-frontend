@@ -237,25 +237,21 @@ export function FormInputError({ fieldError, className = "" }: FormInputErrorPro
   );
 }
 
-FormInputError.defaultProps = {
-  className: "",
-};
-
 const AUTH_LABELS_CLASSNAMES = "text-moody-blue text-xl mb-3";
 export function FormInput({
   name,
   label,
-  placeholder,
-  helperText,
+  placeholder = undefined,
+  helperText = undefined,
   big = true,
   fullWidth = true,
   noIcon = false,
   type,
-  labelClassName,
-  fontVariant,
+  labelClassName = "",
+  fontVariant = undefined,
   className,
-  inputCell,
-  formControlClasses,
+  inputCell = undefined,
+  formControlClasses = "",
   ...otherProps
 }: FormInputProps) {
   const {
@@ -452,17 +448,5 @@ export function FormInput({
     />
   );
 }
-
-FormInput.defaultProps = {
-  noIcon: false,
-  big: true,
-  fullWidth: true,
-  placeholder: undefined,
-  helperText: undefined,
-  labelClassName: "",
-  fontVariant: undefined,
-  inputCell: undefined,
-  formControlClasses: "",
-};
 
 export default FormInput;

@@ -15,7 +15,7 @@ export type FAQPageSectionProps = {
 
 export function FAQPageSection({
   title,
-  className,
+  className = "",
   open,
   handleToggle,
   children,
@@ -51,9 +51,5 @@ export function FAQPageSection({
     </Box>
   );
 }
-
-FAQPageSection.defaultProps = {
-  className: "",
-};
 
 export default FAQPageSection;

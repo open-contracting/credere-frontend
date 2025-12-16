@@ -19,7 +19,7 @@ export function ApplicationDocumentTable({
   application,
   readonly = false,
   allowDataVerification = false,
-  className,
+  className = "",
 }: ApplicationDocumentTableProps) {
   const { t } = useT();
   const [idToDownload, setIdToDownload] = useState<number | undefined>();
@@ -98,11 +98,5 @@ export function ApplicationDocumentTable({
     </Paper>
   );
 }
-
-ApplicationDocumentTable.defaultProps = {
-  readonly: false,
-  className: "",
-  allowDataVerification: false,
-};
 
 export default ApplicationDocumentTable;

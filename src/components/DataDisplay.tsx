@@ -9,7 +9,7 @@ interface DataDisplayProps {
   className?: string;
 }
 
-export function DataDisplay({ data, className }: DataDisplayProps) {
+export function DataDisplay({ data, className = "" }: DataDisplayProps) {
   const { t } = useT();
 
   const formatValue = useCallback(
@@ -47,9 +47,5 @@ export function DataDisplay({ data, className }: DataDisplayProps) {
     </Box>
   );
 }
-
-DataDisplay.defaultProps = {
-  className: "",
-};
 
 export default DataDisplay;

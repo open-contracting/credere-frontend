@@ -17,7 +17,7 @@ export function DataVerificationForm({
   value,
   isLoading,
   readonly,
-  customLabel,
+  customLabel = undefined,
   verifyData,
 }: DataVerificationFormProps) {
   if (readonly) {
@@ -41,9 +41,5 @@ export function DataVerificationForm({
     </Box>
   );
 }
-
-DataVerificationForm.defaultProps = {
-  customLabel: undefined,
-};
 
 export default DataVerificationForm;

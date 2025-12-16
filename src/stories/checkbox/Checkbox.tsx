@@ -16,7 +16,13 @@ export type CheckboxProps = {
   defaultValue?: boolean;
 };
 
-export function Checkbox({ name, label, fieldClassName, defaultValue = false, className }: CheckboxProps) {
+export function Checkbox({
+  name,
+  label,
+  fieldClassName = "",
+  defaultValue = false,
+  className = undefined,
+}: CheckboxProps) {
   const {
     control,
     formState: { errors, defaultValues },
@@ -60,11 +66,5 @@ export function Checkbox({ name, label, fieldClassName, defaultValue = false, cl
     />
   );
 }
-
-Checkbox.defaultProps = {
-  className: undefined,
-  fieldClassName: "",
-  defaultValue: false,
-};
 
 export default Checkbox;

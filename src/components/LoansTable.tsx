@@ -16,7 +16,7 @@ export interface LoansTableProps {
   selectOption: (value: ICreditProduct) => void;
 }
 
-export function LoansTable({ rows, amountRequested, currency, isLoading, selectOption }: LoansTableProps) {
+export function LoansTable({ rows, amountRequested, currency, isLoading = false, selectOption }: LoansTableProps) {
   const { t } = useT();
 
   if (!rows.length && !isLoading) {
@@ -102,9 +102,5 @@ export function LoansTable({ rows, amountRequested, currency, isLoading, selectO
     </Box>
   );
 }
-
-LoansTable.defaultProps = {
-  isLoading: false,
-};
 
 export default LoansTable;
