@@ -112,14 +112,9 @@ function About() {
             <div className="feature-feature home-component01">
               <img alt="ocp-tech" src="/OCP-Credere-invitacion-header.avif" className="feature-image" />
               <div className="feature-content">
-                <a
-                  href="https://www.open-contracting.org/es/2023/10/04/credere-llega-a-colombia-para-ayudarle-a-las-pymes-a-contratar-con-el-estado/"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="feature-title"
-                >
+                <span className="feature-title">
                   CREDERE llega a Colombia para ayudarle a las Pymes a contratar con el Estado
-                </a>
+                </span>
                 <span className="feature-description">4 de Octubre 2023</span>
                 <span className="feature-description1">Open Contracting Partnership</span>
               </div>
@@ -134,15 +129,10 @@ function About() {
             <div className="feature-feature home-component01">
               <img alt="ocp-tech" src="/entrepreneur-woman-1200w.jpeg" className="feature-image" />
               <div className="feature-content">
-                <a
-                  href="https://www.open-contracting.org/es/2023/06/06/building-financial-solutions-for-small-businesses-in-public-procurement-lessons-from-bogota/"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="feature-title"
-                >
+                <span className="feature-title">
                   Generar soluciones financieras para las pequeñas empresas en la contratación pública: lecciones de
                   Bogotá
-                </a>
+                </span>
                 <span className="feature-description">6 de Junio 2023</span>
                 <span className="feature-description1">Open Contracting Partnership</span>
               </div>
@@ -157,14 +147,9 @@ function About() {
             <div className="feature-feature home-component01">
               <img alt="ocp-tech" src="/empresaria_domrep-200h.jpg" className="feature-image" />
               <div className="feature-content">
-                <a
-                  href="https://strivecommunity.org/programs/open-contracting-partnership"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="feature-title"
-                >
+                <span className="feature-title">
                   Open Contracting Partnership: Government contracts made accessible for small businesses
-                </a>
+                </span>
                 <span className="feature-description">MasterCard Strive Community 2022</span>
               </div>
             </div>
