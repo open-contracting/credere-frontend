@@ -71,6 +71,7 @@ export function FileUploader({ className, loading, onAcceptedFile }: FileUploade
 
   return (
     <>
+      {/* biome-ignore lint/a11y/noStaticElementInteractions: react-dropzone's getRootProps handles accessibility */}
       <div
         {...getRootProps({ className: `dropzone flex items-center justify-center ${className}` })}
         onClick={(e) => e.stopPropagation()}

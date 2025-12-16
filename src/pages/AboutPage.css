@@ -294,6 +294,7 @@
   font-weight: 500;
 }
 a {
+  /* biome-ignore lint/complexity/noImportantStyles: open-contracting/credere-frontend@c86eafda */
   text-decoration: none !important;
 }
 .feature-feature {
