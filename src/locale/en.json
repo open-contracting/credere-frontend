@@ -825,5 +825,10 @@
   "Confirm you want to mark this application as lapsed": "Confirm you want to mark this application as lapsed",
   "Are you sure you want to mark this application as lapsed? This action can't be undone. The application won't be listed in your application list anymore and you won't be able to approve or reject the application.": "Are you sure you want to mark this application as lapsed? This action can't be undone. The application won't be listed in your application list anymore and you won't be able to approve or reject the application.",
   "Lapse": "Lapse",
-  "The credit application has been lapsed. You won't see this application in your application list anymore.": "The credit application has been lapsed. You won't see this application in your application list anymore."
+  "The credit application has been lapsed. You won't see this application in your application list anymore.": "The credit application has been lapsed. You won't see this application in your application list anymore.",
+  "Loading...": "Loading...",
+  "This field is required": "This field is required",
+  "Only one file can be uploaded": "Only one file can be uploaded",
+  "File type is not supported": "File type is not supported",
+  "File is larger than {maxSizeMB} MB": "File is larger than {maxSizeMB} MB"
 }

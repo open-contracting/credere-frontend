@@ -825,5 +825,10 @@
   "Confirm you want to mark this application as lapsed": "Confirma que quieres marcar esta aplicación como caducada",
   "Are you sure you want to mark this application as lapsed? This action can't be undone. The application won't be listed in your application list anymore and you won't be able to approve or reject the application.": "Estás seguro de que quieres marcar esta aplicación como caducada? Esta acción no puede ser revertida. La aplicación ya no será listada en tu listas de aplicaciones y no podrás aprobar o rechazar la aplicación.",
   "Lapse": "Caducar",
-  "The credit application has been lapsed. You won't see this application in your application list anymore.": "La aplicación ha sido caducada. Ya no verás esta aplicación en tu lista de aplicaciones."
+  "The credit application has been lapsed. You won't see this application in your application list anymore.": "La aplicación ha sido caducada. Ya no verás esta aplicación en tu lista de aplicaciones.",
+  "Loading...": "Cargando...",
+  "This field is required": "Este campo es obligatorio",
+  "Only one file can be uploaded": "Sólo se puede cargar un archivo",
+  "File type is not supported": "El tipo de archivo no es compatible",
+  "File is larger than {maxSizeMB} MB": "El archivo es más grande que {maxSizeMB} MB"
 }
