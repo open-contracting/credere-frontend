@@ -5,6 +5,10 @@
 
 @config "../tailwind.config.js";
 
+@source "../index.html";
+@source "./**/*.{js,ts,jsx,tsx}";
+@source "../.storybook/preview.tsx";
+
 @theme {
   --color-grass: #d6e100; /* sync with secondary in src/mui-theme.tsx */
   --color-background: #f2f2f2;
