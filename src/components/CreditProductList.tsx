@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { t } from "../util/i18n";
-
 import type { ICreditProduct } from "../schemas/application";
 import LinkButton from "../stories/link-button/LinkButton";
 import { RenderSize, renderCreditProductType } from "../util";
+import { t } from "../util/i18n";
 import { DataTable, type HeadCell } from "./DataTable";
 
 const headCells: HeadCell<ICreditProduct>[] = [

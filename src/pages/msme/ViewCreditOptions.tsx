@@ -21,8 +21,8 @@ import {
   type GetCreditProductsOptionsInput,
   type ICreditProduct,
   type RepaymentTermsInput,
-  type SelectCreditProductInput,
   repaymentTermsSchema,
+  type SelectCreditProductInput,
 } from "../../schemas/application";
 import FormInput from "../../stories/form-input/FormInput";
 import FormSelect from "../../stories/form-select/FormSelect";

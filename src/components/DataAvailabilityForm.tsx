@@ -4,11 +4,10 @@ import { useState } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation as useT } from "react-i18next";
 import { type TypeOf, z } from "zod";
-import { t as tNative } from "../util/i18n";
-
 import FormInput from "../stories/form-input/FormInput";
 import LinkButton from "../stories/link-button/LinkButton";
 import Text from "../stories/text/Text";
+import { t as tNative } from "../util/i18n";
 
 interface DataAvailabilityFormProps {
   name: string;

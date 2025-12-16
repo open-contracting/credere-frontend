@@ -1,8 +1,7 @@
 import { type TypeOf, z } from "zod";
-import { t } from "../util/i18n";
-
 import type { APPLICATION_STATUS, USER_TYPES } from "../constants";
 import { isDateAfterCurrentDate } from "../util";
+import { t } from "../util/i18n";
 import { emailSchema } from "./auth";
 
 export const introSchema = z.object({
